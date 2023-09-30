@@ -6,6 +6,7 @@ import { GenerateInvoiceComponent } from './generate-invoice/generate-invoice.co
 
 @NgModule({
   declarations: [HomeComponent, GenerateInvoiceComponent],
+  providers: [],
   imports: [CommonModule],
   exports: [HomeComponent],
 })
