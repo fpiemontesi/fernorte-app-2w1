@@ -1,0 +1,23 @@
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">FerNorte</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="#" (click)="onShowCatalog()">Catálogo</a>
+        <a class="nav-link" href="#" (click)="onShowClients()">Clientes</a>
+        <a class="nav-link" href="#" (click)="onShowPurchase()">Compras</a>
+        <a class="nav-link" href="#" (click)="onShowInventory()">Inventario</a>
+        <a class="nav-link" href="#" (click)="onShowSales()">Ventas</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<fn-home-catalog *ngIf="showCatalog"></fn-home-catalog>
+<fn-home-clients *ngIf="showClients"></fn-home-clients>
+<fn-home-inventory *ngIf="showInventory"></fn-home-inventory>
+<fn-home-purchase *ngIf="showPurchase"></fn-home-purchase>
+<fn-home-sales *ngIf="showSales"></fn-home-sales>
