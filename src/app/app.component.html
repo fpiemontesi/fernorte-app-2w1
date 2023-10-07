@@ -9,6 +9,7 @@
         <a class="nav-link" href="#" (click)="onShowCatalog()">Catálogo</a>
         <a class="nav-link" href="#" (click)="onShowClients()">Clientes</a>
         <a class="nav-link" href="#" (click)="onShowPurchase()">Compras</a>
+        <a class="nav-link" href="#" (click)="onShowInvoice()">Facturación</a>
         <a class="nav-link" href="#" (click)="onShowInventory()">Inventario</a>
         <a class="nav-link" href="#" (click)="onShowSales()">Ventas</a>
       </div>
@@ -21,3 +22,4 @@
 <fn-home-inventory *ngIf="showInventory"></fn-home-inventory>
 <fn-home-purchase *ngIf="showPurchase"></fn-home-purchase>
 <fn-home-sales *ngIf="showSales"></fn-home-sales>
+<fn-home-invoice *ngIf="showInvoice"></fn-home-invoice>
