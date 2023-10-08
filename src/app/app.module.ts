@@ -14,6 +14,7 @@ import { CustomerModule } from './modules/customer/customer.module';
 import { PurchaseModule } from './modules/purchase/purchase.module';
 import { InventaryModule } from './modules/inventory/inventory.module';
 import { SalesModule } from './modules/sales/sales.module';
+import { InvoiceModule } from './modules/invoice/invoice.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,8 +32,9 @@ import { SalesModule } from './modules/sales/sales.module';
     PurchaseModule,
     InventaryModule,
     SalesModule,
+    InvoiceModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
