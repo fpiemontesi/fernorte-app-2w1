@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+/*variables*/
+:root {
+  --fondo-primario: #3c2f81;
+  --fondo-secundario: #cccccc;
+  --texto-primario: #fff;
+  --texto-secundario:color: rgba(255, 255, 255, 0.60);
+}
+.bg-secundario {
+  background-color: var(--fondo-primario);
+}
+.bg-primario {
+  background-color: #3c2f81;
+}
+.texto-primario {
+  color: var(--texto-primario);
+}
+.texto-secundario{
+    color: var(--fondo-secundario);
+}
