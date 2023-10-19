@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  mostrarVenta: boolean = false;
+  mostrarPresupuesto: boolean = false;
 
+  AltaVenta() {
+      this.mostrarVenta = !this.mostrarVenta;
+  }
+
+  AltaPresupuesto() {
+    this.mostrarPresupuesto = !this.mostrarPresupuesto;
+  }
 }

@@ -1,1 +1,31 @@
-<p>home sales works!</p>
+<div class="container-fluid">
+    <div class="row vh-100">
+        <div class="col-md-3 pt-5 col-lg-2 me-auto bg-info-subtle">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link estilo" href="#" (click)="AltaVenta()">
+                        Venta
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="mostrarVenta">
+                    <button class="btn btn-outline-dark m-1">Alta Venta</button>
+                </li>
+                <li class="nav-item" *ngIf="mostrarVenta">
+                    <button class="btn btn-outline-dark m-1">Consultar Venta</button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link estilo" href="#" (click)="AltaPresupuesto()">
+                        Presupuesto
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="mostrarPresupuesto">
+                    <button class="btn btn-outline-dark m-1">Alta Presupuesto</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 col-lg-10 bg-dark">
+            <p class="text-white fs-5 text-center pt-5">Formularios...</p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,15 @@
+.estilo {
+    border: 1px solid #0363a8; 
+    font-size: 1.2em; 
+    display: block; 
+    padding: 8px 15px; 
+    margin-bottom: 8px; 
+    border-radius: 10px; 
+    transition: border 0.3s, font-size 0.3s;
+    color: darkblue;
+}
+
+.estilo:hover{
+    background-color: #0363a8;
+    color: whitesmoke;
+}
