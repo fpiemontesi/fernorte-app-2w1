@@ -1,0 +1,33 @@
+<h1 class="text-center bg-light py-3">Modificar Existencia</h1>
+<div class="container">
+
+  <div class="card bg-light p-1 fs-3">
+    <div class="row justify-content-between">
+      <div class="col">
+        <div class="fw-bold ">Id del Producto</div>
+        <div>#{{existenciaAModificar.id_catalogo}}</div>
+      </div>
+      <div class="col">
+        <div class="fw-bold">Nombre del Producto</div>
+        <div>#{{existenciaAModificar.nombre}}</div>
+      </div>
+    </div>
+  </div>
+
+  <form class="p-3" #formModExi="ngForm" (ngSubmit)="logearse(formModExi)">
+    <div class="mb-3">
+      <label for="stockMin" class="form-label">Stock Minimo</label>
+      <div>
+        <input type="number" class="form-control w-25" id="stockMin" required min="1"
+        [(ngModel)]="existenciaAModificar.stock_minimo" name="stockMin" #stockMin="ngModel" /> <span>Unidades</span>
+      </div>
+
+      <div *ngIf="stockMin.getError('required') && (stockMin.dirty || invalido )" class="text-danger text-end fst-italic">
+        El nombre de alumno es requerido
+      </div>
+      <div [hidden]="!stockMin.errors?.['min'] || stockMin.pristine" class="text-danger text-end fst-italic">
+        El nombre debe tener menos de 200 caracteres</div>
+    </div>
+    <button type="submit" [disabled]="formModExi.invalid" class="btn btn-primary w-100">Guardar</button>
+  </form>
+</div>
