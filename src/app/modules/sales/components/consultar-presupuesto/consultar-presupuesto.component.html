@@ -1,89 +1,79 @@
 <div class="container">
-  <h1 style="text-align: center; font-size: 50px">Consultar Presupuesto</h1>
-  <div class="form">
-    <div class="formularioConsulta text-center">
-      <form class="form-inline">
-        <div class="form">
-          <div class="row justify-content-center">
-            <div class="col-4 column">
-              <label class="form-label" for="date">Fecha desde</label>
-              <input
-                type="date"
-                name="dateFecha"
-                id="date"
-                class="form-control"
-                placeholder="Seleccione una fecha"
-              />
-            </div>
-            <div class="col-4 column">
-              <label class="form-label" for="date">Fecha hasta</label>
-              <input
-                type="date"
-                name="dateFecha"
-                id="date"
-                class="form-control"
-                placeholder="Seleccione una fecha"
-              />
-            </div>
-          </div>
-          <div class="row mb-3 justify-content-center">
-            <div class="col-4 column2">
-              <label class="form-label" for="cliente">Cliente</label>
-              <select name="selectCliente" id="cliente" class="form-control">
-                <option selected disabled>...</option>
-                <option *ngFor="let cliente of clientes" [value]="cliente.id">
-                  {{ cliente.nombre }}, {{ cliente.apellido }}
-                </option>
-              </select>
-            </div>
-            <div class="col-4 mb-3 justify-content-center">
-              <button type="submit" class="btn btn-outline-primary w-100 mt-5">
-                Buscar
-              </button>
-            </div>
-          </div>
+    <h1 style="text-align: center; font-size: 36px">Consultar Presupuesto</h1>
+    <div class="form">
+        <div class="formularioConsulta text-center">
+            <form class="form-inline">
+                <div class="form">
+                    <div class="row justify-content-center">
+                        <div class="col-4 column">
+                            <label class="form-label" for="date">Fecha desde</label>
+                            <input type="date" name="dateFecha" id="date" class="form-control"
+                                placeholder="Seleccione una fecha" />
+                        </div>
+                        <div class="col-4 column">
+                            <label class="form-label" for="date">Fecha hasta</label>
+                            <input type="date" name="dateFecha" id="date" class="form-control"
+                                placeholder="Seleccione una fecha" />
+                        </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-4 column2">
+                            <label class="form-label" for="cliente">Cliente</label>
+                            <select name="selectCliente" id="cliente" class="form-control">
+                                <option selected disabled>Seleccione</option>
+                                <option *ngFor="let cliente of clientes" [value]="cliente.id">
+                                    {{ cliente.nombre }}, {{ cliente.apellido }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4 mb-3 " style="margin-top: 3%;">
+                            <button type="submit" class="btn btn-outline-dark w-100">
+                                Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
-  <div class="tablaConsultada">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">N° de presupuesto</th>
-          <th scope="col">Cliente</th>
-          <th scope="col">Fecha de creación</th>
-          <th scope="col">Fecha de expiración</th>
-          <th scope="col">Importe total</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>002-4424</td>
-          <td>Peldaño, Alberto</td>
-          <td>22/07/2023</td>
-          <td>27/07/2023</td>
-          <td>$110.500</td>
-          <td><i class="fa fa-search lupa"></i></td>
-          <td><input type="checkbox" /></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div>
-    <div class="row justify-content-end">
-      <div class="col-6">
-        <div class="row botones">
-          <div class="col-6">
-            <button class="btn btn-outline-danger w-100">Borrar</button>
-          </div>
-          <div class="col-6">
-            <button class="btn btn-outline-info w-100">Modificar</button>
-          </div>
+    <div class="tablaConsultada">
+        <table class="table table-hover table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">N° de presupuesto</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Fecha de creación</th>
+                    <th scope="col">Fecha de expiración</th>
+                    <th scope="col">Importe total</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>002-4424</td>
+                    <td>Peldaño, Alberto</td>
+                    <td>22/07/2023</td>
+                    <td>27/07/2023</td>
+                    <td>$110.500</td>
+                    <td><i class="fa fa-search lupa"></i></td>
+                    <td><input type="checkbox" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <div class="row justify-content-end">
+            <div class="col-6">
+                <div class="row botones">
+                    <div class="col-6">
+                        <button class="btn btn-outline-danger w-100">Borrar</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-outline-info w-100">Modificar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
