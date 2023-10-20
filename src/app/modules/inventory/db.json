@@ -1,0 +1,38 @@
+{
+  "secciones": [
+    {
+      "id": "A",
+      "id_zona": 1
+    },
+    {
+      "id": "B",
+      "id_zona": 2
+    },
+    {
+      "id": "C",
+      "id_zona": 2
+    },
+    {
+      "id": "D",
+      "id_zona": 1
+    },
+    {
+      "id": "E",
+      "id_zona": 2
+    },
+    {
+      "id": "R",
+      "id_zona": 1
+    }
+  ],
+  "zonas": [
+    {
+      "id": 1,
+      "name": "Galpon"
+    },
+    {
+      "id": 2,
+      "name": "Corralon"
+    }
+  ]
+}
