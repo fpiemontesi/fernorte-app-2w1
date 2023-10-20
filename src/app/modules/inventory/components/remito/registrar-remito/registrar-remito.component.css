@@ -1,0 +1,12 @@
+.table-container {
+    max-height: 400px; 
+    overflow-y: auto;  
+  }
+
+.button-to-bottom{
+    position: fixed;
+    bottom: 20px; /* Puedes ajustar la distancia desde el borde inferior */
+    right: 200px;
+ }
+
+
