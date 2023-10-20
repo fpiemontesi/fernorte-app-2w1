@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RemitoServService } from './remito-serv.service';
+import { RemitoServService } from './remito.service';
 
 describe('RemitoServService', () => {
   let service: RemitoServService;

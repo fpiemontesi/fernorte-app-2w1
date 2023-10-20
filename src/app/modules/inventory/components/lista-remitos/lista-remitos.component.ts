@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Remito } from '../../models/remito';
-import { RemitoServService } from '../../services/remito-serv.service';
+import { RemitoServService } from '../../services/remito.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fn-lista-remitos',
@@ -15,14 +16,14 @@ export class ListaRemitosComponent implements OnInit{
     {
       idRemito:20,
       nroRemito: 1,
-      nroOrdenCompra: 12,
+      nroOrdenCompra: '12',
       proveedor: 'Proveedor Pepe',
       fecha: new Date('2023-10-18')
     },
     {
       idRemito:21,
       nroRemito: 2,
-      nroOrdenCompra: 143,
+      nroOrdenCompra: '143',
       proveedor: 'Proveedor Raquel',
       fecha: new Date('2023-06-24')
     },
@@ -31,6 +32,7 @@ export class ListaRemitosComponent implements OnInit{
   fechaInicio: Date;
   fechaFin: Date;
   remitosFiltrados: Remito[] = [];
+  private suscripcion = new Subscription();
 
 
   constructor(private serviceRemito: RemitoServService ){
@@ -39,6 +41,7 @@ export class ListaRemitosComponent implements OnInit{
   }
   
   ngOnInit(): void {
+    this.cargarLista();
     this.remitosFiltrados=this.remitos;
   }
 
@@ -53,7 +56,17 @@ export class ListaRemitosComponent implements OnInit{
         
         return fechaRemito >= normalizedFechaInicio && fechaRemito <= normalizedFechaFin;
     });
-}
+  }
+
+  private cargarLista(){
+    this.suscripcion.add(
+      this.serviceRemito.getRemitos().subscribe({
+        next: (remitosResp : Remito[])=>{
+          this.remitos=remitosResp;
+        }
+      })
+    )
+  }
 
 
   // filtrar() {
