@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { flip } from '@popperjs/core';
 
 @Component({
   selector: 'fn-home-inventory',
