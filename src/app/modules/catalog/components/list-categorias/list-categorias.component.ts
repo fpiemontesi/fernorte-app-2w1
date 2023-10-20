@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class ListCategoriasComponent {
 
   @Output() newCategoria = new EventEmitter();
-  @Output() Categoriaeditar = new EventEmitter();
+  @Output() editarCategoria = new EventEmitter();
 
   lista: Categoria[] = [];
 
@@ -39,19 +39,19 @@ export class ListCategoriasComponent {
 
   modificarCategoria(categoria: Categoria) {
     this.categoriaService.guardarCategoria(categoria)
-    this.Categoriaeditar.emit()
+    this.editarCategoria.emit()
   }
 
   eliminarCategoria(id: string) {
-    const confirmed = confirm("Seguro que desea borrar el producto?")
+    const confirmed = confirm("¿Desea eliminar la categoría?")
     if (confirmed) {
       this.categoriaService.delete(id).subscribe({
         next: (categoria: Categoria) => {
-          alert("producto borrado exitosamente")
+          alert("Categoría eliminada exitosamente.")
           this.loadCategorias()
         },
         error: () => {
-          alert("error")
+          alert("Error al intentar eliminar categoría.")
         }
       })
     }
@@ -64,7 +64,7 @@ export class ListCategoriasComponent {
           this.lista = categorias
         },
         error: () => {
-          alert("eror")
+          alert("Error al intentar cargar categorías.")
         }
       })
     )
