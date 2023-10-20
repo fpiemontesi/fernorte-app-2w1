@@ -1,0 +1,80 @@
+.bg-secundario {
+  background-color: #cccccc;
+}
+
+.custom-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.bg-custom-color {
+  background-color: #3c2f81;
+}
+
+.input-text {
+  border: none;
+  border-bottom: #346ddc 1px solid;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
+.input-text:focus {
+  outline: none;
+}
+
+body {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.cust-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Aplicar borde redondeado a la esquina inferior izquierda de la tabla */
+.cust-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+/* Aplicar borde redondeado a la esquina inferior derecha de la tabla */
+.cust-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.custom-modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Aprovecha el ancho completo */
+  height: 100%;
+  /* Aprovecha el alto completo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 80%;
+  /* Ancho máximo del modal */
+  position: relative;
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}

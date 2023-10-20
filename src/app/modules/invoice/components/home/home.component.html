@@ -1,1 +1,27 @@
-<p>home invoice works!</p>
+<!-- <fn-registrar-pago></fn-registrar-pago> -->
+<!-- <fn-form-pago></fn-form-pago> -->
+
+
+<!-- <fn-pending-orders></fn-pending-orders> -->
+<!-- <fn-gestion-factura></fn-gestion-factura> -->
+<!-- <fn-registrar-factura></fn-registrar-factura> -->
+
+
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item" *ngFor="let item of items; let i = index">
+                <a class="nav-link menu-option-custom" [ngClass]="{'active': i === activeIndex}" (click)="setActive(i)">{{ item.text }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+
+        <div [ngSwitch]="activeIndex">
+            <div   *ngSwitchCase="'0'"> <fn-pending-orders></fn-pending-orders></div>
+            <div  *ngSwitchCase="'1'"> <fn-registrar-factura></fn-registrar-factura></div>
+            <div  *ngSwitchCase="'2'"> <fn-gestion-factura></fn-gestion-factura></div>
+        </div>
+    </div>
+</div>
