@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  registrar = false;
+  modificar = false;
+
+
+  mostrarRegistrar(){
+    this.registrar=true;
+    this.modificar=false;
+  }
+  mostrarUpdate(){
+    this.registrar=false;
+    this.modificar=true;
+  }
 }
