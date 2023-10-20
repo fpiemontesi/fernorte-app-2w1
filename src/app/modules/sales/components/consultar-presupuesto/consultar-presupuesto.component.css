@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.formularioConsulta {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-weight: 700;
+}
+
+.tablaConsultada {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.lupa {
+  cursor: pointer;
+}
+
+.column {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-top: 20px;
+}
+
+.column2 {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding-bottom: 20px;
+}
+
+.botones {
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+}

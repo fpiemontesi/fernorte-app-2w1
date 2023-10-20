@@ -1,30 +1,32 @@
 <div class="container-fluid">
     <div class="row vh-100">
-        <div class="col-md-3 pt-5 col-lg-2 me-auto bg-info-subtle">
+        <div class="col-md-3 pt-5 col-lg-2 me-auto bg-dark">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link estilo" href="#" (click)="AltaVenta()">
-                        Venta
-                    </a>
+                    <a class="nav-link estilo" href="#" (click)="MenuVenta()"> Venta</a>
                 </li>
                 <li class="nav-item" *ngIf="mostrarVenta">
-                    <button class="btn btn-outline-dark m-1">Alta Venta</button>
+                    <button class="btn text-white m-1" (click)="MostrarComponente('altaVenta')">Alta Venta</button>
                 </li>
                 <li class="nav-item" *ngIf="mostrarVenta">
-                    <button class="btn btn-outline-dark m-1">Consultar Venta</button>
+                    <button class="btn text-white m-1" (click)="MostrarComponente('consultarVenta')">Consultar Venta</button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link estilo" href="#" (click)="AltaPresupuesto()">
-                        Presupuesto
-                    </a>
+                    <a class="nav-link estilo" href="#" (click)="MenuPresupuesto()"> Presupuesto</a>
                 </li>
                 <li class="nav-item" *ngIf="mostrarPresupuesto">
-                    <button class="btn btn-outline-dark m-1">Alta Presupuesto</button>
+                    <button class="btn text-white m-1" (click)="MostrarComponente('altaPresupuesto')">Alta Presupuesto</button>
+                </li>
+                <li class="nav-item" *ngIf="mostrarPresupuesto">
+                    <button class="btn text-white m-1" (click)="MostrarComponente('consultarPresupuesto')">Consultar Presupuesto</button>
                 </li>
             </ul>
         </div>
-        <div class="col-md-9 col-lg-10 bg-dark">
-            <p class="text-white fs-5 text-center pt-5">Formularios...</p>
+        <div class="col-md-9 col-lg-10 fondo-formulario">
+            <fn-alta-venta *ngIf="mostrarAltaVenta"></fn-alta-venta>
+            <fn-consultar-presupuesto *ngIf="mostrarConsultaPresupuesto"></fn-consultar-presupuesto>
+            <fn-consultar-venta *ngIf="mostrarConsultaVenta"></fn-consultar-venta>
+            <fn-alta-presupuesto *ngIf="mostrarAltaPresupuesto"></fn-alta-presupuesto>
         </div>
     </div>
 </div>

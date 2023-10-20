@@ -9,11 +9,25 @@ export class HomeComponent {
   mostrarVenta: boolean = false;
   mostrarPresupuesto: boolean = false;
 
-  AltaVenta() {
+  mostrarAltaVenta: boolean = false;
+  mostrarConsultaPresupuesto: boolean = false;
+  mostrarConsultaVenta: boolean = false;
+  mostrarAltaPresupuesto:boolean = false;
+
+  MenuVenta() {
       this.mostrarVenta = !this.mostrarVenta;
+      this.mostrarPresupuesto = false;
   }
 
-  AltaPresupuesto() {
+  MenuPresupuesto() {
     this.mostrarPresupuesto = !this.mostrarPresupuesto;
+    this.mostrarVenta = false;
+  }
+
+  MostrarComponente(componente:string) {
+    this.mostrarAltaVenta = componente === 'altaVenta';
+    this.mostrarConsultaPresupuesto = componente === 'consultarPresupuesto';
+    this.mostrarConsultaVenta = componente === 'consultarVenta';
+    this.mostrarAltaPresupuesto = componente === 'altaPresupuesto'
   }
 }
