@@ -1,0 +1,13 @@
+<form>
+    <div class="form-group">
+      <label for="id">id</label>
+      <input type="text" class="form-control" id="txtid" name="id" placeholder="ingresar id" [(ngModel)]="marca.id">
+      
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="txtnombre" name="nombre" placeholder="ingresar Nombre" [(ngModel)]="marca.nombre">
+    </div>
+    <button  (click)="volver()" class="btn btn-danger">Volver</button>
+    <button type="submit"(click)="agregarMarca()" class="btn btn-primary">Crear</button>
+  </form>

@@ -1,1 +1,12 @@
-<p>home catalog works!</p>
+<div class="container">
+    <ng-container *ngIf="listmarca">
+        <fn-list-marcas (newMarca)="verform()" (Marcaeditar)="vermodificar()"></fn-list-marcas>
+    </ng-container>
+    <ng-container *ngIf="formmarca">
+        <fn-alta-marcas (cargadoMarca)="verlist()"></fn-alta-marcas>
+    </ng-container>
+    <ng-container *ngIf="modificarmarca">
+        <fn-editar-marca (editadoMarca)="verlist()"></fn-editar-marca>
+    </ng-container>
+</div>
+
