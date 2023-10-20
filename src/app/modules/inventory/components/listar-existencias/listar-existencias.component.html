@@ -1,0 +1,29 @@
+
+<div> <h2 class="bg-secondary text-white p-5 text-center">LISTAR EXISTENCIAS</h2></div>
+<div class="container my-5 ">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">PRODUCTO</th>
+            <th scope="col">STOCK MINIMO</th>
+            <th scope="col">ACCIONES</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exist of list">
+            <td>{{exist.nombre}}</td>
+            <td>{{exist.stockMinimo}}</td>
+            
+            <td>
+              <button class="btn btn-warning mx-2" disabled>
+                Editar</button>
+              <button class="btn btn-danger mx-2 " (click)="EliminarExistencia(exist.id)">
+                Borrar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>
