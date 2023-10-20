@@ -1,1 +1,125 @@
-<p>consultar-venta works!</p>
+<div class="container" style="padding-top: 3%;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label for="id">Id</label>
+          <input for="id" type="text" name="id" class="form-control" placeholder="Id de la venta" [(ngModel)]="venta.id">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Cliente</label>
+          <input type="text" class="form-control" name="cliente" placeholder="Nombre del cliente" [(ngModel)]="venta.cliente">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Vendedor</label>
+          <input type="text" class="form-control" name="vendedor" placeholder="Nombre del vendedor" [(ngModel)]="venta.vendedor">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Forma de Entrega</label>
+          <select class="form-control" name="formaEntrega" placeholder="Forma de entrega" [(ngModel)]="venta.formaEntrega">
+            <option disabled selected value="">Selecciona la forma de entrega de la venta</option>
+            <option>Envío a domicilio</option>
+            <option>Recogida en tienda</option>
+          </select>
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Tipo de Pedido</label>
+          <select class="form-control" name="tipoPedido" placeholder="Tipo de pedido" [(ngModel)]="venta.tipoPedido">
+            <option disabled selected value="">Selecciona el tipo de venta</option>
+            <option>Mayorista</option>
+            <option>Minorista</option>
+          </select>
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Monto Desde:</label>
+          <input type="number" class="form-control" placeholder="Monto de la venta" name="montoD" [(ngModel)]="montoDesde">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Monto Desde:</label>
+          <input type="number" class="form-control" placeholder="Monto de la venta" name="montoH"  [(ngModel)]="montoHasta">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Fecha Desde:</label>
+          <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="fechaDesde">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Fecha Hasta:</label>
+          <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="fechaHasta">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label>Estado</label>
+          <select class="form-control" name="estado" [(ngModel)]="venta.estado" placeholder="Estado de la venta">
+            <option disabled selected value="">Selecciona el estado de la venta</option>
+            <option>Pendiente</option>
+            <option>Entregado</option>
+          </select>
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <button type="submit" class="btn btn-outline-dark" style="width: 100%; margin-top: 9%;" (click)="filtrarVentas()">Buscar</button>
+        </div>
+      </div>
+    </div>
+  
+    <br>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th class="centered">ID</th>
+            <th class="centered">Cliente</th>
+            <th class="centered">Vendedor</th>
+            <th class="centered">Fecha</th>
+            <th class="centered">Forma de Entrega</th>
+            <th class="centered">Tipo de Pedido</th>
+            <th class="centered">Estado</th>
+            <th class="centered">Monto</th>
+            <th style="text-align: center; margin-top: 3%;">Ver<br> Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let venta of ventas">
+            <td>{{ venta.id }}</td>
+            <td>{{ venta.cliente }}</td>
+            <td>{{ venta.vendedor }}</td>
+            <td>{{ venta.fecha | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ venta.formaEntrega }}</td>
+            <td>{{ venta.tipoPedido }}</td>
+            <td>{{ venta.estado }}</td>
+            <td>{{ venta.monto | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td>
+              <button class="btn btn-outline-dark btn-sm custom-btn" (click)="verDetalle(venta)">
+                <i class="fas fa-eye fa-lg"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="container" *ngIf="mostrarDetalle">
+    <h3 class="h4">Detalles</h3>
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Producto</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of venta.detalles">
+          <td>{{ detalle.productoId }}</td>
+          <td>{{ detalle.descripcion }}</td>
+          <td>{{ detalle.cantidad }}</td>
+          <td>{{ detalle.precioUnitario | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td>{{ detalle.total | currency:'USD':'symbol':'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
