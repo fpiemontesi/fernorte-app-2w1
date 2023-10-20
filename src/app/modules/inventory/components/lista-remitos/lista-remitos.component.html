@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+    <div class="container-fluid ">
+      <h1>Listar Remitos</h1>
+    </div>
+</nav>
+
+<h4 style="text-align: center;">Filtros</h4>
+<div class="container-fluid mt-3 mb-5">
+    <div class="row d-flex justify-content-center">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="fechaInicio">Fecha de inicio:</label>
+                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="fechaFin">Fecha de fin:</label>
+                <input type="date" class="form-control" id="fechaFin" name="fechaFin" [(ngModel)]="fechaFin">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <button class="btn btn-primary boton-css" (click)="filtrar()">Filtrar</button>
+        </div>
+
+    </div>    
+</div>
+
+<h4 style="text-align: center;">Lista de remitos</h4>
+<div class="container mt-3">
+    <table class="table table table-striped">
+        <tr>
+            <th>Nro. Remtio</th>
+            <th>Nro. Orden de Compra</th>
+            <th>Proveedor</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+        </tr>
+        <tbody>
+        <tr *ngFor="let r of remitosFiltrados" >
+            <td>{{r.nroRemito}}</td>
+            <td>{{r.nroOrdenCompra}}</td>
+            <td>{{r.proveedor}}</td>
+            <td>{{r.fecha | date:'dd/MM/yyyy' }}</td>
+            <td><button class="btn btn-primary" (click)="onModificar(r.idRemito)">Modificar</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
