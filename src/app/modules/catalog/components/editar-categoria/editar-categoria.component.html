@@ -1,0 +1,11 @@
+<div class="container mt-4">
+    <form #formulario="ngForm" (ngSubmit)="editarCategoria()">
+        <div class="form-group mb-3">
+            <label for="nombre" class="my-2">Nombre</label>
+            <input type="text" class="form-control" id="txtnombre" name="nombre" placeholder="Ingresar Nombre"
+                [(ngModel)]="categoria.nombre" required>
+        </div>
+        <button type="submit" class="btn btn-primary m-2">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary m-2" (click)="volverAlInicio()">Volver al Inicio</button>
+    </form>
+</div>

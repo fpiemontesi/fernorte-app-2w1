@@ -1,0 +1,36 @@
+{
+  "categorias": [
+    {
+      "id": 16,
+      "nombre": "Ferretería 1"
+    },
+    {
+      "id": 17,
+      "nombre": "Hogar"
+    },
+    {
+      "id": 18,
+      "nombre": "Clavitos"
+    },
+    {
+      "id": 19,
+      "nombre": "categoria nueva actualizada"
+    },
+    {
+      "nombre": "Lionel",
+      "id": 21
+    },
+    {
+      "id": "56",
+      "nombre": "lolaso"
+    },
+    {
+      "nombre": "Casa",
+      "id": "v6VCE7_"
+    },
+    {
+      "nombre": "Categoriaaa",
+      "id": "24CNFR2"
+    }
+  ]
+}

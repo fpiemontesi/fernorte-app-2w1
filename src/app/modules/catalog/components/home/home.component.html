@@ -1,1 +1,11 @@
-<p>home catalog works!</p>
+<div class="container">
+    <ng-container *ngIf="list">
+        <fn-list-categorias (newCategoria)="showform()" (Categoriaeditar)="mostrarmodificar()"></fn-list-categorias>
+    </ng-container>
+    <ng-container *ngIf="form">
+        <fn-alta-categoria (cargado)="showlist()"></fn-alta-categoria>
+    </ng-container>
+    <ng-container *ngIf="modificar">
+        <fn-editar-categoria (editado)="showlist()"></fn-editar-categoria>
+    </ng-container>
+</div>
