@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,22 +6,34 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './register-article.component.html',
   styleUrls: ['./register-article.component.css']
 })
-export class RegisterArticleComponent {
+export class RegisterArticleComponent implements OnInit {
 
   categories: String[] = [
       
   ]
+
+
+  
     constructor() { }
+    ngOnInit(): void {
+  
+    }
 
     formArticle = new FormGroup({
-      nombre: new FormControl('', [Validators.required]),
+      nombre: new FormControl('', [Validators.required, 
+        Validators.minLength(1), 
+        Validators.maxLength(100), 
+        Validators.pattern('^[a-zA-Z0-9 ]+$')
+]), //validacion que no acepte caracteres especiales
+      
+      
       descripcion: new FormControl('', [Validators.required]),
       modelo: new FormControl('', [Validators.required]),
       marca: new FormControl('', [Validators.required]),
-      minorista: new FormControl(0, [Validators.required]),
-      mayorista: new FormControl(0, [Validators.required]), // Inicializado en 0 como número
-      dimensiones: new FormControl(0, [Validators.required]), // Inicializado en 0 como número
-      peso: new FormControl(0, [Validators.required]), // Inicializado en 0 como número
+      minorista: new FormControl(null, [Validators.required]),
+      mayorista: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
+      dimensiones: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
+      peso: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
       color: new FormControl('', [Validators.required]),
       material: new FormControl('', [Validators.required]),
       pais: new FormControl('', [Validators.required]),
@@ -51,5 +63,10 @@ export class RegisterArticleComponent {
     onSubmit() {
       alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.formArticle.value, null, 4));
     }
+
+    resetFields(){
+      alert("SUCCESS");
+    }
+
 
 }
