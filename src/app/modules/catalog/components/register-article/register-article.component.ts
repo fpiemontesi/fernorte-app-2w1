@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { StorageService } from '../../services/storage/storage.service';
 
 @Component({
   selector: 'fn-register-article',
@@ -8,13 +9,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterArticleComponent implements OnInit {
 
+  private models = {};
   categories: String[] = [
+    
       
   ]
 
 
   
-    constructor() { }
+    constructor(private storageService: StorageService) { }
     ngOnInit(): void {
   
     }
@@ -68,5 +71,14 @@ export class RegisterArticleComponent implements OnInit {
       alert("SUCCESS");
     }
 
-
+    readPhoto(event:any){
+       const archivoCapturado = event.target.files[0]
+    let reader = new FileReader()
+    reader.readAsDataURL(archivoCapturado)
+    reader.onloadend = ()=>{
+      const imagen = reader.result;
+      this.storageService.subirImagen(archivoCapturado)
+    }
+  }
+  
 }

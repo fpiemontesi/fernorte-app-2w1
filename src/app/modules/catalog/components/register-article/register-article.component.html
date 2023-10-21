@@ -4,7 +4,8 @@
         <form action="container" [formGroup]="formArticle" >
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-floating mt-4">
+                    <div class="col-12 d-flex justify-content-between gap-2">
+                    <div class="form-floating col-8 mt-4">
                         <select formControlName="modelo" class="form-select" id="" aria-label="Seleccionar Modelo a Registrar">
                             <option value="1">MD12ADW</option>
                             <option value="2">AWD12DAWD</option>
@@ -12,6 +13,14 @@
                         </select>
                         <label for="floatingSelect">Seleccionar Modelo</label>
                     </div>        
+
+                    <div class="col-4 mt-4 form-floating">
+                        <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">$</span>
+                        <input type="text" style="height: 58px;" class="form-control" disabled value="300" aria-describedby="addon-wrapping">
+                        </div>
+                    </div>
+                    </div>
                     <div class="form-group mb-3 mt-4">
                         <input name="nombre" style="height: 50px;" type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Nombre">
                         <div class="mt-1 ms-1" *ngIf="formArticle.get('nombre')?.hasError('required') && formArticle.get('nombre')?.touched">
@@ -78,6 +87,10 @@
                         El porcentaje mayorista es requerido.
                     </div>
 
+                    <div class="input-group mt-4">
+                        <input type="file" class="form-control" id="inputGroupFile02" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
+                        <label class="input-group-text" for="inputGroupFile02">Subir Foto</label>
+                    </div>
 
                 </div>
                 <div class="col-md-6">
@@ -137,7 +150,7 @@
 
             </div>
             <div class="mt-3 d-grid gap-2">
-                <button (click)="onSubmit()" type="submit" class="btn btn-dark" [disabled]="formArticle.invalid">Guardar</button>
+                <button (click)="onSubmit()" type="submit" class="btn btn-dark">Guardar</button>
                 <button (click)="resetFields()" class="btn btn-dark">Cancelar</button>
             </div>
         </form>
