@@ -51,13 +51,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>002-4424</td>
-                    <td>Peldaño, Alberto</td>
-                    <td>22/07/2023</td>
-                    <td>27/07/2023</td>
-                    <td>$110.500</td>
-                    <td><i class="fa fa-search lupa"></i></td>
-                    <td><input type="checkbox" /></td>
+                <tr *ngIf="presupuesto">
+                    <td>{{ presupuesto.nro_presupuesto }}</td>
+                    <td>{{ presupuesto.cliente }}</td>
+                    <td>{{ presupuesto.fecha_creacion | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                    <td>{{ presupuesto.fecha_vencimiento | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+                    <td><i class="fa fa-search lupa"></i></td> <!-- a chequear como se hace esto-->
+                    <td><input type="checkbox" /></td> <!-- a chequear como se hace esto-->
                 </tr>
             </tbody>
         </table>

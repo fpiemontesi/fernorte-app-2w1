@@ -17,6 +17,5 @@ export class VentasService {
   getVentas(): Observable<Ventas[]>{
    const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
    return result;
-
   }
 }
