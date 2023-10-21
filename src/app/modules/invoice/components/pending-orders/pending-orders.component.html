@@ -40,6 +40,7 @@
                                 <td>{{ order.subtotal }}</td>
                                 <td>{{ order.total }}</td>
                                 <td><button class="btn btn-primary" (click)="viewDetail(order)">Ver</button></td>
+                                <td><button class="btn btn-primary" (click)="emitirOrden(order)">Facturar</button></td>
                             </tr>
                         </tbody>
                     </table>

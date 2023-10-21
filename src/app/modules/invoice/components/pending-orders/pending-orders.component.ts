@@ -15,7 +15,8 @@ export class PendingOrdersComponent implements OnInit {
   pedidosFiltrados: Order[] = [];
   //one to load with all data
   orders: Order[] = [];
-  SelectedDetails:Detail [] = [];
+  SelectedDetails: Detail[] = [];
+  @Output() emiteOrden = new EventEmitter<Order>();
 
   isModalOpen: boolean = false
   constructor(private orderService: OrderService) {
@@ -26,7 +27,7 @@ export class PendingOrdersComponent implements OnInit {
         this.orders = response;
         this.ordersToShow = this.orders;
       },
-      (error: any) => { 
+      (error: any) => {
         console.error(error);
       }
     );
@@ -35,12 +36,12 @@ export class PendingOrdersComponent implements OnInit {
   buscarPedidos(event: any): void {
     const termino = event.target.value;
     if (termino !== '') {
-        this.pedidosFiltrados = this.orders.filter((order) => {
-            return order.id.toString().includes(termino);
-        });
-        this.ordersToShow = this.pedidosFiltrados; 
+      this.pedidosFiltrados = this.orders.filter((order) => {
+        return order.id.toString().includes(termino);
+      });
+      this.ordersToShow = this.pedidosFiltrados;
     } else {
-        this.ordersToShow = this.orders
+      this.ordersToShow = this.orders
     }
   }
   viewDetail(order: Order): void {
@@ -50,18 +51,21 @@ export class PendingOrdersComponent implements OnInit {
   }
 
   closeModal() {
-    this.isModalOpen = false; 
+    this.isModalOpen = false;
     this.SelectedDetails = [];
   }
   billOrder(order: Order): void {
     //TODO Redirect to registrar factura
   }
 
-  calculateSubtotal():void{
-    if(this.SelectedDetails.length > 0){
-    this.SelectedDetails.forEach(detail=>{
-      detail.subtotal = detail.cantidad * detail.precioUnitario
-    })
+  calculateSubtotal(): void {
+    if (this.SelectedDetails.length > 0) {
+      this.SelectedDetails.forEach(detail => {
+        detail.subtotal = detail.cantidad * detail.precioUnitario
+      })
+    }
   }
+  emitirOrden(order: Order) {
+    this.emiteOrden.emit(order);
   }
 }
