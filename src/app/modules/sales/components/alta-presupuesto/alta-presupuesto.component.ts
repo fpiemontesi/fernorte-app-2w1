@@ -1,12 +1,13 @@
-import { Component , OnInit } from '@angular/core';
-import { HttpClient  , HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+
 @Component({
-  selector: 'app-alta',
-  templateUrl: './alta.component.html',
-  styleUrls: ['./alta.component.css']
+  selector: 'fn-alta-presupuesto',
+  templateUrl: './alta-presupuesto.component.html',
+  styleUrls: ['./alta-presupuesto.component.css']
 })
-export class AltaComponent {
-  
+export class AltaPresupuestoComponent {
+
   productos : any[] = [];
 
   filas: any[] = [];

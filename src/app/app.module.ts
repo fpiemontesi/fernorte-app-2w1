@@ -17,7 +17,7 @@ import { SalesModule } from './modules/sales/sales.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     AppRoutingModule,

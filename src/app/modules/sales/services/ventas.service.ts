@@ -11,11 +11,11 @@ export class VentasService {
 
   constructor(private http : HttpClient) { }
 
-  private url = 'http://localhost:3000/ventas';
+ // private url = 'http://localhost:3000/ventas';
 
   
   getVentas(): Observable<Ventas[]>{
-   const result= this.http.get<Ventas[]>('http://localhost:3000/ventas');
+   const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
    return result;
 
   }

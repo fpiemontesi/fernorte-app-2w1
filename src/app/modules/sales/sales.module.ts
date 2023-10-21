@@ -5,12 +5,14 @@ import { HomeComponent } from './components/home/home.component';
 import { AltaVentaComponent } from './components/alta-venta/alta-venta.component';
 import { ConsultarPresupuestoComponent } from './components/consultar-presupuesto/consultar-presupuesto.component';
 import { ConsultarVentaComponent } from './components/consultar-venta/consultar-venta.component';
-import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
 
 @NgModule({
-  declarations: [HomeComponent, AltaVentaComponent, ConsultarPresupuestoComponent, ConsultarVentaComponent, AltaPresupuestoComponent],
+  declarations: [HomeComponent, AltaVentaComponent, ConsultarPresupuestoComponent, ConsultarVentaComponent, AltaPresupuestoComponent
+  ],
   providers: [],
   imports: [CommonModule, 
             HttpClientModule,
