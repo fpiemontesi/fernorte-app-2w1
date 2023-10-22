@@ -20,21 +20,22 @@ export class EditarCategoriaComponent {
   }
 
   editarCategoria() {
-    console.log("categoria en editar" + this.categoria.nombre)
-    this.categoriaService.update(this.categoria).subscribe({
+    console.log('ID editarCategoria(): '+this.categoria.id)
+    console.log(this.categoria)
+    this.categoriaService.update(this.categoria.id, this.categoria).subscribe({
       next: (categoria: Categoria) => {
-        alert("Se actualizo correctamente")
+        alert("Categoría actualizada correctamente.")
         this.categoria = {} as Categoria
         this.editado.emit();
       },
       error: () => {
-        alert("Ocurrio un error")
+        alert("Error al intentar actualizar categoría.")
       }
     })
     this.categoria = {} as Categoria;
   }
 
   volverAlInicio() {
-    this.editado.emit(); // Emitir el evento para volver al inicio
+    this.editado.emit();
   }
 }

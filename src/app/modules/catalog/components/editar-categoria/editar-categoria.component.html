@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<!-- <div class="container mt-4">
     <h2 class="mb-3">Modificar Categoría</h2>
     <form #formulario="ngForm" (ngSubmit)="editarCategoria()">
         <div class="form-group mb-3">
@@ -10,6 +10,21 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary m-2" [disabled]="nombre.invalid">Guardar Cambios</button>
+        <button type="button" class="btn btn-danger m-2" (click)="volverAlInicio()">Volver al Inicio</button>
+    </form>
+</div> -->
+<div class="container mt-4">
+    <h2 class="mb-3">Modificar Categoría</h2>
+    <form #formulario="ngForm">
+        <div class="form-group mb-3">
+            <label for="nombre" class="my-2">Nombre</label>
+            <input type="text" class="form-control" id="txtnombre" name="nombre" placeholder="Ingresar Nombre"
+                [(ngModel)]="categoria.nombre" required #nombre="ngModel">
+            <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                <small class="form-text text-danger">El nombre es obligatorio</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary m-2" [disabled]="nombre.invalid" (click)="editarCategoria()">Guardar Cambios</button>
         <button type="button" class="btn btn-danger m-2" (click)="volverAlInicio()">Volver al Inicio</button>
     </form>
 </div>

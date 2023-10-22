@@ -28,7 +28,7 @@ export class ListCategoriasComponent {
         this.lista = categorias;
       },
       error: () => {
-        alert("error")
+        alert("Error al intentar cargar categorías.")
       }
     })
   }
