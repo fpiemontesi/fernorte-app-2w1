@@ -13,4 +13,7 @@ export class LoteService {
   create(body: Lote): Observable<Lote>{
     return this.http.post<Lote>('http://localhost:3000/lotes', body);
   }
+  getAll(): Observable<Lote[]>{
+    return this.http.get<Lote[]>(`http://localhost:3000/lotes`);
+  }
 }
