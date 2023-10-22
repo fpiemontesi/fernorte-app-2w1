@@ -1,1 +1,107 @@
-<p>Componente de alta venta</p>
+<div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;" >
+    <h1>Alta Presupuesto</h1>
+    <form (ngSubmit)="onSubmit()" style="margin: 20px;">
+        <div class="row" style="margin-bottom: 20px;">
+         
+          <div class="col-md-4">
+            <label for="cliente" class="form-label">Cliente</label>
+            <select name="cliente" id="cliente" class="form-select" [(ngModel)]="formData.cliente">
+                <option value="1">Tomas Benza</option>
+                <option value="2">Cande Mello</option>
+              </select>
+            </div>
+            
+          <div class="col-md-5">
+            <label for="tipo" class="form-label">Tipo Pedido</label>
+            <select name="tipo" id="tipo" class="form-select" [(ngModel)]="formData.tipo">
+              <option value="1">Mayorista</option>
+              <option value="2">Minorista</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="vendedor" class="form-label">Vendedor</label>
+            <input type="text" id="vendedor" class="form-control" aria-describedby="nombreHelpBlock" required [(ngModel)]="formData.vendedor" name="vendedor">
+          </div>
+          <div class="col-md-5">
+            <label for="formaEntrega" class="form-label">Forma Entrega</label>
+            <select name="formaEntrega" id="formaEntrega" class="form-select" [(ngModel)]="formData.formaEntrega">
+              <option value="1">Mayorista</option>
+              <option value="2">Minorista</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+          <div class="col-md-6">
+            <label for="producto" class="form-label">Producto</label>
+            <select name="producto" id="producto" class="form-select" [(ngModel)]="formData.producto" required>
+              <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="number" min="1" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad" required [(ngModel)]="formData.cantidad">
+          </div>
+          <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
+            <button (click)="agregarFila()" class="btn btn-dark btn-block m-sm-2">Agregar</button>
+          </div>
+        </div>
+      </form>
+      
+    <div class="container" >
+      <div style="max-height: 250px; overflow-y: auto;">
+        <table id="tabla" class="table table-bordered table-hover table-striped" style="text-align: center;align-content: center;vertical-align: middle;">
+          <thead class="thead-dark">
+              <tr>
+                  <th scope="col" style="width: 400px;">Productos</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio Unitario</th>
+                  <th scope="col">Precio Total</th>
+                  <th scope="col" style="width: 50px;"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let fila of filas; let i = index">
+                  <td>{{ fila.producto }}</td>
+                  <td>{{ fila.cantidad }}</td>
+                  <td>{{fila.precio_unitario}}</td>
+                  <td>Fila 1, Celda 4</td>
+                  <td>
+                    <button class="btn" (click)="eliminarFila(i)">
+                      <img style="width: 30px;height: 30px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZV269MI4oh8zgy7SMG9OGxjUmagmZLXWGFw&usqp=CAU" alt="">
+                    </button>
+                  </td>
+              <tr>
+                  <td colspan="3">TOTAL</td>
+                  <td>Fila 3, Celda 4</td>
+                  <td></td>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+        
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="col-md-6" >
+              
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-3 col-sm-12"><button class="btn btn-dark btn-block m-sm-2">Cancelar</button></div>
+              <div class="col-md-5 col-sm-12"><button class="btn btn-dark btn-block m-sm-2" (click)="realizarSolicitudPost()">Guardar Presupuesto</button></div>
+              <div class="col-md-4 col-sm-12"><button class="btn btn-dark btn-block m-sm-2">Generar Venta</button></div>
+            </div>   
+          </div>
+          
+   
+         
+      </div>
+    </div>
+    
+   
+</div>
+
+
+
+
+
