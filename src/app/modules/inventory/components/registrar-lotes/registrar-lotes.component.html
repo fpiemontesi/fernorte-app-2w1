@@ -8,45 +8,45 @@
   <div class="selects">
     <div>
       <label for="existencia-select">Producto</label>
-      <select class="form-select" id="existencia-sellect" aria-label="Default select example">
-        <option selected></option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" id="existencia-sellect" aria-label="Default select example" name="existencia-sellect" #selectExistencia="ngModel" [(ngModel)]="existenciaSelect.id"  [class.is-valid]="selectExistencia.valid && selectExistencia.dirty" [class.is-invalid]="existenciaSelect.id == 0 && (selectExistencia.dirty || selectExistencia.touched)" required>
+        <option [ngValue]="0" [selected]="existenciaSelect.id == 0" disabled></option>
+        <ng-container *ngFor="let existencia of existences">
+          <option [ngValue]="existencia.id" [selected]="existenciaSelect.id == existencia.id">{{existencia.name}}</option>
+        </ng-container>
       </select>
     </div>
     <div class="mb-3">
       <label for="seccion-select">Sección</label>
-      <select class="form-select" id="seccion-sellect" aria-label="Default select example">
-        <option selected></option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" id="seccion-sellect" aria-label="Default select example"  name="seccion-select" #selectSeccion="ngModel" [(ngModel)]="seccionSelect.id"  [class.is-valid]="selectSeccion.valid && selectSeccion.dirty" [class.is-invalid]="seccionSelect.id == '' && (selectSeccion.dirty || selectSeccion.touched)" required>
+        <option [ngValue]="0" [selected]="seccionSelect.id == ''" disabled></option>
+        <ng-container *ngFor="let seccion of sections">
+          <option [ngValue]="seccion.id" [selected]="seccionSelect.id == seccion.id">{{seccion.id}}</option>
+        </ng-container>
       </select>
     </div>
   </div>
   <div class="inputs">
     <div class="mb-3">
       <label for="inputCantidad" class="form-label">Cantidad</label>
-      <input type="number" class="form-control" id="inputCantidad" #controlCantidad="ngModel" [(ngModel)]="inputCantidad" (input)="cargarCantidad($event)" name="inputCantidad">
+      <input type="number" class="form-control" id="inputCantidad" #controlCantidad="ngModel" [(ngModel)]="inputCantidad" (input)="cargarCantidad($event)" name="inputCantidad" required>
       <div *ngIf="controlCantidad.dirty" style="color: red;">
-        <p *ngIf="controlCantidad.getError('pattern')">No es el formato correcto</p>
+        <p *ngIf="controlCantidad.hasError('pattern')">No es el formato correcto</p>
         <p *ngIf="inputCantidad <= 0">La cantidad no puede ser menor o igual a 0</p>
       </div>
     </div>
     <div class="mb-3">
       <label for="inputFecha" class="form-label">Fecha de vencimiento</label>
-      <input type="date" class="form-control" id="inputFecha" #controlFecha="ngModel" [(ngModel)]="inputFecha" (input)="cargarFecha($event)" name="inputFecha">
+      <input type="date" class="form-control" id="inputFecha" #controlFecha="ngModel" [(ngModel)]="inputFecha" (input)="cargarFecha($event)" name="inputFecha" required>
       <div *ngIf="controlFecha.dirty" style="color: red;">
-        <p *ngIf="controlFecha.getError('pattern')">No es el formato correcto</p>
+        <p *ngIf="controlFecha.hasError('pattern')">No es el formato correcto</p>
         <p *ngIf="compararFechas()">La fecha no puede ser menor a la actual</p>
       </div>
     </div>
     <div class="mb-3">
       <label for="inputEstante" class="form-label">Estante</label>
-      <input type="number" class="form-control" id="inputEstante" #controlEstante="ngModel" [(ngModel)]="inputEstante" (input)="cargarEstante($event)" name="inputEstante">
+      <input type="number" class="form-control" id="inputEstante" #controlEstante="ngModel" [(ngModel)]="inputEstante" (input)="cargarEstante($event)" name="inputEstante" required>
       <div *ngIf="controlEstante.dirty" style="color: red;">
-        <p *ngIf="controlEstante.getError('pattern')">No es el formato correcto</p>
+        <p *ngIf="controlEstante.hasError('pattern')">No es el formato correcto</p>
         <p *ngIf="inputEstante <= 0">La cantidad no puede ser menor o igual a 0</p>
       </div>
     </div>
