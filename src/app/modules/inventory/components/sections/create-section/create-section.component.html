@@ -1,0 +1,43 @@
+<div class="container d-flex justify-content-center">
+  <div class="col-12 col-sm-11">
+    <form #form="ngForm" (ngSubmit)="createSection(form)" class="">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2>Secciones</h2>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 order-sm-1">
+          <label for="section" class="col-form-label">Sección</label>
+          <input type="text" class="form-control" id="section" name="inputSection"
+           placeholder="Id de Sección" aria-label="Id de Seccion" #inputSection="ngModel"
+           [class.is-valid]="inputSection.valid && inputSection.dirty"
+           [class.is-invalid]="inputSection.invalid && (inputSection.dirty || inputSection.touched)"
+           [(ngModel)]="newSection.id" required maxlength="2">
+          <div class="invalid-feedback">
+            Debe ingresar un id.
+          </div>
+        </div>
+        <div class="col-12 col-sm-7 col-md-7 order-3 order-sm-1 mt-sm-0">
+          <label for="storageZone" class="col-form-label">Zona de almacenamiento</label>
+          <select class="form-select" id="storageZone" name="selectStorageZone" aria-label="Zona almacenamiento"
+            [class.is-valid]="selectStorageZone.valid && selectStorageZone.dirty"
+            [class.is-invalid]="newSection.id_zona == 0 && (selectStorageZone.dirty || selectStorageZone.touched)"
+            #selectStorageZone="ngModel" [(ngModel)]="newSection.id_zona">
+            <option [ngValue]="0" disabled [selected]="newSection.id_zona == 0">Desplegar</option>
+            <ng-container *ngFor="let zone of storageZones">
+              <option [ngValue]="zone.id">{{zone.name}}</option>
+            </ng-container>
+          </select>
+          <div class="invalid-feedback">
+            Debe seleccionar una zona de almacenamiento.
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-2 order-4 order-sm-3 order-md-1 mt-3 mt-md-0">
+          <button type="submit" id="saveBtn" class="btn btn-primary align-middle">Guardar</button>
+        </div>
+        <div class="form-text col-12 mt-n1 order-2 order-sm-2">
+          *El identificador de la sección no debe estar repetido
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
