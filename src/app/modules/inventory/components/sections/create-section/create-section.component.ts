@@ -16,6 +16,11 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   sections: Section[] = [];
   newSection: Section = new Section();
 
+  sectionsFiltered: Section[] = [];
+  sectionParam: Section = new Section();
+  filtrando:boolean = false;
+  zoneFiltered: StorageZone = new StorageZone();
+
   private subscriptions = new Subscription();
 
   constructor(private storageService: StorageZoneService, private sectionService: SectionService) {
@@ -23,6 +28,9 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.storageService.getAll().subscribe(
+      zones => { this.storageZones = zones; }
+    )
     this.subscriptions.add(
       this.storageService.getAll().subscribe({
           next: (response: StorageZone[]) => {
@@ -45,7 +53,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
           }
         }
       )
-    )
+    );
   }
 
   createSection(form: NgForm){
@@ -75,5 +83,26 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  filtrar(){
+    this.filtrando = true;
+    this.subscriptions.add(
+      this.sectionService.getByZone(this.sectionParam.id_zona).subscribe(
+        {
+          next: (response: Section[]) =>{
+            this.sectionsFiltered = response;
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        }
+      )
+    )
+    this.storageZones.forEach(zone => {
+      if(zone.id == this.sectionParam.id_zona){
+        this.zoneFiltered.name = zone.name;
+      }
+    });
   }
 }

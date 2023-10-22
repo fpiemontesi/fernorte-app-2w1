@@ -1,10 +1,12 @@
-<div class="container d-flex justify-content-center">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <h1>Secciones</h1>
+  </div>
+</nav>
+<div class="container d-flex justify-content-center registro">
   <div class="col-12 col-sm-11">
     <form #form="ngForm" (ngSubmit)="createSection(form)" class="">
       <div class="row justify-content-center">
-        <div class="col-12">
-          <h2>Secciones</h2>
-        </div>
         <div class="col-12 col-sm-5 col-md-3 order-sm-1">
           <label for="section" class="col-form-label">Sección</label>
           <input type="text" class="form-control" id="section" name="inputSection"
@@ -32,7 +34,7 @@
           </div>
         </div>
         <div class="col-12 col-sm-12 col-md-2 order-4 order-sm-3 order-md-1 mt-3 mt-md-0">
-          <button type="submit" id="saveBtn" class="btn btn-primary align-middle">Guardar</button>
+          <button type="submit" id="saveBtn" class="btn btn-primary align-middle" [disabled]="newSection.id_zona == 0">Guardar</button>
         </div>
         <div class="form-text col-12 mt-n1 order-2 order-sm-2">
           *El identificador de la sección no debe estar repetido
@@ -40,4 +42,34 @@
       </div>
     </form>
   </div>
+</div>
+<div class="listado">
+  <h1>Listar Secciones</h1>
+  <legend>Filtros:</legend>
+  <form #formularioFiltro="ngForm" (submit)="filtrar()">
+      <div class="mb-3 filtro">
+        <label for="zoneFilter" class="form-label">Zona de Almacenamiento:</label>
+        <select id="zoneFilter" name="zoneFilter" class="form-select" #selectStorageZoneFilter="ngModel" [(ngModel)]="sectionParam.id_zona" [class.is-valid]="selectStorageZoneFilter.valid && selectStorageZoneFilter.dirty"
+        [class.is-invalid]="sectionParam.id_zona == 0 && (selectStorageZoneFilter.dirty || selectStorageZoneFilter.touched)" required>
+          <option [ngValue]="0" [selected]="sectionParam.id_zona == 0" disabled>Desplegar</option>
+          <ng-container *ngFor="let zone of storageZones">
+            <option [ngValue]="zone.id" [selected]="sectionParam.id_zona == zone.id">{{zone.name}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-filtro" [disabled]="sectionParam.id_zona == 0">Filtrar</button>
+  </form>
+  <ul class="list-group list-group-flush grilla">
+    <li class="list-group-item headers"><i><b>Sección</b></i><i><b>Zona</b></i></li>
+    <li class="list-group-item lista-zonas" *ngFor="let zone of sectionsFiltered">
+      <p *ngIf="sectionParam.id_zona != 0 && sectionsFiltered.length == 0 && filtrando">No hay secciones cargadas en esta zona</p>
+      <ng-container >
+        <div class="zona-filtrada">
+          <i>{{zone.id}}</i><i>{{zoneFiltered.name}}</i>
+        </div>
+      </ng-container>
+    </li>
+    <li class="list-group-item" *ngIf="sectionParam.id_zona != 0 && filtrando"></li>
+  </ul>
 </div>
