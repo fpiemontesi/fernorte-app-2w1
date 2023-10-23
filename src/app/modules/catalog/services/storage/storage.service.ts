@@ -21,7 +21,7 @@ export class StorageService {
   private storageRef = ref(this.storage, new Date().getMilliseconds().toString());
 
   constructor() { }
-  async subirImagen(imgBase64:any){
+  async subirImagen(imgBase64:any):Promise<void>{
     try {
       await uploadBytes(this.storageRef, imgBase64)
       const url =  await getDownloadURL(this.storageRef)
