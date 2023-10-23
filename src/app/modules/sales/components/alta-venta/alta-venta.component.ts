@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AltaVentaComponent {
   productos : any[] = [];
+  productosVenta : any[] = [];
 
   filas: any[] = [];
 
@@ -42,6 +43,7 @@ export class AltaVentaComponent {
     // Utiliza el índice para eliminar la fila del arreglo
     this.filas.splice(index, 1);
     this.productos.splice(index, 1);
+    this.productosVenta.splice(index ,1)
   }
 
   onSubmit(){
@@ -74,7 +76,12 @@ export class AltaVentaComponent {
       cantidad: this.formData.cantidad,
       unidad: 'Kgs'
     })
-    console.log(this.productos)
+    this.productosVenta.push({
+      id_producto: producto.options[producto.selectedIndex].value,
+      precio_unitario: 1,
+      cantidad: this.formData.cantidad
+    })
+    
   }
   ValidarProducto(){
     if(this.formData.producto != 0 && this.formData.cantidad != 0 && this.formData.cantidad != null){
@@ -121,7 +128,7 @@ export class AltaVentaComponent {
     return undefined; // Si no se encuentra el producto, puedes manejarlo de acuerdo a tus necesidades.
   }
 
-  realizarSolicitudPost() {
+  realizarSolicitudPostPresupuesto() {
     if(!this.ValidarPresupuesto()){
       return;
     }
@@ -133,6 +140,40 @@ export class AltaVentaComponent {
       fecha_creacion: new Date().toISOString(),
       fecha_vencimiento: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
       productos: this.productos
+    };
+    console.log(body);
+    console.log(this.formData)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    this.http.post(url, body, httpOptions)
+      .subscribe(response => {
+        console.log('Solicitud POST exitosa. Respuesta:', response);
+      }, error => {
+        console.error('Error al realizar la solicitud POST:', error);
+      });
+  }
+
+  realizarSolicitudPostVenta() {
+    if(!this.ValidarPresupuesto()){
+      return;
+    }
+    const url = 'http://localhost:8080/ventas/save'; 
+    const cliente = document.getElementById("cliente") as HTMLSelectElement;
+    const forma_entrega = document.getElementById("formaEntrega") as HTMLSelectElement;
+    const tipo_venta = document.getElementById("tipo") as HTMLSelectElement;
+    const vendedor = document.getElementById("vendedor") as HTMLSelectElement;
+    const body = {
+      fecha: new Date().toISOString(),
+      id_cliente : cliente.value,
+      tipo_venta : tipo_venta.value,
+      forma_entrega : forma_entrega.value,
+      fecha_entrega:  new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      id_vendedor : vendedor.value,
+      detalles: this.productosVenta
     };
     console.log(body);
     console.log(this.formData)

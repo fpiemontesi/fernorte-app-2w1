@@ -20,9 +20,9 @@ export class ConsultarPresupuestoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.clientService.getClientes().subscribe(data => {
-      this.clientes = data;
-    });
+    //this.clientService.getClientes().subscribe(data => {
+     // this.clientes = data;
+    //});
   }
 
   searchPresupuesto() {
