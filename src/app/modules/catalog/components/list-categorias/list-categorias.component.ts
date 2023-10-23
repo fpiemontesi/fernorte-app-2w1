@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.component';
 import { AltaCategoriaComponent } from '../alta-categoria/alta-categoria.component';
 import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'fn-list-categorias',
@@ -15,10 +16,9 @@ export class ListCategoriasComponent {
 
   @Output() newCategoria = new EventEmitter();
   @Output() editarCategoria = new EventEmitter();
-
   lista: Categoria[] = [];
-
   private subscription = new Subscription();
+
   constructor(private categoriaService: CategoriaService) {
   }
 
@@ -31,6 +31,10 @@ export class ListCategoriasComponent {
         alert("Error al intentar cargar categorías.")
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   onNewCategoria() {
@@ -69,5 +73,4 @@ export class ListCategoriasComponent {
       })
     )
   }
-
 }

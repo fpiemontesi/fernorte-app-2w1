@@ -13,10 +13,16 @@ export class AltaCategoriaComponent {
 
   @Output() cargado = new EventEmitter();
   categoria:Categoria = {} as Categoria;
+  private subscription = new Subscription();
+
   constructor(private categoriaService:CategoriaService){}
 
   ngOnInit(): void {
     
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   agregarCategoria(){
@@ -27,7 +33,7 @@ export class AltaCategoriaComponent {
         this.cargado.emit();
       },
       error:()=>{
-        alert("Ocurrio un error")
+        alert("Error al intentar crear categoría.")
       }
     })
   }
