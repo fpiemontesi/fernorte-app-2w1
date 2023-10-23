@@ -40,13 +40,13 @@
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                 </div>
             </div>
-        </div>     
+        </div>
 
 
     </div>
 
-    <div class="container pt-2 pb-3 mt-3">
-        <div class="container pt-2 pb-3 mt-3 table-container">
+    <div class="table-container pt-2 pb-3 mt-3">
+        <div class="container pt-2 pb-3 mt-3 mb-4 ">
             <div class="table-responsive">
                 <table class="table border sombra">
                     <thead>
@@ -60,16 +60,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center">
-                            <td>1</td>
-                            <td>18/12/2023</td>
-                            <td>Lionel andres messi</td>
-                            <td>$300,000</td>
-                            <td>R.Inscripto</td>
+                        <tr *ngFor="let invoice of invoices" class="text-center">
+                            <td>{{ invoice.id }}</td>
+                            <td>{{ invoice.date }}</td>
+                            <td>{{ invoice.client }}</td>
+                            <td>{{ invoice.totalAmount }}</td>
+                            <td>{{ invoice.clientType }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col mt-1">
-                                        <img class="img-fluid " src="../../assets/ojo2.png" alt="">
+                                        <button>
+                                            <img class="img-fluid " src="../../assets/ojo2.png" alt="">
+                                        </button>
                                     </div>
                                     <div class="col mt-1">
                                         <img class="img-fluid" src="../../assets/basura.png" alt="">
@@ -85,5 +87,5 @@
             </div>
         </div>
     </div>
-    
+
 </body>

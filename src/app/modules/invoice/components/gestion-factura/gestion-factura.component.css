@@ -50,3 +50,9 @@ body {
   max-width: 30px !important ; /* Ajusta el ancho máximo de la imagen */
   margin: 0 5px !important ; /* Ajusta el margen horizontal entre las imágenes */
 }
+.table-container{
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
