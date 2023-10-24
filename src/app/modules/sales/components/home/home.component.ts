@@ -25,7 +25,7 @@ export class HomeComponent {
   }
 
   MostrarComponente(componente:string) {
-    this.mostrarAltaVenta = componente === 'altaVenta';
+    //this.mostrarAltaVenta = componente === 'altaVenta';
     this.mostrarConsultaPresupuesto = componente === 'consultarPresupuesto';
     this.mostrarConsultaVenta = componente === 'consultarVenta';
     this.mostrarAltaPresupuesto = componente === 'altaPresupuesto'
