@@ -4,8 +4,10 @@ import { CategoriaService } from '../../services/categoria.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.component';
 import { AltaCategoriaComponent } from '../alta-categoria/alta-categoria.component';
-import { Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'fn-list-categorias',
@@ -18,6 +20,7 @@ export class ListCategoriasComponent {
   @Output() editarCategoria = new EventEmitter();
   lista: Categoria[] = [];
   private subscription = new Subscription();
+  private modalRef: BsModalRef = new BsModalRef();
 
   constructor(private categoriaService: CategoriaService) {
   }
@@ -61,6 +64,7 @@ export class ListCategoriasComponent {
     }
   }
 
+
   private loadCategorias() {
     this.subscription.add(
       this.categoriaService.get().subscribe({
@@ -73,4 +77,5 @@ export class ListCategoriasComponent {
       })
     )
   }
+
 }

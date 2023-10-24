@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <form>
             <div class="form-group mb-3">
-                <label for="codigo" class="mb-2">codigo</label>
+                <label for="codigo" class="mb-2">Código</label>
                 <input type="text" class="form-control" id="txtCodigo" name="codigo" placeholder="Ingresar codigo"
                     required [(ngModel)]="categoria.codigo" #codigo="ngModel">
                 <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">

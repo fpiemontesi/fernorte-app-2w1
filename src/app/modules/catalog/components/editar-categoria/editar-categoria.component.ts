@@ -14,12 +14,14 @@ export class EditarCategoriaComponent {
   @Output() editado = new EventEmitter();
   categoria: Categoria = {} as Categoria;
   private subscription = new Subscription();
+  categoriaCodigoOriginal: string = '';
 
   constructor(private categoriaService: CategoriaService) {
   }
 
   ngOnInit(): void {
     this.categoria = this.categoriaService.obtenerCategoria()
+    this.categoriaCodigoOriginal = this.categoria.codigo;
   }
 
   ngOnDestroy(): void {
@@ -29,7 +31,7 @@ export class EditarCategoriaComponent {
   editarCategoria() {
     console.log('CÓDIGO editarCategoria(): ' + this.categoria.codigo)
     console.log(this.categoria)
-    this.categoriaService.update(this.categoria.codigo, this.categoria).subscribe({
+    this.categoriaService.update(this.categoriaCodigoOriginal, this.categoria).subscribe({
       next: (categoria: Categoria) => {
         alert("Categoría actualizada correctamente.")
         this.categoria = {} as Categoria
@@ -46,3 +48,4 @@ export class EditarCategoriaComponent {
     this.editado.emit();
   }
 }
+

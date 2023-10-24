@@ -7,11 +7,14 @@ import { ListCategoriasComponent } from './components/list-categorias/list-categ
 import { FormsModule } from '@angular/forms';
 import { CategoriaService } from './services/categoria.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { SwalModule } from '@sweetalert2/ngx-sweetalert2/lib/sweetalert2-loader.service';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [HomeComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent],
-  providers: [CategoriaService],
-  imports: [CommonModule, FormsModule, NgbModule],
+  providers: [CategoriaService, BsModalService],
+  imports: [CommonModule, FormsModule, NgbModule, SweetAlert2Module],
   exports: [HomeComponent],
 })
 export class CatalogModule {}
