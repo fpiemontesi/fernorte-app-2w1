@@ -30,7 +30,7 @@
         <div class="col-md-6">
           <div class="form-group mb-2">
             <label for="modelo">Modelo</label>
-            <input style="height: 50px;" type="text" class="form-control" id="modelo" placeholder="Modelo" name="modelo" [(ngModel)]="model.modelo" [disabled]="!formActivo">
+            <input style="height: 50px;" type="text" class="form-control" id="codigo" placeholder="Modelo" name="codigo" [(ngModel)]="model.codigo" [disabled]="!formActivo">
           </div>
           <div class="form-group mb-3">
             <label for="name">Nombre</label>
@@ -48,7 +48,7 @@
 
 
           <div class="form-floating">
-            <select formControlName="categorias" (ngModelChange)="addElement()" class="form-select" id="floatingSelect" aria-label="Seleccionar Categorias">
+            <select formControlName="categorias" (change)="addElement()" class="form-select" id="floatingSelect" aria-label="Seleccionar Categorias">
               <!-- todas las opciones deben ser cargadas con un arreglo proveniente de un get -->
               <option value="1" person="tecnologia">Tecno</option>
               <option value="2" person="herramientas">Herramientas</option>

@@ -3,7 +3,7 @@ import {Categoria} from "./categoria";
 
 export interface Producto {
     id:string;
-    modelo:string;
+    codigo:string;
     nombre:string;
     marca:Marca;
     categorias:Categoria[];

@@ -23,7 +23,7 @@ export class UpdateProductComponent implements OnInit{
     id: "",
     marca: "",
     material: "",
-    modelo: "",
+    codigo: "",
     nombre: "",
     paisOrigen: "",
     peso: "",
@@ -59,7 +59,7 @@ export class UpdateProductComponent implements OnInit{
 
 
     descripcion: new FormControl('', [Validators.required]),
-    modelo: new FormControl('', [Validators.required]),
+    codigo: new FormControl('', [Validators.required]),
     marca: new FormControl('', [Validators.required]),
     minorista: new FormControl(null, [Validators.required]),
     mayorista: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
@@ -128,7 +128,7 @@ export class UpdateProductComponent implements OnInit{
       id: "",
       marca: "",
       material: "",
-      modelo: "",
+      codigo: "",
       nombre: "",
       paisOrigen: "",
       peso: "",
