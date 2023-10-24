@@ -11,10 +11,16 @@ import { SwalModule } from '@sweetalert2/ngx-sweetalert2/lib/sweetalert2-loader.
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { RegisterArticleComponent } from './components/register-article/register-article.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { DeleteProductComponent } from './components/delete-product-list/delete-product.component';
+
 @NgModule({
-  declarations: [HomeComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent],
-  providers: [CategoriaService, BsModalService],
-  imports: [CommonModule, FormsModule, NgbModule, SweetAlert2Module],
+  declarations: [HomeComponent, RegisterArticleComponent, UpdateProductComponent, DeleteProductComponent],
+  providers: [],
+    imports: [CommonModule,
+        ReactiveFormsModule, FormsModule],
   exports: [HomeComponent],
 })
 export class CatalogModule {}

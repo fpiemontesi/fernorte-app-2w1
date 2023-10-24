@@ -1,0 +1,26 @@
+
+.imagen-borde {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin: 0 auto;
+  position: relative; /* Necesario para posicionar el span en el centro */
+}
+#product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+.imagen-borde span{
+  position: absolute;
+  top: 15%; /* Ajusta este valor para mover el texto más abajo o arriba */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: end;
+}
+

@@ -1,13 +1,97 @@
-<div class="container">
-    <ng-container *ngIf="list">
-        <fn-list-categorias (newCategoria)="showForm()" (editarCategoria)="mostrarModificar()"></fn-list-categorias>
-    </ng-container>
-    <ng-container *ngIf="form">
-        <fn-alta-categoria (cargado)="showList()"></fn-alta-categoria>
-    </ng-container>
-    <ng-container *ngIf="modificar">
-        <fn-editar-categoria (editado)="showList()"></fn-editar-categoria>
-    </ng-container>
-</div>
 
-<!-- json-server --watch categoria.json -->
+
+<div class="sidebar">
+    <nav class="main-menu">
+            <ul>
+                <li>
+                    <a href="">
+                      <i class="fa bi bi-card-list fa-2x"></i>
+                      <div class="btn-group dropend">
+                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <span style="margin-right: 70px;">Catalogo</span>
+                        </button>
+                        <ul class="dropdown-menu menu">
+                          <li><a class="dropdown-item" href="#">Registrar Catalogo</a></li>
+                          <li><a class="dropdown-item" href="#">Modificar Catalogo</a></li>
+                          <li><a class="dropdown-item" href="#">Eliminar Catalogo</a></li>
+                          <li><a class="dropdown-item" href="#">Listar Catalogo</a></li>
+                        </ul>
+                      </div>
+                    </a>
+
+                </li>
+                <hr>
+                <li class="has-subnav">
+                    <a href="#">
+                        <i class="fa bi bi-bag-fill fa-globe fa-2x"></i>
+                        <span class="nav-text">
+                            <div class="btn-group dropend">
+                                <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <span style="margin-right: 70px;">Productos</span>
+                                </button>
+                                <ul class="dropdown-menu menu">
+                                  <li><a class="dropdown-item" href="#" (click)="mostrarRegistrar()">Registrar Productos</a></li>
+                                  <li><a class="dropdown-item" href="#" (click)="mostrarUpdate()">Modificar Productos</a></li>
+                                  <li><a class="dropdown-item" href="#" (click)="mostrarDelete()">Eliminar Productos</a></li>
+                                  <li><a class="dropdown-item" href="#">Listar Productos</a></li>
+                                </ul>
+                              </div>
+                        </span>
+                    </a>
+                </li>
+                <hr>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa bi bi bi-cash-stack fa-2x"></i>
+                       <div class="btn-group dropend">
+                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <span style="margin-right: 80px;">Ofertas</span>
+                        </button>
+                        <ul class="dropdown-menu menu">
+                          <li><a class="dropdown-item" href="#">Registrar Ofertas</a></li>
+                          <li><a class="dropdown-item" href="#">Modificar Ofertas</a></li>
+                          <li><a class="dropdown-item" href="#">Eliminar Ofertas</a></li>
+                          <li><a class="dropdown-item" href="#">Listar Ofertas</a></li>
+                        </ul>
+                      </div>
+                    </a>
+
+
+                </li>
+                <hr>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa bi bi-cash-coin fa-2x"></i>
+                       <div class="btn-group dropend">
+                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <span style="margin-right: 45px;">Promociones</span>
+                        </button>
+                        <ul class="dropdown-menu menu">
+                          <li><a class="dropdown-item" href="#">Registrar Promociones</a></li>
+                          <li><a class="dropdown-item" href="#">Modificar Promociones</a></li>
+                          <li><a class="dropdown-item" href="#">Eliminar Promociones</a></li>
+                          <li><a class="dropdown-item" href="#">Listar Promociones</a></li>
+                        </ul>
+                      </div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="logout">
+              <hr>
+                <li>
+                   <a href="#">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+</div>
+<div class="main-content">
+  <ng-container *ngIf="registrar"><fn-register-article></fn-register-article></ng-container>
+  <ng-container *ngIf="modificar"><fn-update-product></fn-update-product></ng-container>
+  <ng-container *ngIf="eliminar"><fn-delete-product-list></fn-delete-product-list></ng-container>
+
+</div>
