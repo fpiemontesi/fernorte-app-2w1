@@ -101,7 +101,7 @@ export class AltaPresupuestoComponent {
     
   }
   ValidarProducto(){
-    if(this.formData.producto != 0 && this.formData.cantidad != 0 && this.formData.cantidad != null){
+    if(this.formData.producto != 0 && this.formData.cantidad > 0 && this.formData.cantidad != null){
       return true;
     }
     Swal.fire({
