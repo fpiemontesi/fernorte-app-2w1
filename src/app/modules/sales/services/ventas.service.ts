@@ -14,8 +14,8 @@ export class VentasService {
  // private url = 'http://localhost:3000/ventas';
 
   
-  getVentas(): Observable<Ventas[]>{
-   const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
-   return result;
-  }
+  // getVentas(): Observable<Ventas[]>{
+  //  const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
+  //  return result;
+  // }
 }

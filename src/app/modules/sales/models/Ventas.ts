@@ -3,23 +3,23 @@ import { Detalles } from "./Detalles";
 
 export class Ventas {
     id: number;
-    cliente: string;
-    vendedor: string;
+    id_cliente: number;
+    id_vendedor: string;
     fecha: Date;
-    formaEntrega: string;
-    tipoPedido: string;
+    forma_entrega: string;
+    tipo_venta: string;
     estado: string;
-    monto: number;
+    total: number;
     detalles: Array<Detalles> = [];
 
     constructor() {
        this.id = 0;
-       this.cliente = "";
-       this.vendedor = "";
+       this.id_cliente = 0;
+       this.id_vendedor = "";
        this.fecha = new Date();
-       this.formaEntrega = "";
-       this.tipoPedido = "";
+       this.forma_entrega = "";
+       this.tipo_venta = "";
        this.estado = "";
-       this.monto = 0;
+       this.total = 0;
     }
 }

@@ -1,0 +1,29 @@
+
+.custom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 32%;
+    background-color: rgb(13, 136, 202); /* Color de fondo al estado normal */
+    border: 1px solid rgb(13, 136, 202); /* Borde del botón */
+    color: white; /* Color del texto en el botón */
+  
+    /* Transición para el color de fondo cuando se presiona */
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: rgb(50, 100, 80); /* Color de fondo al pasar el ratón por encima */
+  }
+  
+  .custom-btn:active {
+    background-color: rgb(30, 70, 50); /* Color de fondo al presionar el botón */
+  }
+  /* filas impares */
+  .table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa; /* Cambia el color de fondo de las filas impares */
+  }
+  .table thead {
+    background-color: #343a40; /* Cambia el color de fondo del encabezado */
+    color: white; /* Cambia el color del texto del encabezado */
+  }
