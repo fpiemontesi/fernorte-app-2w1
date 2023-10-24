@@ -28,7 +28,7 @@ export class AltaCategoriaComponent {
   agregarCategoria(){
     this.categoriaService.create(this.categoria).subscribe({
       next: (categoria:Categoria)=>{
-        alert("Se registro correctamente")
+        alert("La categoría se registró correctamente.")
         this.categoria = {} as Categoria
         this.cargado.emit();
       },

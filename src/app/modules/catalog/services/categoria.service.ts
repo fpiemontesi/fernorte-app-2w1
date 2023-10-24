@@ -13,24 +13,19 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
   get(): Observable<Categoria[]> {
-    //return this.http.get<Categoria[]>("http://localhost:3000/categorias")
     return this.http.get<Categoria[]>("http://localhost:8080/categorias")
   }
 
   create(categoria: Categoria): Observable<Categoria> {
-    //return this.http.post<Categoria>("http://localhost:3000/categorias", categoria)
     return this.http.post<Categoria>("http://localhost:8080/crearCategoria", categoria)
   }
 
   update(id: string, categoria: Categoria): Observable<Categoria> {
-    //return this.http.put<Categoria>("http://localhost:3000/categorias/" + categoria.id, categoria)
     console.log('ID update(): '+id)
-    //return this.http.put<Categoria>(`http://localhost:8080/modificarCategoria/${id}`, categoria)
     return this.http.put<Categoria>('http://localhost:8080/modificarCategoria/'+id, categoria)
   }
 
   delete(id: string): Observable<Categoria> {
-    //return this.http.delete<Categoria>("http://localhost:3000/categorias/" + id)
     return this.http.delete<Categoria>("http://localhost:8080/eliminarCategoria/" + id)
   }
 

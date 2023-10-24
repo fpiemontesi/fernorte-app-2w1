@@ -1,12 +1,12 @@
 <div class="container">
     <ng-container *ngIf="list">
-        <fn-list-categorias (newCategoria)="showform()" (editarCategoria)="mostrarmodificar()"></fn-list-categorias>
+        <fn-list-categorias (newCategoria)="showForm()" (editarCategoria)="mostrarModificar()"></fn-list-categorias>
     </ng-container>
     <ng-container *ngIf="form">
-        <fn-alta-categoria (cargado)="showlist()"></fn-alta-categoria>
+        <fn-alta-categoria (cargado)="showList()"></fn-alta-categoria>
     </ng-container>
     <ng-container *ngIf="modificar">
-        <fn-editar-categoria (editado)="showlist()"></fn-editar-categoria>
+        <fn-editar-categoria (editado)="showList()"></fn-editar-categoria>
     </ng-container>
 </div>
 

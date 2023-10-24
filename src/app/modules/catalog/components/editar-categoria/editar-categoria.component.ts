@@ -27,9 +27,9 @@ export class EditarCategoriaComponent {
   }
 
   editarCategoria() {
-    console.log('ID editarCategoria(): ' + this.categoria.id)
+    console.log('CÓDIGO editarCategoria(): ' + this.categoria.codigo)
     console.log(this.categoria)
-    this.categoriaService.update(this.categoria.id, this.categoria).subscribe({
+    this.categoriaService.update(this.categoria.codigo, this.categoria).subscribe({
       next: (categoria: Categoria) => {
         alert("Categoría actualizada correctamente.")
         this.categoria = {} as Categoria

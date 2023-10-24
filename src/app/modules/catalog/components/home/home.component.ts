@@ -15,17 +15,17 @@ export class HomeComponent {
 
   constructor() { }
 
-  mostrarmodificar() {
+  mostrarModificar() {
     this.list = false
     this.form = false
     this.modificar = true
   }
-  showlist() {
+  showList() {
     this.list = true
     this.form = false
     this.modificar = false
   }
-  showform() {
+  showForm() {
     this.list = false
     this.form = true
     this.modificar = false
