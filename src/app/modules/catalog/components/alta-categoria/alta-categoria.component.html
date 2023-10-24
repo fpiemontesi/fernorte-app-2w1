@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h2 class="mb-3">Alta de Categoría</h2>
+    <div class="col-md-6">
+        <form>
+            <div class="form-group mb-3">
+                <label for="codigo" class="mb-2">Código</label>
+                <input type="text" class="form-control" id="txtCodigo" name="codigo" placeholder="Ingresar codigo"
+                    required [(ngModel)]="categoria.codigo" #codigo="ngModel">
+                <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
+                    <small class="form-text text-danger">El codigo es obligatorio</small>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="nombre" class="mb-2">Nombre</label>
+                <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre"
+                    required [(ngModel)]="categoria.nombre" #nombre="ngModel">
+                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                    <small class="form-text text-danger">El nombre es obligatorio</small>
+                </div>
+            </div>
+            <button (click)="agregarCategoria()" class="btn btn-primary m-1" [disabled]="nombre.invalid">Crear</button>
+            <button (click)="volverAlInicio()" class="btn btn-danger m-1">Volver al Inicio</button>
+        </form>
+    </div>
+</div>

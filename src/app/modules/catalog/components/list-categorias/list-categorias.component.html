@@ -1,0 +1,24 @@
+<div class="container">
+    <button (click)="onNewCategoria()" class="btn btn-success float-end mt-2">Cargar Categoría</button>
+    <h2 class="my-2 py-2">Listado de Categorías</h2>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of lista">
+                    <td>{{c.codigo}}</td>
+                    <td>{{c.nombre}}</td>
+                    <td><button (click)="modificarCategoria(c)" class="btn btn-primary">Modificar</button></td>
+                    <td><button (click)="eliminarCategoria(c.codigo)" class="btn btn-danger">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
