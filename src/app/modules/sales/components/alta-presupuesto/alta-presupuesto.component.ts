@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
-
+import { Component , OnInit, ViewChild } from '@angular/core';
+import { HttpClient  , HttpHeaders} from '@angular/common/http';
+import Swal from 'sweetalert2'
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'fn-alta-presupuesto',
   templateUrl: './alta-presupuesto.component.html',
@@ -22,10 +23,20 @@ export class AltaPresupuestoComponent {
     producto: '',
     cantidad: 0
   };
-
+ 
   myList: any[] = [];
-
+  @ViewChild('form', { static: false })
+  form!: NgForm;
   constructor(private http: HttpClient) { }
+
+  action!: string; 
+
+  onSubmit() {
+    if (this.form.valid) {
+      return true;
+    }
+    return false;
+  }
 
   ngOnInit() {
     this.Listar();
@@ -47,20 +58,25 @@ export class AltaPresupuestoComponent {
     this.productosVenta.splice(index ,1)
   }
 
-  onSubmit(){
-    console.log("hola");
-  }
+  
 
-  agregarFila(): void {
+  agregarFila(event : Event): void {
+    event.preventDefault();
     const producto = document.getElementById("producto") as HTMLSelectElement;
-    // Aquí debes agregar una nueva fila a tu arreglo de filas
+    
     if(!this.ValidarProducto()){
       return;
     }
     const productoSeleccionado = producto.options[producto.selectedIndex].text;
     if (this.filas.some((fila) => fila.producto === productoSeleccionado)) {
-    // Producto duplicado, muestra una alerta
-    alert('Este producto ya ha sido agregado.');
+    
+      Swal.fire({
+        icon: 'warning', // Puedes cambiar el icono a tu elección
+        title: 'El producto ya ah sido seleccionado',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonText: 'Aceptar'
+      });;
     return;
   }
     this.filas.push({
@@ -88,7 +104,13 @@ export class AltaPresupuestoComponent {
     if(this.formData.producto != 0 && this.formData.cantidad != 0 && this.formData.cantidad != null){
       return true;
     }
-    alert("Debe seleccionar un producto y una cantidad");
+    Swal.fire({
+      icon: 'warning', // Puedes cambiar el icono a tu elección
+      title: 'Seleccione un producto y una cantidad',
+      showCancelButton: false,
+      showConfirmButton: true,
+      confirmButtonText: 'Aceptar'
+    });
     return false;
   }
 
@@ -130,8 +152,9 @@ export class AltaPresupuestoComponent {
   }
 
   realizarSolicitudPostPresupuesto() {
-    if(!this.ValidarPresupuesto()){
-      return;
+    if(!this.onSubmit())
+    {
+      return ;
     }
     const url = 'http://localhost:8080/presupuesto/Save'; 
     const cliente = document.getElementById("cliente") as HTMLSelectElement;
@@ -159,8 +182,9 @@ export class AltaPresupuestoComponent {
   }
 
   realizarSolicitudPostVenta() {
-    if(!this.ValidarPresupuesto()){
-      return;
+    if(!this.onSubmit())
+    {
+      return ;
     }
     const url = 'http://localhost:8080/ventas/save'; 
     const cliente = document.getElementById("cliente") as HTMLSelectElement;
