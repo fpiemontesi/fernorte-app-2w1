@@ -10,11 +10,19 @@ export class HttpClientService {
 
   constructor(private client:HttpClient) { }
 
-  getAllModels():Observable<Producto[]>{
+  getAllProducts():Observable<Producto[]>{
       return this.client.get<Producto[]>("http://localhost:8080/productos");
   }
 
-  getModelById(id:string):Observable<Producto>{
-    return this.client.get<Producto>("http://localhost:8080/productos/"+id);
+  getProductByCode(code:string):Observable<Producto>{
+    return this.client.get<Producto>("http://localhost:8080/productos/"+code);
+  }
+
+  updateProduct(code:string, product:Producto):Observable<Producto>{
+    return this.client.put<Producto>("http://localhost:8080/productoModificar/"+code, product);
+  }
+
+  deleteProduct(code:string):Observable<Producto>{
+    return this.client.delete<Producto>("http://localhost:8080/productoEliminar/"+code);
   }
 }

@@ -20,7 +20,7 @@ export class RegisterArticleComponent implements OnInit {
   model:Producto | undefined;
     constructor(private storageService: StorageService, private httpClientService:HttpClientService) { }
     ngOnInit(): void {
-      this.httpClientService.getAllModels().subscribe(
+      this.httpClientService.getAllProducts().subscribe(
         (response:Producto[])=>{
           this.allModels=response;
           }
@@ -28,7 +28,7 @@ export class RegisterArticleComponent implements OnInit {
     }
 
   getModelById(){
-    this.httpClientService.getModelById(this.modelSelected).subscribe(
+    this.httpClientService.getProductByCode(this.modelSelected).subscribe(
       (response:Producto)=>{
         this.model=response;
       }

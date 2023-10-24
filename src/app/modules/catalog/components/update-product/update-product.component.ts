@@ -13,9 +13,9 @@ export class UpdateProductComponent implements OnInit{
   imagenURL:string = "";
   categories: String[] = [
   ]
-  allModels:Producto[]=[];
-  modelSelected:string = "";
-  model:Producto = {
+  allProducts:Producto[]=[];
+  productCodeSelected:string = "";
+  product:Producto = {
     categorias: [],
     color: "",
     descripcion: "",
@@ -35,19 +35,24 @@ export class UpdateProductComponent implements OnInit{
   formActivo:boolean = false;
   constructor(private storageService: StorageService, private httpClientService:HttpClientService) { }
   ngOnInit(): void {
-    this.httpClientService.getAllModels().subscribe(
+    this.httpClientService.getAllProducts().subscribe(
       (response:Producto[])=>{
-        this.allModels=response;
+        this.allProducts=response;
       }
     );
   }
 
   getModelById(){
-    this.httpClientService.getModelById(this.modelSelected).subscribe(
+    this.httpClientService.getProductByCode(this.productCodeSelected).subscribe(
       (response:Producto)=>{
-        this.model=response;
+        this.product=response;
       }
     )
+  }
+
+  updateProduct(product: Producto) {
+    this.httpClientService.updateProduct(product.codigo, product);
+    //this.editarCategoria.emit()
   }
 
   formArticle = new FormGroup({
@@ -119,8 +124,8 @@ export class UpdateProductComponent implements OnInit{
   }
 
   cancelarModificacion(){
-    this.modelSelected = "";
-    this.model = {
+    this.productCodeSelected = "";
+    this.product = {
       categorias: [],
       color: "",
       descripcion: "",

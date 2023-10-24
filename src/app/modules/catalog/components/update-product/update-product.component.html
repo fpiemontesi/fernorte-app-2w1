@@ -3,9 +3,9 @@
   <div class="">
     <div>
       <label for="selectArticulo">Articulo a Modificar</label>
-      <select class="form-select" id="selectArticulo" aria-label="Seleccionar Articulo" name="idArticuloSelected" [(ngModel)]="modelSelected" (change)="llenarForm()">
+      <select class="form-select" id="selectArticulo" aria-label="Seleccionar Articulo" name="idArticuloSelected" [(ngModel)]="productCodeSelected" (change)="llenarForm()">
         <option selected disabled>Seleccionar Articulo</option>
-        <ng-container *ngFor="let articulo of allModels">
+        <ng-container *ngFor="let articulo of allProducts">
           <option value="{{articulo.id}}">{{articulo.nombre}}</option>
         </ng-container>
       </select>
@@ -29,15 +29,15 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group mb-2">
-            <label for="modelo">Modelo</label>
-            <input style="height: 50px;" type="text" class="form-control" id="codigo" placeholder="Modelo" name="codigo" [(ngModel)]="model.codigo" [disabled]="!formActivo">
+            <label for="codigo">Codigo</label>
+            <input style="height: 50px;" type="text" class="form-control" id="codigo" placeholder="Codigo" name="codigo" [(ngModel)]="product.codigo" [disabled]="!formActivo">
           </div>
           <div class="form-group mb-3">
             <label for="name">Nombre</label>
-            <input style="height: 50px;" type="text" class="form-control" id="name" placeholder="Nombre" name="nombre" [(ngModel)]="model.nombre" [disabled]="!formActivo">
+            <input style="height: 50px;" type="text" class="form-control" id="name" placeholder="Nombre" name="nombre" [(ngModel)]="product.nombre" [disabled]="!formActivo">
           </div>
           <div class="form-floating mb-3">
-            <select class="form-select" id="marca" aria-label="Seleccionar Marca" name="marca" [(ngModel)]="model.marca" [disabled]="!formActivo">
+            <select class="form-select" id="marca" aria-label="Seleccionar Marca" name="marca" [(ngModel)]="product.marca" [disabled]="!formActivo">
               <option selected disabled>Abrir Menu</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -70,13 +70,13 @@
 
           <div class="form-group  mt-4  d-flex align-items-center">
             <label for="minorista"></label>
-            <input  type="text" class="form-control w-50 me-4" id="minorista" placeholder="Porcentaje Minorista" name="precioMinorista" [(ngModel)]="model.precio_minorista" [disabled]="!formActivo">
+            <input type="text" class="form-control w-50 me-4" id="minorista" placeholder="Porcentaje Minorista" name="precioMinorista" [(ngModel)]="product.precio_minorista" [disabled]="!formActivo">
             <p style="margin: 0px; font-weight: bold;">Precio: </p>
           </div>
 
           <div class="form-group mt-4 d-flex align-items-center">
             <label for="mayorista"></label>
-            <input  type="text" class="form-control  w-50 me-4" id="mayorista" placeholder="Porcentaje Mayorista" name="precioMayorista" [(ngModel)]="model.precio_mayorista" [disabled]="!formActivo">
+            <input type="text" class="form-control  w-50 me-4" id="mayorista" placeholder="Porcentaje Mayorista" name="precioMayorista" [(ngModel)]="product.precio_mayorista" [disabled]="!formActivo">
             <p style=" margin: 0px;font-weight: bold;">Precio: </p>
           </div>
 
@@ -87,29 +87,29 @@
             <label for="name">Descripcion</label>
             <div class="form-floating">
                             <textarea class="form-control" placeholder="Descripcion del producto" id="floatingDescription"
-                                      style="height: 130px" name="descripcion" [(ngModel)]="model.descripcion" [disabled]="!formActivo"></textarea>
+                                      style="height: 130px" name="descripcion" [(ngModel)]="product.descripcion" [disabled]="!formActivo"></textarea>
             </div>
           </div>
           <div class="mt-3">
             <h5>Caracteristicas</h5>
             <div class="form-group">
               <label for="dimensiones">Dimensiones</label>
-              <input  type="text" class="form-control" id="dimensiones" placeholder="Dimensiones" name="dimensiones" [(ngModel)]="model.dimensiones" [disabled]="!formActivo">
+              <input type="text" class="form-control" id="dimensiones" placeholder="Dimensiones" name="dimensiones" [(ngModel)]="product.dimensiones" [disabled]="!formActivo">
             </div>
             <div class="form-group">
               <label for="peso">Peso</label>
-              <input  type="text" class="form-control" id="peso" placeholder="Peso" name="peso" [(ngModel)]="model.peso" [disabled]="!formActivo">
+              <input type="text" class="form-control" id="peso" placeholder="Peso" name="peso" [(ngModel)]="product.peso" [disabled]="!formActivo">
             </div>
             <div class="form-group">
               <label for="color">Color</label>
-              <input  type="text" class="form-control" id="color" placeholder="Color" name="color" [(ngModel)]="model.color" [disabled]="!formActivo">
+              <input type="text" class="form-control" id="color" placeholder="Color" name="color" [(ngModel)]="product.color" [disabled]="!formActivo">
             </div>
             <div class="form-group">
               <label for="material">Material</label>
-              <input  type="text" class="form-control" id="material" placeholder="Material" name="material" [(ngModel)]="model.material" [disabled]="!formActivo">
+              <input type="text" class="form-control" id="material" placeholder="Material" name="material" [(ngModel)]="product.material" [disabled]="!formActivo">
             </div>
             <div class="form-floating mb-3 mt-4">
-              <select class="form-select" id="paisOrigen" aria-label="Seleccionar Pais" name="paisOrigen" [(ngModel)]="model.paisOrigen" [disabled]="!formActivo">
+              <select class="form-select" id="paisOrigen" aria-label="Seleccionar Pais" name="paisOrigen" [(ngModel)]="product.paisOrigen" [disabled]="!formActivo">
                 <option selected disabled>Abrir Menu</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -127,7 +127,7 @@
 
       </div>
       <div class="mt-3 d-grid d-md-flex gap-2">
-        <button type="submit" class="btn btn-dark">Guardar</button>
+        <button type="submit" class="btn btn-dark" (click)="updateProduct(product)">Guardar</button>
         <button type="submit" class="btn btn-dark" (click)="cancelarModificacion()">Cancelar</button>
       </div>
 
