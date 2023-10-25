@@ -62,6 +62,7 @@ export class AltaPresupuestoComponent {
 
   agregarFila(event : Event): void {
     event.preventDefault();
+    console.log(this.formData);
     const producto = document.getElementById("producto") as HTMLSelectElement;
     
     if(!this.ValidarProducto()){
@@ -72,7 +73,7 @@ export class AltaPresupuestoComponent {
     
       Swal.fire({
         icon: 'warning', // Puedes cambiar el icono a tu elección
-        title: 'El producto ya ha sido seleccionado',
+        title: 'El producto ya ah sido seleccionado',
         showCancelButton: false,
         showConfirmButton: true,
         confirmButtonText: 'Aceptar'
@@ -101,7 +102,7 @@ export class AltaPresupuestoComponent {
     
   }
   ValidarProducto(){
-    if(this.formData.producto != 0 && this.formData.cantidad > 0 && this.formData.cantidad != null){
+    if(this.formData.producto != 0 && this.formData.cantidad != 0 && this.formData.cantidad != null){
       return true;
     }
     Swal.fire({
@@ -114,34 +115,7 @@ export class AltaPresupuestoComponent {
     return false;
   }
 
-  ValidarPresupuesto(){
-    const fechaHoy = new Date(); // Obten la fecha actual
-    const fechaAyer = new Date(fechaHoy);
-    fechaAyer.setDate(fechaAyer.getDate() - 1);
-    if(this.formData.fecha != '' && 
-        new Date(this.formData.fecha) > fechaAyer  && 
-        this.formData.cliente != '' && 
-        this.formData.tipo != '' && 
-        this.formData.formaEntrega != '' &&
-        this.formData.vendedor != '' && this.filas.length > 0){
-          alert("Presupuesto valido");
-          this.formData.producto = 0;
-          this.formData.cantidad = 0;
-          this.formData.fecha = Date();
-          this.formData.cliente = '';
-          this.formData.tipo = '';
-          this.formData.formaEntrega = '';
-          this.formData.vendedor = '';
-
-      return true;
-    }
-    else{
-      
-      alert("Complete los campos");
-      return false;
-    }
-   
-  }
+  
 
   getPrecioUnitario(productoSeleccionado: string): string | undefined {
     const productoEnLista = this.myList.find(item => item.name === productoSeleccionado);
@@ -152,7 +126,7 @@ export class AltaPresupuestoComponent {
   }
 
   realizarSolicitudPostPresupuesto() {
-    if(!this.onSubmit())
+    if(!this.onSubmit()) 
     {
       return ;
     }
@@ -165,8 +139,7 @@ export class AltaPresupuestoComponent {
       fecha_vencimiento: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
       productos: this.productos
     };
-    console.log(body);
-    console.log(this.formData)
+    
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -176,6 +149,14 @@ export class AltaPresupuestoComponent {
     this.http.post(url, body, httpOptions)
       .subscribe(response => {
         console.log('Solicitud POST exitosa. Respuesta:', response);
+        Swal.fire({
+          icon: 'success', // Puedes cambiar el icono a tu elección
+          title: 'Se ha guardado el presupuesto',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar'
+        });
+        this.Clean();
       }, error => {
         console.error('Error al realizar la solicitud POST:', error);
       });
@@ -187,17 +168,13 @@ export class AltaPresupuestoComponent {
       return ;
     }
     const url = 'http://localhost:8080/ventas/save'; 
-    const cliente = document.getElementById("cliente") as HTMLSelectElement;
-    const forma_entrega = document.getElementById("formaEntrega") as HTMLSelectElement;
-    const tipo_venta = document.getElementById("tipo") as HTMLSelectElement;
-    const vendedor = document.getElementById("vendedor") as HTMLSelectElement;
     const body = {
       fecha: new Date().toISOString(),
-      id_cliente : cliente.value,
-      tipo_venta : tipo_venta.value,
-      forma_entrega : forma_entrega.value,
+      id_cliente : this.formData.cliente,
+      tipo_venta : this.formData.tipo,
+      forma_entrega : this.formData.formaEntrega,
       fecha_entrega:  new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      id_vendedor : vendedor.value,
+      id_vendedor : this.formData.vendedor,
       detalles: this.productosVenta
     };
     console.log(body);
@@ -211,9 +188,24 @@ export class AltaPresupuestoComponent {
     this.http.post(url, body, httpOptions)
       .subscribe(response => {
         console.log('Solicitud POST exitosa. Respuesta:', response);
+        Swal.fire({
+          icon: 'success', // Puedes cambiar el icono a tu elección
+          title: 'Se ha guardado la Venta',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar'
+        });
+        this.Clean();
       }, error => {
         console.error('Error al realizar la solicitud POST:', error);
       });
+  }
+
+  Clean() {
+    this.form.resetForm({ producto: 0 });
+    this.filas = [];
+    this.productos = [];
+    this.productosVenta = [];
   }
 
  
