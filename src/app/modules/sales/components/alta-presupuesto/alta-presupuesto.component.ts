@@ -72,7 +72,7 @@ export class AltaPresupuestoComponent {
     
       Swal.fire({
         icon: 'warning', // Puedes cambiar el icono a tu elección
-        title: 'El producto ya ah sido seleccionado',
+        title: 'El producto ya ha sido seleccionado',
         showCancelButton: false,
         showConfirmButton: true,
         confirmButtonText: 'Aceptar'

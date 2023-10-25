@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Ventas } from '../../models/Ventas';
-import { VentasService } from '../../services/ventas.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'fn-consultar-venta',
@@ -82,6 +82,13 @@ export class ConsultarVentaComponent {
       },
       error: (error) => {
         console.error('Error al realizar la solicitud POST:', error);
+        Swal.fire({
+          icon: 'error', // Puedes cambiar el icono a tu elección
+          title: 'Error al filtrar las ventas',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar'
+        });
       }
     });
   }
