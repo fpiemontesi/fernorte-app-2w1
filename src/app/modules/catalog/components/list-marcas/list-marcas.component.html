@@ -1,0 +1,19 @@
+<button  (click)="onNewMarca()" class="btn btn-success">Cargar Marca</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Modificar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of lista">
+        <td>{{m.id}}</td>
+        <td>{{m.nombre}}</td>
+        <td><button  (click)="modificarMarca(m)"  class="btn btn-primary">Modificar</button></td>
+        <td><button  (click)="eliminarMarca(m.id)" class="btn btn-danger">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
