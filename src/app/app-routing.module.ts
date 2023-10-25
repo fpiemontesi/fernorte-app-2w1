@@ -1,13 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CatalogModule } from './modules/catalog/catalog.module';
-import { CustomerModule } from './modules/customer/customer.module';
-import { PurchaseModule } from './modules/purchase/purchase.module';
-import { InventaryModule } from './modules/inventory/inventory.module';
-import { SalesModule } from './modules/sales/sales.module';
-import { InvoiceModule } from './modules/invoice/invoice.module';
-
 import * as Catalog from './modules/catalog/components/home/home.component';
 import * as Customer from './modules/customer/components/home/home.component';
 import * as Purchase from './modules/purchase/components/home/home.component';
@@ -43,15 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CatalogModule,
-    CustomerModule,
-    PurchaseModule,
-    InventaryModule,
-    SalesModule,
-    InvoiceModule,
-    RouterModule.forRoot(routes),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
