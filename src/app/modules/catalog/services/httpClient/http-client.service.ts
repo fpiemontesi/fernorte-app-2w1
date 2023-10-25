@@ -18,6 +18,9 @@ export class HttpClientService {
     return this.client.get<Producto>("http://localhost:8080/productos/"+code);
   }
 
+  getProductsActive():Observable<Producto[]>{
+    return this.client.get<Producto[]>("http://localhost:8080/productos/activos");
+  }
   updateProduct(code:string, product:Producto):Observable<Producto>{
     return this.client.put<Producto>("http://localhost:8080/productoModificar/"+code, product);
   }

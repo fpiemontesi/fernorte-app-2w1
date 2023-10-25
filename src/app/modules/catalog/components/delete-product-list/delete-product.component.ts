@@ -15,11 +15,11 @@ export class DeleteProductComponent implements OnInit{
   products:Producto[] = [];
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getProductsActive();
   }
 
-  getAllProducts(){
-    this.httpClientService.getAllProducts().subscribe(
+  getProductsActive(){
+    this.httpClientService.getProductsActive().subscribe(
       (response:Producto[])=>{
         this.products=response;
       }
@@ -29,15 +29,15 @@ export class DeleteProductComponent implements OnInit{
 
 
   deleteProduct(id: string) {
-    const confirmed = confirm("¿Desea eliminar la categoría?")
+    const confirmed = confirm("¿Desea eliminar el producto?")
     if (confirmed) {
       this.httpClientService.deleteProduct(id).subscribe({
         next: (producto: Producto) => {
-          alert("Categoría eliminada exitosamente.")
-          this.getAllProducts();
+          alert("Producto eliminado exitosamente.")
+          this.getProductsActive();
         },
         error: () => {
-          alert("Error al intentar eliminar categoría.")
+          alert("Error al intentar eliminar el producto.")
         }
       })
     }

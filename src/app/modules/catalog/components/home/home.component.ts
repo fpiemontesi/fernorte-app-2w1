@@ -5,49 +5,54 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  registrar = false;
-  modificar = false;
-  eliminar=false;
+export class HomeComponent implements OnInit{
+  registerProduct = false;
+  updateProduct = false;
+  deleteProduct = false;
 
-  list = true
-  form = false
-  modificar = false
+  list = true;
+  form = false;
+  modificar = false;
+
   ngOnInit(): void {
   }
 
-  constructor() { }
+  constructor() {
+  }
 
   mostrarModificar() {
-    this.list = false
-    this.form = false
-    this.modificar = true
+    this.list = false;
+    this.form = false;
+    this.modificar = true;
   }
+
   showList() {
-    this.list = true
-    this.form = false
-    this.modificar = false
+    this.list = true;
+    this.form = false;
+    this.modificar = false;
   }
+
+  mostrarRegisterProduct() {
+    this.registerProduct = true;
+    this.updateProduct = false;
+    this.deleteProduct = false;
+  }
+
+  mostrarUpdateProduct() {
+    this.registerProduct = false;
+    this.updateProduct = true;
+    this.deleteProduct = false;
+  }
+
+  mostrarDeleteProduct() {
+    this.registerProduct = false;
+    this.updateProduct = false;
+    this.deleteProduct = true;
+  }
+
   showForm() {
-    this.list = false
-    this.form = true
-    this.modificar = false
-  }
-
-  mostrarRegistrar(){
-    this.registrar=true;
-    this.modificar=false;
-    this.eliminar=false;
-  }
-  mostrarUpdate(){
-    this.registrar=false;
-    this.modificar=true;
-    this.eliminar=false;
-  }
-
-  mostrarDelete(){
-    this.registrar=false;
-    this.modificar=false;
-    this.eliminar=true;
+    this.list = false;
+    this.form = true;
+    this.modificar = false;
   }
 }
