@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../../../services/storage/storage.service';
-import {HttpClientService} from "../../../services/httpClient/http-client.service";
+import {productService} from "../../../services/productService/product.service";
 import {Producto} from "../../../models/producto";
 
 @Component({
@@ -18,7 +18,7 @@ export class RegisterProductComponent implements OnInit {
   allModels:Producto[]=[];
   modelSelected:string = "";
   model:Producto | undefined;
-    constructor(private storageService: StorageService, private httpClientService:HttpClientService) { }
+    constructor(private storageService: StorageService, private httpClientService:productService) { }
     ngOnInit(): void {
       this.httpClientService.getAllProducts().subscribe(
         (response:Producto[])=>{

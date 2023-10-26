@@ -1,0 +1,10 @@
+<div class="container">
+  <form #formulario="ngForm" (ngSubmit)="editarMarca()">
+    <div class="form-group">
+      <label for="txtNombre">Nombre</label>
+      <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="ingresar Nombre" [(ngModel)]="marca.nombre">
+    </div>
+    <button routerLink="/listBrands" class="btn btn-danger">Volver</button>
+    <button type="submit" class="btn btn-primary">Editar</button>
+  </form>
+</div>

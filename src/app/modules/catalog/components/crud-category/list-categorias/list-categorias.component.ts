@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Categoria } from '../../../models/categoria';
-import { CategoriaService } from '../../../services/categoria.service';
+import { CategoriaService } from '../../../services/categoryService/categoria.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.component';
 import { AltaCategoriaComponent } from '../alta-categoria/alta-categoria.component';
@@ -16,8 +16,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class ListCategoriasComponent {
 
-  @Output() newCategoria = new EventEmitter();
-  @Output() editarCategoria = new EventEmitter();
   lista: Categoria[] = [];
   private subscription = new Subscription();
   private modalRef: BsModalRef = new BsModalRef();
@@ -40,13 +38,9 @@ export class ListCategoriasComponent {
     this.subscription.unsubscribe();
   }
 
-  onNewCategoria() {
-    this.newCategoria.emit();
-  }
 
   modificarCategoria(categoria: Categoria) {
     this.categoriaService.guardarCategoria(categoria)
-    this.editarCategoria.emit()
   }
 
   eliminarCategoria(id: string) {

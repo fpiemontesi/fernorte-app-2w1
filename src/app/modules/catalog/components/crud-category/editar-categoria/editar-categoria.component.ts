@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Categoria} from '../../../models/categoria';
-import {CategoriaService} from '../../../services/categoria.service';
+import {CategoriaService} from '../../../services/categoryService/categoria.service';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -15,7 +15,7 @@ export class EditarCategoriaComponent implements OnInit{
   categoria: Categoria = {} as Categoria;
   private subscription = new Subscription();
 
-  constructor(private categoriaService: CategoriaService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private categoriaService: CategoriaService, private activatedRoute: ActivatedRoute, private router:Router) {
   }
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class EditarCategoriaComponent implements OnInit{
       next: (categoria: Categoria) => {
         alert("Categoría actualizada correctamente.")
         this.categoria = {} as Categoria
+        this.router.navigate(["/listCategories"])
       },
       error: () => {
         alert("Error al intentar actualizar categoría.")

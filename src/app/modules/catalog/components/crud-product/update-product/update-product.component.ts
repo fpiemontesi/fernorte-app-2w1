@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Producto} from "../../../models/producto";
 import {StorageService} from "../../../services/storage/storage.service";
-import {HttpClientService} from "../../../services/httpClient/http-client.service";
+import {productService} from "../../../services/productService/product.service";
 import {Subscription} from "rxjs";
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -19,7 +19,7 @@ export class UpdateProductComponent implements OnInit{
   private subscription = new Subscription();
 
   formActivo:boolean = false;
-  constructor(private storageService: StorageService, private httpClientService:HttpClientService) { }
+  constructor(private storageService: StorageService, private httpClientService:productService) { }
   ngOnInit(): void {
     this.getAllProducts();
   }

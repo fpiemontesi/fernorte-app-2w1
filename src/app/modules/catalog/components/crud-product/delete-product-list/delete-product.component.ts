@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Producto} from "../../../models/producto";
-import {HttpClientService} from "../../../services/httpClient/http-client.service";
+import {productService} from "../../../services/productService/product.service";
 
 @Component({
   selector: 'fn-delete-product-list',
@@ -9,7 +9,7 @@ import {HttpClientService} from "../../../services/httpClient/http-client.servic
 })
 export class DeleteProductComponent implements OnInit{
 
-  constructor(private httpClientService:HttpClientService) {
+  constructor(private httpClientService:productService) {
   }
 
   products:Producto[] = [];

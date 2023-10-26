@@ -10,6 +10,9 @@ import { AltaCategoriaComponent } from './components/crud-category/alta-categori
 import { EditarCategoriaComponent } from './components/crud-category/editar-categoria/editar-categoria.component';
 import { ListCategoriasComponent } from './components/crud-category/list-categorias/list-categorias.component';
 import {RouterModule, Routes} from "@angular/router";
+import { RegisterBrandComponent } from './components/crud-brand/register-brand/register-brand.component';
+import { UpdateBrandComponent } from './components/crud-brand/update-brand/update-brand.component';
+import { ListBrandsComponent } from './components/crud-brand/list-brands/list-brands.component';
 
 
 
@@ -24,12 +27,16 @@ const routes:Routes = [
       {path:"", component:ListCategoriasComponent},
     ]
   },
-
-
+  {path:"registerBrand", component:RegisterBrandComponent},
+  {path:"listBrands",
+    children:[
+      {path:"updateBrand", component: UpdateBrandComponent},
+      {path:"", component:ListBrandsComponent},
+    ]},
 ];
 
 @NgModule({
-  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent],
+  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent],
   providers: [],
   imports: [CommonModule, FormsModule, NgbModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],
