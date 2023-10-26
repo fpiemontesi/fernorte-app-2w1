@@ -6,7 +6,7 @@ import {Producto} from "../../models/producto";
 @Injectable({
   providedIn: 'root'
 })
-export class HttpClientService {
+export class productService {
 
   constructor(private client:HttpClient) { }
 
