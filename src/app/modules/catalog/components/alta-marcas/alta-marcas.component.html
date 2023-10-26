@@ -1,3 +1,7 @@
+<ng-container *ngIf="alert">
+  <fn-alert mensaje="Se guardo exitosamente. Espere 5 Segundos" tipoAlert="alert alert-success"></fn-alert>
+</ng-container>
+
 <form>
     <div class="form-group">
       <label for="id">id</label>
@@ -8,6 +12,9 @@
       <label for="nombre">Nombre</label>
       <input type="text" class="form-control" id="txtnombre" name="nombre" placeholder="ingresar Nombre" [(ngModel)]="marca.nombre">
     </div>
-    <button  (click)="volver()" class="btn btn-danger">Volver</button>
-    <button type="submit"(click)="agregarMarca()" class="btn btn-primary">Crear</button>
+    <button (click)="volver()" class="btn btn-danger m-2 ms-0 p-2 ">Volver</button>
+    <button type="submit"(click)="agregarMarca()" class="btn btn-primary m-2  p-2">Guardar</button>
+
   </form>
+
+  

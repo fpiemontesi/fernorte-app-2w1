@@ -1,16 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Marca } from '../models/marca';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-
-
-export class ServiceMarcaService {
+export class MarcaService {
   marca:Marca= {} as Marca
-  data:any;
   
   constructor(private http:HttpClient) { }
   get():Observable<Marca[]>{
@@ -20,7 +17,6 @@ export class ServiceMarcaService {
     return this.http.post<Marca>("http://localhost:3000/marcas",marca)
   }
   update(marca:Marca):Observable<Marca>{
-    console.log("Marca en service"+this.marca.nombre)
     return this.http.put<Marca>("http://localhost:3000/marcas/"+marca.id,marca)
   }
   delete(id:string):Observable<Marca>{
@@ -33,5 +29,4 @@ export class ServiceMarcaService {
   obtenerMarca():Marca{
     return this.marca
   }
-
 }

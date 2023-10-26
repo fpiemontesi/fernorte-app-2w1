@@ -8,9 +8,11 @@ import { ListMarcasComponent } from './components/list-marcas/list-marcas.compon
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditarMarcaComponent } from './components/editar-marca/editar-marca.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
-  declarations: [HomeComponent, AltaMarcasComponent,ListMarcasComponent, EditarMarcaComponent],
+  declarations: [HomeComponent, AltaMarcasComponent,ListMarcasComponent, EditarMarcaComponent, AlertComponent, ModalComponent],
   providers: [],
   imports: [
     CommonModule,
