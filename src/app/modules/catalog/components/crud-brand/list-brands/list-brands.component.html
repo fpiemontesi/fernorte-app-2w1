@@ -1,4 +1,9 @@
 <div class="container">
+  <fn-modal mensaje="Seguro que quieres eliminar?" option1="Eliminar" option2="Cancelar" (evento)="eliminarMarca()" title="Eliminar marca"></fn-modal>
+  <ng-container *ngIf="alert">
+    <fn-alert mensaje="Se elimino correctamente. Espere 5 segundos." tipoAlert="alert alert-success"></fn-alert>
+  </ng-container>
+
   <button class="btn btn-success">Cargar Marca</button>
   <table class="table">
     <thead>
@@ -14,7 +19,7 @@
       <td>{{m.codigo}}</td>
       <td>{{m.nombre}}</td>
       <td><button  routerLink="updateBrand" [queryParams]={codigo:[m.codigo]}  class="btn btn-primary">Modificar</button></td>
-      <td><button (click)="eliminarMarca(m.codigo)" class="btn btn-danger">Eliminar</button></td>
+      <td><button (click)="guardarCodigo(m.codigo)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button></td>
     </tr>
     </tbody>
   </table>

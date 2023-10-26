@@ -1,10 +1,13 @@
 <div class="container">
+  <ng-container *ngIf="alert">
+    <fn-alert mensaje="Se modifico Correctamente. Espere 5 segundos" tipoAlert="alert alert-success"></fn-alert>
+  </ng-container>
   <form #formulario="ngForm" (ngSubmit)="editarMarca()">
     <div class="form-group">
       <label for="txtNombre">Nombre</label>
       <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="ingresar Nombre" [(ngModel)]="marca.nombre">
     </div>
-    <button routerLink="/listBrands" class="btn btn-danger">Volver</button>
-    <button type="submit" class="btn btn-primary">Editar</button>
+    <button routerLink="/listBrands" class="btn btn-danger m-2 ms-0 p-2">Volver</button>
+    <button type="submit" class="btn btn-primary m-2 p-2">Editar</button>
   </form>
 </div>

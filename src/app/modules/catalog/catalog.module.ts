@@ -13,6 +13,8 @@ import {RouterModule, Routes} from "@angular/router";
 import { RegisterBrandComponent } from './components/crud-brand/register-brand/register-brand.component';
 import { UpdateBrandComponent } from './components/crud-brand/update-brand/update-brand.component';
 import { ListBrandsComponent } from './components/crud-brand/list-brands/list-brands.component';
+import { AlertComponent } from './components/interactions/alert/alert.component';
+import { ModalComponent } from './components/interactions/modal/modal.component';
 
 
 
@@ -36,7 +38,7 @@ const routes:Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent],
+  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent],
   providers: [],
   imports: [CommonModule, FormsModule, NgbModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],
