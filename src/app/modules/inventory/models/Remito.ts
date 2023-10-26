@@ -1,17 +1,10 @@
-export class Remito{
-    proveedor: string;
-    fechaLlegada: Date;
-    producto: string;
-    cantidad: number;
-    ordenCompra: string;
-    nro: number;
+import { DetalleRemito } from "./DetalleRemito";
 
-    constructor(){
-        this.proveedor='';
-        this.fechaLlegada=new Date();
-        this.producto='';
-        this.cantidad=0;
-        this.ordenCompra='';
-        this.nro=0;
-    }
+export class Remito{
+    id: number = 0;
+    fechaLlegada: Date = new Date;
+    nroOrdenCompra: number = 0;
+    nroRemito: number = 0;
+    nombreProveedor: string = "";
+    detalles: DetalleRemito[] = [];
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Remito } from '../../../models/Remito';
 import { NgForm } from '@angular/forms';
+import { DetalleRemito } from '../../../models/DetalleRemito';
 
 @Component({
   selector: 'fn-registrar-remito',
@@ -10,17 +11,24 @@ import { NgForm } from '@angular/forms';
 export class RegistrarRemitoComponent {
   remitos: Remito[] = [];
   remito: Remito = new Remito();
+  detalle: DetalleRemito = new DetalleRemito();
 
   agregarRemito(form: NgForm) {
     if (form.valid) {
-      this.remitos.push(this.remito);
-      this.remito = new Remito(); 
-    }else{
-      alert('Datos ingresados son invalidos');
+      const nuevoDetalle: DetalleRemito = new DetalleRemito();
+      nuevoDetalle.cantidad = this.detalle.cantidad;
+      nuevoDetalle.nombreProducto = this.detalle.nombreProducto;
+      nuevoDetalle.detalle = this.detalle.detalle;
+
+      this.remito.detalles.push(nuevoDetalle);
+      this.detalle = new DetalleRemito(); 
+    } else {
+      alert('Datos ingresados son inválidos');
     }
   }
 
-  eliminarRemito(index: number) {
-    this.remitos.splice(index, 1);
+
+  eliminarDetalle(index: number) {
+    this.remito.detalles.splice(index, 1);
   }
 }

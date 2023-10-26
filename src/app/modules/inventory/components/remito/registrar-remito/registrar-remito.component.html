@@ -1,88 +1,85 @@
 <div class="container main-content">
     <h1>Registrar Remito:</h1>
     <form #form="ngForm" (ngSubmit)="agregarRemito(form)">
-        <div class="row">
-            <div class="col-md-3 form-group">
-                <label for="fechaLlegada">Fecha de llegada:</label>
-                <input type="date" class="form-control" id="fechaLlegada" name="fechaLlegada" #elementoFechaLlegada="ngModel" [(ngModel)]="remito.fechaLlegada" required>
-                <div *ngIf="(elementoFechaLlegada.dirty || elementoFechaLlegada.touched) && elementoFechaLlegada.getError('required')" class="text-danger">
-                    La fecha de llegada es requerida
-                </div>
-            </div>
-            <div class="col-md-3 form-group">
-                <label for="ordenCompra">Nro de orden de compra:</label>
-                <input type="text" class="form-control" id="ordenCompra" name="ordenCompra" #elementoOrdenCompra="ngModel" [(ngModel)]="remito.ordenCompra" required minlength="1">
-                <div *ngIf="(elementoOrdenCompra.dirty || elementoOrdenCompra.touched) && elementoOrdenCompra.getError('required')" class="text-danger">
-                    El nro de la orden de compra es requerido
-                </div>
-            </div>
-            <div class="col-md-3 form-group">
-                <label for="nroRemito">Nro de remito:</label>
-                <input type="number" class="form-control" id="nroRemito" name="nroRemito" #elementoNroRemito="ngModel" [(ngModel)]="remito.nro" required minlength="1">
-                <div *ngIf="(elementoNroRemito.dirty || elementoNroRemito.touched) && elementoCantidad.getError('required')" class="text-danger">
-                    Un numero de remito es requerido
-                </div>
-                <div *ngIf="remito.nro <= 0" class="text-danger">
-                    El numero de remito no puede ser menor a 0
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="fechaLlegada">Fecha de llegada:</label>
+          <input type="date" class="form-control" id="fechaLlegada" name="fechaLlegada" #elementoFechaLlegada="ngModel" [(ngModel)]="remito.fechaLlegada" required>
+          <div *ngIf="(elementoFechaLlegada.dirty || elementoFechaLlegada.touched) && elementoFechaLlegada.hasError('required')" class="text-danger">
+            La fecha de llegada es requerida
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 form-group">
-                <label for="proveedor">Proveedor:</label>
-                <input type="text" class="form-control" id="proveedor" name="proveedor" #elementoProveedor="ngModel" [(ngModel)]="remito.proveedor" required maxlength="50" minlength="3">
-                <div *ngIf="(elementoProveedor.dirty || elementoProveedor.touched) && elementoProveedor.getError('required')" class="text-danger">
-                    El proveedor es requerido
-                </div>
-                <div *ngIf="(elementoProveedor.dirty || elementoProveedor.touched) && elementoProveedor.getError('maxlength')" class="text-danger">
-                    El nombre es muy largo
-                </div>
-                <div *ngIf="(elementoProveedor.dirty || elementoProveedor.touched) && elementoProveedor.getError('minlength')" class="text-danger">
-                    El nombre es muy corto
-                </div>
-            </div>
-            <div class="col-md-3 form-group">
-                <label for="producto">Producto:</label>
-                <input type="text" class="form-control" id="producto" name="producto" #elementoProducto="ngModel" [(ngModel)]="remito.producto" required minlength="1">
-                <div *ngIf="(elementoProducto.dirty || elementoProducto.touched) && elementoProducto.getError('required')" class="text-danger">
-                    El producto es requerido
-                </div>
-            </div>
-            <div class="col-md-3 form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad" #elementoCantidad="ngModel" [(ngModel)]="remito.cantidad" required minlength="1">
-                <div *ngIf="(elementoCantidad.dirty || elementoCantidad.touched) && elementoCantidad.getError('required')" class="text-danger">
-                    Una cantidad es requerida
-                </div>
-                <div *ngIf="remito.cantidad <= 0" class="text-danger">
-                    La cantidad debe ser mayor que 0
-                </div>
-            </div>
-            <div class="col-md-2 text-center">
-                <button type="submit" class="btn btn-primary">Agregar</button>
-            </div>
+        <div class="col-md-3 form-group">
+          <label for="nroOrdenCompra">Nro de orden de compra:</label>
+          <input type="number" class="form-control" id="nroOrdenCompra" name="nroOrdenCompra" #elementoNroOrdenCompra="ngModel" [(ngModel)]="remito.nroOrdenCompra" min="1">
+          <div *ngIf="(elementoNroOrdenCompra.dirty || elementoNroOrdenCompra.touched) && elementoNroOrdenCompra.hasError('min')" class="text-danger">
+            El nro de la orden de compra no puede ser menor a 1
+          </div>
         </div>
-            
+        <div class="col-md-3 form-group">
+          <label for="nroRemito">Nro de remito:</label>
+          <input type="number" class="form-control" id="nroRemito" name="nroRemito" #elementoNroRemito="ngModel" [(ngModel)]="remito.nroRemito" min="1">
+          <div *ngIf="(elementoNroRemito.dirty || elementoNroRemito.touched) && elementoNroRemito.hasError('min')" class="text-danger">
+            El número de remito no puede ser menor a 1
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="nombreProveedor">Proveedor:</label>
+          <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor" #elementoNombreProveedor="ngModel" [(ngModel)]="remito.nombreProveedor" required maxlength="50" minlength="3">
+          <div *ngIf="(elementoNombreProveedor.dirty || elementoNombreProveedor.touched) && elementoNombreProveedor.hasError('required')" class="text-danger">
+            El proveedor es requerido
+          </div>
+          <div *ngIf="(elementoNombreProveedor.dirty || elementoNombreProveedor.touched) && elementoNombreProveedor.hasError('maxlength')" class="text-danger">
+            El nombre es muy largo
+          </div>
+          <div *ngIf="(elementoNombreProveedor.dirty || elementoNombreProveedor.touched) && elementoNombreProveedor.hasError('minlength')" class="text-danger">
+            El nombre es muy corto
+          </div>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="nombreProducto">Producto:</label>
+            <input type="text" class="form-control" id="nombreProducto" name="nombreProducto" #elementoNombreProducto="ngModel" [(ngModel)]="detalle.nombreProducto" minlength="1">
+            <div *ngIf="elementoNombreProducto.dirty && elementoNombreProducto.hasError('required')" class="text-danger">
+              El producto es requerido
+            </div>
+          </div>
+          <div class="col-md-3 form-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" #elementoCantidad="ngModel" [(ngModel)]="detalle.cantidad" min="1">
+            <div *ngIf="elementoCantidad.dirty && elementoCantidad.hasError('required')" class="text-danger">
+              La cantidad es requerida
+            </div>
+            <div *ngIf="elementoCantidad.dirty && elementoCantidad.hasError('min')" class="text-danger">
+              La cantidad debe ser mayor a 0
+            </div>
+          </div>
+        <div class="col-md-2 text-center">
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+      </div>
     </form>
     <div class="table-container">
-        <table class="table mt-4">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let remito of remitos; let i = index">
-                <td>{{ remito.producto }}</td>
-                <td>{{ remito.cantidad }}</td>
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let detalle of remito.detalles; let i = index">
+                <td>{{ detalle.nombreProducto }}</td>
+                <td>{{ detalle.cantidad }}</td>
                 <td>
-                  <button class="btn btn-danger" (click)="eliminarRemito(i)">X</button>
+                  <button class="btn btn-danger" (click)="eliminarDetalle(i)">X</button>
                 </td>
               </tr>
             </tbody>
           </table>
     </div>
     <button class="btn btn-primary button-to-bottom">Guardar Remito</button>
-</div>
+  </div>
+  

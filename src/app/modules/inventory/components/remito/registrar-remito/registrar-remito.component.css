@@ -5,7 +5,7 @@
 
 .button-to-bottom{
     position: fixed;
-    bottom: 20px; /* Puedes ajustar la distancia desde el borde inferior */
+    bottom: 20px;
     right: 200px;
  }
 
