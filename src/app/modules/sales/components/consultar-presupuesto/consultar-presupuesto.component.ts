@@ -4,6 +4,7 @@ import { ClienteService } from '../../services/cliente.service';
 import { Presupuesto } from '../../models/Presupuesto';
 import { PresupuestoService } from '../../services/presupuesto.service';
 
+
 @Component({
   selector: 'fn-consultar-presupuesto',
   templateUrl: './consultar-presupuesto.component.html',
@@ -13,6 +14,7 @@ export class ConsultarPresupuestoComponent implements OnInit {
   clientes: Cliente[] = [];
   selectedClientId: number = 0;
   presupuesto: Presupuesto = new Presupuesto();
+  mostrarDetalles: boolean = false;
 
   constructor(
     private clientService: ClienteService,

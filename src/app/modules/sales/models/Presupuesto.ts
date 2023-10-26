@@ -6,6 +6,7 @@ export class Presupuesto {
   cliente: string;
   fecha_creacion: Date;
   fecha_vencimiento: Date;
+  total_importe: number;
   productos: Detalles[];
 
   constructor() {
@@ -14,6 +15,7 @@ export class Presupuesto {
     this.cliente = '';
     this.fecha_creacion = new Date();
     this.fecha_vencimiento = new Date();
+    this.total_importe = 0;
     this.productos = [];
   }
 }

@@ -27,7 +27,7 @@
                             </select>
                         </div>
                         <div class="col-4 mb-3 " style="margin-top: 3%;">
-                            <button type="submit" class="btn btn-outline-dark w-100">
+                            <button type="submit" class="btn btn-outline-dark w-100" (click)="searchPresupuesto()">
                                 Buscar
                             </button>
                         </div>
@@ -56,11 +56,16 @@
                     <td>{{ presupuesto.cliente }}</td>
                     <td>{{ presupuesto.fecha_creacion | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                     <td>{{ presupuesto.fecha_vencimiento | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
-                    <td><i class="fa fa-search lupa"></i></td> <!-- a chequear como se hace esto-->
-                    <td><input type="checkbox" /></td> <!-- a chequear como se hace esto-->
+                    <td>{{ presupuesto.total_importe }}</td>
+                    <td><i class="fa fa-search lupa" (click)="mostrarDetalles = true">{{presupuesto.productos}}</i></td>
+                    <!--terminar-->
+                    <td><input type="checkbox" /></td> <!--terminar-->
                 </tr>
             </tbody>
         </table>
+        <div *ngIf="mostrarDetalles">
+            <!--<fn-detalles-productos [productos]="presupuesto.productos"></fn-detalles-productos> -->
+        </div>
     </div>
     <div>
         <div class="row justify-content-end">
