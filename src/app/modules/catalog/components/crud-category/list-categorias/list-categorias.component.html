@@ -15,7 +15,7 @@
                 <tr *ngFor="let c of lista">
                     <td>{{c.codigo}}</td>
                     <td>{{c.nombre}}</td>
-                    <td><button (click)="modificarCategoria(c)" class="btn btn-primary">Modificar</button></td>
+                    <td><button routerLink="updateCategory" [queryParams]={codigo:[c.codigo]} class="btn btn-primary">Modificar</button></td>
                     <td><button (click)="eliminarCategoria(c.codigo)" class="btn btn-danger">Eliminar</button></td>
                 </tr>
             </tbody>

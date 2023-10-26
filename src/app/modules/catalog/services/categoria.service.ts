@@ -13,20 +13,24 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
   get(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>("http://localhost:8080/categorias")
+    return this.http.get<Categoria[]>("http://localhost:8080/api/categories")
+  }
+
+  getByCode(code:string): Observable<Categoria> {
+    return this.http.get<Categoria>("http://localhost:8080/api/categories/"+code)
   }
 
   create(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>("http://localhost:8080/crearCategoria", categoria)
+    return this.http.post<Categoria>("http://localhost:8080/api/categories", categoria)
   }
 
   update(id: string, categoria: Categoria): Observable<Categoria> {
     console.log('ID update(): '+id)
-    return this.http.put<Categoria>('http://localhost:8080/modificarCategoria/'+id, categoria)
+    return this.http.put<Categoria>('http://localhost:8080/api/categories/'+id, categoria)
   }
 
   delete(id: string): Observable<Categoria> {
-    return this.http.delete<Categoria>("http://localhost:8080/eliminarCategoria/" + id)
+    return this.http.delete<Categoria>("http://localhost:8080/api/categories/" + id)
   }
 
   guardarCategoria(categoria: Categoria) {

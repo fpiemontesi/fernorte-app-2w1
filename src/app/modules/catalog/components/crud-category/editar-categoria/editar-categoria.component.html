@@ -9,7 +9,7 @@
                 <small class="form-text text-danger">El código es obligatorio</small>
             </div> -->
 
-            <label for="nombre" class="my-2">Nombre</label>
+            <label for="txtNombre" class="my-2">Nombre</label>
             <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre"
                 [(ngModel)]="categoria.nombre" required #nombre="ngModel">
             <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
@@ -18,6 +18,6 @@
         </div>
         <button type="submit" class="btn btn-primary m-2" [disabled]="nombre.invalid"
             (click)="editarCategoria()">Guardar Cambios</button>
-        <button type="button" class="btn btn-danger m-2" (click)="volverAlInicio()">Volver al Inicio</button>
+        <button type="button" routerLink="/listCategories" class="btn btn-danger m-2">Volver al Inicio</button>
     </form>
 </div>

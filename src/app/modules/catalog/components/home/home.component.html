@@ -1,5 +1,3 @@
-
-
 <div class="sidebar">
     <nav class="main-menu">
             <ul>
@@ -30,16 +28,33 @@
                                   <span style="margin-right: 70px;">Productos</span>
                                 </button>
                                 <ul class="dropdown-menu menu">
-                                  <li><a class="dropdown-item" href="#" (click)="mostrarRegisterProduct()">Registrar Productos</a></li>
-                                  <li><a class="dropdown-item" href="#" (click)="mostrarUpdateProduct()">Modificar Productos</a></li>
-                                  <li><a class="dropdown-item" href="#" (click)="mostrarDeleteProduct()">Eliminar Productos</a></li>
-                                  <li><a class="dropdown-item" href="#">Listar Productos</a></li>
+                                  <li><a class="dropdown-item" href="#" routerLink="registerProduct">Registrar Productos</a></li>
+                                  <li><a class="dropdown-item" href="#" routerLink="updateProduct">Modificar Productos</a></li>
+                                  <li><a class="dropdown-item" href="#" routerLink="deleteProduct">Listar Productos</a></li>
                                 </ul>
                               </div>
                         </span>
                     </a>
                 </li>
                 <hr>
+                <li class="has-subnav">
+                  <a href="#">
+                    <i class="fa bi bi-tags fa-globe fa-2x"></i>
+                    <span class="nav-text">
+                      <div class="btn-group dropend">
+                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          <span style="margin-right: 70px;">Categorias</span>
+                        </button>
+                        <ul class="dropdown-menu menu">
+                          <li><a class="dropdown-item" href="#" routerLink="registerCategory">Registrar Categoria</a></li>
+                          <li><a class="dropdown-item" href="#" routerLink="listCategories">Listar Categorias</a></li>
+                        </ul>
+                      </div>
+                    </span>
+                  </a>
+                </li>
+                <hr>
+
                 <li class="has-subnav">
                     <a href="#">
                        <i class="fa bi bi bi-cash-stack fa-2x"></i>
@@ -90,8 +105,8 @@
         </nav>
 </div>
 <div class="main-content">
-  <ng-container *ngIf="registerProduct"><fn-register-article></fn-register-article></ng-container>
-  <ng-container *ngIf="updateProduct"><fn-update-product></fn-update-product></ng-container>
-  <ng-container *ngIf="deleteProduct"><fn-delete-product-list></fn-delete-product-list></ng-container>
+
+
 
 </div>
+<router-outlet></router-outlet>

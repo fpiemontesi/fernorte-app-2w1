@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { StorageService } from '../../services/storage/storage.service';
-import {HttpClientService} from "../../services/httpClient/http-client.service";
-import {Producto} from "../../models/producto";
+import { StorageService } from '../../../services/storage/storage.service';
+import {HttpClientService} from "../../../services/httpClient/http-client.service";
+import {Producto} from "../../../models/producto";
 
 @Component({
-  selector: 'fn-register-article',
-  templateUrl: './register-article.component.html',
-  styleUrls: ['./register-article.component.css']
+  selector: 'fn-register-product',
+  templateUrl: './register-product.component.html',
+  styleUrls: ['./register-product.component.css']
 })
-export class RegisterArticleComponent implements OnInit {
+export class RegisterProductComponent implements OnInit {
 
   private models = {};
   imagenURL:string = "";

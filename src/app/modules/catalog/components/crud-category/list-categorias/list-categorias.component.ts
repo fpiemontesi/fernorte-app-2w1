@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Categoria } from '../../models/categoria';
-import { CategoriaService } from '../../services/categoria.service';
+import { Categoria } from '../../../models/categoria';
+import { CategoriaService } from '../../../services/categoria.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.component';
 import { AltaCategoriaComponent } from '../alta-categoria/alta-categoria.component';

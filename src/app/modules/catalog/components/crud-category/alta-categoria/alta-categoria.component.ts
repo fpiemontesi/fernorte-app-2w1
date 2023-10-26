@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Categoria } from '../../models/categoria';
-import { CategoriaService } from '../../services/categoria.service';
+import { Categoria } from '../../../models/categoria';
+import { CategoriaService } from '../../../services/categoria.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class AltaCategoriaComponent {
   constructor(private categoriaService:CategoriaService){}
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnDestroy(): void {

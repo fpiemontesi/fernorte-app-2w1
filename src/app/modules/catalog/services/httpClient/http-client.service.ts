@@ -11,21 +11,21 @@ export class HttpClientService {
   constructor(private client:HttpClient) { }
 
   getAllProducts():Observable<Producto[]>{
-      return this.client.get<Producto[]>("http://localhost:8080/productos");
+      return this.client.get<Producto[]>("http://localhost:8080/api/products");
   }
 
   getProductByCode(code:string):Observable<Producto>{
-    return this.client.get<Producto>("http://localhost:8080/productos/"+code);
+    return this.client.get<Producto>("http://localhost:8080/api/products/"+code);
   }
 
   getProductsActive():Observable<Producto[]>{
-    return this.client.get<Producto[]>("http://localhost:8080/productos/activos");
+    return this.client.get<Producto[]>("http://localhost:8080/api/products/actives");
   }
   updateProduct(code:string, product:Producto):Observable<Producto>{
-    return this.client.put<Producto>("http://localhost:8080/productoModificar/"+code, product);
+    return this.client.put<Producto>("http://localhost:8080/api/products/"+code, product);
   }
 
   deleteProduct(code:string):Observable<Producto>{
-    return this.client.delete<Producto>("http://localhost:8080/productoEliminar/"+code);
+    return this.client.delete<Producto>("http://localhost:8080/api/products/"+code);
   }
 }

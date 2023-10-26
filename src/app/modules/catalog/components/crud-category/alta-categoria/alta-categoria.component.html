@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <form>
             <div class="form-group mb-3">
-                <label for="codigo" class="mb-2">Código</label>
+                <label for="txtCodigo" class="mb-2">Código</label>
                 <input type="text" class="form-control" id="txtCodigo" name="codigo" placeholder="Ingresar codigo"
                     required [(ngModel)]="categoria.codigo" #codigo="ngModel">
                 <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="form-group mb-3">
-                <label for="nombre" class="mb-2">Nombre</label>
+                <label for="txtNombre" class="mb-2">Nombre</label>
                 <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre"
                     required [(ngModel)]="categoria.nombre" #nombre="ngModel">
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <button (click)="agregarCategoria()" class="btn btn-primary m-1" [disabled]="nombre.invalid">Crear</button>
-            <button (click)="volverAlInicio()" class="btn btn-danger m-1">Volver al Inicio</button>
+            <button routerLink="/listCategories" class="btn btn-danger m-1">Volver al Inicio</button>
         </form>
     </div>
 </div>

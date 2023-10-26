@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Producto} from "../../models/producto";
-import {HttpClientService} from "../../services/httpClient/http-client.service";
+import {Producto} from "../../../models/producto";
+import {HttpClientService} from "../../../services/httpClient/http-client.service";
 
 @Component({
   selector: 'fn-delete-product-list',

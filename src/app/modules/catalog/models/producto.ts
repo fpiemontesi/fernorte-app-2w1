@@ -5,8 +5,9 @@ export interface Producto {
     id:string;
     codigo:string;
     nombre:string;
-    marca:Marca;
-    categorias:Categoria[];
+    codigo_marca:string;
+    categorias_id:string[];
+    precio_compra:number;
     precio_minorista:number;
     precio_mayorista:number;
     descripcion:string;
