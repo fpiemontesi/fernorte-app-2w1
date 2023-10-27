@@ -11,13 +11,26 @@ export class InvoiceService {
   request?: requestInvoiceDto;
   invoices: Invoice[] = [];
 
+  newInvoice?: Invoice;
+  totalPay: number = 0;
+
   constructor(private http: HttpClient) { }
 
-  actualizar(body: requestInvoiceDto): Observable<requestInvoiceDto> {
-    return this.http.put<requestInvoiceDto>('https://api.example.com/data', body);
+  loadInvoice(body: requestInvoiceDto): Observable<requestInvoiceDto> {
+    return this.http.post<requestInvoiceDto>('https://api.example.com/data', body);
   }
 
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>('http://localhost:8080/api/v1/invoice/all');
+  }
+
+  setRequest(req:requestInvoiceDto){
+    this.request = req;
+  }
+  setTotalpay(num:number){
+    this.totalPay = num;
+  }
+  getTotalpay(){
+    return this.totalPay;
   }
 }

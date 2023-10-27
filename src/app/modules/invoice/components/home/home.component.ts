@@ -34,7 +34,7 @@ export class HomeComponent {
   setActive(index: number) {
     this.activeIndex = index;
   }
-  facturarorden(order: Order) {
+  selectedOrder(order: Order) {
     this.orden = order;
     console.log("BORRAR",order)
     this.activeIndex = 1;

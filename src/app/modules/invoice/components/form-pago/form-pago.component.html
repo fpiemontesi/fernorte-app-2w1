@@ -1,40 +1,35 @@
 <div class="row g-3">
-        <div class="col-3">
-          <div class="form-group">
-            <label for="selectMethods" class="form-label">Forma de pago</label>
-            <select class="form-select" name="selectMethods" id="selectMethods" #controlMethods="ngModel"
-            [(ngModel)]="paymentMethodDTO.idPaymentMethod" required>
-            <option *ngFor="let pm of listMethods"
-            [ngValue]="pm.idMethod">
-              {{pm.paymentMethod}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="form-group">
-          <label for="inputDetails" class="form-label">Observaciones</label>
-          <input type="text" id="inputDetails" name="details" class="form-control" #controlDetails="ngModel"
-          [(ngModel)]="payment.details">
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          <label for="inputSubtotalMethod" class="form-label">Monto: $</label>
-          <input type="number" id="inputSubtotalMethod" name="subtotalMethod" class="form-control"
-          #controlSubtotal="ngModel" [(ngModel)]="paymentMethodDTO.subtotalMethod" required>
-        </div>
-      </div>
-      <div class="col-2">
-        <label>Opciones</label>
-        <div class="btn-toolbar" id="buttonOptions" role="toolbar" aria-label="Toolbar with button groups">
-          <div class="btn-group" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-info" (click)="addMethod()">+</button>
-            <button type="button" class="btn btn-danger" (click)="deleteMethod()">-</button>
-            <button type="button" class="btn btn-success" (click)="enviarPago()">Pagar</button>         
-          </div>
-        </div>
+  <div class="col-3">
+    <div class="form-group">
+      <label for="selectMethods" class="form-label">Forma de pago</label>
+      <select class="form-select" name="selectMethods" id="selectMethods" #controlMethods="ngModel"
+        [(ngModel)]="pay.paymentMethod" required>
+        <option *ngFor="let pm of listTypePayment" [ngValue]="pm.id">
+          {{pm.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="form-group">
+      <label for="inputDetails" class="form-label">Observaciones</label>
+      <input type="text" id="inputDetails" name="details" class="form-control" #controlDetails="ngModel"
+        [(ngModel)]="pay.observations">
+    </div>
+  </div>
+  <div class="col-2">
+    <div class="form-group">
+      <label for="inputSubtotalMethod" class="form-label">Monto: $</label>
+      <input type="number" id="inputSubtotalMethod" name="subtotalMethod" class="form-control"
+        #controlSubtotal="ngModel" [(ngModel)]="pay.amount" required>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <div class="btn-group" role="group" aria-label="Third group">
+        <button type="button " class="btn btn-warning" (click)="addPay()">Pagar</button>
+
       </div>
     </div>
-    
-    
+  </div>
+</div>

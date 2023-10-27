@@ -22,7 +22,7 @@ export class PendingOrdersComponent implements OnInit {
   constructor(private orderService: OrderService) {
   }
   ngOnInit(): void {
-    this.orderService.cargarDatos().subscribe(
+    this.orderService.obtenerOrdenes().subscribe(
       (response: Order[]) => {
         this.orders = response;
         this.ordersToShow = this.orders;
@@ -54,9 +54,7 @@ export class PendingOrdersComponent implements OnInit {
     this.isModalOpen = false;
     this.SelectedDetails = [];
   }
-  billOrder(order: Order): void {
-    //TODO Redirect to registrar factura
-  }
+ 
 
   calculateSubtotal(): void {
     if (this.SelectedDetails.length > 0) {
@@ -67,5 +65,6 @@ export class PendingOrdersComponent implements OnInit {
   }
   emitirOrden(order: Order) {
     this.emiteOrden.emit(order);
+    this.orderService.setOrderSelected(order);
   }
 }

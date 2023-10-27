@@ -23,7 +23,7 @@
     <div class="card-body">
 
         <div [ngSwitch]="activeIndex">
-            <div   *ngSwitchCase="'0'"> <fn-pending-orders (emiteOrden)="facturarorden($event)"></fn-pending-orders></div>
+            <div   *ngSwitchCase="'0'"> <fn-pending-orders (emiteOrden)="selectedOrder($event)"></fn-pending-orders></div>
             <div  *ngSwitchCase="'1'"> <fn-registrar-factura></fn-registrar-factura></div>
             <div  *ngSwitchCase="'2'"> <fn-gestion-factura></fn-gestion-factura></div>
             

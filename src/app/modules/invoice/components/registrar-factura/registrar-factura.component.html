@@ -96,77 +96,29 @@
       <table class="table border sombra">
         <thead>
           <tr>
-            <th>Descripción</th>
-            <th>U. Medida</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>SubTotal</th>
+              <th>N°</th>
+              <th>Descripcion</th>
+              <th>Cantidad</th>
+              <th>Precio Unidad</th>
+              <th>Subtotal</th>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Producto 1</td>
-            <td>Unidad</td>
-            <td>5</td>
-            <td>$10.00</td>
-            <td>$50.00</td>
+      </thead>
+      <tbody>
+          <tr *ngFor="let det of details">
+              <td>{{ det.idProducto }}</td>
+              <td>{{ det.descripcion }}</td>
+              <td>{{ det.cantidad }}</td>
+              <td>{{ det.precioUnitario }}</td>
+              <td>{{ det.subtotal }}</td>
+
           </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-        </tbody>
+      </tbody>
       </table>
     </div>
 
     <div class="row d-flex justify-content-end">
       <div class="col-auto">
-        <label class="h3">Total: $38346</label>
+        <label class="h3"><p>{{totalPedido | currency}}</p>  </label>
       </div>
     </div>
     <div class="row">

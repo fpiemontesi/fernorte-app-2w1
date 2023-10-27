@@ -12,6 +12,24 @@
         <fn-form-pago [total]="invoiceTotal" [resto]="remainPayment"
           (onCalcularRestante)="actualizarRestante($event)"></fn-form-pago>
       </form>
+      <div *ngIf="listPays.length>0">
+        <table class="table table-striped cust-table">
+            <thead>
+                <tr>
+                    <th>Forma de pago</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pay of listPays">
+                   
+                    <td>{{ pay.paymentMethod }}</td>
+                    <td>{{ pay.amount }}</td>
+                    <td><button class="btn btn-primary" (click)="deletePay(pay)">Borrar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     </div>
   </div>
   <div class="modal-footer">
