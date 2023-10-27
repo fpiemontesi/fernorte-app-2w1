@@ -14,6 +14,10 @@ export class SectionService {
     return this.http.post<Section>('http://localhost:3000/secciones', body);
   }
 
+  edit(body: Section): Observable<Section>{
+    return this.http.put<Section>(`http://localhost:3000/secciones/${body.id}`, body);
+  }
+
   getById(id: number): Observable<Section>{
     return this.http.get<Section>(`http://localhost:3000/secciones/${id}`);
   }

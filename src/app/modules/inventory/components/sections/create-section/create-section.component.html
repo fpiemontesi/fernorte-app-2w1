@@ -5,7 +5,7 @@
 </nav>
 <div class="container d-flex justify-content-center registro">
   <div class="col-12 col-sm-11">
-    <form #form="ngForm" (ngSubmit)="createSection(form)" class="">
+    <form #form="ngForm" (ngSubmit)="saveSection(form)" class="">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-5 col-md-3 order-sm-1">
           <label for="section" class="col-form-label">Sección</label>
@@ -66,7 +66,7 @@
       <p *ngIf="sectionParam.id_zona != 0 && sectionsFiltered.length == 0 && filtrando">No hay secciones cargadas en esta zona</p>
       <ng-container >
         <div class="zona-filtrada">
-          <i>{{section.name}}</i><i>{{zoneFiltered.name}}</i><i class="acciones"><button  class="btn btn-warning">Editar</button><button class="btn btn-danger" (click)="eliminar(section.id)">Eliminar</button></i>
+          <i>{{section.name}}</i><i>{{zoneFiltered.name}}</i><i class="acciones"><button  class="btn btn-warning" (click)="editar(section.id)">Editar</button><button class="btn btn-danger" (click)="eliminar(section.id)">Eliminar</button></i>
         </div>
       </ng-container>
     </li>

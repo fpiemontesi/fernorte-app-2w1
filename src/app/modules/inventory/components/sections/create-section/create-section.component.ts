@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {StorageZoneService} from "../../../services/storage-zone.service";
 import {StorageZone} from "../../../models/storage-zone";
 import {Subscription} from "rxjs";
@@ -23,6 +23,9 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   sectionParam: Section = new Section();
   filtrando:boolean = false;
   zoneFiltered: StorageZone = new StorageZone();
+
+  editing:Boolean = false;
+  editingId: number = 0 ;
 
   private subscriptions = new Subscription();
 
@@ -68,15 +71,20 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
     );
   }
 
+  saveSection(form: NgForm){
+    if(this.editing) this.editSection(form)
+    else this.createSection(form);
+  }
+
   createSection(form: NgForm){
     if(form.invalid){
       alert('Formulario invalido');
       return;
     }
 
-    if(this.sections.some(section => section.id == this.newSection.id && section.id_zona ==
+    if(this.sections.some(section => section.name == this.newSection.name && section.id_zona ==
       this.newSection.id_zona)){
-      alert("Ya existe una seccion con ese ID");
+      alert("Ya existe una seccion con ese nombre y zona");
       return;
     }
 
@@ -91,6 +99,35 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           alert("Hubo un error al intentar esta operación, no se pudo crear la sección")
+        }
+      }
+    );
+  }
+
+  editSection(form: NgForm){
+    if(form.invalid){
+      alert('Formulario invalido');
+      return;
+    }
+
+    if(this.sections.some(section => section.name == this.newSection.name && section.id_zona ==
+      this.newSection.id_zona)){
+      alert("Ya existe una seccion con ese nombre y zona");
+      return;
+    }
+
+    this.sectionService.edit(this.newSection).subscribe(
+      {
+        next: (response: Section) =>{
+          alert("Sección editada!");
+          this.sections = this.sections.filter(section => { section.id != this.newSection.id })
+          this.newSection.name = "";
+          this.newSection.id_zona = 0;
+          this.filtrar();
+          this.editing = false;
+        },
+        error: (err) => {
+          alert("Hubo un error al intentar esta operación, no se pudo editar la sección")
         }
       }
     );
@@ -150,6 +187,22 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
         }
       )
     )
+  }
 
+  editar(id: number){
+    this.subscriptions.add(
+      this.sectionService.getById(id).subscribe(
+        {
+          next: (response: Section) =>{
+            this.newSection = response;
+            this.editingId = id;
+            this.editing = true;
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        }
+      )
+    )
   }
 }
