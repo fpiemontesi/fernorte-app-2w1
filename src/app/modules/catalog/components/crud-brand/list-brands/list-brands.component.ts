@@ -19,16 +19,7 @@ export class ListBrandsComponent implements OnInit,OnDestroy{
 
   }
   ngOnInit(): void {
-    this.subscription.add(
-      this.marcaService.get().subscribe({
-        next: (marcas:Marca[]) =>{
-          this.lista=marcas;
-        },
-        error: () => {
-          alert("error")
-        }
-      })
-    )
+    this.loadMarcas();
   }
 
   ngOnDestroy() {
@@ -75,7 +66,7 @@ export class ListBrandsComponent implements OnInit,OnDestroy{
           this.lista =marcas
         },
         error: ()=>{
-          alert("eror")
+          console.log("Error al cargar las Marcas")
         }
       })
     )

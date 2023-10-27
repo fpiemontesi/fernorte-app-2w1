@@ -66,7 +66,7 @@ export class ListCategoriasComponent {
           this.lista = categorias
         },
         error: () => {
-          alert("Error al intentar cargar categorías.")
+          console.log("Error al intentar cargar categorías.")
         }
       })
     )

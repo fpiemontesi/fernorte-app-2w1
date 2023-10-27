@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {ServiceMarcaService} from "../../../services/brandService/service-marca.service";
 import {Marca} from "../../../models/marca";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'fn-register-brand',
@@ -12,7 +13,7 @@ export class RegisterBrandComponent implements OnDestroy{
   marca:Marca = {} as Marca;
   alert:boolean = false;
   private subscription = new Subscription();
-  constructor(private marcaService:ServiceMarcaService){}
+  constructor(private marcaService:ServiceMarcaService, private router:Router){}
 
   ngOnInit(): void {
 
@@ -31,6 +32,7 @@ export class RegisterBrandComponent implements OnDestroy{
       next: async (marca:Marca)=>{
         await this.toggleAlert()
         this.marca = {} as Marca
+        this.router.navigate(["listBrands"])
       },
       error:()=>{
         alert("Ocurrio un error")

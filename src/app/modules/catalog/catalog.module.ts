@@ -22,17 +22,17 @@ const routes:Routes = [
   {path:"registerProduct", component:RegisterProductComponent},
   {path:"updateProduct", component:UpdateProductComponent},
   {path:"deleteProduct", component:DeleteProductComponent},
-  {path:"registerCategory", component:AltaCategoriaComponent},
   {path:"listCategories",
     children:[
       {path:"updateCategory", component:EditarCategoriaComponent},
+      {path:"registerCategory", component:AltaCategoriaComponent},
       {path:"", component:ListCategoriasComponent},
     ]
   },
-  {path:"registerBrand", component:RegisterBrandComponent},
   {path:"listBrands",
     children:[
       {path:"updateBrand", component: UpdateBrandComponent},
+      {path:"registerBrand", component:RegisterBrandComponent},
       {path:"", component:ListBrandsComponent},
     ]},
 ];
