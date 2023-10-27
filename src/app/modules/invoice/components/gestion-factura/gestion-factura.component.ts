@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Invoice } from '../../models/Invoice';
+import { InvoiceDto } from '../../models/InvoiceDto';
 import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { InvoiceService } from '../../services/invoice.service';
 export class GestionFacturaComponent {
 
 
-  invoices: Invoice[] = []; // Declarar una variable para almacenar las facturas
+  invoices: InvoiceDto[] = []; // Declarar una variable para almacenar las facturas
 
   constructor(private invoiceService: InvoiceService) { 
 
@@ -19,7 +19,7 @@ export class GestionFacturaComponent {
 
   ngOnInit() {
     this.invoiceService.getInvoices().subscribe(
-      (response: Invoice[]) => {
+      (response: InvoiceDto[]) => {
         this.invoices = response;
         console.log(this.invoices);
       },

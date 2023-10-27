@@ -16,6 +16,7 @@ export class PendingOrdersComponent implements OnInit {
   //one to load with all data
   orders: Order[] = [];
   SelectedDetails: Detail[] = [];
+  
   @Output() emiteOrden = new EventEmitter<Order>();
 
   isModalOpen: boolean = false

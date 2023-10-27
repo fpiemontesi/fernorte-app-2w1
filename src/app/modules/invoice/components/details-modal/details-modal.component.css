@@ -1,0 +1,34 @@
+.custom-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Aprovecha el ancho completo */
+    height: 100%;
+    /* Aprovecha el alto completo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 80%;
+    /* Ancho máximo del modal */
+    position: relative;
+    border-radius: 10px;
+  }
+  
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
