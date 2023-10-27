@@ -96,7 +96,6 @@
       <table class="table border sombra">
         <thead>
           <tr>
-              <th>N°</th>
               <th>Descripcion</th>
               <th>Cantidad</th>
               <th>Precio Unidad</th>
@@ -105,11 +104,10 @@
       </thead>
       <tbody>
           <tr *ngFor="let det of details">
-              <td>{{ det.idProducto }}</td>
               <td>{{ det.descripcion }}</td>
               <td>{{ det.cantidad }}</td>
               <td>{{ det.precioUnitario }}</td>
-              <td>{{ det.subtotal }}</td>
+              <td>{{ det.subtotal}}</td>
 
           </tr>
       </tbody>
@@ -127,7 +125,7 @@
           type="button"
           class="btn btn-secondary"
           value="Cancelar"
-          (click)="realizarPago()"
+          routerLink="/ConsultarPedidos"
         />
       </div>
       <div class="col d-flex justify-content-end">

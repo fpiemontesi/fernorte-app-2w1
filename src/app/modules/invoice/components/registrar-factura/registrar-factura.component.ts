@@ -22,13 +22,14 @@ export class RegistrarFacturaComponent {
     if (this.details) {
       this.details.forEach(element => {
         this.totalPedido! += element.cantidad * element.precioUnitario;
+        element.subtotal = element.cantidad * element.precioUnitario;
       });
       invoiceservice.setTotalpay(this.totalPedido);
 
     }
   }
 
-  realizarPago() {
-
+  volver() {
+    
   }
 }

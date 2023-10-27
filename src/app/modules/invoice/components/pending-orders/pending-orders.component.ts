@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/order';
 import { Detail } from '../../models/Detail';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fn-pending-orders',
@@ -20,7 +21,7 @@ export class PendingOrdersComponent implements OnInit {
   @Output() emiteOrden = new EventEmitter<Order>();
 
   isModalOpen: boolean = false;
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService, private route:Router) {}
   ngOnInit(): void {
     this.orderService.obtenerOrdenes().subscribe(
       (response: Order[]) => {
@@ -48,6 +49,7 @@ export class PendingOrdersComponent implements OnInit {
     this.SelectedDetails = order.detalles;
     this.calculateSubtotal();
     this.isModalOpen = true;
+    
   }
 
   closeModal() {
@@ -63,9 +65,11 @@ export class PendingOrdersComponent implements OnInit {
       });
     }
   }
+
   emitirOrden(order: Order) {
     console.log(order);
     this.emiteOrden.emit(order);
     this.orderService.setOrderSelected(order);
+    this.route.navigate(['ConsultarPedidos/RegistrarFactura'])
   }
 }

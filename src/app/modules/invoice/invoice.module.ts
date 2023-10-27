@@ -8,6 +8,21 @@ import { RegistrarPagoComponent } from './components/registrar-pago/registrar-pa
 import { FormPagoComponent } from './components/form-pago/form-pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsModalComponent } from './components/details-modal/details-modal.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path:'ConsultarPedidos',
+    children:[
+      {path:'', component: PendingOrdersComponent},
+      {path:'RegistrarFactura', 
+        children:[
+          {path:'', component: RegistrarFacturaComponent },
+          {path:'DetalleFactura', component: DetailsModalComponent}
+        ]}
+    ] }, 
+
+  {path:'GestionarFactura', component: GestionFacturaComponent }
+];
 
 @NgModule({
   declarations: [HomeComponent,  
@@ -19,7 +34,7 @@ import { DetailsModalComponent } from './components/details-modal/details-modal.
     DetailsModalComponent],
     
   providers: [],
-  imports: [CommonModule, FormsModule],
-  exports: [HomeComponent],
+  imports: [CommonModule, FormsModule,RouterModule.forRoot(routes)],
+  exports: [HomeComponent,RouterModule],
 })
 export class InvoiceModule { }
