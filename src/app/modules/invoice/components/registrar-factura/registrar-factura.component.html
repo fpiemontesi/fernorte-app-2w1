@@ -123,10 +123,14 @@
     </div>
     <div class="row">
       <div class="col">
-        <input type="button" class="btn btn-secondary" value="Cancelar" />
+        <input
+          type="button"
+          class="btn btn-secondary"
+          value="Cancelar"
+          (click)="realizarPago()"
+        />
       </div>
       <div class="col d-flex justify-content-end">
-    
         <fn-registrar-pago></fn-registrar-pago>
       </div>
     </div>

@@ -7,6 +7,7 @@ import { PendingOrdersComponent } from './components/pending-orders/pending-orde
 import { RegistrarPagoComponent } from './components/registrar-pago/registrar-pago.component';
 import { FormPagoComponent } from './components/form-pago/form-pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetailsModalComponent } from './components/details-modal/details-modal.component';
 
 @NgModule({
   declarations: [HomeComponent,  
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PendingOrdersComponent,
     GestionFacturaComponent,
     RegistrarPagoComponent,
-    FormPagoComponent],
+    FormPagoComponent,
+    DetailsModalComponent],
     
   providers: [],
   imports: [CommonModule, FormsModule],
