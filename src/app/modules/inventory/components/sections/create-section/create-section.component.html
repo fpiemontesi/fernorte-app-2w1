@@ -10,12 +10,12 @@
         <div class="col-12 col-sm-5 col-md-3 order-sm-1">
           <label for="section" class="col-form-label">Sección</label>
           <input type="text" class="form-control" id="section" name="inputSection"
-           placeholder="Id de Sección" aria-label="Id de Seccion" #inputSection="ngModel"
+           placeholder="Nombre de la Sección" aria-label="Nombre de Seccion" #inputSection="ngModel"
            [class.is-valid]="inputSection.valid && inputSection.dirty"
            [class.is-invalid]="inputSection.invalid && (inputSection.dirty || inputSection.touched)"
-           [(ngModel)]="newSection.id" required maxlength="2">
+           [(ngModel)]="newSection.name" required maxlength="2">
           <div class="invalid-feedback">
-            Debe ingresar un id.
+            Debe ingresar un nombre.
           </div>
         </div>
         <div class="col-12 col-sm-7 col-md-7 order-3 order-sm-1 mt-sm-0">
@@ -61,12 +61,12 @@
       <button type="submit" class="btn btn-primary btn-filtro" [disabled]="sectionParam.id_zona == 0">Filtrar</button>
   </form>
   <ul class="list-group list-group-flush grilla">
-    <li class="list-group-item headers"><i><b>Sección</b></i><i><b>Zona</b></i></li>
-    <li class="list-group-item lista-zonas" *ngFor="let zone of sectionsFiltered">
+    <li class="list-group-item headers"><i><b>Sección</b></i><i><b>Zona</b></i><i><b>Accion</b></i></li>
+    <li class="list-group-item lista-zonas" *ngFor="let section of sectionsFiltered">
       <p *ngIf="sectionParam.id_zona != 0 && sectionsFiltered.length == 0 && filtrando">No hay secciones cargadas en esta zona</p>
       <ng-container >
         <div class="zona-filtrada">
-          <i>{{zone.id}}</i><i>{{zoneFiltered.name}}</i>
+          <i>{{section.name}}</i><i>{{zoneFiltered.name}}</i><i class="acciones"><button  class="btn btn-warning">Editar</button><button class="btn btn-danger" (click)="eliminar(section.id)">Eliminar</button></i>
         </div>
       </ng-container>
     </li>

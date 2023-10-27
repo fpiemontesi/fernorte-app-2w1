@@ -14,7 +14,7 @@ export class SectionService {
     return this.http.post<Section>('http://localhost:3000/secciones', body);
   }
 
-  getById(id: string): Observable<Section>{
+  getById(id: number): Observable<Section>{
     return this.http.get<Section>(`http://localhost:3000/secciones/${id}`);
   }
 
@@ -24,5 +24,9 @@ export class SectionService {
 
   getAll(): Observable<Section[]>{
     return this.http.get<Section[]>(`http://localhost:3000/secciones`);
+  }
+
+  delete(id: number): Observable<void>{
+    return this.http.delete<void>(`http://localhost:3000/secciones/${id}`);
   }
 }

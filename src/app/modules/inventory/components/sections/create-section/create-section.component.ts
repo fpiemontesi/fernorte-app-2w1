@@ -1,10 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {StorageZoneService} from "../../../services/storage-zone.service";
 import {StorageZone} from "../../../models/storage-zone";
 import {Subscription} from "rxjs";
 import {Section} from "../../../models/section";
 import {SectionService} from "../../../services/section.service";
 import {NgForm} from "@angular/forms";
+import { LoteService } from '../../../services/lote.service';
+import { Lote } from '../../../models/lote';
 
 @Component({
   selector: 'fn-create-section',
@@ -15,6 +17,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   storageZones: StorageZone[] = [];
   sections: Section[] = [];
   newSection: Section = new Section();
+  batchs: Lote[] = [];
 
   sectionsFiltered: Section[] = [];
   sectionParam: Section = new Section();
@@ -23,13 +26,25 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(private storageService: StorageZoneService, private sectionService: SectionService) {
+  constructor(private loteService: LoteService, private storageService: StorageZoneService, private sectionService: SectionService) {
   }
 
 
   ngOnInit(): void {
     this.storageService.getAll().subscribe(
       zones => { this.storageZones = zones; }
+    )
+    this.subscriptions.add(
+      this.loteService.getAll().subscribe(
+        {
+          next: (response: Lote[]) =>{
+            this.batchs = response;
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        }
+      )
     )
     this.subscriptions.add(
       this.storageService.getAll().subscribe({
@@ -73,14 +88,17 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
         next: (response: Section) =>{
           alert("Sección creada!");
           this.sections.push(response);
+          this.newSection.name = "";
+          this.newSection.id_zona = 0;
+          this.filtrar();
         },
         error: (err) => {
-          console.log(err);
           alert("Hubo un error al intentar esta operación, no se pudo crear la sección")
         }
       }
     );
   }
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
@@ -104,5 +122,37 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
         this.zoneFiltered.name = zone.name;
       }
     });
+  }
+
+  eliminar(id: number){
+    let borrar = confirm("seguro que desea eliminar la sección?");
+    if(!borrar) return;
+
+    let flag:Boolean = false;
+    try{
+      this.batchs.forEach(lote => {
+        if(lote.id_section == id){
+          flag = true;
+          alert("No se puede eliminar esta sección porque hay un lote que depende de ella")
+          throw "Existe un lote que depende de esta sección";
+        }
+      })
+    }catch(e){}
+
+    if(flag) return;
+
+    this.subscriptions.add(
+      this.sectionService.delete(id).subscribe(
+        {
+          next: (response: void) =>{
+            this.filtrar();
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        }
+      )
+    )
+
   }
 }

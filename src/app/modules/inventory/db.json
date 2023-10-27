@@ -1,28 +1,24 @@
 {
   "secciones": [
     {
-      "id": "A",
+      "id": 1,
+      "name": "A",
       "id_zona": 1
     },
     {
-      "id": "B",
+      "id": 3,
+      "name": "C",
       "id_zona": 2
     },
     {
-      "id": "C",
-      "id_zona": 2
-    },
-    {
-      "id": "D",
+      "id": 4,
+      "name": "D",
       "id_zona": 1
     },
     {
-      "id": "E",
+      "id": 6,
+      "name": "J",
       "id_zona": 2
-    },
-    {
-      "id": "R",
-      "id_zona": 1
     }
   ],
   "zonas": [
@@ -33,6 +29,89 @@
     {
       "id": 2,
       "name": "Corralon"
+    }
+  ],
+  "lotes": [
+    {
+      "id": 1,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 2,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 3,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 4,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 5,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "3"
+    },
+    {
+      "id": 6,
+      "id_existence": 1,
+      "id_section": 1,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "3"
+    },
+    {
+      "id": 7,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "4",
+      "due_date": "2023-10-26",
+      "shelf": "4"
+    },
+    {
+      "id": 8,
+      "id_existence": 1,
+      "id_section": 3,
+      "quantity": "3",
+      "due_date": "2023-10-30",
+      "shelf": "5"
+    }
+  ],
+  "existencias": [
+    {
+      "id": 1,
+      "name": "tornillos",
+      "minimun_stock": 100
+    },
+    {
+      "id": 2,
+      "name": "tablones",
+      "minimun_stock": 20
+    },
+    {
+      "id": 3,
+      "name": "tuercas",
+      "minimun_stock": 150
     }
   ]
 }

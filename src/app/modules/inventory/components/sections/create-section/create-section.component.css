@@ -70,6 +70,15 @@ ul .headers{
 .zona-filtrada i{
   padding: 0 150px;
 }
+.acciones{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  align-items: center;
+}
+.acciones button{
+  margin: 5px;
+}
 
 @media (min-width: 768px){
   #saveBtn {

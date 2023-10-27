@@ -1,6 +1,7 @@
 import {StorageZone} from "./storage-zone";
 
 export class Section {
-   id: string = "";
+   id: number = 0;
+   name: string = "";
    id_zona: number = 0;
 }
