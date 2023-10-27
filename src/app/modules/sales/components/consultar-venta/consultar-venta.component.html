@@ -119,4 +119,23 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="container" *ngIf="mostrarActualizarEstado">
+    <h3 class="h4">Modificar Estado</h3>
+    <div class="row" style="padding-top: 1%;">
+      <div class="col-md-3 col-sm-12">
+        <label>Estado</label>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <select class="form-control" id="estado" name="estado" [(ngModel)]="nuevoEstado">
+          <option [value]="1" [selected]="venta.estado === 1" >Pendiente</option>
+          <option [value]="2" [selected]="venta.estado === 2">Entregado</option>
+        </select>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="actualizarEstado()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+
 </div>

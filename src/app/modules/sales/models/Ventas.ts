@@ -8,7 +8,7 @@ export class Ventas {
     fecha: Date;
     forma_entrega: string;
     tipo_venta: string;
-    estado: string;
+    estado: number;
     total: number;
     detalles: Array<Detalles> = [];
 
@@ -19,7 +19,7 @@ export class Ventas {
        this.fecha = new Date();
        this.forma_entrega = "";
        this.tipo_venta = "";
-       this.estado = "";
+       this.estado = 0;
        this.total = 0;
     }
 }
