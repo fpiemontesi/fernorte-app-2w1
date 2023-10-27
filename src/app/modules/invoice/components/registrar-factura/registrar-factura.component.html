@@ -103,62 +103,20 @@
             <th>SubTotal</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor="let detail of order.detalles">
           <tr>
-            <td>Producto 1</td>
+            <td>{{ detail.descripcion }}</td>
             <td>Unidad</td>
-            <td>5</td>
-            <td>$10.00</td>
-            <td>$50.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
-          </tr>
-          <tr>
-            <td>Producto 2</td>
-            <td>Unidad</td>
-            <td>3</td>
-            <td>$15.00</td>
-            <td>$45.00</td>
+            <td>{{ detail.cantidad }}</td>
+            <td>
+              {{ detail.precioUnitario | currency : "ARS" : "" : "1.2-2" }}
+            </td>
+            <td>
+              {{
+                detail.precioUnitario * detail.cantidad
+                  | currency : "ARS" : "" : "1.2-2"
+              }}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -166,15 +124,25 @@
 
     <div class="row d-flex justify-content-end">
       <div class="col-auto">
-        <label class="h3">Total: $38346</label>
+        <label class="h4"
+          >Subtotal:
+          {{ order.subtotal | currency : "$" : "symbol" : "1.2-2" }}</label
+        ><br />
+        <label class="h3"
+          >Total: {{ order.total | currency : "$" : "symbol" : "1.2-2" }}</label
+        >
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <input type="button" class="btn btn-secondary" value="Cancelar" />
+        <input
+          type="button"
+          class="btn btn-secondary"
+          value="Cancelar"
+          (click)="realizarPago()"
+        />
       </div>
       <div class="col d-flex justify-content-end">
-    
         <fn-registrar-pago></fn-registrar-pago>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Detail } from '../../models/Detail';
 @Component({
   selector: 'fn-pending-orders',
   templateUrl: './pending-orders.component.html',
-  styleUrls: ['./pending-orders.component.css']
+  styleUrls: ['./pending-orders.component.css'],
 })
 export class PendingOrdersComponent implements OnInit {
   //one to load with the items to shows according the case
@@ -16,12 +16,11 @@ export class PendingOrdersComponent implements OnInit {
   //one to load with all data
   orders: Order[] = [];
   SelectedDetails: Detail[] = [];
-  
+
   @Output() emiteOrden = new EventEmitter<Order>();
 
-  isModalOpen: boolean = false
-  constructor(private orderService: OrderService) {
-  }
+  isModalOpen: boolean = false;
+  constructor(private orderService: OrderService) {}
   ngOnInit(): void {
     this.orderService.cargarDatos().subscribe(
       (response: Order[]) => {
@@ -42,7 +41,7 @@ export class PendingOrdersComponent implements OnInit {
       });
       this.ordersToShow = this.pedidosFiltrados;
     } else {
-      this.ordersToShow = this.orders
+      this.ordersToShow = this.orders;
     }
   }
   viewDetail(order: Order): void {
@@ -61,12 +60,13 @@ export class PendingOrdersComponent implements OnInit {
 
   calculateSubtotal(): void {
     if (this.SelectedDetails.length > 0) {
-      this.SelectedDetails.forEach(detail => {
-        detail.subtotal = detail.cantidad * detail.precioUnitario
-      })
+      this.SelectedDetails.forEach((detail) => {
+        detail.subtotal = detail.cantidad * detail.precioUnitario;
+      });
     }
   }
   emitirOrden(order: Order) {
+    console.log(order);
     this.emiteOrden.emit(order);
   }
 }
