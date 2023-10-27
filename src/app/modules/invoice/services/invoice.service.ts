@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { requestInvoiceDto } from '../models/requestInvoiceDTO';
 import {  InvoiceDto } from '../models/InvoiceDto';
+import { Invoice } from '../models/Invoice';
 
 @Injectable({
   providedIn: 'root'
