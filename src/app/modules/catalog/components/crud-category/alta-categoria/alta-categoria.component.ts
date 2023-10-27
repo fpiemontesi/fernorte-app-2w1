@@ -26,16 +26,18 @@ export class AltaCategoriaComponent implements OnInit,OnDestroy{
   }
 
   agregarCategoria(){
-    this.categoriaService.create(this.categoria).subscribe({
-      next: (categoria:Categoria)=>{
-        alert("La categoría se registró correctamente.")
-        this.categoria = {} as Categoria
-        this.router.navigate(["listCategories"])
-      },
-      error:()=>{
-        alert("Error al intentar crear categoría.")
-      }
-    })
+    this.subscription.add(
+      this.categoriaService.create(this.categoria).subscribe({
+        next: (categoria:Categoria)=>{
+          alert("La categoría se registró correctamente.")
+          this.categoria = {} as Categoria
+          this.router.navigate(["listCategories"])
+        },
+        error:()=>{
+          alert("Error al intentar crear categoría.")
+        }
+      })
+    )
   }
 
 }

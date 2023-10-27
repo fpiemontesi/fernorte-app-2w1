@@ -1,37 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '../../../services/storage/storage.service';
 import {productService} from "../../../services/productService/product.service";
 import {Producto} from "../../../models/producto";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'fn-register-product',
   templateUrl: './register-product.component.html',
   styleUrls: ['./register-product.component.css']
 })
-export class RegisterProductComponent implements OnInit {
-
-  private models = {};
-  imagenURL:string = "";
+export class RegisterProductComponent implements OnInit, OnDestroy {
   categories: String[] = [
   ]
   allModels:Producto[]=[];
   modelSelected:string = "";
-  model:Producto | undefined;
+  model:Producto = {} as Producto;
+  private subscription = new Subscription();
+
     constructor(private storageService: StorageService, private httpClientService:productService) { }
     ngOnInit(): void {
-      this.httpClientService.getAllProducts().subscribe(
-        (response:Producto[])=>{
-          this.allModels=response;
-          }
-      );
+      this.subscription.add(
+        this.httpClientService.getAllProducts().subscribe(
+          (response:Producto[])=>{
+            this.allModels=response;
+            }
+        )
+      )
+    }
+
+    ngOnDestroy() {
+      this.subscription.unsubscribe();
     }
 
   getModelById(){
-    this.httpClientService.getProductByCode(this.modelSelected).subscribe(
-      (response:Producto)=>{
-        this.model=response;
-      }
+    this.subscription.add(
+      this.httpClientService.getProductByCode(this.modelSelected).subscribe(
+        (response:Producto)=>{
+          this.model=response;
+        }
+      )
     )
   }
 
@@ -54,6 +62,7 @@ export class RegisterProductComponent implements OnInit {
       material: new FormControl('', [Validators.required]),
       pais: new FormControl('', [Validators.required]),
       categorias: new FormControl('', [Validators.required]),
+      imageURL: new FormControl('', [Validators.required]),
     });
 
 
@@ -90,13 +99,13 @@ export class RegisterProductComponent implements OnInit {
       if (archivoCapturado instanceof Blob) {
         let reader = new FileReader();
         reader.readAsDataURL(archivoCapturado);
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
           const imagen = reader.result;
-          this.imagenURL = imagen as string;
-          this.storageService.subirImagen(archivoCapturado);
+          this.formArticle.value.imageURL = await this.storageService.subirImagen(archivoCapturado);
         };
-      } else {
-        this.imagenURL = "";
       }
-  }
+      else {
+        this.formArticle.value.imageURL = "";
+      }
+    }
 }

@@ -16,5 +16,6 @@ export interface Producto {
     color:string;
     material:string;
     paisOrigen:string;
+    imageURL:string;
     activo:boolean;
 }

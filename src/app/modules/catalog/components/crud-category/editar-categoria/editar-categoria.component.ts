@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Categoria} from '../../../models/categoria';
 import {CategoriaService} from '../../../services/categoryService/categoria.service';
 import {Subscription} from 'rxjs';
@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './editar-categoria.component.html',
   styleUrls: ['./editar-categoria.component.css']
 })
-export class EditarCategoriaComponent implements OnInit{
+export class EditarCategoriaComponent implements OnInit, OnDestroy{
 
   codeCategorySelected:string = "";
   categoria: Categoria = {} as Categoria;
@@ -19,13 +19,17 @@ export class EditarCategoriaComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.codeCategorySelected = params["codigo"];
-    });
-    this.categoriaService.getByCode(this.codeCategorySelected).subscribe(
-      (response:Categoria)=>{
-        this.categoria=response;
-      }
+    this.subscription.add(
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.codeCategorySelected = params["codigo"];
+      })
+    );
+    this.subscription.add(
+      this.categoriaService.getByCode(this.codeCategorySelected).subscribe(
+        (response:Categoria)=>{
+          this.categoria=response;
+        }
+      )
     )
   }
 
@@ -34,19 +38,18 @@ export class EditarCategoriaComponent implements OnInit{
   }
 
   editarCategoria() {
-    console.log('CÓDIGO editarCategoria(): ' + this.categoria.codigo)
-    console.log(this.categoria)
-    this.categoriaService.update(this.codeCategorySelected, this.categoria).subscribe({
-      next: (categoria: Categoria) => {
-        alert("Categoría actualizada correctamente.")
-        this.categoria = {} as Categoria
-        this.router.navigate(["/listCategories"])
-      },
-      error: () => {
-        alert("Error al intentar actualizar categoría.")
-      }
-    })
-    this.categoria = {} as Categoria;
+    this.subscription.add(
+      this.categoriaService.update(this.codeCategorySelected, this.categoria).subscribe({
+        next: (categoria: Categoria) => {
+          alert("Categoría actualizada correctamente.")
+          this.categoria = {} as Categoria
+          this.router.navigate(["/listCategories"])
+        },
+        error: () => {
+          alert("Error al intentar actualizar categoría.")
+        }
+      })
+    )
   }
 
 }

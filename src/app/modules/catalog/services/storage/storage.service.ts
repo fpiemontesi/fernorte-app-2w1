@@ -21,13 +21,12 @@ export class StorageService {
   private storageRef = ref(this.storage, new Date().getMilliseconds().toString());
 
   constructor() { }
-  async subirImagen(imgBase64:any):Promise<void>{
+  async subirImagen(imgBase64:any):Promise<string>{
     try {
       await uploadBytes(this.storageRef, imgBase64)
-      const url =  await getDownloadURL(this.storageRef)
-      console.log(url)
+      return await getDownloadURL(this.storageRef) // DEVUELVE EL URL DE LA IMAGEN
     } catch (e) {
-      console.error(e)
+      return e as string;
     }
   }
 }

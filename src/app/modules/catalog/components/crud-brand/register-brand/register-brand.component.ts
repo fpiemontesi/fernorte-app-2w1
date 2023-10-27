@@ -15,12 +15,9 @@ export class RegisterBrandComponent implements OnDestroy{
   private subscription = new Subscription();
   constructor(private marcaService:ServiceMarcaService, private router:Router){}
 
-  ngOnInit(): void {
-
-  }
-
   cleanForm(){
     this.marca = {} as Marca
+    this.router.navigate(["/listBrands"])
   }
 
   ngOnDestroy(): void {
@@ -28,16 +25,18 @@ export class RegisterBrandComponent implements OnDestroy{
   }
 
   agregarMarca(){
-    this.marcaService.create(this.marca).subscribe({
-      next: async (marca:Marca)=>{
-        await this.toggleAlert()
-        this.marca = {} as Marca
-        this.router.navigate(["listBrands"])
-      },
-      error:()=>{
-        alert("Ocurrio un error")
-      }
-    })
+    this.subscription.add(
+      this.marcaService.create(this.marca).subscribe({
+        next: async (marca:Marca)=>{
+          await this.toggleAlert()
+          this.marca = {} as Marca
+          this.router.navigate(["listBrands"])
+        },
+        error:()=>{
+          alert("Ocurrio un error")
+        }
+      })
+    )
   }
 
   toggleAlert(): Promise<void> {

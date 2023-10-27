@@ -20,13 +20,16 @@ export class UpdateBrandComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.codeMarcaSelected = params["codigo"];
-    });
-    this.marcaService.getByCode(this.codeMarcaSelected).subscribe(
+    this.subscription.add(
+      this.activatedRoute.queryParams.subscribe(params => {
+        this.codeMarcaSelected = params["codigo"];
+      }),
+    )
+    this.subscription.add(
+      this.marcaService.getByCode(this.codeMarcaSelected).subscribe(
         (response:Marca)=>{
-            this.marca=response;
-        }
+          this.marca=response;
+        }),
     )
   }
 

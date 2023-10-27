@@ -13,13 +13,13 @@
 
     <div class="container">
       <div class="imagen-borde">
-        <img src="{{imagenURL}}" alt="" id="product-image">
+        <img src="{{product.imageURL}}" alt="" id="product-image">
       </div>
     </div>
 
     <div class="container">
       <div class="input-group mt-4">
-        <input type="file" class="form-control" id="inputGroupFile02" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
+        <input type="file" class="form-control" id="inputGroupFile02" name="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)" [(ngModel)]="product.imageURL">
         <label class="input-group-text" for="inputGroupFile02">Subir Foto</label>
       </div>
     </div>

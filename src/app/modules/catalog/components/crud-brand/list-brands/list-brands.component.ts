@@ -12,7 +12,6 @@ export class ListBrandsComponent implements OnInit,OnDestroy{
   lista:Marca[]=[];
   codigoMarca = "";
   alert:boolean = false;
-  modal:boolean= false;
   private subscription = new Subscription();
   constructor(private marcaService:ServiceMarcaService) {
 

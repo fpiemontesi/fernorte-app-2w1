@@ -4,7 +4,7 @@
         <form action="container" [formGroup]="formArticle">
           <div class="container">
             <div class="imagen-borde">
-              <img src="{{imagenURL}}" alt="" id="product-image">
+              <img src="{{formArticle.value.imageURL}}" alt="" id="product-image">
             </div>
           </div>
             <div class="row">
@@ -94,8 +94,8 @@
                     </div>
 
                     <div class="input-group mt-4">
-                        <input type="file" class="form-control" id="inputGroupFile02" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
-                        <label class="input-group-text" for="inputGroupFile02">Subir Foto</label>
+                        <input type="file" formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
+                        <label class="input-group-text" for="imageURL">Subir Foto</label>
                     </div>
 
                 </div>

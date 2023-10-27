@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Producto} from "../../../models/producto";
 import {StorageService} from "../../../services/storage/storage.service";
 import {productService} from "../../../services/productService/product.service";
@@ -10,8 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   templateUrl: './update-product.component.html',
   styleUrls: ['./update-product.component.css']
 })
-export class UpdateProductComponent implements OnInit{
-  imagenURL:string = "";
+export class UpdateProductComponent implements OnInit, OnDestroy{
   categories: String[] = []
   allProducts:Producto[]=[];
   productCodeSelected:string = "";
@@ -19,6 +18,7 @@ export class UpdateProductComponent implements OnInit{
   private subscription = new Subscription();
 
   formActivo:boolean = false;
+
   constructor(private storageService: StorageService, private httpClientService:productService) { }
   ngOnInit(): void {
     this.getAllProducts();
@@ -29,17 +29,20 @@ export class UpdateProductComponent implements OnInit{
   }
 
   getAllProducts(){
-    this.httpClientService.getAllProducts().subscribe(
-      (response:Producto[])=>{
-        this.allProducts=response;
-      }
-    );
+    this.subscription.add(
+      this.httpClientService.getAllProducts().subscribe(
+        (response:Producto[])=>{
+          this.allProducts=response;
+        }
+      )
+    )
   }
-  getModelById(){
-    this.httpClientService.getProductByCode(this.productCodeSelected).subscribe(
-      (response:Producto)=>{
-        this.product=response;
-      }
+  getProductByCode(){
+    this.subscription.add(
+      this.httpClientService.getProductByCode(this.productCodeSelected).subscribe(
+        (response:Producto)=>{
+          this.product=response;
+        })
     )
   }
 
@@ -63,8 +66,7 @@ export class UpdateProductComponent implements OnInit{
   }
 
   llenarForm(){
-    this.getModelById();
-    this.imagenURL = "";
+    this.getProductByCode();
     this.formActivo = true;
   }
 
@@ -73,13 +75,13 @@ export class UpdateProductComponent implements OnInit{
     if (archivoCapturado instanceof Blob) {
       let reader = new FileReader();
       reader.readAsDataURL(archivoCapturado);
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         const imagen = reader.result;
-        this.imagenURL = imagen as string;
-        this.storageService.subirImagen(archivoCapturado);
+        this.product.imageURL = await this.storageService.subirImagen(archivoCapturado);
       };
-    } else {
-      this.imagenURL = "";
+    }
+    else {
+      this.product.imageURL = "";
     }
   }
 
@@ -94,21 +96,23 @@ export class UpdateProductComponent implements OnInit{
     console.log(this.product);
     console.log(this.productCodeSelected);
     this.product.categorias_id = [];
-    this.httpClientService.updateProduct(this.productCodeSelected, this.product).subscribe({
-      next: (producto: Producto) => {
-        alert("Producto actualizado correctamente.")
-        this.product = {} as Producto
-        this.getAllProducts();
-      },
-      error: (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.status === 400) {
-          console.log("Error 400 - Solicitud incorrecta");
-          console.log("Mensaje de error:", errorResponse.error);
-        } else {
-          console.log("Error desconocido:", errorResponse);
+    this.subscription.add(
+      this.httpClientService.updateProduct(this.productCodeSelected, this.product).subscribe({
+        next: (producto: Producto) => {
+          alert("Producto actualizado correctamente.")
+          this.product = {} as Producto
+          this.getAllProducts();
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          if (errorResponse.status === 400) {
+            console.log("Error 400 - Solicitud incorrecta");
+            console.log("Mensaje de error:", errorResponse.error);
+          } else {
+            console.log("Error desconocido:", errorResponse);
+          }
+          alert("Error al intentar actualizar producto.");
         }
-        alert("Error al intentar actualizar producto.");
-      }
-    })
+      })
+    )
   }
 }
