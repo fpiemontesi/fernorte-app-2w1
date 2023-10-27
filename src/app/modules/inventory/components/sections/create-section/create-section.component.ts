@@ -31,9 +31,6 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.storageService.getAll().subscribe(
-      zones => { this.storageZones = zones; }
-    )
     this.subscriptions.add(
       this.loteService.getAll().subscribe(
         {
