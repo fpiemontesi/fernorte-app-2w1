@@ -35,4 +35,10 @@ export class HomeComponent implements OnInit{
     this.modificarmarca=false
   }
 
+  onClick() {
+    // Aquí puedes realizar acciones cuando el elemento se hace clic
+    alert('Elemento clicado');
+  }
+
+
 }

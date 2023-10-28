@@ -1,5 +1,103 @@
-<div class="sidebar">
-    <nav class="main-menu">
+<div class="">
+  
+  <a class="btn btn-primary botonAbrirNav pt-5"  data-bs-toggle="offcanvas"  href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <svg id="svgInic" class="svgInic" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+        </svg>
+  </a>
+
+  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header mt-2">
+      <h5 class="offcanvas-title fs-3" id="offcanvasExampleLabel">Catalogo</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+     
+      <li class="mb-2 ">
+        <button class="fs-5 btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+          Productos <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+          </svg>
+        </button>
+        <div class="collapse" id="orders-collapse">
+          <ul class="btn-toggle-nav ms-3">
+            <li><a class="dropdown-item" href="#" routerLink="registerProduct">Registrar Productos</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="updateProduct">Modificar Productos</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="deleteProduct">Listar Productos</a></li>
+          </ul>
+        </div>
+      </li>
+
+
+      <li class="mb-2 ">
+        <button class="fs-5 btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-discount" aria-expanded="false">
+          Promociones <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+          </svg>
+        </button>
+        <div class="collapse" id="orders-discount">
+          <ul class="btn-toggle-nav ms-3">
+            <li><a class="dropdown-item" href="#">Registrar Promociones</a></li>
+            <li><a class="dropdown-item" href="#">Modificar Promociones</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar Promociones</a></li>
+            <li><a class="dropdown-item" href="#">Listar Promociones</a></li>
+          </ul>
+        </div>
+      </li>
+
+
+      <li class="mb-2 ">
+        <button class="fs-5 btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-offer" aria-expanded="false">
+          Ofertas <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+          </svg>
+        </button>
+        <div class="collapse" id="orders-offer">
+          <ul class="btn-toggle-nav ms-3">
+            <li><a class="dropdown-item" href="#">Registrar Ofertas</a></li>
+            <li><a class="dropdown-item" href="#">Modificar Ofertas</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar Ofertas</a></li>
+            <li><a class="dropdown-item" href="#">Listar Ofertas</a></li>
+          </ul>
+        </div>
+      </li>
+
+      
+      <li class="mb-2 ">
+        <button class="fs-5 btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-catalog" aria-expanded="false">
+          Catalogo <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+          </svg>
+        </button>
+        <div class="collapse" id="orders-catalog">
+          <ul class="btn-toggle-nav ms-3">
+            <li><a class="dropdown-item" href="#">Registrar Catalogo</a></li>
+            <li><a class="dropdown-item" href="#">Modificar Catalogo</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar Catalogo</a></li>
+            <li><a class="dropdown-item" href="#">Listar Catalogo</a></li>
+          </ul>
+        </div>
+      </li>
+
+
+  
+      <div class="d-flex flex-column ms-3">
+        <p class="mb-5 fs-5 "  class="" >
+          <a routerLink="listCategories"><span class="fs-5">Categorias</span></a>
+        </p>
+
+        <p class="mb-2 fs-5"  class=""  >
+          <a routerLink="listBrands"><span class="fs-5">Marcas</span></a>
+        </p>
+      </div>
+   
+      
+     
+    </div>
+  </div>
+
+   <!--  <nav class="main-menu">
             <ul>
                 <li>
                     <a href="">
@@ -111,7 +209,7 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav> -->
 </div>
 
 <router-outlet></router-outlet>
