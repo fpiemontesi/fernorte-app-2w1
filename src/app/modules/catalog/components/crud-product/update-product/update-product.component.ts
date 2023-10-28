@@ -48,18 +48,18 @@ export class UpdateProductComponent implements OnInit, OnDestroy{
 
 
 
-/*
-  addElement(){
-    if(this.formArticle.value.categorias != 'Abrir Menu' && this.formArticle.value.categorias != null){
-      for(let i = 0; i < this.categories.length; i++){
-        if(this.categories[i] == this.formArticle.value.categorias){
-          return;
+  /*
+    addElement(){
+      if(this.formArticle.value.categorias != 'Abrir Menu' && this.formArticle.value.categorias != null){
+        for(let i = 0; i < this.categories.length; i++){
+          if(this.categories[i] == this.formArticle.value.categorias){
+            return;
+          }
         }
+        this.categories.push(this.formArticle.value.categorias);
       }
-      this.categories.push(this.formArticle.value.categorias);
     }
-  }
-*/
+  */
 
   removeCategory(categories: any){
     this.categories.splice(this.categories.indexOf(categories), 1);

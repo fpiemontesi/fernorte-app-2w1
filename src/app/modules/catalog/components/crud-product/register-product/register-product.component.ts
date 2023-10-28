@@ -14,7 +14,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
   categories: String[] = [
   ]
   allModels:Producto[]=[];
-  modelSelected:string = "";
+  codeProductSelected = "";
   model:Producto = {} as Producto;
   private subscription = new Subscription();
 
@@ -33,9 +33,9 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
 
-  getModelById(){
+  getModelByCode(){
     this.subscription.add(
-      this.httpClientService.getProductByCode(this.modelSelected).subscribe(
+      this.httpClientService.getProductByCode(this.codeProductSelected).subscribe(
         (response:Producto)=>{
           this.model=response;
         }
@@ -44,24 +44,23 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
   }
 
     formArticle = new FormGroup({
+
+      codigo: new FormControl('', [Validators.required]),
       nombre: new FormControl('', [Validators.required,
         Validators.minLength(1),
         Validators.maxLength(100),
         Validators.pattern('^[a-zA-Z0-9 ]+$')
       ]), //validacion que no acepte caracteres especiales
-
-
+      codigo_marca: new FormControl('', [Validators.required]),
+      categorias_id: new FormControl('', [Validators.required]),
+      precio_minorista: new FormControl(null, [Validators.required]),
+      precio_mayorista: new FormControl(null, [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
-      modelo: new FormControl('', [Validators.required]),
-      marca: new FormControl('', [Validators.required]),
-      minorista: new FormControl(null, [Validators.required]),
-      mayorista: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
       dimensiones: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
       peso: new FormControl(null, [Validators.required]), // Inicializado en 0 como número
       color: new FormControl('', [Validators.required]),
       material: new FormControl('', [Validators.required]),
       pais: new FormControl('', [Validators.required]),
-      categorias: new FormControl('', [Validators.required]),
       imageURL: new FormControl('', [Validators.required]),
     });
 
@@ -70,13 +69,13 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
 
 
     addElement(){
-      if(this.formArticle.value.categorias != 'Abrir Menu' && this.formArticle.value.categorias != null){
+      if(this.formArticle.value.categorias_id != 'Abrir Menu' && this.formArticle.value.categorias_id != null){
         for(let i = 0; i < this.categories.length; i++){
-          if(this.categories[i] == this.formArticle.value.categorias){
+          if(this.categories[i] == this.formArticle.value.categorias_id){
             return;
           }
         }
-        this.categories.push(this.formArticle.value.categorias);
+        this.categories.push(this.formArticle.value.categorias_id);
       }
     }
 

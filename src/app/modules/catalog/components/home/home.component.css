@@ -23,7 +23,7 @@ font-size:20px;
 .main-menu:hover,nav.main-menu.expanded {
 width:250px;
 overflow:visible;
-transition: all 0.2 ease-in;
+transition: all 0.2ms ease-in;
 }
 
 
@@ -64,9 +64,9 @@ font-size: 14px;
 text-decoration:none;
 -webkit-transform:translateZ(0) scale(1,1);
 -webkit-transition:all .1s linear;
-transition: all 0.2 ease-in;
+transition: all 0.2ms ease-in;
 color: #434343;
-  
+
 }
 
 .main-menu .nav-icon {
@@ -100,13 +100,13 @@ overflow-y:hidden;
 .no-touch .scrollable.hover:hover {
 overflow-y:auto;
 overflow:visible;
-transition: all 0.2 ease-in;
+transition: all 0.2ms ease-in;
 }
 
 
 a:hover,a:focus {
 text-decoration:none;
-transition: all 0.2 ease-in;
+transition: all 0.2ms ease-in;
 }
 
 nav {
@@ -202,7 +202,7 @@ body {
     -moz-transition: all 200ms ease-in;
     -o-transition: all 200ms ease-in;
     -ms-transition: all 200ms ease-in;
-    transition: all 0.2 ease-in;
+    transition: all 0.2ms ease-in;
 }
 .sidebar #leftside-navigation ul li a:hover {
     color: #555555;
@@ -267,4 +267,3 @@ body {
     border: none;
 }
 
-   
