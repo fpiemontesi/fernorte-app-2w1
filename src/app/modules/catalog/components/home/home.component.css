@@ -38,17 +38,17 @@
     color: rgb(5, 5, 5);
     cursor: pointer;
     animation-play-state: paused;
-    
+
   }
-  
+
   @keyframes example {
     0%   {left:0px; top:0px;}
     50%  {left:5px; top:0px;}
     100% {left:0px; top:0px;}
-   
+
   }
-  
-  
+
+
 
   li{
     list-style: none;
@@ -62,3 +62,35 @@
     text-decoration: none;
     color: rgb(9, 9, 9);
   }
+
+#toggleProducts[aria-expanded="false"] svg {
+  transform: rotate(0deg);
+}
+
+#toggleProducts[aria-expanded="true"] svg {
+  transform: rotate(-90deg);
+}
+
+#togglePromociones[aria-expanded="false"] svg {
+  transform: rotate(0deg);
+}
+
+#togglePromociones[aria-expanded="true"] svg {
+  transform: rotate(-90deg);
+}
+
+#toggleCatalogo[aria-expanded="false"] svg {
+  transform: rotate(0deg);
+}
+
+#toggleCatalogo[aria-expanded="true"] svg {
+  transform: rotate(-90deg);
+}
+
+#toggleOfertas[aria-expanded="false"] svg {
+  transform: rotate(0deg);
+}
+
+#toggleOfertas[aria-expanded="true"] svg {
+  transform: rotate(-90deg);
+}
