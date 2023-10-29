@@ -6,15 +6,26 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RestService {
-  private urlGetClientes = 'http://localhost:8080/clientes/getAllClientes';
   private urlPostCliente = 'http://localhost:8080/clientes/postCliente';
   private urlPutCliente = 'http://localhost:8080/clientes/updateCliente';
+  private urlGetClientes = 'http://localhost:8080/clientes/getAllClientes';
+
+  private urlPostUsuario = 'http://localhost:8081/auth/register';
+  private urlDeleteUsuario = 'http://localhost:8081/auth/baja-logica';
+  private urlGetUsuariosCargo = 'http://localhost:8081/auth/getUser/ByCargo';
+
+  private urlLoginUsuario = 'http://localhost:8081/auth/login';
+  private urlResetPasswordUsuario ='http://localhost:8081/auth/forgot-password';
+  private urlVerifyUsuario = 'http://localhost:8081/auth/reset-password';
+  private urlUpdatePasswordsuario = 'http://localhost:8081/auth/update-password';
+  
+
+  private urlGetCargos = 'http://localhost:8081/auth/getCargos';
+  private urlPostCargo = 'http://localhost:8081/auth/createCargo';
+
 
   constructor(private httpClient: HttpClient) {}
 
-  public getClientes(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.urlGetClientes);
-  }
 
   public postCliente(cliente: any): Observable<any> {
     return this.httpClient.post(this.urlPostCliente, cliente);
@@ -23,4 +34,55 @@ export class RestService {
   public actualizarCliente(cliente: any): Observable<any> {
     return this.httpClient.put(this.urlPutCliente, cliente);
   }
+
+  public getClientes(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.urlGetClientes);
+  }
+
+
+
+
+  public postUsuario(usuario: any): Observable<any> {
+    return this.httpClient.post(this.urlPostUsuario, usuario);
+  }
+
+  public deleteUsuario(numeroDoc: any): Observable<any> {
+    const url = `${this.urlDeleteUsuario}/${numeroDoc}`;
+    return this.httpClient.put(url, numeroDoc);
+  }
+
+  public getUsuariosPorCargo(cargo: string): Observable<any[]> {
+    const url = `${this.urlGetUsuariosCargo}?cargo=${cargo}`;
+    return this.httpClient.get<any[]>(url);
+  }
+
+  
+
+
+  public loginUsuario(credentials: any): Observable<any> {
+    return this.httpClient.post(this.urlLoginUsuario, credentials);
+  }
+
+  public resetPasswordUsuario(email: any): Observable<any> {
+    return this.httpClient.post(this.urlResetPasswordUsuario, email, { responseType: 'text' });
+  }
+
+  public verifyUsuario(verification: any): Observable<any> {
+    return this.httpClient.post(this.urlVerifyUsuario, verification);
+  }
+
+  public updatePasswordUsuario(password: any): Observable<any> {
+    return this.httpClient.post(this.urlUpdatePasswordsuario, password, { responseType: 'text' });
+  }
+
+
+  public postCargo(cargo: any): Observable<any> {
+    return this.httpClient.post(this.urlPostCargo, cargo);
+  }
+
+  public getCargos(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.urlGetCargos);
+  }
+
+
 }
