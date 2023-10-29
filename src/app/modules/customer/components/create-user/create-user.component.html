@@ -1,0 +1,287 @@
+<div class="container big-cart">
+    <h3>Crear Usuario</h3>
+    <form #crearUsuarioForm="ngForm">
+      <div class="row">
+        <!-- Primera columna -->
+        <div class="col-md-6">
+          <div class="form-group mt-3">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="Nombre del Usuario"
+              name="nombre"
+              [(ngModel)]="usuario.nombre"
+              required
+            />
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['nombre'].invalid &&
+                crearUsuarioForm.controls['nombre'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['nombre'].errors?.['required']"
+                class="error"
+              >
+                El nombre es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email del Usuario"
+              name="email"
+              [(ngModel)]="usuario.email"
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            />
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['email'].invalid &&
+                crearUsuarioForm.controls['email'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['email'].errors?.['required']"
+                class="error"
+              >
+                El email es requerido.
+              </div>
+  
+              <div
+                *ngIf="crearUsuarioForm.controls['email'].errors?.['pattern']"
+                class="error"
+              >
+                El formato del email es incorrecto.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Username"
+              name="username"
+              [(ngModel)]="usuario.username"
+              required
+            />
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['username'].invalid &&
+                crearUsuarioForm.controls['username'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['username'].errors?.['required']"
+                class="error"
+              >
+                El nombre de usuario es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="tipoDocumento">Tipo de Documento:</label>
+            <select
+              class="form-control"
+              id="tipoDocumento"
+              name="tipoDocumento"
+              [(ngModel)]="usuario.id_tipo_documento.id_tipo_documento"
+              required
+            >
+              <option value="" selected disabled>
+                Seleccione un tipo de documento
+              </option>
+              <option value="1">DNI</option>
+              <option value="2">CUIL</option>
+            </select>
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['tipoDocumento'].invalid &&
+                crearUsuarioForm.controls['tipoDocumento'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['tipoDocumento'].errors?.['required']"
+                class="error"
+              >
+                El tipo de documento es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="tipoCargo">Tipo de Cargo:</label>
+            <select
+              class="form-control"
+              id="tipoCargo"
+              name="tipoCargo"
+              [(ngModel)]="usuario.id_cargo.id_cargo"
+              required
+            >
+              <option value="" selected disabled>
+                Seleccione un tipo de cargo
+              </option>
+              <option *ngFor="let cargo of listaCargos" [value]="cargo.id_cargo">
+                {{ cargo.descripcion }}
+              </option>
+            </select>
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['tipoCargo'].invalid &&
+                crearUsuarioForm.controls['tipoCargo'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['tipoCargo'].errors?.['required']"
+                class="error"
+              >
+                El tipo de cargo es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Segunda columna -->
+        <div class="col-md-6">
+          <div class="form-group mt-3">
+            <label for="apellido">Apellido:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="apellido"
+              placeholder="Apellido del Usuario"
+              name="apellido"
+              [(ngModel)]="usuario.apellido"
+              required
+            />
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['apellido'].invalid &&
+                crearUsuarioForm.controls['apellido'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['apellido'].errors?.['required']"
+                class="error"
+              >
+                El apellido es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="telefono">Teléfono:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="telefono"
+              placeholder="Teléfono del Usuario"
+              name="telefono"
+              [(ngModel)]="usuario.telefono"
+              required
+            />
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['telefono'].invalid &&
+                crearUsuarioForm.controls['telefono'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['telefono'].errors?.['required']"
+                class="error"
+              >
+                El teléfono es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="password">Contraseña:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Contraseña del Usuario"
+              name="password"
+              [(ngModel)]="usuario.password"
+              required
+              minlength="6"
+            />
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['password'].invalid &&
+                crearUsuarioForm.controls['password'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['password'].errors?.['required']"
+                class="error"
+              >
+                La contraseña es requerida.
+              </div>
+  
+              <div
+                *ngIf="crearUsuarioForm.controls['password'].errors?.['minlength']"
+                class="error"
+              >
+                La contraseña debe tener al menos 6 caracteres.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="numeroDocumento">Número de Documento:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numeroDocumento"
+              placeholder="Número de Documento"
+              name="numeroDocumento"
+              [(ngModel)]="usuario.numero_documento"
+              required
+            />
+  
+            <div
+              *ngIf="
+                crearUsuarioForm.controls['numeroDocumento'].invalid &&
+                crearUsuarioForm.controls['numeroDocumento'].touched
+              "
+            >
+              <div
+                *ngIf="crearUsuarioForm.controls['numeroDocumento'].errors?.['required']"
+                class="error"
+              >
+                El número de documento es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success mt-3"
+        (click)="crearUsuario()"
+        [disabled]="crearUsuarioForm.invalid"
+      >
+        Guardar Usuario
+      </button>
+    </form>
+  </div>
+  

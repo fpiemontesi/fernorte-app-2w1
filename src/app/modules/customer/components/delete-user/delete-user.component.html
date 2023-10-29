@@ -1,0 +1,27 @@
+<div class="container big-cart">
+    <h3>Baja de Usuario</h3>
+  
+    <div class="row mb-3 d-flex align-items-end">
+      <div class="col-md-6">
+        <label for="numeroDocumento" class="text-nowrap"
+          >Dar de baja usuario por número de documento:</label
+        >
+        <input
+          type="number"
+          class="form-control mt-1"
+          id="numeroDocumento"
+          [(ngModel)]="numeroDoc"
+        />
+      </div>
+  
+      <div class="col-md-6">
+        <button
+          class="btn btn-danger d-block"
+          (click)="borrarUsuario()"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  
+  </div>
