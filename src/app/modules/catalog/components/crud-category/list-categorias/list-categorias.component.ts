@@ -1,19 +1,20 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Categoria} from '../../../models/categoria';
-import {CategoriaService} from '../../../services/categoryService/categoria.service';
-import {Subscription} from 'rxjs';
-import {BsModalRef} from 'ngx-bootstrap/modal';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Categoria } from '../../../models/categoria';
+import { CategoriaService } from '../../../services/categoryService/categoria.service';
+import { Subscription } from 'rxjs';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'fn-list-categorias',
   templateUrl: './list-categorias.component.html',
   styleUrls: ['./list-categorias.component.css']
 })
-export class ListCategoriasComponent implements OnInit,OnDestroy{
+export class ListCategoriasComponent implements OnInit, OnDestroy {
 
   lista: Categoria[] = [];
   private subscription = new Subscription();
-  private modalRef: BsModalRef = new BsModalRef();
+  alert: boolean = false;
+  codigoCategoria = "";
 
   constructor(private categoriaService: CategoriaService) {
   }
@@ -35,23 +36,20 @@ export class ListCategoriasComponent implements OnInit,OnDestroy{
     this.subscription.unsubscribe();
   }
 
-
-  eliminarCategoria(id: string) {
-    const confirmed = confirm("¿Desea eliminar la categoría?")
-    if (confirmed) {
-      this.subscription.add(
-        this.categoriaService.delete(id).subscribe({
-          next: (categoria: Categoria) => {
-            alert("Categoría eliminada exitosamente.")
-            this.loadCategorias()
-          },
-          error: () => {
-            alert("Error al intentar eliminar categoría.")
-          }
-        })
-      )
-    }
+  eliminarCategoria() {
+    this.subscription.add(
+      this.categoriaService.delete(this.codigoCategoria).subscribe({
+        next: async (categoria: Categoria) => {
+          await this.toggleAlert();
+          this.loadCategorias()
+        },
+        error: () => {
+          alert("Error al intentar eliminar categoría.")
+        }
+      })
+    )
   }
+
   private loadCategorias() {
     this.subscription.add(
       this.categoriaService.get().subscribe({
@@ -65,4 +63,22 @@ export class ListCategoriasComponent implements OnInit,OnDestroy{
     )
   }
 
+  toggleAlert(): Promise<void> {
+    this.alert = !this.alert;
+
+    if (this.alert) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.alert = false;
+          resolve();
+        }, 3000);
+      });
+    } else {
+      return Promise.resolve();
+    }
+  }
+
+  guardarCodigo(codigo:string){
+    this.codigoCategoria = codigo;
+  }
 }

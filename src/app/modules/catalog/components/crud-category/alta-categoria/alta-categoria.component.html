@@ -1,4 +1,9 @@
 <div class="container mt-4">
+
+    <ng-container *ngIf="alert">
+        <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
+      </ng-container>
+
     <h2 class="mb-3">Alta de Categoría</h2>
     <div class="col-md-6">
         <form>
@@ -18,7 +23,7 @@
                     <small class="form-text text-danger">El nombre es obligatorio</small>
                 </div>
             </div>
-            <button (click)="agregarCategoria()" class="btn btn-primary m-1" [disabled]="nombre.invalid">Crear</button>
+            <button type="submit" (click)="agregarCategoria()" class="btn btn-primary m-1" [disabled]="nombre.invalid">Crear</button>
             <button routerLink="/listCategories" class="btn btn-danger m-1">Volver al Inicio</button>
         </form>
     </div>

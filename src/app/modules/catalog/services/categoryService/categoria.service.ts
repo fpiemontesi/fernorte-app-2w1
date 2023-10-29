@@ -24,9 +24,12 @@ export class CategoriaService {
     return this.http.post<Categoria>("http://localhost:8080/api/categories", categoria)
   }
 
-  update(id: string, categoria: Categoria): Observable<Categoria> {
+  /*update(id: string, categoria: Categoria): Observable<Categoria> {
     console.log('ID update(): '+id)
     return this.http.put<Categoria>('http://localhost:8080/api/categories/'+id, categoria)
+  }*/
+  update(categoria: Categoria): Observable<Categoria> {
+    return this.http.put<Categoria>('http://localhost:8080/api/categories/'+categoria.codigo, categoria)
   }
 
   delete(id: string): Observable<Categoria> {

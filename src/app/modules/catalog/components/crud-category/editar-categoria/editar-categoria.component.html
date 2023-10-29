@@ -1,14 +1,12 @@
 <div class="container mt-4">
-    <h2 class="mb-3">Modificar Categoría</h2>
-    <form #formulario="ngForm">
-        <div class="form-group mb-3">
-            <!-- <label for="codigo" class="my-2">Código</label>
-            <input type="text" class="form-control" id="txtCodigo" name="codigo" placeholder="Ingresar código"
-                [(ngModel)]="categoria.codigo" required #codigo="ngModel">
-            <div *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
-                <small class="form-text text-danger">El código es obligatorio</small>
-            </div> -->
 
+    <ng-container *ngIf="alert">
+        <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
+    </ng-container>
+
+    <h2 class="mb-3">Modificar Categoría</h2>
+    <form #formulario="ngForm" (ngSubmit)="editarCategoria()">
+        <div class="form-group mb-3">
             <label for="txtNombre" class="my-2">Nombre</label>
             <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre"
                 [(ngModel)]="categoria.nombre" required #nombre="ngModel">
@@ -16,8 +14,9 @@
                 <small class="form-text text-danger">El nombre es obligatorio</small>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary m-2" [disabled]="nombre.invalid"
-            (click)="editarCategoria()">Guardar Cambios</button>
+        <!-- <button type="submit" class="btn btn-primary m-2" [disabled]="nombre.invalid"
+            (click)="editarCategoria()">Guardar Cambios</button> -->
+        <button type="submit" class="btn btn-primary m-2 p-2">Guardar Cambios</button>
         <button type="button" routerLink="/listCategories" class="btn btn-danger m-2">Volver al Inicio</button>
     </form>
 </div>

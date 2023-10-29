@@ -1,4 +1,10 @@
 <div class="container">
+    <fn-modal mensaje="¿Realmente desea eliminar la categoría?" option1="Eliminar" option2="Cancelar"
+        (evento)="eliminarCategoria()" title="Eliminar Categoría"></fn-modal>
+    <ng-container *ngIf="alert">
+        <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
+    </ng-container>
+
     <button routerLink="registerCategory" class="btn btn-success float-end mt-2">Registrar Categoría</button>
     <h2 class="my-2 py-2">Listado de Categorías</h2>
     <div class="table-responsive">
@@ -15,8 +21,11 @@
                 <tr *ngFor="let c of lista">
                     <td>{{c.codigo}}</td>
                     <td>{{c.nombre}}</td>
-                    <td><button routerLink="updateCategory" [queryParams]={codigo:[c.codigo]} class="btn btn-primary">Modificar</button></td>
-                    <td><button (click)="eliminarCategoria(c.codigo)" class="btn btn-danger">Eliminar</button></td>
+                    <td><button routerLink="updateCategory" [queryParams]={codigo:[c.codigo]}
+                            class="btn btn-primary">Modificar</button></td>
+                    <!-- <td><button (click)="eliminarCategoria(c.codigo)" class="btn btn-danger">Eliminar</button></td> -->
+                    <td><button (click)="guardarCodigo(c.codigo)" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Eliminar</button></td>
                 </tr>
             </tbody>
         </table>

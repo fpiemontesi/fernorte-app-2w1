@@ -11,8 +11,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class EditarCategoriaComponent implements OnInit, OnDestroy{
 
-  codeCategorySelected:string = "";
   categoria: Categoria = {} as Categoria;
+  codeCategorySelected:string = "";
+  alert:boolean = false
   private subscription = new Subscription();
 
   constructor(private categoriaService: CategoriaService, private activatedRoute: ActivatedRoute, private router:Router) {
@@ -37,7 +38,7 @@ export class EditarCategoriaComponent implements OnInit, OnDestroy{
     this.subscription.unsubscribe();
   }
 
-  editarCategoria() {
+  /*editarCategoria() {
     this.subscription.add(
       this.categoriaService.update(this.codeCategorySelected, this.categoria).subscribe({
         next: (categoria: Categoria) => {
@@ -50,6 +51,36 @@ export class EditarCategoriaComponent implements OnInit, OnDestroy{
         }
       })
     )
+  }*/
+
+  editarCategoria() {
+    this.subscription.add(
+      this.categoriaService.update(this.categoria).subscribe({
+        next: async (categoria: Categoria) => {
+          await this.toggleAlert()
+          this.categoria = {} as Categoria
+          this.router.navigate(["/listCategories"])
+        },
+        error: () => {
+          alert("Error al intentar actualizar categoría.")
+        }
+      })
+    )
+  }
+
+  toggleAlert(): Promise<void> {
+    this.alert = !this.alert;
+
+    if (this.alert) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.alert = false;
+          resolve();
+        }, 3000);
+      });
+    } else {
+      return Promise.resolve();
+    }
   }
 
 }
