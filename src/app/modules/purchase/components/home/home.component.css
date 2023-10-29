@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.menu {
+    width: 200px; /* Ancho del menú vertical */
+    background-color: #333; /* Color de fondo del menú */
+    height: 100%; /* Tamaño del menú vertical, puedes ajustarlo según tus necesidades */
+    position: fixed; /* Fija el menú en la posición */
+}
+
+.menu ul {
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+}
+
+.menu ul li {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #fff; /* Color del texto del menú */
+    display: block;
+}
+
+.menu ul li a:hover {
+    background-color: #555; /* Color de fondo cuando el mouse pasa sobre el enlace */
+}
