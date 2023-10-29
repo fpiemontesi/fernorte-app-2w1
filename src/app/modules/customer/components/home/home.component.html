@@ -1,1 +1,2 @@
-<p>home clients works!</p>
+<fn-login (loginSuccess)="onLoginSuccess()" *ngIf="showLoginForm && !isLogged"></fn-login>
+<fn-logout *ngIf="isLogged"></fn-logout>

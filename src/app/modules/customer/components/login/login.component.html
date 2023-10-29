@@ -1,0 +1,299 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="col-md-6 big-cart" *ngIf="mostrarLogin">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <form #loginUsuarioForm="ngForm">
+              <div class="form-group mt-3">
+                <label for="usuario">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="username"
+                  placeholder="Ingrese su email"
+                  name="username"
+                  [(ngModel)]="credentials.username"
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                />
+  
+                <div
+                  *ngIf="
+                    loginUsuarioForm.controls['username'].invalid &&
+                    loginUsuarioForm.controls['username'].touched
+                  "
+                >
+                  <div
+                    *ngIf="loginUsuarioForm.controls['username'].errors?.['required']"
+                    class="error"
+                  >
+                    El email es requerido.
+                  </div>
+  
+                  <div
+                    *ngIf="loginUsuarioForm.controls['username'].errors?.['pattern']"
+                    class="error"
+                  >
+                    El formato del email es incorrecto.
+                  </div>
+                </div>
+              </div>
+  
+              <div class="form-group mt-3">
+                <label for="password">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Ingrese su contraseña"
+                  name="password"
+                  [(ngModel)]="credentials.password"
+                  required
+                />
+  
+                <div
+                  *ngIf="
+                    loginUsuarioForm.controls['password'].invalid &&
+                    loginUsuarioForm.controls['password'].touched
+                  "
+                >
+                  <div
+                    *ngIf="loginUsuarioForm.controls['password'].errors?.['required']"
+                    class="error"
+                  >
+                    La contraseña es requerida.
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary mt-3"
+                [disabled]="loginUsuarioForm.invalid"
+                (click)="login()"
+              >
+                Iniciar Sesión
+              </button>
+            </form>
+          </div>
+          <div class="card-footer">
+            <p class="text-center">
+              <a href="#" (click)="recuperarContrasena()"
+                >¿Has olvidado la contraseña?</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 big-cart" *ngIf="mostrarRecuperarContrasena">
+      <div class="col">
+        <div class="card">
+          <div class="card-header"><b>Recupera tu cuenta</b></div>
+          <div class="card-body">
+            <form #resetPasswordUsuarioForm="ngForm">
+              <div class="form-group mt-3">
+                <label for="email"
+                  >Introduce tu email para buscar tu cuenta y verificar tu
+                  identidad.</label
+                >
+                <input
+                  type="email"
+                  class="form-control mt-1"
+                  id="email"
+                  placeholder="Ingrese su email"
+                  name="email"
+                  [(ngModel)]="bodyEmail.email"
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                />
+  
+                <div
+                  *ngIf="
+                    resetPasswordUsuarioForm.controls['email'].invalid &&
+                    resetPasswordUsuarioForm.controls['email'].touched
+                  "
+                >
+                  <div
+                    *ngIf="resetPasswordUsuarioForm.controls['email'].errors?.['required']"
+                    class="error"
+                  >
+                    El email es requerido.
+                  </div>
+  
+                  <div
+                    *ngIf="resetPasswordUsuarioForm.controls['email'].errors?.['pattern']"
+                    class="error"
+                  >
+                    El formato del email es incorrecto.
+                  </div>
+                </div>
+              </div>
+              <button
+                style="margin-right: 5px"
+                type="submit"
+                class="btn btn-secondary mt-3"
+                (click)="cancelarRecuperarContrasena()"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary mt-3"
+                (click)="enviarMailParaRecuperar()"
+                [disabled]="resetPasswordUsuarioForm.invalid"
+              >
+                Buscar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 big-cart" *ngIf="mostrarIngresarCodigo">
+      <div class="col">
+        <div class="card">
+          <div class="card-header"><b>Introduce el código de seguridad</b></div>
+          <div class="card-body">
+            <form #verifyUsuarioForm="ngForm">
+              <div class="form-group mt-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="emailVerificar"
+                  placeholder="Ingrese el email a verificar"
+                  name="emailVerificar"
+                  [(ngModel)]="verification.email"
+                  required
+                  hidden
+                />
+  
+                <label for="codigo"
+                  >Comprueba si has recibido un mensaje con tu código de 6 dígitos
+                  en tu email.</label
+                >
+                <input
+                  type="text"
+                  class="form-control mt-1"
+                  id="codigo"
+                  placeholder="Ingrese el codigo"
+                  name="codigo"
+                  [(ngModel)]="verification.verificationCode"
+                  required
+                />
+  
+                <div
+                  *ngIf="
+                    verifyUsuarioForm.controls['codigo'].invalid &&
+                    verifyUsuarioForm.controls['codigo'].touched
+                  "
+                >
+                  <div
+                    *ngIf="verifyUsuarioForm.controls['codigo'].errors?.['required']"
+                    class="error"
+                  >
+                    El codigo es requerido.
+                  </div>
+                </div>
+              </div>
+              <button
+                style="margin-right: 5px"
+                type="submit"
+                class="btn btn-secondary mt-3"
+                (click)="cancelarIngresarCodigo()"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary mt-3"
+                (click)="verificarUsuario()"
+                [disabled]="verifyUsuarioForm.invalid"
+              >
+                Continuar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 big-cart" *ngIf="mostrarCambiarContrasena">
+      <div class="col">
+        <div class="card">
+          <div class="card-header"><b>Elige una contraseña nueva</b></div>
+          <div class="card-body">
+            <form #changePasswordUsuarioForm="ngForm">
+              <div class="form-group mt-3">
+                <label for="usuario"
+                  >Crea una contraseña nueva de seis caracteres como
+                  mínimo.</label
+                >
+  
+                <input
+                  type="text"
+                  class="form-control"
+                  id="token"
+                  name="token"
+                  [(ngModel)]="password.token"
+                  required
+                  hidden
+                />
+  
+                <input
+                  type="password"
+                  class="form-control mt-1"
+                  id="contrasenaNueva"
+                  placeholder="Contraseña nueva"
+                  name="contrasenaNueva"
+                  [(ngModel)]="password.newPassword"
+                  required
+                  minlength="6"
+                />
+  
+                <div
+                  *ngIf="
+                    changePasswordUsuarioForm.controls['contrasenaNueva']
+                      .invalid &&
+                    changePasswordUsuarioForm.controls['contrasenaNueva'].touched
+                  "
+                >
+                  <div
+                    *ngIf="changePasswordUsuarioForm.controls['contrasenaNueva'].errors?.['required']"
+                    class="error"
+                  >
+                    La contraseña es requerida.
+                  </div>
+  
+                  <div
+                    *ngIf="changePasswordUsuarioForm.controls['contrasenaNueva'].errors?.['minlength']"
+                    class="error"
+                  >
+                    La contraseña debe tener al menos 6 caracteres.
+                  </div>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-secondary mt-3"
+                style="margin-right: 5px"
+                (click)="cancelarCambiarContrasena()"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary mt-3"
+                (click)="cambiarContrasenaUsuario()"
+                [disabled]="changePasswordUsuarioForm.invalid"
+              >
+                Guardar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

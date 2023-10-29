@@ -1,0 +1,204 @@
+<div class="container big-cart">
+    <h3>Crear Cliente</h3>
+    <form #crearClienteForm="ngForm">
+      <div class="row">
+        <!-- Primera columna -->
+        <div class="col-md-6">
+          <div class="form-group mt-3">
+            <label for="nombre">Nombre:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="Nombre del Cliente"
+              name="nombre"
+              [(ngModel)]="cliente.nombre"
+              required
+            />
+  
+            <div *ngIf="crearClienteForm.controls['nombre'].invalid && crearClienteForm.controls['nombre'].touched">
+              <div *ngIf="crearClienteForm.controls['nombre'].errors?.['required']" class="error">El nombre es requerido.
+              </div>
+            </div>
+            
+  
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email del Cliente"
+              name="email"
+              [(ngModel)]="cliente.email"
+              required
+            />
+            <div *ngIf="crearClienteForm.controls['email'].invalid && crearClienteForm.controls['email'].touched">
+              <div *ngIf="crearClienteForm.controls['email'].errors?.['required']" class="error">El email es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="tipoDocumento">Tipo de Documento:</label>
+            <select
+              class="form-control"
+              id="tipoDocumento"
+              name="tipoDocumento"
+              [(ngModel)]="cliente.id_tipo_doc.id_tipo_doc"
+              required
+            >
+              <option value="" selected disabled>
+                Seleccione un tipo de documento
+              </option>
+              <option value="1">DNI</option>
+              <option value="2">CUIL</option>
+              <option value="3">CUIT</option>
+            </select>
+  
+            <div *ngIf="crearClienteForm.controls['tipoDocumento'].invalid && crearClienteForm.controls['tipoDocumento'].touched">
+              <div *ngIf="crearClienteForm.controls['tipoDocumento'].errors?.['required']" class="error">El tipo de documento es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="categoriaFiscal">Categoría Fiscal:</label>
+            <select
+              class="form-control"
+              id="categoriaFiscal"
+              name="categoriaFiscal"
+              [(ngModel)]="cliente.id_categoria_fiscal.id_categoria"
+              required
+            >
+              <option value="" selected disabled>
+                Seleccione una categoría fiscal
+              </option>
+              <option value="1">Monotributista</option>
+              <option value="2">Responsable Incripto</option>
+            </select>
+  
+            <div *ngIf="crearClienteForm.controls['categoriaFiscal'].invalid && crearClienteForm.controls['categoriaFiscal'].touched">
+              <div *ngIf="crearClienteForm.controls['categoriaFiscal'].errors?.['required']" class="error">La categoria fiscal es requerida.
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Segunda columna -->
+        <div class="col-md-6">
+          <div class="form-group mt-3">
+            <label for="apellido">Apellido:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="apellido"
+              placeholder="Apellido del Cliente"
+              name="apellido"
+              [(ngModel)]="cliente.apellido"
+              required
+            />
+  
+            <div *ngIf="crearClienteForm.controls['apellido'].invalid && crearClienteForm.controls['apellido'].touched">
+              <div *ngIf="crearClienteForm.controls['apellido'].errors?.['required']" class="error">El apellido es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="telefono">Teléfono:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="telefono"
+              placeholder="Teléfono del Cliente"
+              name="telefono"
+              [(ngModel)]="cliente.telefono"
+              required
+            />
+  
+            <div *ngIf="crearClienteForm.controls['telefono'].invalid && crearClienteForm.controls['telefono'].touched">
+              <div *ngIf="crearClienteForm.controls['telefono'].errors?.['required']" class="error">El teléfono es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="numeroDocumento">Número de Documento:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numeroDocumento"
+              placeholder="Número de Documento"
+              name="numeroDocumento"
+              [(ngModel)]="cliente.nro_doc"
+              required
+            />
+  
+            <div *ngIf="crearClienteForm.controls['numeroDocumento'].invalid && crearClienteForm.controls['numeroDocumento'].touched">
+              <div *ngIf="crearClienteForm.controls['numeroDocumento'].errors?.['required']" class="error">El número de documento es requerido.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3" *ngIf="cliente.id_categoria_fiscal.id_categoria == 1">
+            <label for="clasificacion">Categoría Monotributista:</label>
+            <select
+              class="form-control"
+              id="clasificacion"
+              name="clasificacion"
+              [(ngModel)]="cliente.id_clasificacion.id_clasificacion"
+              required
+            >
+              <option value="" selected disabled>
+                Seleccione una categoría monotributista:
+              </option>
+              <option value="1">A</option>
+              <option value="2">B</option>
+              <option value="3">C</option>
+              <option value="4">D</option>
+              <option value="5">E</option>
+              <option value="6">F</option>
+              <option value="7">G</option>
+              <option value="8">H</option>
+              <option value="9">I</option>
+              <option value="10">J</option>
+              <option value="11">K</option>
+            </select>
+  
+            <div *ngIf="crearClienteForm.controls['clasificacion'].invalid && crearClienteForm.controls['clasificacion'].touched">
+              <div *ngIf="crearClienteForm.controls['clasificacion'].errors?.['required']" class="error">La categoría monotributista es requerida.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group mt-3">
+            <label for="tipoCliente">Tipo de Cliente:</label>
+            <select
+              class="form-control"
+              id="tipoCliente"
+              name="tipoCliente"
+              [(ngModel)]="cliente.id_tipo_cliente.id_tipo_cliente"
+              required
+            >
+              <option value="" selected disabled>
+                Seleccione un tipo de cliente
+              </option>
+              <option value="1">Persona</option>
+              <option value="2">Empresa</option>
+            </select>
+  
+            <div *ngIf="crearClienteForm.controls['tipoCliente'].invalid && crearClienteForm.controls['tipoCliente'].touched">
+              <div *ngIf="crearClienteForm.controls['tipoCliente'].errors?.['required']" class="error">El tipo de cliente es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success mt-3" (click)="crearCliente()" [disabled]="crearClienteForm.invalid">
+        Guardar Cliente
+      </button>
+    </form>
+  </div>
