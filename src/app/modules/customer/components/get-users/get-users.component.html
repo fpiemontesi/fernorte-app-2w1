@@ -1,0 +1,74 @@
+<div class="container big-cart">
+    <h3>Listado de Usarios por cargo</h3>
+  
+    <!-- Filtros de Búsqueda -->
+    <div class="row mb-3">
+      <div class="col-md-3">
+        <label for="filtroCargo" class="text-nowrap">Filtrar por cargo:</label>
+  
+        <select
+          class="form-control mt-1"
+          id="cargo"
+          name="cargo"
+          [(ngModel)]="cargoElegido"
+          required
+        >
+          <option value="" selected disabled>Seleccione un cargo</option>
+          <option *ngFor="let cargo of listaCargos" [value]="cargo.descripcion">
+            {{ cargo.descripcion }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label>&nbsp;</label>
+        <button
+          class="btn btn-primary form-control mt-1"
+          id="buscarUsuariosBtn"
+          (click)="filtrarUsuarios()"
+        >
+          Buscar
+        </button>
+      </div>
+      <div class="col-md-3" *ngIf="listaFiltrada">
+        <label>&nbsp;</label>
+        <button
+          class="btn btn-secondary form-control mt-1"
+          (click)="borrarFiltro()"
+        >
+          Borrar filtro
+        </button>
+      </div>
+    </div>
+  
+    <!-- Lista de Usuarios -->
+    <table class="table" *ngIf="listaFiltrada">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Username</th>
+          <th>Tipo de Documento</th>
+          <th>Número de Documento</th>
+          <th>Cargo</th>
+          <th>Activo</th>
+        </tr>
+      </thead>
+  
+      <tbody id="listaUsuarios">
+        <tr *ngFor="let usuario of usuarioArray">
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.apellido }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.telefono }}</td>
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.id_tipo_documento.descripcion }}</td>
+          <td>{{ usuario.numero_documento }}</td>
+          <td>{{ usuario.id_cargo.descripcion }}</td>
+          <td>{{ usuario.activo ? "Si" : "No" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
