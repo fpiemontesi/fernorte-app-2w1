@@ -40,3 +40,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+.vs/fernorte-app-2w1/FileContentIndex/read.lock
+.vs/fernorte-app-2w1/FileContentIndex/af365b77-3e9a-406a-9e30-3e9eb57aed99.vsidx
+*.sqlite
+*.vsidx
