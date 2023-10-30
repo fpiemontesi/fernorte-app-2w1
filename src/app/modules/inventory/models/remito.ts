@@ -1,7 +1,10 @@
+import { DetalleRemito } from "./detalle-remito";
+
 export class Remito {
-    idRemito: number=0;
-    nroRemito: number=0;
-    nroOrdenCompra: string="";
-    proveedor: string="";
-    fecha: Date = new Date();
+    id: number = 0;
+    fechaLlegada: Date = new Date;
+    nroOrdenCompra: number = 0;
+    nroRemito: number = 0;
+    nombreProveedor: string = "";
+    detalles: DetalleRemito[] = [];
 }

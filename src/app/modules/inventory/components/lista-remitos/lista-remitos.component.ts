@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Remito } from '../../models/remito';
 import { RemitoServService } from '../../services/remito.service';
 import { Subscription } from 'rxjs';
+import { DetalleRemito } from '../../models/detalle-remito';
 
 @Component({
   selector: 'fn-lista-remitos',
@@ -14,18 +15,20 @@ export class ListaRemitosComponent implements OnInit{
   remitos:Remito[]=[
     //ejemplos de prueba
     {
-      idRemito:20,
+      id:20,
       nroRemito: 1,
-      nroOrdenCompra: '12',
-      proveedor: 'Proveedor Pepe',
-      fecha: new Date('2023-10-18')
+      nroOrdenCompra: 12,
+      nombreProveedor: 'Proveedor Pepe',
+      fechaLlegada: new Date('2023-10-18'),
+      detalles: []
     },
     {
-      idRemito:21,
+      id:21,
       nroRemito: 2,
-      nroOrdenCompra: '143',
-      proveedor: 'Proveedor Raquel',
-      fecha: new Date('2023-06-24')
+      nroOrdenCompra: 143,
+      nombreProveedor: 'Proveedor Raquel',
+      fechaLlegada: new Date('2023-06-24'),
+      detalles: []
     },
   ]
 
@@ -47,12 +50,16 @@ export class ListaRemitosComponent implements OnInit{
 
   onModificar(id:number){}
 
-  filtrar() { //gracias GPT por aclararme muchas cosas sobre formato fechas y stings ...
+  filtrar() { //gracias GPT por aclararme muchas cosas sobre formato fechas y stings .
+    if (!this.fechaInicio && !this.fechaFin) {
+      this.remitosFiltrados = this.remitos;
+      return;
+    }
     const normalizedFechaInicio = new Date(this.fechaInicio);
     const normalizedFechaFin = new Date(this.fechaFin);
 
     this.remitosFiltrados = this.remitos.filter(remito => {
-        const fechaRemito = remito.fecha;
+        const fechaRemito = remito.fechaLlegada;
         
         return fechaRemito >= normalizedFechaInicio && fechaRemito <= normalizedFechaFin;
     });
@@ -67,16 +74,5 @@ export class ListaRemitosComponent implements OnInit{
       })
     )
   }
-
-
-  // filtrar() {
-  //   console.log("Fecha inicio:", this.fechaInicio);
-  //   console.log("Fecha fin:", this.fechaFin);
-  //   this.remitosFiltrados = this.remitos.filter(remito => {
-  //     let fechaRemito = new Date(remito.fecha);
-  //     return fechaRemito >= this.fechaInicio && fechaRemito <= this.fechaFin;
-  //   });
-  // }
-
 
 }

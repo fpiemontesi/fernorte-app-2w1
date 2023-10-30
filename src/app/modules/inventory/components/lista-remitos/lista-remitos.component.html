@@ -43,9 +43,9 @@
         <tr *ngFor="let r of remitosFiltrados" >
             <td>{{r.nroRemito}}</td>
             <td>{{r.nroOrdenCompra}}</td>
-            <td>{{r.proveedor}}</td>
-            <td>{{r.fecha | date:'dd/MM/yyyy' }}</td>
-            <td><button class="btn btn-primary" (click)="onModificar(r.idRemito)">Modificar</button></td>
+            <td>{{r.nombreProveedor}}</td>
+            <td>{{r.fechaLlegada | date:'dd/MM/yyyy' }}</td>
+            <td><button class="btn btn-primary" (click)="onModificar(r.id)">Modificar</button></td>
         </tr>
         </tbody>
     </table>
