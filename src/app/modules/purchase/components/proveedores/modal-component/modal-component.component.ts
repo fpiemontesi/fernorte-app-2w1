@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Proveedor } from '../../models/Proveedor';
+import { Proveedor } from '../../../models/Proveedor';
+
 
 @Component({
   selector: 'fn-modal-component',
