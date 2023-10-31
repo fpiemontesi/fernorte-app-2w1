@@ -3,6 +3,7 @@ import { Ventas } from '../../models/Ventas';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { VentasService } from '../../services/ventas.service';
 
 @Component({
   selector: 'fn-consultar-venta',
@@ -21,7 +22,7 @@ export class ConsultarVentaComponent {
   venta: Ventas;
   mostrarModificar: boolean = false;
 
-  constructor(private http : HttpClient, private router: Router) {
+  constructor(private http : HttpClient, private router: Router, private service : VentasService) {
     this.venta= {} as Ventas;
   } 
     
@@ -136,6 +137,7 @@ export class ConsultarVentaComponent {
     
   }
   modificarVenta(id:number){
+    this.service.guardarId(id);
     this.router.navigate(['modificar-venta']);
     console.log("id de la venta");
   }

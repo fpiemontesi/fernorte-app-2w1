@@ -101,7 +101,7 @@
             </button>
           </td>
           <td>
-            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="modificarVenta(venta)">
+            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="modificarVenta(venta.id)">
               <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
             </button>
           </td>
@@ -147,7 +147,4 @@
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="mostrarModificar">
-<router-outlet></router-outlet>
 </div>

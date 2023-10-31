@@ -8,11 +8,12 @@ import { Ventas } from '../models/Ventas';
   providedIn: 'root'
 })
 export class VentasService {
-
-  constructor(private http : HttpClient) { }
+  idVenta!: number;
+  constructor(private http : HttpClient) { 
+ }
 
   private apiUrl = 'http://localhost:3000/ventas';
-
+  private urlId = 'http://localhost:8080/ventas/'
   
   // getVentas(): Observable<Ventas[]>{
   //  const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
@@ -24,9 +25,17 @@ export class VentasService {
     return this.http.get(url);
   }
     
-  
+
+  guardarId(id: number) {
+    this.idVenta = id;
+  }
+
+  obtenerId(): number {
+    return this.idVenta;
+  }
+
   getVentaById(ventaId: number) {
-    return this.http.get(`${this.apiUrl}/ventas/byId/${ventaId}`);
+    return this.http.get(`${this.apiUrl}${ventaId}`);
   }
 
   realizarSolicitudPostVenta(formData: any, productosVenta: any): Observable<any> {

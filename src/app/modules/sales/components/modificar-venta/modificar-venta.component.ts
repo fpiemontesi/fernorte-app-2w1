@@ -22,7 +22,9 @@ export class ModificarVentaComponent implements OnInit{
   action!: string; 
 
 
-  constructor(private service: VentasService, private route: ActivatedRoute){}
+  constructor(private service: VentasService, private route: ActivatedRoute){
+    this.ventaId= this.service.obtenerId();
+  }
     
   listarClientes(){
     this.service.getClientes().subscribe(data => {

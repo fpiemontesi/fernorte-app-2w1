@@ -3,30 +3,24 @@
         <div class="col-md-3 pt-5 col-lg-2 me-auto bg-dark">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link estilo" href="#" (click)="MenuVenta()"> Venta</a>
+                    <a class="nav-link estilo" href="#" (click)="MenuVenta($event)"> Venta</a>
                 </li>
                 <li class="nav-item" *ngIf="mostrarVenta">
-                    <button class="btn text-white m-1" (click)="MostrarComponente('altaPresupuesto')">Alta Venta</button>
-                </li>
-                <li class="nav-item" *ngIf="mostrarVenta">
-                    <button class="btn text-white m-1" (click)="MostrarComponente('consultarVenta')">Consultar Venta</button>
+                    <button class="btn text-white m-1" routerLink="consultar-venta">Consultar Venta</button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link estilo" href="#" (click)="MenuPresupuesto()"> Presupuesto</a>
+                    <a class="nav-link estilo" href="#" (click)="MenuPresupuesto($event)"> Presupuesto</a>
                 </li>
                 <li class="nav-item" *ngIf="mostrarPresupuesto">
-                    <button class="btn text-white m-1" (click)="MostrarComponente('altaPresupuesto')">Alta Presupuesto</button>
+                    <button class="btn text-white m-1" routerLink="alta-presupuesto">Alta Presupuesto</button>
                 </li>
                 <li class="nav-item" *ngIf="mostrarPresupuesto">
-                    <button class="btn text-white m-1" (click)="MostrarComponente('consultarPresupuesto')">Consultar Presupuesto</button>
+                    <button class="btn text-white m-1" routerLink="consultar-presupuesto">Consultar Presupuesto</button>
                 </li>
             </ul>
         </div>
         <div class="col-md-9 col-lg-10 fondo-formulario">
-            <fn-alta-venta *ngIf="mostrarAltaVenta"></fn-alta-venta>
-            <fn-consultar-presupuesto *ngIf="mostrarConsultaPresupuesto"></fn-consultar-presupuesto>
-            <fn-consultar-venta *ngIf="mostrarConsultaVenta"></fn-consultar-venta>
-            <fn-alta-presupuesto *ngIf="mostrarAltaPresupuesto"></fn-alta-presupuesto>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

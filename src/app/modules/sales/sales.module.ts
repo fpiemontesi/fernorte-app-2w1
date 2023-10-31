@@ -23,7 +23,16 @@ const routes: Routes = [
   {
     path: 'modificar-venta',
     component: ModificarVentaComponent
+  },
+  {
+    path: 'consultar-presupuesto',
+    component: ConsultarPresupuestoComponent
+  },
+  {
+    path: 'alta-presupuesto',
+    component: AltaPresupuestoComponent
   }
+
 ];
 
 @NgModule({

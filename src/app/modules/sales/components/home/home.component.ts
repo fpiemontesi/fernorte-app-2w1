@@ -14,18 +14,19 @@ export class HomeComponent {
   mostrarConsultaVenta: boolean = false;
   mostrarAltaPresupuesto:boolean = false;
 
-  MenuVenta() {
+  MenuVenta(event : Event) {
+      event.preventDefault();
       this.mostrarVenta = !this.mostrarVenta;
       this.mostrarPresupuesto = false;
   }
 
-  MenuPresupuesto() {
+  MenuPresupuesto(event:Event) {
+    event.preventDefault();
     this.mostrarPresupuesto = !this.mostrarPresupuesto;
     this.mostrarVenta = false;
   }
 
   MostrarComponente(componente:string) {
-    //this.mostrarAltaVenta = componente === 'altaVenta';
     this.mostrarConsultaPresupuesto = componente === 'consultarPresupuesto';
     this.mostrarConsultaVenta = componente === 'consultarVenta';
     this.mostrarAltaPresupuesto = componente === 'altaPresupuesto'
