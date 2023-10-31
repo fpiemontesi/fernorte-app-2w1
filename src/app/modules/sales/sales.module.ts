@@ -11,7 +11,20 @@ import { FormsModule } from '@angular/forms';
 import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
 import { DetallesProductosComponent } from './components/detalles-productos/detalles-productos.component';
 import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppRoutingModule } from 'src/app/modules/sales/app-routing.module';
+import { RouterModule, Routes } from '@angular/router';
+
+
+const routes: Routes = [
+  {
+    path: 'consultar-venta',
+    component: ConsultarVentaComponent
+  },
+  {
+    path: 'modificar-venta',
+    component: ModificarVentaComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -24,7 +37,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     ModificarVentaComponent,
   ],
   providers: [],
-  imports: [CommonModule, HttpClientModule, FormsModule, AppRoutingModule,],
-  exports: [HomeComponent],
+  imports: [CommonModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],
+  exports: [HomeComponent, RouterModule],
 })
 export class SalesModule {}

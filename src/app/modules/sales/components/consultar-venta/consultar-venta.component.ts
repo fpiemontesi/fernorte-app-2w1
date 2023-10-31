@@ -135,9 +135,9 @@ export class ConsultarVentaComponent {
   actualizarEstado(){
     
   }
-  modificarVenta(venta:any){
-    this.router.navigate(['/modificar-venta', venta.id]);
-    console.log("id de la venta", venta.id);
+  modificarVenta(id:number){
+    this.router.navigate(['modificar-venta']);
+    console.log("id de la venta");
   }
   
   verDetalle(venta: Ventas){
