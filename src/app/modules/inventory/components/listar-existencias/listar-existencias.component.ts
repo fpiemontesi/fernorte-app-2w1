@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Existencias } from '../../models/existencias';
-import { ListarExistenciasService } from '../../services/listar-existencias.service';
+import { ListarExistenciasService } from '../../services/existance.service';
 
 @Component({
   selector: 'fn-listar-existencias',
