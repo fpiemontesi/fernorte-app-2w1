@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
 import { DetallesProductosComponent } from './components/detalles-productos/detalles-productos.component';
+import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,9 +21,10 @@ import { DetallesProductosComponent } from './components/detalles-productos/deta
     ConsultarVentaComponent,
     AltaPresupuestoComponent,
     DetallesProductosComponent,
+    ModificarVentaComponent,
   ],
   providers: [],
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, AppRoutingModule,],
   exports: [HomeComponent],
 })
 export class SalesModule {}
