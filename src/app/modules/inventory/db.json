@@ -1,0 +1,76 @@
+{
+  "receipts": [
+    {
+      "id": 1,
+      "arrivalDate": "2023-10-30T08:00:00.000Z",
+      "purchaseOrderNumber": 1,
+      "receiptNumber": 1,
+      "supplierName": "Pedro",
+      "details": [
+        {
+          "id": 1,
+          "quantity": 5,
+          "productName": "Nails",
+          "detail": "Sample detail for product 1"
+        },
+        {
+          "id": 2,
+          "quantity": 10,
+          "productName": "Industrial Tape",
+          "detail": "Sample detail for product 2"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "arrivalDate": "2023-10-29T14:30:00.000Z",
+      "purchaseOrderNumber": 2,
+      "receiptNumber": 2,
+      "supplierName": "Jose Juan Carlos",
+      "details": [
+        {
+          "id": 3,
+          "quantity": 50,
+          "productName": "Screws",
+          "detail": "Description for product 3"
+        },
+        {
+          "id": 4,
+          "quantity": 100,
+          "productName": "Threaded screws",
+          "detail": "Details about product 4"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "arrivalDate": "2023-10-31T00:06:07.263Z",
+      "purchaseOrderNumber": 6,
+      "receiptNumber": 6,
+      "supplierName": "Jordan",
+      "details": [
+        {
+          "id": 0,
+          "quantity": 60,
+          "productName": "Standard Tape",
+          "detail": "Details"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "arrivalDate": "2023-10-31T00:31:17.837Z",
+      "purchaseOrderNumber": 14,
+      "receiptNumber": 14,
+      "supplierName": "Ethan",
+      "details": [
+        {
+          "id": 0,
+          "quantity": 120,
+          "productName": "Hammer",
+          "detail": "Hammer time"
+        }
+      ]
+    }
+  ]
+}

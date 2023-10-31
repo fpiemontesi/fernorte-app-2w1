@@ -1,10 +1,10 @@
-import { DetalleRemito } from "./DetalleRemito";
+import { ReceiptDetail } from "./detalle-remito";
 
-export class Remito{
+export class Receipt {
     id: number = 0;
-    fechaLlegada: Date = new Date;
-    nroOrdenCompra: number = 0;
-    nroRemito: number = 0;
-    nombreProveedor: string = "";
-    detalles: DetalleRemito[] = [];
+    arrivalDate: Date = new Date();
+    purchaseOrderNumber: number = 0;
+    receiptNumber: number = 0;
+    supplierName: string = "";
+    details: ReceiptDetail[] = [];
 }
