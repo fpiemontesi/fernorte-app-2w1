@@ -1,41 +1,42 @@
-import { Component } from '@angular/core';
-import { Lote } from '../../models/lote';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Batch } from '../../models/batch';
 import { Existence } from '../../models/existence';
 import { Section } from '../../models/section';
 import { Subscription } from 'rxjs';
 import { SectionService } from '../../services/section.service';
 import { ExistenceService } from '../../services/existence.service';
-import { LoteService } from '../../services/lote.service';
+import { BatchService } from '../../services/batch.service';
+import { AppToastService } from '../../services/app-toast.service';
 
 @Component({
   selector: 'fn-registrar-lotes',
   templateUrl: './registrar-lotes.component.html',
   styleUrls: ['./registrar-lotes.component.css']
 })
-export class RegistrarLotesComponent {
-  existenciaSelect: Existence = new Existence();
-  seccionSelect: Section = new Section();
-  inputCantidad: number = 0;
-  inputFecha!: Date;
-  inputEstante: number = 0;
+export class RegistrarLotesComponent implements OnInit, OnDestroy {
+  existenceSelect: Existence = new Existence();
+  sectionSelect: Section = new Section();
+  inputQuantity: number = 0;
+  inputDate!: Date;
+  inputShelf: number = 0;
 
-  fechaActual:Date = new Date();
+  actualDate:Date = new Date();
 
-  lote:Lote = new Lote();
-  lotes: Lote[] = [];
+  batch:Batch = new Batch();
+  batches: Batch[] = [];
   sections: Section[]= [];
   existences: Existence[]= [];
 
   private subscriptions = new Subscription();
 
-  constructor(private existenceService: ExistenceService, private sectionService: SectionService, private loteService: LoteService) {
+  constructor(private existenceService: ExistenceService, private sectionService: SectionService, private batchService: BatchService, private toastService: AppToastService) {
   }
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.loteService.getAll().subscribe({
-          next: (response: Lote[]) => {
-              return this.lotes = response;
+      this.batchService.getAll().subscribe({
+          next: (response: Batch[]) => {
+            this.batches = response;
           },
           error: (err) => {
             console.log(err);
@@ -46,7 +47,7 @@ export class RegistrarLotesComponent {
     this.subscriptions.add(
       this.existenceService.getAll().subscribe({
           next: (response: Existence[]) => {
-              return this.existences = response;
+            this.existences = response;
           },
           error: (err) => {
             console.log(err);
@@ -68,48 +69,48 @@ export class RegistrarLotesComponent {
     );
   }
 
-  crear(){
-    this.lote.due_date = this.inputFecha;
-    this.lote.id_existence = this.existenciaSelect.id;
-    this.lote.id_section = this.seccionSelect.id;
-    this.lote.quantity = this.inputCantidad;
-    this.lote.shelf = this.inputEstante;
+  create(){
+    this.batch.dueDate = this.inputDate;
+    this.batch.existenceCode = this.existenceSelect.code;
+    this.batch.sectionId = this.sectionSelect.id;
+    this.batch.quantity = this.inputQuantity;
+    this.batch.shelf = this.inputShelf;
 
-    if(this.lotes.some(lote => lote.id_section == this.lote.id_section && lote.shelf == this.lote.shelf)){
-      alert("Ya existe un lote en la misma seccion y estantería, no entra otro");
+    if(this.batches.some(batch => batch.sectionId == this.batch.sectionId && batch.shelf == this.batch.shelf)){
+      this.toastService.show("Error!", "Ya existe un lote en la misma seccion y estantería, no entra otro");
       return;
     }
 
-      this.loteService.create(this.lote).subscribe(
+      this.batchService.create(this.batch).subscribe(
         {
-          next: (response: Lote) =>{
-            alert("Lote creado!");
-            this.lotes.push(response);
+          next: (response: Batch) =>{
+            this.toastService.show("Creado!", "Lote creado!");
+            this.batches.push(response);
           },
           error: (err) => {
             console.log(err);
-            alert("Hubo un error al intentar esta operación, no se pudo crear el lote")
+            this.toastService.show("Error!", "Hubo un error al intentar esta operación, no se pudo crear el lote");
           }
         }
       );
 
-    this.inputFecha = new Date();
-    this.existenciaSelect = new Existence();
-    this.seccionSelect = new Section();
-    this.inputCantidad = 0;
-    this.inputEstante = 0;
+    this.inputDate = new Date();
+    this.existenceSelect = new Existence();
+    this.sectionSelect = new Section();
+    this.inputQuantity = 0;
+    this.inputShelf = 0;
   }
 
-  cargarCantidad(event:any){ this.inputCantidad = event.target.value; }
-  cargarFecha(event:any){ this.inputFecha = event.target.value; }
-  cargarEstante(event:any){ this.inputEstante = event.target.value; }
+  chargeQuantity(event:any){ this.inputQuantity = event.target.value; }
+  chargeDate(event:any){ this.inputDate = event.target.value; }
+  chargeShelf(event:any){ this.inputShelf = event.target.value; }
 
-  compararFechas(){
-    if (this.inputFecha) {
-      const fechaInput = new Date(this.inputFecha);
+  compareDates(){
+    if (this.inputDate) {
+      const inputDate = new Date(this.inputDate);
 
-      if (fechaInput > this.fechaActual) return false
-      else if (fechaInput < this.fechaActual) return true;
+      if (inputDate > this.actualDate) return false
+      else if (inputDate < this.actualDate) return true;
     }
 
     return true;

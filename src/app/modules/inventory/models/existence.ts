@@ -1,5 +1,5 @@
 export class Existence {
-  id: number = 0;
+  code: string = "";
   name: string = '';
-  minimun_stock:number = 0;
+  minimunStock:number = 0;
 }

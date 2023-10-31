@@ -11,6 +11,6 @@ export class SectionService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Section[]>{
-    return this.http.get<Section[]>(`http://localhost:3000/secciones`);
+    return this.http.get<Section[]>(`http://localhost:3000/sections`);
   }
 }

@@ -4,52 +4,137 @@
   </div>
 </nav>
 
-<form #formulario="ngForm"  (ngSubmit)="crear()" >
+<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>
+
+<form #myForm="ngForm" (ngSubmit)="create()">
   <div class="selects">
     <div>
       <label for="existencia-select">Producto</label>
-      <select class="form-select" id="existencia-sellect" aria-label="Default select example" name="existencia-sellect" #selectExistencia="ngModel" [(ngModel)]="existenciaSelect.id"  [class.is-valid]="selectExistencia.valid && selectExistencia.dirty" [class.is-invalid]="existenciaSelect.id == 0 && (selectExistencia.dirty || selectExistencia.touched)" required>
-        <option [ngValue]="0" [selected]="existenciaSelect.id == 0" disabled></option>
-        <ng-container *ngFor="let existencia of existences">
-          <option [ngValue]="existencia.id" [selected]="existenciaSelect.id == existencia.id">{{existencia.name}}</option>
+      <select
+        class="form-select"
+        id="existence-select"
+        aria-label="Default select example"
+        name="existence-select"
+        #selectExistence="ngModel"
+        [(ngModel)]="existenceSelect.code"
+        [class.is-valid]="selectExistence.valid && selectExistence.dirty"
+        [class.is-invalid]="
+        existenceSelect.code == '0' &&
+          (selectExistence.dirty || selectExistence.touched)
+        "
+        required
+      >
+        <option
+          [ngValue]="'0' "
+          [selected]="existenceSelect.code == '0'"
+          disabled
+        ></option>
+        <ng-container *ngFor="let existence of existences">
+          <option
+            [ngValue]="existence.code"
+            [selected]="existenceSelect.code == existence.code"
+          >
+            {{ existence.name }}
+          </option>
         </ng-container>
       </select>
     </div>
     <div class="mb-3">
-      <label for="seccion-select">Sección</label>
-      <select class="form-select" id="seccion-sellect" aria-label="Default select example"  name="seccion-select" #selectSeccion="ngModel" [(ngModel)]="seccionSelect.id"  [class.is-valid]="selectSeccion.valid && selectSeccion.dirty" [class.is-invalid]="seccionSelect.id == '' && (selectSeccion.dirty || selectSeccion.touched)" required>
-        <option [ngValue]="0" [selected]="seccionSelect.id == ''" disabled></option>
-        <ng-container *ngFor="let seccion of sections">
-          <option [ngValue]="seccion.id" [selected]="seccionSelect.id == seccion.id">{{seccion.id}}</option>
+      <label for="section-select">Sección</label>
+      <select
+        class="form-select"
+        id="section-select"
+        aria-label="Default select example"
+        name="setcion-select"
+        #selectSetcion="ngModel"
+        [(ngModel)]="sectionSelect.id"
+        [class.is-valid]="selectSetcion.valid && selectSetcion.dirty"
+        [class.is-invalid]="
+        sectionSelect.id == '' &&
+          (selectSetcion.dirty || selectSetcion.touched)
+        "
+        required
+      >
+        <option
+          [ngValue]="0"
+          [selected]="sectionSelect.id == ''"
+          disabled
+        ></option>
+        <ng-container *ngFor="let section of sections">
+          <option
+            [ngValue]="section.id"
+            [selected]="sectionSelect.id == section.id"
+          >
+            {{ section.id }}
+          </option>
         </ng-container>
       </select>
     </div>
   </div>
   <div class="inputs">
     <div class="mb-3">
-      <label for="inputCantidad" class="form-label">Cantidad</label>
-      <input type="number" class="form-control" id="inputCantidad" #controlCantidad="ngModel" [(ngModel)]="inputCantidad" (input)="cargarCantidad($event)" name="inputCantidad" required>
-      <div *ngIf="controlCantidad.dirty" style="color: red;">
-        <p *ngIf="controlCantidad.hasError('pattern')">No es el formato correcto</p>
-        <p *ngIf="inputCantidad <= 0">La cantidad no puede ser menor o igual a 0</p>
+      <label for="inputQuantity" class="form-label">Cantidad</label>
+      <input
+        type="number"
+        class="form-control"
+        id="inputQuantity"
+        #quantityControll="ngModel"
+        [(ngModel)]="inputQuantity"
+        (input)="chargeQuantity($event)"
+        name="inputQuantity"
+        required
+      />
+      <div *ngIf="quantityControll.dirty" style="color: red">
+        <p *ngIf="quantityControll.hasError('pattern')">
+          No es el formato correcto
+        </p>
+        <p *ngIf="inputQuantity <= 0">
+          La cantidad no puede ser menor o igual a 0
+        </p>
       </div>
     </div>
     <div class="mb-3">
-      <label for="inputFecha" class="form-label">Fecha de vencimiento</label>
-      <input type="date" class="form-control" id="inputFecha" #controlFecha="ngModel" [(ngModel)]="inputFecha" (input)="cargarFecha($event)" name="inputFecha" required>
-      <div *ngIf="controlFecha.dirty" style="color: red;">
-        <p *ngIf="controlFecha.hasError('pattern')">No es el formato correcto</p>
-        <p *ngIf="compararFechas()">La fecha no puede ser menor a la actual</p>
+      <label for="inputDate" class="form-label">Fecha de vencimiento</label>
+      <input
+        type="date"
+        class="form-control"
+        id="inputDate"
+        #dateControll="ngModel"
+        [(ngModel)]="inputDate"
+        (input)="chargeDate($event)"
+        name="inputDate"
+        required
+      />
+      <div *ngIf="dateControll.dirty" style="color: red">
+        <p *ngIf="dateControll.hasError('pattern')">
+          No es el formato correcto
+        </p>
+        <p *ngIf="compareDates()">La fecha no puede ser menor a la actual</p>
       </div>
     </div>
     <div class="mb-3">
-      <label for="inputEstante" class="form-label">Estante</label>
-      <input type="number" class="form-control" id="inputEstante" #controlEstante="ngModel" [(ngModel)]="inputEstante" (input)="cargarEstante($event)" name="inputEstante" required>
-      <div *ngIf="controlEstante.dirty" style="color: red;">
-        <p *ngIf="controlEstante.hasError('pattern')">No es el formato correcto</p>
-        <p *ngIf="inputEstante <= 0">La cantidad no puede ser menor o igual a 0</p>
+      <label for="inputShelf" class="form-label">Estante</label>
+      <input
+        type="number"
+        class="form-control"
+        id="inputShelf"
+        #shelfControll="ngModel"
+        [(ngModel)]="inputShelf"
+        (input)="chargeShelf($event)"
+        name="inputShelf"
+        required
+      />
+      <div *ngIf="shelfControll.dirty" style="color: red">
+        <p *ngIf="shelfControll.hasError('pattern')">
+          No es el formato correcto
+        </p>
+        <p *ngIf="inputShelf <= 0">
+          La cantidad no puede ser menor o igual a 0
+        </p>
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Guardar</button>
+  <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
+    Guardar
+  </button>
 </form>
