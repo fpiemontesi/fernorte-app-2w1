@@ -3,38 +3,75 @@
     <h1>Secciones</h1>
   </div>
 </nav>
-<div class="container d-flex justify-content-center registro">
+
+<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>
+
+<div class="container d-flex justify-content-center register">
   <div class="col-12 col-sm-11">
     <form #form="ngForm" (ngSubmit)="saveSection(form)" class="">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-5 col-md-3 order-sm-1">
           <label for="section" class="col-form-label">Sección</label>
-          <input type="text" class="form-control" id="section" name="inputSection"
-           placeholder="Nombre de la Sección" aria-label="Nombre de Seccion" #inputSection="ngModel"
-           [class.is-valid]="inputSection.valid && inputSection.dirty"
-           [class.is-invalid]="inputSection.invalid && (inputSection.dirty || inputSection.touched)"
-           [(ngModel)]="newSection.name" required maxlength="2">
-          <div class="invalid-feedback">
-            Debe ingresar un nombre.
-          </div>
+          <input
+            type="text"
+            class="form-control"
+            id="section"
+            name="input-section"
+            placeholder="Nombre de la Sección"
+            aria-label="Nombre de Seccion"
+            #inputSection="ngModel"
+            [class.is-valid]="inputSection.valid && inputSection.dirty"
+            [class.is-invalid]="
+              inputSection.invalid &&
+              (inputSection.dirty || inputSection.touched)
+            "
+            [(ngModel)]="newSection.name"
+            required
+            maxlength="2"
+          />
+          <div class="invalid-feedback">Debe ingresar un nombre.</div>
         </div>
         <div class="col-12 col-sm-7 col-md-7 order-3 order-sm-1 mt-sm-0">
-          <label for="storageZone" class="col-form-label">Zona de almacenamiento</label>
-          <select class="form-select" id="storageZone" name="selectStorageZone" aria-label="Zona almacenamiento"
-            [class.is-valid]="selectStorageZone.valid && selectStorageZone.dirty"
-            [class.is-invalid]="newSection.id_zona == 0 && (selectStorageZone.dirty || selectStorageZone.touched)"
-            #selectStorageZone="ngModel" [(ngModel)]="newSection.id_zona">
-            <option [ngValue]="0" disabled [selected]="newSection.id_zona == 0">Desplegar</option>
+          <label for="storage-zone" class="col-form-label"
+            >Zona de almacenamiento</label
+          >
+          <select
+            class="form-select"
+            id="storage-zone"
+            name="select-storage-zone"
+            aria-label="Zona almacenamiento"
+            [class.is-valid]="
+              selectStorageZone.valid && selectStorageZone.dirty
+            "
+            [class.is-invalid]="
+              newSection.zoneId == 0 &&
+              (selectStorageZone.dirty || selectStorageZone.touched)
+            "
+            #selectStorageZone="ngModel"
+            [(ngModel)]="newSection.zoneId"
+          >
+            <option [ngValue]="0" disabled [selected]="newSection.zoneId == 0">
+              Desplegar
+            </option>
             <ng-container *ngFor="let zone of storageZones">
-              <option [ngValue]="zone.id">{{zone.name}}</option>
+              <option [ngValue]="zone.id">{{ zone.name }}</option>
             </ng-container>
           </select>
           <div class="invalid-feedback">
             Debe seleccionar una zona de almacenamiento.
           </div>
         </div>
-        <div class="col-12 col-sm-12 col-md-2 order-4 order-sm-3 order-md-1 mt-3 mt-md-0">
-          <button type="submit" id="saveBtn" class="btn btn-primary align-middle" [disabled]="newSection.id_zona == 0">Guardar</button>
+        <div
+          class="col-12 col-sm-12 col-md-2 order-4 order-sm-3 order-md-1 mt-3 mt-md-0"
+        >
+          <button
+            type="submit"
+            id="save-btn"
+            class="btn btn-primary align-middle"
+            [disabled]="newSection.zoneId == 0"
+          >
+            Guardar
+          </button>
         </div>
         <div class="form-text col-12 mt-n1 order-2 order-sm-2">
           *El identificador de la sección no debe estar repetido
@@ -43,33 +80,83 @@
     </form>
   </div>
 </div>
-<div class="listado">
+<div class="list">
   <h1>Listar Secciones</h1>
   <legend>Filtros:</legend>
-  <form #formularioFiltro="ngForm" (submit)="filtrar()">
-      <div class="mb-3 filtro">
-        <label for="zoneFilter" class="form-label">Zona de Almacenamiento:</label>
-        <select id="zoneFilter" name="zoneFilter" class="form-select" #selectStorageZoneFilter="ngModel" [(ngModel)]="sectionParam.id_zona" [class.is-valid]="selectStorageZoneFilter.valid && selectStorageZoneFilter.dirty"
-        [class.is-invalid]="sectionParam.id_zona == 0 && (selectStorageZoneFilter.dirty || selectStorageZoneFilter.touched)" required>
-          <option [ngValue]="0" [selected]="sectionParam.id_zona == 0" disabled>Desplegar</option>
-          <ng-container *ngFor="let zone of storageZones">
-            <option [ngValue]="zone.id" [selected]="sectionParam.id_zona == zone.id">{{zone.name}}</option>
-          </ng-container>
-        </select>
-      </div>
+  <form #formularioFiltro="ngForm" (submit)="filter()">
+    <div class="mb-3 filter">
+      <label for="zone-filter" class="form-label">Zona de Almacenamiento:</label>
+      <select
+        id="zone-filter"
+        name="zone-filter"
+        class="form-select"
+        #selectStorageZoneFilter="ngModel"
+        [(ngModel)]="sectionParam.zoneId"
+        [class.is-valid]="
+          selectStorageZoneFilter.valid && selectStorageZoneFilter.dirty
+        "
+        [class.is-invalid]="
+          sectionParam.zoneId == 0 &&
+          (selectStorageZoneFilter.dirty || selectStorageZoneFilter.touched)
+        "
+        required
+      >
+        <option [ngValue]="0" [selected]="sectionParam.zoneId == 0" disabled>
+          Desplegar
+        </option>
+        <ng-container *ngFor="let zone of storageZones">
+          <option
+            [ngValue]="zone.id"
+            [selected]="sectionParam.zoneId == zone.id"
+          >
+            {{ zone.name }}
+          </option>
+        </ng-container>
+      </select>
+    </div>
 
-      <button type="submit" class="btn btn-primary btn-filtro" [disabled]="sectionParam.id_zona == 0">Filtrar</button>
+    <button
+      type="submit"
+      class="btn btn-primary btn-filter"
+      [disabled]="sectionParam.zoneId == 0"
+    >
+      Filtrar
+    </button>
   </form>
-  <ul class="list-group list-group-flush grilla">
-    <li class="list-group-item headers"><i><b>Sección</b></i><i><b>Zona</b></i><i><b>Accion</b></i></li>
-    <li class="list-group-item lista-zonas" *ngFor="let section of sectionsFiltered">
-      <p *ngIf="sectionParam.id_zona != 0 && sectionsFiltered.length == 0 && filtrando">No hay secciones cargadas en esta zona</p>
-      <ng-container >
-        <div class="zona-filtrada">
-          <i>{{section.name}}</i><i>{{zoneFiltered.name}}</i><i class="acciones"><button  class="btn btn-warning" (click)="editar(section.id)">Editar</button><button class="btn btn-danger" (click)="eliminar(section.id)">Eliminar</button></i>
+  <ul class="list-group list-group-flush grid">
+    <li class="list-group-item headers">
+      <i><b>Sección</b></i
+      ><i><b>Zona</b></i
+      ><i><b>Accion</b></i>
+    </li>
+    <li
+      class="list-group-item zone-list"
+      *ngFor="let section of sectionsFiltered"
+    >
+      <p
+        *ngIf="
+          sectionParam.zoneId != 0 && sectionsFiltered.length == 0 && filtering
+        "
+      >
+        No hay secciones cargadas en esta zona
+      </p>
+      <ng-container>
+        <div class="zone-filtered">
+          <i>{{ section.name }}</i
+          ><i>{{ zoneFiltered.name }}</i
+          ><i class="actions"
+            ><button class="btn btn-warning" (click)="edit(section.id)">
+              Editar</button
+            ><button class="btn btn-danger" (click)="open('focusFirst')" (click)="deleteSection(section.id)">
+              Eliminar
+            </button></i
+          >
         </div>
       </ng-container>
     </li>
-    <li class="list-group-item" *ngIf="sectionParam.id_zona != 0 && filtrando"></li>
+    <li
+      class="list-group-item"
+      *ngIf="sectionParam.zoneId != 0 && filtering"
+    ></li>
   </ul>
 </div>

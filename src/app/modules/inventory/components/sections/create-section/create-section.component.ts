@@ -1,12 +1,51 @@
-import {Component, ElementRef, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, Type} from '@angular/core';
 import {StorageZoneService} from "../../../services/storage-zone.service";
 import {StorageZone} from "../../../models/storage-zone";
 import {Subscription} from "rxjs";
 import {Section} from "../../../models/section";
 import {SectionService} from "../../../services/section.service";
 import {NgForm} from "@angular/forms";
-import { LoteService } from '../../../services/lote.service';
-import { Lote } from '../../../models/lote';
+import { BatchService } from '../../../services/batch.service';
+import { Batch } from '../../../models/batch';
+import { AppToastService } from '../../../services/app-toast.service';
+
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+	selector: 'ngbd-modal-confirm',
+	standalone: true,
+	template: `
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-title">Eliminar sección</h4>
+			<button
+				type="button"
+				class="btn-close"
+				aria-describedby="modal-title"
+				(click)="modal.dismiss('Cross click')"
+			></button>
+		</div>
+		<div class="modal-body">
+			<p>
+				<strong>¿Seguro de que quieres eliminarla?</strong>
+			</p>
+			<p>
+				Toda la información asociada a esta sección va a se eliminada.
+				<span class="text-danger">Esta operación no puede ser desecha.</span>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancelar</button>
+			<button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+		</div>
+	`,
+})
+export class NgbdModalConfirm {
+	constructor(public modal: NgbActiveModal) {}
+}
+
+const MODALS: { [name: string]: Type<any> } = {
+	focusFirst: NgbdModalConfirm,
+};
 
 @Component({
   selector: 'fn-create-section',
@@ -17,11 +56,11 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   storageZones: StorageZone[] = [];
   sections: Section[] = [];
   newSection: Section = new Section();
-  batchs: Lote[] = [];
+  batchs: Batch[] = [];
 
   sectionsFiltered: Section[] = [];
   sectionParam: Section = new Section();
-  filtrando:boolean = false;
+  filtering:boolean = false;
   zoneFiltered: StorageZone = new StorageZone();
 
   editing:Boolean = false;
@@ -29,15 +68,15 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
 
-  constructor(private loteService: LoteService, private storageService: StorageZoneService, private sectionService: SectionService) {
+  constructor(private batchService: BatchService, private storageService: StorageZoneService, private sectionService: SectionService, private toastService: AppToastService, private _modalService: NgbModal) {
   }
 
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.loteService.getAll().subscribe(
+      this.batchService.getAll().subscribe(
         {
-          next: (response: Lote[]) =>{
+          next: (response: Batch[]) =>{
             this.batchs = response;
           },
           error: (err) => {
@@ -49,7 +88,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.storageService.getAll().subscribe({
           next: (response: StorageZone[]) => {
-              return this.storageZones = response;
+              this.storageZones = response;
           },
           error: (err) => {
             console.log(err);
@@ -78,27 +117,27 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
 
   createSection(form: NgForm){
     if(form.invalid){
-      alert('Formulario invalido');
+      this.toastService.show("Error!","Formulario invalido");
       return;
     }
 
-    if(this.sections.some(section => section.name == this.newSection.name && section.id_zona ==
-      this.newSection.id_zona)){
-      alert("Ya existe una seccion con ese nombre y zona");
+    if(this.sections.some(section => section.name == this.newSection.name && section.zoneId ==
+      this.newSection.zoneId)){
+      this.toastService.show("Error!","Ya existe una seccion con ese nombre y zona");
       return;
     }
 
     this.sectionService.create(this.newSection).subscribe(
       {
         next: (response: Section) =>{
-          alert("Sección creada!");
+          this.toastService.show("Creada","Sección creada!");
           this.sections.push(response);
           this.newSection.name = "";
-          this.newSection.id_zona = 0;
-          this.filtrar();
+          this.newSection.zoneId = 0;
+          this.filter();
         },
         error: (err) => {
-          alert("Hubo un error al intentar esta operación, no se pudo crear la sección")
+          this.toastService.show("Error!","Hubo un error al intentar esta operación, no se pudo crear la sección");
         }
       }
     );
@@ -106,28 +145,28 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
 
   editSection(form: NgForm){
     if(form.invalid){
-      alert('Formulario invalido');
+      this.toastService.show("Error!","Formulario invalido");
       return;
     }
 
-    if(this.sections.some(section => section.name == this.newSection.name && section.id_zona ==
-      this.newSection.id_zona)){
-      alert("Ya existe una seccion con ese nombre y zona");
+    if(this.sections.some(section => section.name == this.newSection.name && section.zoneId ==
+      this.newSection.zoneId)){
+      this.toastService.show("Error!","Ya existe una seccion con ese nombre y zona");
       return;
     }
 
     this.sectionService.edit(this.newSection).subscribe(
       {
         next: (response: Section) =>{
-          alert("Sección editada!");
+          this.toastService.show("Editada","Sección editada!");
           this.sections = this.sections.filter(section => { section.id != this.newSection.id })
           this.newSection.name = "";
-          this.newSection.id_zona = 0;
-          this.filtrar();
+          this.newSection.zoneId = 0;
+          this.filter();
           this.editing = false;
         },
         error: (err) => {
-          alert("Hubo un error al intentar esta operación, no se pudo editar la sección")
+          this.toastService.show("Error!","Hubo un error al intentar esta operación, no se pudo editar la sección");
         }
       }
     );
@@ -137,10 +176,10 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  filtrar(){
-    this.filtrando = true;
+  filter(){
+    this.filtering = true;
     this.subscriptions.add(
-      this.sectionService.getByZone(this.sectionParam.id_zona).subscribe(
+      this.sectionService.getByZone(this.sectionParam.zoneId).subscribe(
         {
           next: (response: Section[]) =>{
             this.sectionsFiltered = response;
@@ -152,22 +191,19 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
       )
     )
     this.storageZones.forEach(zone => {
-      if(zone.id == this.sectionParam.id_zona){
+      if(zone.id == this.sectionParam.zoneId){
         this.zoneFiltered.name = zone.name;
       }
     });
   }
 
-  eliminar(id: number){
-    let borrar = confirm("seguro que desea eliminar la sección?");
-    if(!borrar) return;
-
+  deleteSection(id: number){
     let flag:Boolean = false;
     try{
       this.batchs.forEach(lote => {
-        if(lote.id_section == id){
+        if(lote.sectionId == id){
           flag = true;
-          alert("No se puede eliminar esta sección porque hay un lote que depende de ella")
+          this.toastService.show("Error!","No se puede eliminar esta sección porque hay un lote que depende de ella");
           throw "Existe un lote que depende de esta sección";
         }
       })
@@ -179,7 +215,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
       this.sectionService.delete(id).subscribe(
         {
           next: (response: void) =>{
-            this.filtrar();
+            this.filter();
           },
           error: (err) => {
             console.log(err);
@@ -189,7 +225,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
     )
   }
 
-  editar(id: number){
+  edit(id: number){
     this.subscriptions.add(
       this.sectionService.getById(id).subscribe(
         {
@@ -205,4 +241,8 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
       )
     )
   }
+
+  open(name: string) {
+		this._modalService.open(MODALS[name]);
+	}
 }

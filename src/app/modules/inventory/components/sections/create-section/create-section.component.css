@@ -1,4 +1,4 @@
-registro form{
+.register form{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,38 +10,38 @@ nav div h1{
   text-align: center;
 }
 
-.listado form{
+.list form{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 }
-.listado h1{
+.list h1{
   display: block;
   text-align: center;
   margin-top: 50px;
 }
-.listado legend{
+.list legend{
   margin-top: 20px;
   margin-left: 100px;
 }
-.filtro{
+.filter{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
   margin: 0;
 }
-.filtro select{
+.filter select{
   display: inline;
   width: fit-content;
 }
 
-.btn-filtro{
+.btn-filter{
   height: fit-content;
 }
 
-.grilla{
+.grid{
   margin: 0 25vw;
 }
 
@@ -53,35 +53,35 @@ ul .headers{
 .headers i{
   padding: 0 150px;
 }
-.grilla li p{
+.grid li p{
   display: block;
   text-align: center;
   margin: 0;
 }
-.zona-filtrada{
+.zone-filtered{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
-.lista-zonas{
+.zone-list{
   display: flex;
   flex-direction: column;
 }
-.zona-filtrada i{
+.zona-filtered i{
   padding: 0 150px;
 }
-.acciones{
+.actions{
   display: flex;
   flex-direction: column;
   justify-content:space-evenly;
   align-items: center;
 }
-.acciones button{
+.actions button{
   margin: 5px;
 }
 
 @media (min-width: 768px){
-  #saveBtn {
+  #save-btn {
     margin-top: 36px;
   }
 }

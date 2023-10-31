@@ -11,6 +11,6 @@ export class StorageZoneService {
   constructor(private http:HttpClient) { }
 
   getAll(): Observable<StorageZone[]> {
-    return this.http.get<StorageZone[]>('http://localhost:3000/zonas')
+    return this.http.get<StorageZone[]>('http://localhost:3000/zones')
   }
 }

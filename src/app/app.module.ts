@@ -31,6 +31,7 @@ import { AppComponent } from './app.component';
     CatalogModule,
     CustomerModule,
     PurchaseModule,
+    InventaryModule,
     SalesModule,
     InvoiceModule,
   ],
