@@ -1,0 +1,65 @@
+<div class="container">
+    <ng-container *ngIf="alert">
+      <fn-alert mensaje="Se guardo exitosamente. Espere 5 Segundos" tipoAlert="alert alert-success"></fn-alert>
+    </ng-container>
+  
+    <form>
+      <div class="form-group">
+        <label for="txtCode">Codigo</label>
+        <input type="text" class="form-control" id="txtCode" name="codigo" placeholder="Ingresar Codigo" [(ngModel)]="discount.codigo">
+  
+      </div>
+      <div class="form-group">
+        <label for="txtNombre">Nombre</label>
+        <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="discount.nombre">
+      </div>
+      <div class="form-group">
+        <label for="txtDescripcion">Descripcion</label>
+        <input type="text" class="form-control" id="txtDescripcion" name="descripcion" placeholder="Ingresar descripcion" [(ngModel)]="discount.descripcion">
+      </div>
+      <div class="form-group">
+        <label for="txtPrecio_min">Precio Minimo</label>
+        <input type="number" class="form-control" id="txtPrecio_min" name="precio_min" placeholder="Ingresar Precio Minimo" [(ngModel)]="discount.precio_min">
+      </div>
+      <div class="form-group">
+        <label for="txtPrecio_min">Precio Tope</label>
+        <input type="number" class="form-control" id="txtPrecio_top" name="precio_top" placeholder="Ingresar Precio Tope" [(ngModel)]="discount.precio_top">
+      </div>
+      <div class="form-group">
+        <label for="txtCodigo_Producto">Producto</label>
+        <input type="string" class="form-control" id="txtCodigo_Producto" name="codigo_producto" placeholder="Seleccionar Producto" [(ngModel)]="discount.codigo_producto">
+      </div>
+      
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <option *ngFor="let p of lstProductos" [value]="p.codigo" class="dropdown-item" href="#">{{p.nombre}}</option>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+
+      <Select>
+        <option *ngFor="let p of lstProductos">{{p.nombre}}</option>
+      </Select>
+      
+
+      <div class="form-group">
+        <input type="checkbox" name="activo" [(ngModel)]="discount.activo">Activo
+      </div>
+      
+      <button (click)="cleanForm()" class="btn btn-danger m-2 ms-0 p-2">Cancelar</button>
+      <button type="submit"(click)="agregarMarca()" class="btn btn-primary m-2  p-2">Crear</button>
+    </form>
+  </div>
