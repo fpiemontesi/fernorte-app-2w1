@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListaRemitosComponent } from './lista-remitos.component';
+import { ReceiptListComponent } from './lista-remitos.component';
 
 describe('ListaRemitosComponent', () => {
-  let component: ListaRemitosComponent;
-  let fixture: ComponentFixture<ListaRemitosComponent>;
+  let component: ReceiptListComponent;
+  let fixture: ComponentFixture<ReceiptListComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListaRemitosComponent]
+      declarations: [ReceiptListComponent]
     });
-    fixture = TestBed.createComponent(ListaRemitosComponent);
+    fixture = TestBed.createComponent(ReceiptListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,78 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { Remito } from '../../models/remito';
-import { RemitoServService } from '../../services/remito.service';
+import { receipt } from '../../models/remito';
+import { ReceiptService } from '../../services/remito.service';
 import { Subscription } from 'rxjs';
-import { DetalleRemito } from '../../models/detalle-remito';
+import { receiptDetail } from '../../models/detalle-remito';
 
 @Component({
   selector: 'fn-lista-remitos',
   templateUrl: './lista-remitos.component.html',
   styleUrls: ['./lista-remitos.component.css']
 })
-export class ListaRemitosComponent implements OnInit{
+export class ReceiptListComponent implements OnInit {
+  receipts: receipt[] = [];
+  startDate: Date;
+  endDate: Date;
+  filteredReceipts: receipt[] = [];
+  private subscription = new Subscription();
 
-
-  remitos:Remito[]=[
-    //ejemplos de prueba
-    {
-      id:20,
-      nroRemito: 1,
-      nroOrdenCompra: 12,
-      nombreProveedor: 'Proveedor Pepe',
-      fechaLlegada: new Date('2023-10-18'),
-      detalles: []
-    },
-    {
-      id:21,
-      nroRemito: 2,
-      nroOrdenCompra: 143,
-      nombreProveedor: 'Proveedor Raquel',
-      fechaLlegada: new Date('2023-06-24'),
-      detalles: []
-    },
-  ]
-
-  fechaInicio: Date;
-  fechaFin: Date;
-  remitosFiltrados: Remito[] = [];
-  private suscripcion = new Subscription();
-
-
-  constructor(private serviceRemito: RemitoServService ){
-    this.fechaFin= new Date();
-    this.fechaInicio= new Date();
+  constructor(private receiptService: ReceiptService) {
+    this.endDate = new Date();
+    this.startDate = new Date();
   }
-  
+
   ngOnInit(): void {
-    this.cargarLista();
-    this.remitosFiltrados=this.remitos;
+    this.loadReceipts();
   }
 
-  onModificar(id:number){}
+  modify(id: number) {}
 
-  filtrar() { //gracias GPT por aclararme muchas cosas sobre formato fechas y stings .
-    if (!this.fechaInicio && !this.fechaFin) {
-      this.remitosFiltrados = this.remitos;
+  filter() {
+    if (!this.startDate && !this.endDate) {
+      this.filteredReceipts = this.receipts;
       return;
     }
-    const normalizedFechaInicio = new Date(this.fechaInicio);
-    const normalizedFechaFin = new Date(this.fechaFin);
-
-    this.remitosFiltrados = this.remitos.filter(remito => {
-        const fechaRemito = remito.fechaLlegada;
-        
-        return fechaRemito >= normalizedFechaInicio && fechaRemito <= normalizedFechaFin;
+    this.filteredReceipts = this.receipts.filter((receipt) => {
+      const receiptDate = receipt.arrivalDate;
+      return receiptDate >= this.startDate && receiptDate <= this.endDate;
     });
   }
 
-  private cargarLista(){
-    this.suscripcion.add(
-      this.serviceRemito.getRemitos().subscribe({
-        next: (remitosResp : Remito[])=>{
-          this.remitos=remitosResp;
+  private loadReceipts() {
+    this.subscription.add(
+      this.receiptService.getReceipts().subscribe({
+        next: (receiptsResponse: receipt[]) => {
+          this.receipts = receiptsResponse;
+          this.filteredReceipts = receiptsResponse;
         }
       })
-    )
+    );
   }
-
 }

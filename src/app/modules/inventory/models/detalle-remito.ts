@@ -1,6 +1,6 @@
-export class DetalleRemito {
+export class receiptDetail {
     id: number = 0;
-    cantidad: number = 0;
-    nombreProducto: string = "";
-    detalle: string = "";
-}
+    quantity: number = 0;
+    productName: string = "";
+    detail: string = "";
+  }

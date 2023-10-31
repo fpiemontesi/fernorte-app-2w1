@@ -1,20 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Remito } from '../models/remito';
+import { receipt } from '../models/remito';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class RemitoServService {
-  url:string="";
-  constructor(private http:HttpClient) { }
+export class ReceiptService {
+  url: string = "http://localhost:3000/receipts";
+  
+  constructor(private http: HttpClient) { }
 
-  getRemitos(): Observable<Remito[]>{
-    const result = this.http.get<Remito[]>(
+  getReceipts(): Observable<receipt[]> {
+    const result = this.http.get<receipt[]>(
       this.url
-    )
-      return result;
+    );
+    return result;
   }
-
 }

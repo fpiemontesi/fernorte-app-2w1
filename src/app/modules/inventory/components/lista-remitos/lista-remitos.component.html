@@ -10,20 +10,20 @@
 
         <div class="col-md-3">
             <div class="form-group">
-                <label for="fechaInicio">Fecha de inicio:</label>
-                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio">
+                <label for="startDate">Fecha de inicio:</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="startDate" >
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="form-group">
-                <label for="fechaFin">Fecha de fin:</label>
-                <input type="date" class="form-control" id="fechaFin" name="fechaFin" [(ngModel)]="fechaFin">
+                <label for="endDate">Fecha de fin:</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" [(ngModel)]="endDate" >
             </div>
         </div>
 
         <div class="col-auto">
-            <button class="btn btn-primary boton-css" (click)="filtrar()">Filtrar</button>
+            <button class="btn btn-primary boton-css" (click)="filter()">Filtrar</button>
         </div>
 
     </div>    
@@ -40,12 +40,12 @@
             <th>Acción</th>
         </tr>
         <tbody>
-        <tr *ngFor="let r of remitosFiltrados" >
-            <td>{{r.nroRemito}}</td>
-            <td>{{r.nroOrdenCompra}}</td>
-            <td>{{r.nombreProveedor}}</td>
-            <td>{{r.fechaLlegada | date:'dd/MM/yyyy' }}</td>
-            <td><button class="btn btn-primary" (click)="onModificar(r.id)">Modificar</button></td>
+        <tr *ngFor="let r of filteredReceipts" >
+            <td>{{r.receiptNumber}}</td>
+            <td>{{r.purchaseOrderNumber}}</td>
+            <td>{{r.supplierName}}</td>
+            <td>{{r.arrivalDate | date:'dd/MM/yyyy' }}</td>
+            <td><button class="btn btn-primary" (click)="modify(r.id)">Modificar</button></td>
         </tr>
         </tbody>
     </table>
