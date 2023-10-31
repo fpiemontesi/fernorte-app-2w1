@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent
-    , ModificarExistenciaComponent],
+    , ModificarExistenciaComponent, ModificarExistenciaComponent],
   providers: [],
   imports: [CommonModule, 
     FormsModule, 

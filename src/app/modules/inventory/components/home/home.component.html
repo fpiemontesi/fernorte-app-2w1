@@ -1,13 +1,1 @@
-<ul ngbNav #nav="ngbNav" class="nav-tabs">
-  <li ngbNavItem>
-    <button ngbNavLink>Inicio</button>
-    <ng-template ngbNavContent>Inicio</ng-template>
-  </li>
-  <li ngbNavItem>
-    <button ngbNavLink>Modificar Existencia</button>
-    <ng-template ngbNavContent>
-      <app-modificar-existencia></app-modificar-existencia>
-    </ng-template>
-  </li>
-</ul>
-<div [ngbNavOutlet]="nav"></div>
+<fn-listar-existencias></fn-listar-existencias>
