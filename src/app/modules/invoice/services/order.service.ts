@@ -19,7 +19,6 @@ export class OrderService {
     return this.http.get<Order[]>(this.apiUrl);
   }
   setOrderSelected(or:Order){
-    
     this.orderSelected = or;
   }
 

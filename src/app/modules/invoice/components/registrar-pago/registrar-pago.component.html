@@ -22,8 +22,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let pay of listPays">
-                   
-                    <td>{{ pay.paymentMethod }}</td>
+                    <td>{{ pay.paymentMethodDescription }}</td>
                     <td>{{ pay.amount }}</td>
                     <td><button class="btn btn-primary" (click)="deletePay(pay)">Borrar</button></td>
                 </tr>
@@ -34,12 +33,12 @@
   </div>
   <div class="modal-footer">
     <div class="col">
-      <label>Total a pagar: $ {{ invoiceTotal }}</label>
+      <label>Total a pagar: {{ invoiceTotal | currency }}</label>
     </div>
     <div class="col">
-      <label>Restante: $ {{ remainPayment }}</label>
+      <label>Restante: {{ remainPayment | currency }}</label>
     </div>
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+    <button type="button" class="btn btn-light" (click)="closeModal(content)">
       Cerrar
     </button>
   </div>

@@ -1,6 +1,6 @@
 export class payDetailDTO{
-    amount?: number;
+    amount: number =0;
     paymentMethod?: number;
     observations?: string;
-
+    paymentMethodDescription?: string;
 }

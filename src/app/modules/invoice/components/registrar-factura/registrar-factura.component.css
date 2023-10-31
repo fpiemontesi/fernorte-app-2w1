@@ -25,6 +25,7 @@ body {
   box-shadow: 10px 10px 13px 0px rgba(0, 0, 0, 0.48);
   -webkit-box-shadow: 10px 10px 13px 0px rgba(0, 0, 0, 0.48);
   -moz-box-shadow: 10px 10px 13px 0px rgba(0, 0, 0, 0.48);
+  border-radius: 5px;
 }
 
 .input-text {
@@ -54,4 +55,9 @@ body {
 
 .table-container::-webkit-scrollbar-thumb:hover {
   background-color: #2e2e2e;
+}
+.custom-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
 }

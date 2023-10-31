@@ -24,21 +24,20 @@ export class RegistrarPagoComponent {
   constructor(private modalService : NgbModal, private servinv: InvoiceService, private payserv: PaymentMethodService) { }
 
   ngOnInit() {
-    
     this.remainPayment = this.invoiceTotal;
   }
 
-  deletePay(pay:payDetailDTO){
-    const index = this.listPays.indexOf(pay); // Encuentra el índice del pago en el array
+  deletePay(pay: payDetailDTO) {
+    const index = this.listPays.indexOf(pay);
     if (index !== -1) {
-      this.listPays.splice(index, 1); // Elimina el pago del array
+      this.listPays.splice(index, 1);
+      this.remainPayment = this.invoiceTotal - this.listPays.reduce((total, pay) => total + (pay.amount || 0), 0);
+      this.payserv.setListPaids(this.listPays);
     }
-    this.remainPayment += pay.amount!;
-    console.log(this.payserv.getListPaids());
   }
+  
 
   openModal(content: any) {
-    
 		this.invoiceTotal = this.servinv.getTotalpay();
     this.remainPayment = this.invoiceTotal;
     this.modalService.open(content, { size: 'xl', backdrop: 'static', keyboard: false, scrollable: true } );
@@ -47,5 +46,14 @@ export class RegistrarPagoComponent {
   actualizarRestante(resto : number) {
     this.remainPayment = resto;
     this.listPays = this.payserv.getListPaids();
+  }
+  closeModal(content:any){
+    console.log(this.remainPayment)
+    if(this.remainPayment<=this.invoiceTotal){
+      alert("Payments Insufficient")
+    }
+    else{
+      this.modalService.dismissAll();
+    }
   }
 }

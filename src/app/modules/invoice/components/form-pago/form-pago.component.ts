@@ -19,11 +19,8 @@ export class FormPagoComponent {
   paymentMethodDTO: PmDTO = {} as PmDTO; //idDetalleFormaPago, idPago, idFormaPago, subtotalFormaPago
   listaPayment: Payment[] = [];
 
-
-
-
   listTypePayment: paymentMethodDTO[] = [];
-
+  selectedPayment?: paymentMethodDTO;
   listPaids: payDetailDTO[] = [];
   pay: payDetailDTO = new payDetailDTO();
 
@@ -33,72 +30,54 @@ export class FormPagoComponent {
   @Output() onCalcularRestante = new EventEmitter<number>();
 
   constructor(private formasPagoService: PaymentMethodService, private paidservice: PaymentMethodService) {
-    formasPagoService.obtenerFormasPago().subscribe((response: paymentMethodDTO[]) => {
+    
+  }
+
+
+  addPay() {
+    const newPay = new payDetailDTO();
+    newPay.amount = this.pay.amount;
+    if(this.validatePay(newPay.amount)){
+    newPay.paymentMethod = this.selectedPayment?.id;
+    newPay.observations = this.pay.observations
+    newPay.paymentMethodDescription = this.selectedPayment?.name;
+    this.listPaids.push(newPay);
+    this.paidservice.setListPaids(this.listPaids);
+    console.log(this.paidservice.getListPaids());
+    this.pay = new payDetailDTO();
+    this.selectedPayment = undefined;
+    this.resto = this.resto - newPay.amount!;
+    }
+    else{
+      alert("Payment amount is greater than restant")
+      this.pay = new payDetailDTO();
+      this.selectedPayment = undefined;
+    }
+    this.onCalcularRestante.emit(this.resto);
+  }
+
+  validatePay(amount : number): boolean{
+    console.log(this.resto)
+    console.log(amount)
+    if(this.resto >=amount ) 
+      return true;
+    else
+      return false;
+  }
+
+  ngOnInit() {
+    this.formasPagoService.obtenerFormasPago().subscribe((response: paymentMethodDTO[]) => {
       this.listTypePayment = response;
     },
       (error: any) => {
         console.error(error);
       }
     );
-  }
-
-
-  addPay() {
-  const newPay = new payDetailDTO();
- 
-  newPay.amount  = this.pay.amount; 
-  newPay.paymentMethod = this.pay.paymentMethod; 
-  newPay.observations = this.pay.observations
-
-  this.listPaids.push(newPay);
-  this.paidservice.setListPaids(this.listPaids);
-  console.log(this.paidservice.getListPaids());
-  this.pay = new payDetailDTO(); 
-  this.resto = this.resto - newPay.amount!;
-  this.onCalcularRestante.emit(this.resto);
-  }
-
- 
-
-
-
-
-
-
-  ngOnInit() {
-    this.listMethods = this.formasPagoService.listarFormas();
     this.resto = this.total;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-  addMethod() {
-
-    if (this.resto != 0 && this.paymentMethodDTO.subtotalMethod <= this.resto && this.paymentMethodDTO.subtotalMethod <= this.total) {
-
-      this.listpmDTO.push(this.paymentMethodDTO);
-      this.calcularRestante();
-      this.onCalcularRestante.emit(this.resto);
-    }
-    else {
-      alert("Error al procesar el metodo de pago");
-    }
-    this.paymentMethodDTO = {} as PmDTO;
-  }
-
   deleteMethod() {
-
     if (this.resto != 0 && this.listpmDTO.length != 0) {
-
       var lastDTO = this.listpmDTO.pop();
       this.resto = this.resto + lastDTO?.subtotalMethod!;
       this.onCalcularRestante.emit(this.resto);
@@ -122,17 +101,5 @@ export class FormPagoComponent {
       alert("Error. Todavia hay restante a pagar");
     }
   }
-
-  // cargarComboFormasPago() {
-
-  // this.formasPagoService.get().subscribe({
-  //   next: (comboFormas: PaymentMethod[]) => {
-  //     this.listaFormas = comboFormas;
-  //   },
-  //   error: () => {
-  //     alert('Error al cargar formas de pago');
-  //   }
-  // });
-  // }
 
 }

@@ -1,4 +1,5 @@
 <body class="bg-secundario">
+  <div class="container-fluid custom-container">
   <div class="container-fluid bg-primario text-white pb-4 sombra">
     <div class="row">
       <div class="col-md-6">
@@ -106,9 +107,24 @@
           <tr *ngFor="let det of details">
               <td>{{ det.descripcion }}</td>
               <td>{{ det.cantidad }}</td>
-              <td>{{ det.precioUnitario }}</td>
-              <td>{{ det.subtotal}}</td>
-
+              <td>{{ det.precioUnitario | currency }}</td>
+              <td>{{ det.subtotal | currency}}</td>
+          </tr>
+      </tbody>
+      </table>
+      <table class="table border sombra">
+        <thead>
+          <tr>
+              <th>Descripcion</th>
+              <th>Porcentaje</th>
+              <th>Descuento</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let disc of discounts">
+              <td>{{ disc.descripcion }}</td>
+              <td>{{ disc.porcentaje }}</td>
+              <td>{{ disc.discounted | currency}} </td>
           </tr>
       </tbody>
       </table>
@@ -132,5 +148,6 @@
         <fn-registrar-pago></fn-registrar-pago>
       </div>
     </div>
+  </div>
   </div>
 </body>
