@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <h1 style="text-align: center; font-size: 36px">Consultar Presupuesto</h1>
     <div class="form">
         <div class="formularioConsulta text-center">
@@ -58,13 +58,13 @@
                     <td>{{ presupuesto.fecha_vencimiento | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                     <td>{{ presupuesto.total_importe }}</td>
                     <td><i class="fa fa-search lupa" (click)="mostrarDetalles = true">{{presupuesto.productos}}</i></td>
-                    <!--terminar-->
-                    <td><input type="checkbox" /></td> <!--terminar-->
+                    
+                    <td><input type="checkbox" /></td>terminar
                 </tr>
             </tbody>
         </table>
         <div *ngIf="mostrarDetalles">
-            <!--<fn-detalles-productos [productos]="presupuesto.productos"></fn-detalles-productos> -->
+            <fn-detalles-productos [productos]="presupuesto.productos"></fn-detalles-productos>
         </div>
     </div>
     <div>
@@ -81,4 +81,100 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="container" style="padding-top: 3%;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-12" style="padding: 1%;">
+        <label>Fecha Desde</label>
+        <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="presupuesto.fechaDesde">
+      </div>
+      <div class="col-md-4 col-sm-12" style="padding: 1%;">
+        <label>Fecha Hasta</label>
+        <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="presupuesto.fechaHasta">
+      </div>
+      <div class="col-md-4 col-sm-12" style="padding: 1%;">
+        <label>Cliente</label>
+        <select name="selectCliente" id="cliente" class="form-control">
+          <option selected disabled>Seleccione</option>
+          <option *ngFor="let cliente of clientes" [value]="cliente.id" [(ngModel)]="presupuesto.cliente">
+              {{ cliente.nombre }}, {{ cliente.apellido }}
+          </option>
+      </select>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-sm-12" style="padding: 1%;">
+        <button class="btn btn-dark w-100">
+          Buscar
+        </button>
+      </div>
+    </div>
+
+    <div class="tablaConsultada">
+      <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">N° de presupuesto</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha de creación</th>
+            <th scope="col">Fecha de expiración</th>
+            <th scope="col">Importe total</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          <tr *ngIf="presupuesto">
+            <td>{{ presupuesto.nroPresupuesto }}</td>
+            <td>{{ presupuesto.cliente }}</td>
+            <td>{{ presupuesto.fechaDesde | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ presupuesto.fechaHasta | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ presupuesto.totalImporte }}</td>
+            <td><i class="fa fa-search lupa" (click)="mostrarDetalles = true">{{presupuesto.detalles}}</i></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container" *ngIf="mostrarDetalles">
+      <h3 class="h4">Detalles</h3>
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead">
+          <tr>
+            <th>Producto</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let detalle of presupuesto.detalles">
+            <td>{{ detalle.id_producto }}</td>
+            <td>{{ detalle.descripcion }}</td>
+            <td>{{ detalle.cantidad }}</td>
+            <td>{{ detalle.precio_unitario | currency:'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="row justify-content-end">
+        <div class="col-6">
+          <div class="row botones">
+            <div class="col-6">
+              <button class="btn btn-danger w-100">Borrar</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-info w-100">Modificar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

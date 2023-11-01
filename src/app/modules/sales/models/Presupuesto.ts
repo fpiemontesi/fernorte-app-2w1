@@ -1,21 +1,22 @@
+import { Cliente } from './Cliente';
 import { Detalles } from './Detalles';
 
 export class Presupuesto {
   id: number;
-  nro_presupuesto: string;
-  cliente: string;
-  fecha_creacion: Date;
-  fecha_vencimiento: Date;
-  total_importe: number;
-  productos: Detalles[];
+  nroPresupuesto: string;
+  cliente: Cliente;
+  fechaDesde: Date;
+  fechaHasta: Date;
+  totalImporte: number;
+  detalles: Detalles[];
 
   constructor() {
     this.id = 0;
-    this.nro_presupuesto = '';
-    this.cliente = '';
-    this.fecha_creacion = new Date();
-    this.fecha_vencimiento = new Date();
-    this.total_importe = 0;
-    this.productos = [];
+    this.nroPresupuesto = '';
+    this.cliente = new Cliente();
+    this.fechaDesde = new Date();
+    this.fechaHasta = new Date();
+    this.totalImporte = 0;
+    this.detalles = [];
   }
 }
