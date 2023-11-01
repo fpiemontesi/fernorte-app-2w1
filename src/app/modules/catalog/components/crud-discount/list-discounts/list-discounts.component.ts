@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Discount } from '../../../models/discount';
 import { DiscountService } from '../../../services/discountService/discount.service';
 import { Subscription } from 'rxjs';
+import { productService } from '../../../services/productService/product.service';
+import { Producto } from '../../../models/producto';
 
 @Component({
   selector: 'fn-list-discounts',
@@ -10,15 +12,29 @@ import { Subscription } from 'rxjs';
 })
 export class ListDiscountsComponent {
   lista:Discount[]=[];
+  listaproduct:Producto[]=[]
   codigoDiscount = "";
   alert:boolean = false;
   private subscription = new Subscription();
-  constructor(private discountService:DiscountService) {
+  constructor(private discountService:DiscountService, private pService:productService) {
 
 
   }
   ngOnInit(): void {
     this.loadDiscounts();
+
+    this.pService.getAllProducts().subscribe({
+      next:(productos:Producto[])=>{
+        this.listaproduct = productos
+      },
+      error:()=> {
+        alert("error")
+      }
+    })
+  }
+  obtenerNombreProducto(code:string): string{
+    const producto = this.listaproduct.find(m => m.codigo === code);
+    return producto ? producto.nombre : 'Desconocida';
   }
 
   ngOnDestroy() {
@@ -28,6 +44,7 @@ export class ListDiscountsComponent {
   guardarCodigo(codigo:string){
     this.codigoDiscount = codigo;
   }
+  
 
   eliminarMarca(){
     this.subscription.add(
@@ -63,6 +80,7 @@ export class ListDiscountsComponent {
       this.discountService.get().subscribe({
         next: (discount:Discount[])=> {
           this.lista =discount
+
         },
         error: ()=>{
           console.log("Error al cargar las Descuento")

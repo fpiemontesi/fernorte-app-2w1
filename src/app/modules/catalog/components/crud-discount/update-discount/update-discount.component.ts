@@ -3,6 +3,8 @@ import { Discount } from '../../../models/discount';
 import { Subscription } from 'rxjs';
 import { DiscountService } from '../../../services/discountService/discount.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Producto } from '../../../models/producto';
+import { productService } from '../../../services/productService/product.service';
 
 @Component({
   selector: 'fn-update-discount',
@@ -11,25 +13,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UpdateDiscountComponent {
   discount:Discount = {} as Discount;
-  codeMarcaSelected:string = "";
+  lstProductos:Producto[] = []
+  codeDiscountSelected:string = "";
   alert:boolean = false
   private subscription = new Subscription();
 
 
-  constructor(private discountService:DiscountService, private activatedRoute: ActivatedRoute, private route:Router){
+  constructor(private discountService:DiscountService, private activatedRoute: ActivatedRoute, private route:Router,private pService:productService){
   }
 
   ngOnInit(): void {
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(params => {
-        this.codeMarcaSelected = params["codigo"];
+        this.codeDiscountSelected = params["codigo"];
       }),
     )
     this.subscription.add(
-      this.discountService.getByCode(this.codeMarcaSelected).subscribe(
+      this.discountService.getByCode(this.codeDiscountSelected).subscribe(
         (response:Discount)=>{
           this.discount=response;
         }),
+    )
+    this.subscription.add(
+      this.pService.getAllProducts().subscribe({
+        next: (data:Producto[])=>{
+          this.lstProductos = data;
+        },
+        error:() => {
+          alert("error")
+        }
+      }),
+      
     )
   }
 
@@ -37,7 +51,7 @@ export class UpdateDiscountComponent {
     this.subscription.unsubscribe();
   }
 
-  editarMarca(){
+  editarDiscount(){
     this.subscription.add(
         this.discountService.update(this.discount).subscribe({
           next: async (discount:Discount)=>{

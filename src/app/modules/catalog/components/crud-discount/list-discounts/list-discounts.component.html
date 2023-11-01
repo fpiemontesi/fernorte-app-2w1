@@ -27,7 +27,7 @@
         <td>{{d.descripcion}}</td>
         <td>{{d.precio_min}}</td>
         <td>{{d.precio_top}}</td>
-        <td>{{d.codigo_producto}}</td>
+        <td>{{obtenerNombreProducto(d.codigo_producto)}}</td>
         <td>{{d.activo}}</td>
         <td><button  routerLink="updateDiscount" [queryParams]={codigo:[d.codigo]}  class="btn btn-primary">Modificar</button></td>
         <td><button (click)="guardarCodigo(d.codigo)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button></td>
