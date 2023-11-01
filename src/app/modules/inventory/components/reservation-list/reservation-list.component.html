@@ -18,16 +18,18 @@
     </div>
 </div>
 
-<!-- <div *ngIf="reservationDetails.length > 0"> -->
-    <h3>Detalles de la Reserva</h3>
-    <div class="container mt-3">
-        <table class="table table table-striped">
+<div *ngIf="reservationDetails.length > 0">
+    <div class="container mt-4">
+        <h4>Detalles de la Reserva:</h4>
+        <table class="table table table-striped mt-2">
+            <thead>
             <tr>
                 <th>Nro. Lote</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
                 <th>Sección</th>
             </tr>
+            </thead>
             <tbody>
             <tr *ngFor="let d of reservationDetails" >
                 <td>{{d.batch.id}}</td>
@@ -38,4 +40,4 @@
             </tbody>
         </table>
     </div>
-<!-- </div> -->
+</div>
