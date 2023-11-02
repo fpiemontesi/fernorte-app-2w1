@@ -6,10 +6,11 @@ import { ModalComponentComponent } from './components/modal-component/modal-comp
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { ModalComponentbajaComponent } from './components/modal-componentbaja/modal-componentbaja.component';
 import { ModalComponenteditarComponent } from './components/modal-componenteditar/modal-componenteditar.component';
+import { OrdenCompraComponent } from './components/orden-compra/orden-compra.component';
 
 
 @NgModule({
-  declarations: [HomeComponent,ModalComponentComponent, ProveedoresComponent, ModalComponentbajaComponent, ModalComponenteditarComponent],
+  declarations: [HomeComponent,ModalComponentComponent, ProveedoresComponent, ModalComponentbajaComponent, ModalComponenteditarComponent, OrdenCompraComponent],
   providers: [],
   imports: [CommonModule],
   exports: [HomeComponent],
