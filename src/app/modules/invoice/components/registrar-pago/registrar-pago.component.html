@@ -9,8 +9,8 @@
   <div class="modal-body">
     <div class="container text-center">
       <form>
-        <fn-form-pago [total]="invoiceTotal" [resto]="remainPayment"
-          (onCalcularRestante)="actualizarRestante($event)"></fn-form-pago>
+        <fn-form-pago [total]="invoiceTotal" 
+        (restoEmit)="guardarResto($event)"></fn-form-pago>
       </form>
       <div *ngIf="listPays.length>0">
         <table class="table table-striped cust-table">
@@ -36,10 +36,10 @@
       <label>Total a pagar: {{ invoiceTotal | currency }}</label>
     </div>
     <div class="col">
-      <label>Restante: {{ remainPayment | currency }}</label>
+      <label>Restante: {{ resto | currency }}</label>
     </div>
-    <button type="button" class="btn btn-light" (click)="closeModal(content)">
-      Cerrar
+    <button type="button" class="btn btn-light" (click)="endPays(content)">
+      Finalizar Pagos
     </button>
   </div>
 </ng-template>

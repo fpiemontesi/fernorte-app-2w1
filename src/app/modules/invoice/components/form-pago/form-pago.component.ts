@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { PaymentMethod } from '../../models/payment-method';
-import { Payment } from '../../models/payment';
-import { PmDTO } from '../../models/pm-dto';
 import { paymentMethodDTO } from '../../models/paymentMethodDTO';
 import { payDetailDTO } from '../../models/payDetailDTO';
 
@@ -13,93 +10,96 @@ import { payDetailDTO } from '../../models/payDetailDTO';
 })
 export class FormPagoComponent {
 
-  listMethods: PaymentMethod[] = []; //idFormaPago, FormaPago
-  payment: Payment = {} as Payment; //idPago, idDetalleFormaPago, observaciones, total
-  listpmDTO: PmDTO[] = []; //DetalleFormaPago
-  paymentMethodDTO: PmDTO = {} as PmDTO; //idDetalleFormaPago, idPago, idFormaPago, subtotalFormaPago
-  listaPayment: Payment[] = [];
 
+  //listado de las formas de pago 
   listTypePayment: paymentMethodDTO[] = [];
+  //objeto metodo de pago elegido
   selectedPayment?: paymentMethodDTO;
+  //lista de los pagos guardados completos
   listPaids: payDetailDTO[] = [];
+  //un solo pago realizado que se adiciona a la lista
   pay: payDetailDTO = new payDetailDTO();
 
 
-  @Input() resto: number = 0;
+  resto: number = 0;
   @Input() total: number = 0;
-  @Output() onCalcularRestante = new EventEmitter<number>();
+
+  @Output() restoEmit: EventEmitter<number> = new EventEmitter<number>();
+
 
   constructor(private formasPagoService: PaymentMethodService, private paidservice: PaymentMethodService) {
-    
-  }
-
-
-  addPay() {
-    const newPay = new payDetailDTO();
-    newPay.amount = this.pay.amount;
-    if(this.validatePay(newPay.amount)){
-    newPay.paymentMethod = this.selectedPayment?.id;
-    newPay.observations = this.pay.observations
-    newPay.paymentMethodDescription = this.selectedPayment?.name;
-    this.listPaids.push(newPay);
-    this.paidservice.setListPaids(this.listPaids);
-    console.log(this.paidservice.getListPaids());
-    this.pay = new payDetailDTO();
-    this.selectedPayment = undefined;
-    this.resto = this.resto - newPay.amount!;
-    }
-    else{
-      alert("Payment amount is greater than restant")
-      this.pay = new payDetailDTO();
-      this.selectedPayment = undefined;
-    }
-    this.onCalcularRestante.emit(this.resto);
-  }
-
-  validatePay(amount : number): boolean{
-    console.log(this.resto)
-    console.log(amount)
-    if(this.resto >=amount ) 
-      return true;
-    else
-      return false;
-  }
-
-  ngOnInit() {
-    this.formasPagoService.obtenerFormasPago().subscribe((response: paymentMethodDTO[]) => {
+    formasPagoService.obtenerFormasPago().subscribe((response: paymentMethodDTO[]) => {
       this.listTypePayment = response;
     },
       (error: any) => {
         console.error(error);
       }
     );
+  }
+
+  // agrega pagos a la lista de pagos
+
+  addPay() {
+    const newPay = new payDetailDTO();
+
+    if (this.validatePay(this.pay.amount)) {
+
+      newPay.amount = this.pay.amount;
+      newPay.paymentMethod = this.selectedPayment?.id;
+      newPay.paymentMethodDescription = this.selectedPayment?.name;
+      newPay.observations = this.pay.observations
+
+
+      this.listPaids.push(newPay);
+      this.paidservice.setListPaids(this.listPaids);
+      console.log(this.paidservice.getListPaids());
+      this.pay = new payDetailDTO();
+      this.resto = this.resto - newPay.amount!;
+      this.paidservice.setListPaids(this.listPaids);
+      this.restoEmit.emit(this.resto);
+    }
+    else {
+   
+    }
+
+
+  }
+  validatePay(monto: number) {
+    const metodoUtilizado = this.listPaids.find(p => p.paymentMethodDescription === this.selectedPayment?.name);
+
+    if (monto > this.resto) {
+      alert("El monto supera el total.");
+      return false;
+    } else if (monto === 0) {
+      alert("No se puede ingresar un valor de 0.");
+      return false;
+    } else if (this.selectedPayment === undefined) {
+      alert("Ingrese metodo de pago");
+      return false;
+    } else if (metodoUtilizado !== undefined) {
+      alert("Ya eligio esa forma de pago");
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
+
+
+  ngOnInit() {
+
     this.resto = this.total;
   }
 
-  deleteMethod() {
-    if (this.resto != 0 && this.listpmDTO.length != 0) {
-      var lastDTO = this.listpmDTO.pop();
-      this.resto = this.resto + lastDTO?.subtotalMethod!;
-      this.onCalcularRestante.emit(this.resto);
-    }
-  }
 
-  calcularRestante() {
-    this.resto = this.resto - this.paymentMethodDTO.subtotalMethod;
-  }
 
-  enviarPago() {
 
-    if (this.resto == 0) {
-      this.payment.listPaymentMethodDTO = this.listpmDTO;
-      this.payment.invoiceTotal = this.total;
-      this.listaPayment.push(this.payment);
-      console.log(this.listaPayment);
-      alert("Pago completado");
-    }
-    else {
-      alert("Error. Todavia hay restante a pagar");
-    }
-  }
+
+
+
+
+
+
 
 }

@@ -18,10 +18,10 @@ export class PendingOrdersComponent implements OnInit {
   orders: Order[] = [];
   SelectedDetails: Detail[] = [];
 
-  @Output() emiteOrden = new EventEmitter<Order>();
 
   isModalOpen: boolean = false;
-  constructor(private orderService: OrderService, private route:Router) {}
+
+  constructor(private orderService: OrderService, private route: Router) { }
   ngOnInit(): void {
     this.orderService.obtenerOrdenes().subscribe(
       (response: Order[]) => {
@@ -49,14 +49,14 @@ export class PendingOrdersComponent implements OnInit {
     this.SelectedDetails = order.detalles;
     this.calculateSubtotal();
     this.isModalOpen = true;
-    
+
   }
 
   closeModal() {
     this.isModalOpen = false;
     this.SelectedDetails = [];
   }
- 
+
 
   calculateSubtotal(): void {
     if (this.SelectedDetails.length > 0) {
@@ -65,10 +65,9 @@ export class PendingOrdersComponent implements OnInit {
       });
     }
   }
-
-  emitirOrden(order: Order) {
+  //guardamos la orden en el servicio order
+  facturarOrden(order: Order) {
     console.log(order);
-    this.emiteOrden.emit(order);
     this.orderService.setOrderSelected(order);
     this.route.navigate(['ConsultarPedidos/RegistrarFactura'])
   }

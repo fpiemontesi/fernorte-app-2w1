@@ -1,34 +1,36 @@
 import { Injectable } from '@angular/core';
-import { PaymentMethod } from '../models/payment-method';
-import { Payment } from '../models/payment'; //test
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { payDetailDTO } from '../models/payDetailDTO';
 import { paymentMethodDTO } from '../models/paymentMethodDTO';
 
 @Injectable({
-  providedIn: 'any'
+  providedIn: 'root'
 })
 export class PaymentMethodService {
 
   private apiUrl = 'http://localhost:8081/paymentMethods';
   listpayment?: paymentMethodDTO[] = [];
 
-
-  paidList:payDetailDTO[] = [];
+  private paidListSubject = new BehaviorSubject<payDetailDTO[]>([]);
+  paidList$ = this.paidListSubject.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
-  obtenerFormasPago():Observable<paymentMethodDTO[]> {
+  obtenerFormasPago(): Observable<paymentMethodDTO[]> {
     return this.http.get<paymentMethodDTO[]>(this.apiUrl);
   }
-  setListPaids(list:payDetailDTO[]){
-    this.paidList = list;
+
+  setListPaids(list: payDetailDTO[]) {
+    this.paidListSubject.next(list); // Emite la nueva lista de pagos
   }
 
-  getListPaids(){
-    return this.paidList;
+  getListPaids() {
+    return this.paidListSubject.getValue(); // Obtiene el valor actual sin notificar
   }
-  
+
+  getPaidsObservable(): Observable<payDetailDTO[]> {
+    return this.paidList$; // Devuelve el Observable para suscribirse a los cambios
+  }
 }

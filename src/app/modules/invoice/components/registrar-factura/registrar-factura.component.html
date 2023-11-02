@@ -21,7 +21,7 @@
             <input
               type="text"
               name=""
-              id=""
+              id="nombreCliente"
               value="Ernesto j."
               disabled
               class="input-text"
@@ -32,7 +32,7 @@
             <input
               type="text"
               name=""
-              id=""
+              id="fechaFactura"
               value="12/12/2021"
               disabled
               class="input-text"
@@ -43,7 +43,7 @@
             <input
               type="text"
               name=""
-              id=""
+              id="tipoDni"
               value="Dni"
               disabled
               class="input-text"
@@ -56,7 +56,7 @@
             <input
               type="text"
               name=""
-              id=""
+              id="tipoCliente"
               value="Consumidor Final"
               disabled
               class="input-text"
@@ -67,7 +67,7 @@
             <input
               type="text"
               name=""
-              id=""
+              id="domicilio"
               value=""
               disabled
               class="input-text"
@@ -78,7 +78,7 @@
             <input
               type="text"
               name=""
-              id=""
+              id="nroDoc"
               value="45827404"
               disabled
               class="input-text"
@@ -122,8 +122,8 @@
       </thead>
       <tbody>
           <tr *ngFor="let disc of discounts">
-              <td>{{ disc.descripcion }}</td>
-              <td>{{ disc.porcentaje }}</td>
+              <td>{{ disc.description }}</td>
+              <td>{{ disc.porcentage }}</td>
               <td>{{ disc.discounted | currency}} </td>
           </tr>
       </tbody>
