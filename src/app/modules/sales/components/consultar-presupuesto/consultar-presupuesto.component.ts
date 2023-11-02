@@ -1,12 +1,8 @@
 import { Presupuesto } from './../../models/Presupuesto';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../models/Cliente';
-import { PresupuestoService } from '../../services/presupuesto.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { ClienteService } from '../../services/cliente.service';
-
+import { PresupuestoService } from '../../services/presupuesto.service';
 
 @Component({
   selector: 'fn-consultar-presupuesto',
@@ -15,76 +11,46 @@ import { ClienteService } from '../../services/cliente.service';
 })
 export class ConsultarPresupuestoComponent implements OnInit {
   clientes: Cliente[] = [];
-  http: any;
+  selectedCliente: Cliente = new Cliente();
+  mostrarDetalles: boolean = false;
+  presupuesto: Presupuesto = new Presupuesto();
+  presupuestos: Presupuesto[] = [];
 
   constructor(
-    private clientService: ClienteService,
+    private clienteService: ClienteService,
     private presupuestoService: PresupuestoService
   ) {}
 
-  ngOnInit() {
-    this.clientService.getClientes().subscribe(data => {
-     this.clientes = data;
+  ngOnInit(): void {
+    this.clienteService.getClientes().subscribe((data) => {
+      this.clientes = data;
     });
+    this.presupuesto.totalImporte = this.calcularTotalImporte();
   }
 
-  mostrarDetalles: boolean = false;
-  presupuesto!: Presupuesto;
-  presupuestos: any[] = [];
-  mostrarModificar: boolean = false;
+  buscarPresupuestoPorFechasYCliente() {
+    const parametros = {
+      fecha_creacion: this.presupuesto.fechaDesde,
+      fecha_vencimiento: this.presupuesto.fechaHasta,
+      cliente:
+        this.selectedCliente.nombre + ' ' + this.selectedCliente.apellido,
+    };
+    this.presupuestoService
+      .getPresupuestoByDatesAndClient(parametros)
+      .subscribe((response) => {
+        this.presupuestos = response;
+      });
+  }
 
-    
-  limpiarCampos(){
-    this.presupuesto = {} as Presupuesto;
+  calcularTotalImporte(): number {
+    let total = 0;
+    for (const detalle of this.presupuesto.detalles) {
+      total += detalle.cantidad * detalle.precio_unitario;
+    }
+    return total;
   }
-  
-  // FILTRAR PRESUPUESTOS POR GET
-  filtrarPresupuestos() {
-   
-    // Construye los parámetros de la consulta
-    let params = new HttpParams()
-    if(this.presupuesto.id){
-      params = params.set('id', this.presupuesto?.id.toString());
-    }
-  
-    if (this.presupuesto.cliente.id) {
-      params = params.set('id_cliente', this.presupuesto.cliente.id.toString());
-    }
-  
-    if (this.presupuesto.fechaDesde) {
-      params = params.set('fecha_desde', this.presupuesto.fechaDesde.toISOString());
-    }
-  
-    if (this.presupuesto.fechaHasta) {
-      params = params.set('fecha_hasta', this.presupuesto.fechaHasta.toISOString());
-    }
-      
-    const url = 'http://localhost:8080/presupuetos/';
-  
-    // Agrega los parámetros a la URL de manera adecuada
-    const urlWithParams = `${url}?${params.toString()}`;
-  
-    this.http.get(urlWithParams).subscribe({
-     next: (response: any[]) => {
-       console.log('Solicitud GET exitosa. Respuesta:', response);
-       this.presupuestos = response;
-     },
-     error: (error: any) => {
-       console.error('Error al realizar la solicitud GET:', error);
-       console.log(params.toString());
-       Swal.fire({
-         icon: 'error',
-         title: 'Error al filtrar los presupuestos',
-         showCancelButton: false,
-         showConfirmButton: true,
-         confirmButtonText: 'Aceptar',
-       });
-     },
-    });
-  }
-  
-  verDetalle(presupuesto: Presupuesto){
-    this.presupuesto = presupuesto;
+
+  mostrarDetallesFuncion() {
     this.mostrarDetalles = true;
   }
 }

@@ -7,11 +7,11 @@ import { Cliente } from '../models/Cliente';
   providedIn: 'root'
 })
 export class ClienteService {
-  private baseUrl = 'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes';
+  private apiUrl = "https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getClientes(): Observable<any[]> {
-   return this.http.get<any[]>(this.baseUrl);
+    return this.http.get<any[]>(this.apiUrl);
   }
 }
