@@ -2,7 +2,7 @@
   "existencias": [
     {
       "id": 1,
-      "stock_minimo": 15,
+      "stock_minimo": 1,
       "nombre": "Destornillador"
     },
     {

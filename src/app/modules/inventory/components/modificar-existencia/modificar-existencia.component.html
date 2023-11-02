@@ -31,3 +31,8 @@
     <button type="submit" [disabled]="formModExi.invalid" class="btn btn-primary w-100">Guardar</button>
   </form>
 </div>
+
+<ngb-toast [header]="toast.header"
+  *ngFor="let toast of toasts; index as index" >
+  {{toast.body}} 
+</ngb-toast>

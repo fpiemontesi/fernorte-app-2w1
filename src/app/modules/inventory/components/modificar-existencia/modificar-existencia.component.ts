@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Existencia } from '../../models/existencia';
 import { ListarExistenciasService } from '../../services/existance.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToastInfo } from '../../models/notification';
 
 @Component({
   selector: 'app-modificar-existencia',
@@ -16,7 +17,7 @@ export class ModificarExistenciaComponent implements OnInit {
     nombre:"Tornillos",
     id_catalogo:5
   }
-  toasts: object[] = [];
+  toasts: ToastInfo[] = [];
   invalido=false
   
   constructor(private service: ListarExistenciasService, private activatedRoute: ActivatedRoute, private router:Router){
@@ -36,24 +37,24 @@ export class ModificarExistenciaComponent implements OnInit {
 
   logearse(form: NgForm) {
     if(form.valid){
-      alert("Exito")
       this.service.modificarExistencia(this.existenciaAModificar).subscribe({
         next:() =>{
-          // this.notificar('Producto modificado correctamente!',"");
-          alert('Producto modificado correctamente!');
-          this.router.navigate(['/inventory/listar-existencias']);
+          this.notificar("Exito",'Producto modificado correctamente!');
+          // alert('Producto modificado correctamente!');
+          // this.router.navigate(['/inventory/listar-existencias']);
         },
         error:() =>{
-          alert('Ocurrio un error al elimar el producto!');
+          this.notificar("Error",'Ocurrio un error al elimar el producto!');
+          // alert('Ocurrio un error al elimar el producto!');
         }
       })
     }else{
-      console.log("invalido")
+      this.notificar("Error",'Valores invalidos');
       this.invalido=true
     }
   }
 
   notificar(header: string, body: string) {
-    this.toasts.push({ header, body });
+    this.toasts.push({ header, body, delay:1000 });
   }
 }
