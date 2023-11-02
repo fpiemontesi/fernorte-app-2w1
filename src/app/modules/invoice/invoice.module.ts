@@ -9,6 +9,7 @@ import { FormPagoComponent } from './components/form-pago/form-pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsModalComponent } from './components/details-modal/details-modal.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 const routes: Routes = [
   {path:'ConsultarPedidos',
@@ -21,7 +22,8 @@ const routes: Routes = [
         ]}
     ] }, 
 
-  {path:'GestionarFactura', component: GestionFacturaComponent }
+  {path:'GestionarFactura', component: GestionFacturaComponent },
+  {path:'Reportes', component: ReportesComponent }
 ];
 
 @NgModule({

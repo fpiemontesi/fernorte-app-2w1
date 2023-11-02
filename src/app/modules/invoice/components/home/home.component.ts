@@ -16,8 +16,6 @@ export class HomeComponent {
   constructor(private dola:DolarServiceService) { }
   
   ngOnInit() {
- 
-    
     this.dola.obtenerDolar().subscribe((dol: Dolar) => {
       this.dolar = dol.venta; // Asignar el valor de compra del objeto Dolar
     });
