@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2>Crear Pedido de Cotización</h2>
+        </div>
+        <form class="form-inline col-4">
+        <div class="form-group form-inline" style="float: right;">
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" class="form-control" id="fecha" name="Fecha-pedido" required/>
+            <br>
+        </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-3">
+    <form #formulario="ngForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="producto-faltante">Producto faltante</label>
+                <select [(ngModel)]="nuevoDato.producto" name="producto" class="form-control" id="producto-faltante" required #productoSelect="ngModel">
+                    <option selected disabled value="">Seleccionar...</option>
+                    <option *ngFor="let producto of productos" [value]="producto">{{ producto }}</option>
+                </select>
+                <div *ngIf="productoSelect.invalid && (productoSelect.dirty || productoSelect.touched)" class="text-danger">Producto faltante requerido.</div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" [(ngModel)]="nuevoDato.cantidad" name="cantidad" class="form-control" id="cantidad" required  #cantidadInput="ngModel">
+                <div *ngIf="cantidadInput.invalid && (cantidadInput.dirty || cantidadInput.touched)" class="text-danger">Cantidad requerida.</div>
+                <div *ngIf="(cantidadInput.dirty || cantidadInput.touched) && nuevoDato.cantidad<=0" class="text-danger">Cantidad no puede ser 0 o negativa.</div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="unidad">Unidad de medida</label>
+                <select class="form-control" [(ngModel)]="nuevoDato.unidad" name="unidad" id="unidad" required #unidadSelect="ngModel">
+                    <option selected disabled value="">Seleccionar...</option>
+                    <option *ngFor="let unidad of unidadesDeMedida" [value]="unidad">{{ unidad }}</option>
+                </select>
+                <div *ngIf="unidadSelect.invalid && (unidadSelect.dirty || unidadSelect.touched)" class="text-danger">Unidad requerida.</div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" style="float: right;" (click)="agregarDato()" [disabled]="productoSelect.invalid || cantidadInput.invalid || unidadSelect.invalid || nuevoDato.cantidad <= 0">Cargar</button> 
+        </div>
+    </form>
+</div>
+    <br>
+    <div class="col-1"></div>
+    <div class="col-8">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Unidad de medida</th>
+                <th scope="col">Proveedores</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dato of datos; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{ dato.producto }}</td>
+                <td>{{ dato.cantidad }} &nbsp;<button type="button" class="btn btn-danger btn-sm" (click)="disminuirCantidad(i)">-</button> &nbsp;<button type="button" class="btn btn-success btn-sm" (click)="aumentarCantidad(i)">+</button></td>
+                <td>{{ dato.unidad }}</td>
+                <td>Proveedor 1</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary" style="float: right;">Generar y enviar</button>
+</div>

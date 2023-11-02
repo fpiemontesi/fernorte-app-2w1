@@ -1,1 +1,43 @@
-<p>home purchase works!</p>
+<div class="row">
+  <div class="col-3">
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#" class="nav-link disabled link-dark" aria-current="page">
+          <h5>Proveedores</h5>
+        </a>
+        <a href="#" class="nav-link disabled link-dark" aria-current="page">
+          Crear
+        </a>
+        <a href="#" class="nav-link disabled link-dark" aria-current="page">
+          Ver todos
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link disabled link-dark">
+          <h5>Pedidos de cotización</h5>
+        </a>
+        <a class="nav-link link-dark" (click)="mostrarMiComponente()">
+          Crear
+        </a>
+        <a href="#" class="nav-link disabled link-dark">
+          Ver todos
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link disabled link-dark">
+          <h5>Ordenes de compra</h5>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+  <div class="col-9">
+    <div *ngIf="mostrarComponente">
+      <br>
+      <fn-crear-pedido-cotizacion></fn-crear-pedido-cotizacion>
+    </div>
+  </div>
+</div>
