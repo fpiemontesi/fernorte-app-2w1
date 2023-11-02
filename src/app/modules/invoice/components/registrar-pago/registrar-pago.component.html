@@ -1,5 +1,5 @@
 <button class="btn btn-success mb-2 me-2" (click)="openModal(content)">
-  PAGAR
+  {{ pagado ? 'FACTURAR' : 'PAGAR' }}
 </button>
 <ng-template #content let-modal>
   <div class="modal-header">

@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceService } from '../../services/invoice.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
 import { payDetailDTO } from '../../models/payDetailDTO';
+import { requestInvoiceDto } from '../../models/requestInvoiceDTO';
+import { OrderService } from '../../services/order.service';
 
 
 @Component({
@@ -16,16 +18,16 @@ export class RegistrarPagoComponent {
   @Input() resto: number = 0;
   //lista de los pagos que se hicieron
   listPays: payDetailDTO[] = [];
-
-
-  constructor(private modalService: NgbModal, private servinvoice: InvoiceService, private payserv: PaymentMethodService) { }
+  //variable para ver si esta pagado ya
+  pagado: boolean = false;
+  constructor(private modalService: NgbModal, private servinvoice: InvoiceService, private payserv: PaymentMethodService, private orderserv: OrderService) { }
 
   ngOnInit() {
     this.resto = this.invoiceTotal;
     this.payserv.getPaidsObservable().subscribe((pays) => {
       this.listPays = pays;
     });
-  
+
   }
 
 
@@ -41,10 +43,19 @@ export class RegistrarPagoComponent {
 
   //abre el modal para agregar pagos
   openModal(content: any) {
-    //cargamos la variable invoiceTotal con el total a pagar a traves del servicio de factura y seteamos el resto igual
-    this.invoiceTotal = this.servinvoice.getTotalpay();
-    this.resto = this.invoiceTotal;
-    this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false, scrollable: true });
+    if (this.pagado) {
+      const request: requestInvoiceDto = new requestInvoiceDto();
+      request.orderId = this.orderserv.getOrderSelected()?.id;
+      request.paymentMethodList = this.listPays;
+      this.servinvoice.loadInvoice(request);
+      alert("LA FACTURA SE CARGO TODO EXITO");
+    } else {
+      //cargamos la variable invoiceTotal con el total a pagar a traves del servicio de factura y seteamos el resto igual
+      this.invoiceTotal = this.servinvoice.getTotalpay();
+      this.resto = this.invoiceTotal;
+      this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false, scrollable: true });
+    }
+
   }
   //toma el resto del hijo y lo guarda en el padre
   guardarResto(resto: any) {
@@ -59,6 +70,7 @@ export class RegistrarPagoComponent {
     else {
       alert("Pagos totales ingresados")
       this.modalService.dismissAll();
+      this.pagado = true;
     }
   }
 }

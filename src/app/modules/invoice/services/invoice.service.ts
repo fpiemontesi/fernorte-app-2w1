@@ -10,11 +10,12 @@ import { InvoiceDto } from '../models/InvoiceDto';
   providedIn: 'root'
 })
 export class InvoiceService {
-  request?: requestInvoiceDto;
-  invoices: InvoiceDto[] = [];
+  
 
   newInvoice?: InvoiceDto;
   totalPay: number = 0;
+
+  requestInvoice?: requestInvoiceDto;
 
   constructor(private http: HttpClient) { }
 
@@ -26,13 +27,10 @@ export class InvoiceService {
     return this.http.get<InvoiceDto[]>('http://localhost:8080/api/v1/invoice/all');
   }
 
-  setRequest(req:requestInvoiceDto){
-    this.request = req;
-  }
-  setTotalpay(num:number){
+  setTotalpay(num: number) {
     this.totalPay = num;
   }
-  getTotalpay(){
+  getTotalpay() {
     return this.totalPay;
   }
 }
