@@ -50,7 +50,7 @@
       "supplierName": "Jordan",
       "details": [
         {
-          "id": 0,
+          "id": 5,
           "quantity": 60,
           "productName": "Standard Tape",
           "detail": "Details"
@@ -65,10 +65,25 @@
       "supplierName": "Ethan",
       "details": [
         {
-          "id": 0,
+          "id": 6,
           "quantity": 120,
           "productName": "Hammer",
           "detail": "Hammer time"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "arrivalDate": "2023-11-17",
+      "purchaseOrderNumber": 30,
+      "receiptNumber": 1001,
+      "supplierName": "Nathan",
+      "details": [
+        {
+          "id": 7,
+          "quantity": 2,
+          "productName": "Saw",
+          "detail": "Details details details..."
         }
       ]
     }

@@ -1,4 +1,4 @@
-import { ReceiptDetail } from "./detalle-remito";
+import { ReceiptDetail } from "./receipt-detail";
 
 export class Receipt {
     id: number = 0;

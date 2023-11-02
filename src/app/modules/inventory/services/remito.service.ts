@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Receipt } from '../models/remito';
+import { Receipt } from '../models/receipt';
 import { Observable } from 'rxjs';
 
 @Injectable({

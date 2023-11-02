@@ -1,9 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Receipt } from '../../../models/remito';
-import { ReceiptDetail } from '../../../models/detalle-remito';
+import { Receipt } from '../../../models/receipt';
+import { ReceiptDetail } from '../../../models/receipt-detail';
 import { RemitoService } from '../../../services/remito.service';
 import { Subscription } from 'rxjs';
+import { AppToastService } from '../../../services/app-toast.service';
 
 @Component({
   selector: 'fn-registrar-remito',
@@ -16,12 +17,11 @@ export class RegistrarRemitoComponent implements OnDestroy{
   detail: ReceiptDetail = new ReceiptDetail();
   private subscriptions = new Subscription();
 
-  constructor(private remitoService: RemitoService){}
+  constructor(private remitoService: RemitoService, private toastService: AppToastService){}
 
   addReceipt(form: NgForm) {
-    if(form.invalid){
-      alert('Form invalid');
-      //Toast pending...
+    if (form.invalid) {
+      this.toastService.show("Formulario inválido", "El formulario insertado es inválido.");
       return;
     }
     this.remitoService.create(this.receipt).subscribe({
@@ -31,12 +31,10 @@ export class RegistrarRemitoComponent implements OnDestroy{
         this.receipt.purchaseOrderNumber=0;
         this.receipt.receiptNumber=0;
         this.receipt.supplierName="";
-        //Toast pending...
-        alert('Success')
+        this.toastService.show("Formulario valido!","Remito fue registrado correctamente.");
       },
       error: (err) => {
-        //Toast pending...
-        console.log(err);
+        this.toastService.show("Error",err);
       }
     });
   }
@@ -51,8 +49,7 @@ export class RegistrarRemitoComponent implements OnDestroy{
       this.receipt.details.push(newDetail);
       this.detail = new ReceiptDetail(); 
     } else {
-     //Toast pending...
-     alert('Details are invalid')
+      this.toastService.show("Formulario invalido","Datos del detalle invalido.");
     }
   }
 
@@ -63,5 +60,4 @@ export class RegistrarRemitoComponent implements OnDestroy{
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
 }
