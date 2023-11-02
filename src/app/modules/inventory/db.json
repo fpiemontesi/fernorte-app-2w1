@@ -1,0 +1,29 @@
+{
+  "existencias": [
+    {
+      "id": 1,
+      "stock_minimo": 15,
+      "nombre": "Destornillador"
+    },
+    {
+      "id": 3,
+      "stock_minimo": "50",
+      "nombre": "Martillo"
+    },
+    {
+      "id": 4,
+      "stock_minimo": "200",
+      "nombre": "Aerosol"
+    },
+    {
+      "id": 5,
+      "stock_minimo": "500",
+      "nombre": "Tornillo"
+    },
+    {
+      "id": 6,
+      "stock_minimo": "50",
+      "nombre": "Taladro"
+    }
+  ]
+}

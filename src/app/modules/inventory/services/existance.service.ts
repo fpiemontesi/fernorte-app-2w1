@@ -16,15 +16,15 @@ export class ListarExistenciasService {
   public getExistencias() : Observable<Existencia[]> {
     return this.http.get<Existencia[]>(this.url);
   }
-
+  public getExistencia(id:number) : Observable<Existencia> {
+    return this.http.get<Existencia>(this.url+'/'+id);
+  }
   public deleteExistencia(id:number) :Observable<Existencia>{
     return this.http.delete<Existencia>(this.url+'/'+id);
   }
   public modificarExistencia(existencia:Existencia):Observable<Existencia>{
-    return this.http.put<Existencia>('https://my-json-server.typicode.com/'+
-    '1w1111979DiFranciscoMateo/demo/existencias/'+existencia.id,{
-      stock_minimo: existencia.stock_minimo
-    });
+    return this.http.put<Existencia>(this.url+'/'+existencia.id,existencia);
+  }
 
 
 }
