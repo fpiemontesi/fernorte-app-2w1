@@ -56,7 +56,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   storageZones: StorageZone[] = [];
   sections: Section[] = [];
   newSection: Section = new Section();
-  batchs: Batch[] = [];
+  batches: Batch[] = [];
 
   sectionsFiltered: Section[] = [];
   sectionParam: Section = new Section();
@@ -77,7 +77,7 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
       this.batchService.getAll().subscribe(
         {
           next: (response: Batch[]) =>{
-            this.batchs = response;
+            this.batches = response;
           },
           error: (err) => {
             console.log(err);
@@ -200,13 +200,13 @@ export class CreateSectionComponent implements OnInit, OnDestroy {
   deleteSection(id: number){
     let flag:Boolean = false;
     try{
-      this.batchs.forEach(lote => {
-        if(lote.sectionId == id){
+      for (let i = 0; i < this.batches.length; i++) {
+        if(this.batches[i].sectionId == id){
           flag = true;
           this.toastService.show("Error!","No se puede eliminar esta sección porque hay un lote que depende de ella");
-          throw "Existe un lote que depende de esta sección";
+          break;
         }
-      })
+      }
     }catch(e){}
 
     if(flag) return;
