@@ -25,8 +25,12 @@ export class RegistrarFacturaComponent {
   clients?: Client[] = [];
   clientSelected?: Client;
   // Obtener elementos del DOM y castearlos al tipo adecuado
-
-
+  nombreCliente?: string;
+  fechaFactura?: string;
+  tipoDni?: string;
+  tipoCliente?: string;
+  nroDoc?: string;
+  domicilio?: string;
 
 
   constructor(private orderService: OrderService, private invoiceservice: InvoiceService, private customerserv: CustomerService) {
@@ -52,12 +56,7 @@ export class RegistrarFacturaComponent {
 
   }
   ngOnInit() {
-    const nroDocInput = document.getElementById('nroDoc') as HTMLInputElement;
-    const domicilioInput = document.getElementById('domicilio') as HTMLInputElement;
-    const tipoClienteInput = document.getElementById('tipoCliente') as HTMLSelectElement;
-    const tipoDniInput = document.getElementById('tipoDni') as HTMLSelectElement;
-    const fechaFacturaInput = document.getElementById('fechaFactura') as HTMLInputElement;
-    const clienteInput = document.getElementById('nombreCliente') as HTMLInputElement;
+  
     //cargamos los clientes[] desde la api
     this.customerserv.obtenerCliente().subscribe(
       (response: Client[]) => {
@@ -80,12 +79,12 @@ export class RegistrarFacturaComponent {
         const formattedDate = formatDate(date, 'dd-MM-yyyy', 'es'); // El tercer argumento es el código de localización ('es' para español).
         console.log(formattedDate);
 
-        nroDocInput.value = this.clientSelected?.nro_doc?.toString() || "";  // Valor por defecto: ""
-        domicilioInput.value = this.clientSelected?.domicilio || "Cargar Domicilio";
-        clienteInput.value = this.clientSelected?.nombre + " " + this.clientSelected?.apellido;
-        tipoClienteInput.value = this.clientSelected?.id_tipo_cliente?.tipo_cliente || "";
-        tipoDniInput.value = this.clientSelected?.id_tipo_doc?.tipo_documento || "";
-        fechaFacturaInput.value = formattedDate.toString();
+        this.nroDoc= this.clientSelected?.nro_doc?.toString() || "";  // Valor por defecto: ""
+        this.domicilio = this.clientSelected?.domicilio || "Cargar Domicilio";
+        this.nombreCliente = this.clientSelected?.nombre + " " + this.clientSelected?.apellido;
+        this.tipoCliente = this.clientSelected?.id_tipo_cliente?.tipo_cliente || "";
+        this.tipoDni = this.clientSelected?.id_tipo_doc?.tipo_documento || "";
+        this.fechaFactura = formattedDate.toString();
 
       },
       (error: any) => {
@@ -108,7 +107,7 @@ export class RegistrarFacturaComponent {
       });
     }
   }
-  realizarPago(){
+  realizarPago() {
 
   }
 }
