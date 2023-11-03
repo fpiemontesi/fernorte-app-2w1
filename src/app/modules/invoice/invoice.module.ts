@@ -12,31 +12,37 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReportesComponent } from './components/reportes/reportes.component';
 
 const routes: Routes = [
-  {path:'ConsultarPedidos',
-    children:[
-      {path:'', component: PendingOrdersComponent},
-      {path:'RegistrarFactura', 
-        children:[
-          {path:'', component: RegistrarFacturaComponent },
-          {path:'DetalleFactura', component: DetailsModalComponent}
-        ]}
-    ] }, 
+  {
+    path: 'ConsultarPedidos',
+    children: [
+      { path: '', component: PendingOrdersComponent },
+      {
+        path: 'RegistrarFactura/:id',
+        children: [
+          { path: '', component: RegistrarFacturaComponent },
+          { path: 'DetalleFactura', component: DetailsModalComponent },
+        ],
+      },
+    ],
+  },
 
-  {path:'GestionarFactura', component: GestionFacturaComponent },
-  {path:'Reportes', component: ReportesComponent }
+  { path: 'GestionarFactura', component: GestionFacturaComponent },
+  { path: 'Reportes', component: ReportesComponent },
 ];
 
 @NgModule({
-  declarations: [HomeComponent,  
+  declarations: [
+    HomeComponent,
     RegistrarFacturaComponent,
     PendingOrdersComponent,
     GestionFacturaComponent,
     RegistrarPagoComponent,
     FormPagoComponent,
-    DetailsModalComponent],
-    
+    DetailsModalComponent,
+  ],
+
   providers: [],
-  imports: [CommonModule, FormsModule,RouterModule.forRoot(routes)],
-  exports: [HomeComponent,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule.forRoot(routes)],
+  exports: [HomeComponent, RouterModule],
 })
-export class InvoiceModule { }
+export class InvoiceModule {}

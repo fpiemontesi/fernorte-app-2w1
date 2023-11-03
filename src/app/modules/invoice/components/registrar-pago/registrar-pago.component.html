@@ -1,34 +1,45 @@
 <button class="btn btn-success mb-2 me-2" (click)="openModal(content)">
-  {{ pagado ? 'FACTURAR' : 'PAGAR' }}
+  {{ pagado ? "FACTURAR" : "PAGAR" }}
 </button>
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Formas de pago</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
   </div>
   <div class="modal-body">
     <div class="container text-center">
       <form>
-        <fn-form-pago [total]="invoiceTotal" 
-        (restoEmit)="guardarResto($event)"></fn-form-pago>
+        <fn-form-pago
+          [total]="invoiceTotal"
+          (restoEmit)="guardarResto($event)"
+        ></fn-form-pago>
       </form>
-      <div *ngIf="listPays.length>0">
+      <div *ngIf="listPays.length > 0">
         <table class="table table-striped cust-table">
-            <thead>
-                <tr>
-                    <th>Forma de pago</th>
-                    <th>Monto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let pay of listPays">
-                    <td>{{ pay.paymentMethodDescription }}</td>
-                    <td>{{ pay.amount }}</td>
-                    <td><button class="btn btn-primary" (click)="deletePay(pay)">Borrar</button></td>
-                </tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th>Forma de pago</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pay of listPays">
+              <td>{{ pay.paymentMethodDescription }}</td>
+              <td>{{ pay.amount }}</td>
+              <td>
+                <button class="btn btn-primary" (click)="deletePay(pay)">
+                  Borrar
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
-    </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">
@@ -38,7 +49,7 @@
     <div class="col">
       <label>Restante: {{ resto | currency }}</label>
     </div>
-    <button type="button" class="btn btn-light" (click)="endPays(content)">
+    <button type="button" class="btn btn-success" (click)="endPays(content)">
       Finalizar Pagos
     </button>
   </div>

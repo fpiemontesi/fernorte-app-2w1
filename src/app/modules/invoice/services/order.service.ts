@@ -4,25 +4,24 @@ import { Order } from '../models/order';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-
-  private apiUrl = 'https://my-json-server.typicode.com/113843-Decicco-Giovanni/ventas/ventas';
+  private apiUrl =
+    'https://my-json-server.typicode.com/113843-Decicco-Giovanni/ventas/ventas';
   orders: Order[] = [];
 
-  orderSelected?: Order;
-  constructor(private http: HttpClient) {
-  }
+  orderSelected: Order = new Order();
+  constructor(private http: HttpClient) {}
 
-  obtenerOrdenes():Observable<Order[]> {
+  obtenerOrdenes(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrl);
   }
-  setOrderSelected(or:Order){
+  setOrderSelected(or: Order) {
     this.orderSelected = or;
   }
 
-  getOrderSelected(){
+  getOrderSelected() {
     return this.orderSelected;
   }
 }

@@ -1,153 +1,156 @@
 <body class="bg-secundario">
   <div class="container-fluid custom-container">
-  <div class="container-fluid bg-primario text-white pb-4 sombra">
-    <div class="row">
-      <div class="col-md-6">
-        <a class="navbar-brand" href="#">
-          <img
-            src="../../assets/LogoFerNorte.png"
-            alt=""
-            class="d-inline-block align-text-top"
-          />
-        </a>
+    <div class="container-fluid bg-primario text-white pb-4 sombra">
+      <div class="row">
+        <div class="col-md-6">
+          <a class="navbar-brand" href="#">
+            <img
+              src="../../assets/LogoFerNorte.png"
+              alt=""
+              class="d-inline-block align-text-top"
+            />
+          </a>
+        </div>
+        <div class="col-md-6 text-end pt-2 .texto-primario">N° 1000</div>
       </div>
-      <div class="col-md-6 text-end pt-2 .texto-primario">N° 1000</div>
-    </div>
-    <div class="row">
-      <div class="col-10">
-        <div class="row pb-2">
-          <div class="col align-items-end d-flex justify-content-end">
-            <label for="" class="margenR">Cliente</label>
-            <input
-              type="text"
-              name=""
-              id="nombreCliente"
-              [value]="nombreCliente"
-              disabled
-              class="input-text"
-            />
+      <div class="row">
+        <div class="col-10">
+          <div class="row pb-2">
+            <div class="col align-items-end d-flex justify-content-end">
+              <label for="" class="margenR">Cliente</label>
+              <input
+                type="text"
+                name=""
+                id="nombreCliente"
+                [value]="client.nombre + ' ' + client.apellido"
+                disabled
+                class="input-text"
+              />
+            </div>
+            <div class="col align-items-end d-flex justify-content-end">
+              <label for="" class="margenR">Fecha</label>
+              <input
+                type="text"
+                name=""
+                id="fechaFactura"
+                [value]="fechaHoy | date : 'yyyy-MM-dd'"
+                disabled
+                class="input-text"
+              />
+            </div>
+            <div class="col align-items-end d-flex justify-content-end">
+              <label for="" class="margenR">Tipo Documento</label>
+              <input
+                type="text"
+                name=""
+                id="tipoDni"
+                [value]="client.id_tipo_doc.tipo_documento"
+                disabled
+                class="input-text"
+              />
+            </div>
           </div>
-          <div class="col align-items-end d-flex justify-content-end">
-            <label for="" class="margenR">Fecha</label>
-            <input
-              type="text"
-              name=""
-              id="fechaFactura"
-              [value]="fechaFactura"
-              disabled
-              class="input-text"
-            />
-          </div>
-          <div class="col align-items-end d-flex justify-content-end">
-            <label for="" class="margenR">Tipo Documento</label>
-            <input
-              type="text"
-              name=""
-              id="tipoDni"
-              [value]="tipoDni"
-              disabled
-              class="input-text"
-            />
+          <div class="row">
+            <div class="col align-items-end d-flex justify-content-end">
+              <label for="" class="margenR">Tipo Cliente</label>
+              <input
+                type="text"
+                name=""
+                id="tipoCliente"
+                [value]="client.id_tipo_cliente.tipo_cliente"
+                disabled
+                class="input-text"
+              />
+            </div>
+            <div class="col align-items-end d-flex justify-content-end">
+              <label for="" class="margenR">Domicilio</label>
+              <input
+                type="text"
+                name=""
+                id="domicilio"
+                [value]="client.domicilio"
+                disabled
+                class="input-text"
+              />
+            </div>
+            <div class="col align-items-end d-flex justify-content-end">
+              <label for="" class="margenR">Documento</label>
+              <input
+                type="text"
+                name=""
+                id="nroDoc"
+                [value]="client.nro_doc"
+                disabled
+                class="input-text"
+              />
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col align-items-end d-flex justify-content-end">
-            <label for="" class="margenR">Tipo Cliente</label>
-            <input
-              type="text"
-              name=""
-              id="tipoCliente"
-              [value]="tipoCliente"
-              disabled
-              class="input-text"
-            />
-          </div>
-          <div class="col align-items-end d-flex justify-content-end">
-            <label for="" class="margenR">Domicilio</label>
-            <input
-              type="text"
-              name=""
-              id="domicilio"
-              [value]="domicilio"
-              disabled
-              class="input-text"
-            />
-          </div>
-          <div class="col align-items-end d-flex justify-content-end">
-            <label for="" class="margenR">Documento</label>
-            <input
-              type="text"
-              name=""
-              id="nroDoc"
-              [value]="nroDoc"
-              disabled
-              class="input-text"
-            />
-          </div>
+        <div class="col-2 mr-5">
+          <div class="row text-end r-1"><div class="col">tipo</div></div>
+          <div class="row text-end h1"><div class="col">C</div></div>
         </div>
       </div>
-      <div class="col-2 mr-5">
-        <div class="row text-end r-1"><div class="col">tipo</div></div>
-        <div class="row text-end h1"><div class="col">C</div></div>
-      </div>
     </div>
-  </div>
-  <div class="container pt-2 pb-3 mt-3">
-    <div class="container pt-2 pb-3 mt-3 table-container">
-      <table class="table border sombra">
-        <thead>
-          <tr>
+    <div class="container pt-2 pb-3 mt-3">
+      <div class="container pt-2 pb-3 mt-3 mb-3 table-container sombra">
+        <table class="table border">
+          <thead>
+            <tr>
               <th>Descripcion</th>
               <th>Cantidad</th>
               <th>Precio Unidad</th>
               <th>Subtotal</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let det of details">
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let det of orderSelected.detalles">
               <td>{{ det.descripcion }}</td>
               <td>{{ det.cantidad }}</td>
               <td>{{ det.precioUnitario | currency }}</td>
-              <td>{{ det.subtotal | currency}}</td>
-          </tr>
-      </tbody>
-      </table>
-      <table class="table border sombra">
-        <thead>
-          <tr>
-              <th>Descripcion</th>
+              <td>{{ det.cantidad * det.precioUnitario | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table border">
+          <thead>
+            <tr>
+              <th>Descripción</th>
               <th>Porcentaje</th>
               <th>Descuento</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let disc of discounts">
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let disc of orderSelected.descuentos">
               <td>{{ disc.description }}</td>
               <td>{{ disc.porcentage }}</td>
-              <td>{{ disc.discounted | currency}} </td>
-          </tr>
-      </tbody>
-      </table>
-    </div>
+              <td>{{ disc.discounted | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="row d-flex justify-content-end">
-      <div class="col-auto">
-        <label class="h3"><p>{{totalPedido | currency}}</p>  </label>
+      <div class="row d-flex justify-content-end">
+        <div class="col-auto">
+          <label class="h4" style="color: dimgray"
+            >Subtotal: {{ orderSelected.subtotal | currency }} </label
+          ><br />
+          <label class="h3">Total: {{ orderSelected.total | currency }} </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-start">
+          <input
+            type="button"
+            class="btn btn-secondary"
+            value="Cancelar"
+            routerLink="/ConsultarPedidos"
+          />
+        </div>
+        <div class="col d-flex justify-content-end">
+          <fn-registrar-pago></fn-registrar-pago>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <input
-          type="button"
-          class="btn btn-secondary"
-          value="Cancelar"
-          routerLink="/ConsultarPedidos"
-        />
-      </div>
-      <div class="col d-flex justify-content-end">
-        <fn-registrar-pago></fn-registrar-pago>
-      </div>
-    </div>
-  </div>
   </div>
 </body>

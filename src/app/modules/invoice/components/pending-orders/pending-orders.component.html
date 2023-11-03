@@ -53,14 +53,25 @@
                   {{ order.total | currency : "ARS" : "" : "1.2-2" }}
                 </td>
                 <td>
-                  <button class="btn btn-primary" (click)="viewDetail(order)">
-                    Ver
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-primary" (click)="facturarOrden(order)">
-                    Facturar
-                  </button>
+                  <div class="row justify-content-center">
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-primary"
+                        (click)="viewDetail(order)"
+                      >
+                        (0)
+                      </button>
+                    </div>
+
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-success"
+                        (click)="facturarOrden(order)"
+                      >
+                        $
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>

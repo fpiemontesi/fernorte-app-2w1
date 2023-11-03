@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { DiscountDTO } from '../../models/DiscountDTO';
+import { ActivatedRoute } from '@angular/router';
 registerLocaleData(localeEs);
 
 @Component({
@@ -17,97 +18,27 @@ registerLocaleData(localeEs);
   styleUrls: ['./registrar-factura.component.css'],
 })
 export class RegistrarFacturaComponent {
-  orderSelected: Order | undefined;
-  //array de detalles de la factura
-  details: Detail[] | undefined;
-  discounts: DiscountDTO[] | undefined;
-  totalPedido: number = 0;
-  clients?: Client[] = [];
-  clientSelected?: Client;
-  // Obtener elementos del DOM y castearlos al tipo adecuado
-  nombreCliente?: string;
-  fechaFactura?: string;
-  tipoDni?: string;
-  tipoCliente?: string;
-  nroDoc?: string;
-  domicilio?: string;
-
-
-  constructor(private orderService: OrderService, private invoiceservice: InvoiceService, private customerserv: CustomerService) {
-    //cargamos las variables con los servicios ordenseleccionada, detalles, descuentos
-    this.orderSelected = this.orderService.getOrderSelected();
-    this.details = this.orderSelected?.detalles;
-    this.discounts = this.orderSelected?.descuentos;
-    invoiceservice.setTotalpay(this.orderSelected!.total);
-
-
-    this.totalPedido = invoiceservice.getTotalpay();
-    if (this.details) {
-      this.details.forEach(element => {
-        //EL TOFIXED REDONDEA 2 CIFRAS
-        const subtotal = (element.cantidad * element.precioUnitario).toFixed(2);
-        //CONVERTIMOS A NUMERO
-        element.subtotal = parseFloat(subtotal);
-      });
-      invoiceservice.setTotalpay(this.totalPedido);
-    }
-    this.calculateDiscounted();
-
-
-  }
+  orderSelected: Order = new Order();
+  client: Client = new Client();
+  id: number = 0;
+  fechaHoy: Date = new Date();
+  constructor(
+    private orderService: OrderService,
+    private invoiceservice: InvoiceService,
+    private customerserv: CustomerService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit() {
-  
-    //cargamos los clientes[] desde la api
-    this.customerserv.obtenerCliente().subscribe(
-      (response: Client[]) => {
-        this.clients = response;
-        console.log("esta es la response de clientes", response);
-        console.log("esta es clients", this.clients);
+    this.id = this.route.snapshot.params['id'];
+    this.orderSelected = this.orderService.getOrderSelected();
 
-        // Ahora buscamos el cliente en el array de clientes
-        const clienteEncontrado = this.clients?.find(c => c.id === this.orderSelected?.idCliente);
-        console.log("idcliente orden", this.orderSelected?.idCliente);
-        console.log("cliente encontrado", clienteEncontrado);
-        //si existe el cliente en el array lo guardamos en el seleccionado sino advertimos que no existe
-        if (clienteEncontrado) {
-          this.clientSelected = clienteEncontrado
-        } else {
-          alert("Cliente no existe");
-
-        }
-        const date = new Date();
-        const formattedDate = formatDate(date, 'dd-MM-yyyy', 'es'); // El tercer argumento es el código de localización ('es' para español).
-        console.log(formattedDate);
-
-        this.nroDoc= this.clientSelected?.nro_doc?.toString() || "";  // Valor por defecto: ""
-        this.domicilio = this.clientSelected?.domicilio || "Cargar Domicilio";
-        this.nombreCliente = this.clientSelected?.nombre + " " + this.clientSelected?.apellido;
-        this.tipoCliente = this.clientSelected?.id_tipo_cliente?.tipo_cliente || "";
-        this.tipoDni = this.clientSelected?.id_tipo_doc?.tipo_documento || "";
-        this.fechaFactura = formattedDate.toString();
-
-      },
-      (error: any) => {
-        console.error(error);
+    this.customerserv
+      .obtenerClienteById(this.orderSelected.idCliente)
+      .subscribe((data) => {
+        console.log(data);
+        this.client = data;
+        console.log(this.client);
       });
-
-
-
-    console.log("discounts: ", this.discounts)
-    console.log("discounts this.order: ", this.orderSelected?.descuentos)
-
-
-
   }
-
-  calculateDiscounted() {
-    if (this.discounts) {
-      this.discounts.forEach(element => {
-        element.discounted = (this.totalPedido * element.porcentage!) / 100;
-      });
-    }
-  }
-  realizarPago() {
-
-  }
+  realizarPago() {}
 }
