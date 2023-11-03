@@ -3,6 +3,7 @@ import { CustomerService } from '../../services/customer.service';
 import { Component, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { cliente } from '../../models/cliente';
 
 @Component({
   selector: 'fn-create-customer',
@@ -12,30 +13,8 @@ import { NgForm } from '@angular/forms';
 export class CreateCustomerComponent {
   @ViewChild('crearClienteForm', { static: false }) crearClienteForm!: NgForm;
 
-  cliente = {
-    nombre: '',
-    apellido: '',
-    email: '',
-    telefono: '',
-    id_tipo_doc: {
-      id_tipo_doc: null,
-      tipo_documento: '',
-    },
-    nro_doc: null,
-    id_categoria_fiscal: {
-      id_categoria: null,
-      descripcion: '',
-    },
-    id_tipo_cliente: {
-      id_tipo_cliente: null,
-      tipo_cliente: '',
-    },
-    id_clasificacion: {
-      id_clasificacion: null,
-      descripcion: '',
-    },
-    cant_puntos: 0,
-  };
+ 
+  cliente = new cliente();
 
   constructor(
     private restService: RestService,
@@ -46,33 +25,6 @@ export class CreateCustomerComponent {
     try {
       this.restService.postCliente(this.cliente).subscribe((response) => {
         console.log('Cliente creado con éxito', response);
-
-        // Limpia el formulario
-        this.cliente = {
-          nombre: '',
-          apellido: '',
-          email: '',
-          telefono: '',
-          id_tipo_doc: {
-            id_tipo_doc: null,
-            tipo_documento: '',
-          },
-          nro_doc: null,
-          id_categoria_fiscal: {
-            id_categoria: null,
-            descripcion: '',
-          },
-          id_tipo_cliente: {
-            id_tipo_cliente: null,
-            tipo_cliente: '',
-          },
-          id_clasificacion: {
-            id_clasificacion: null,
-            descripcion: '',
-          },
-          cant_puntos: 0,
-        };
-
         this.crearClienteForm.reset();
         this.customerService.agregarCliente(this.cliente);
       });
