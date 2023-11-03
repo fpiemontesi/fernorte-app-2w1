@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
+import { PresupuestoService } from '../../services/presupuesto.service';
 
 @Component({
   selector: 'fn-modificar-venta',
@@ -31,7 +32,7 @@ export class ModificarVentaComponent implements OnInit{
     cantidad: 0
   };
 
-  constructor(private service: VentasService, private http: HttpClient) {
+  constructor(private service: VentasService, private http: HttpClient, private presupuestoServ: PresupuestoService) {
    
   }
   ngOnInit(): void {
@@ -48,9 +49,16 @@ export class ModificarVentaComponent implements OnInit{
     this.formData.vendedor = ventaActual.id_vendedor;
     this.formData.tipo = ventaActual.tipo_venta;
     this.formData.formaEntrega = ventaActual.forma_entrega;
-    this.formData.producto = ventaActual.detalles[0].descripcion;
-    this.formData.cantidad = ventaActual.detalles[0].cantidad;
+    for(let i = 0; i < ventaActual.detalles.length; i++) {
+      this.filas.push({
+        id: ventaActual.detalles[i].id_producto,
+        producto: ventaActual.detalles[i].descripcion,
+        cantidad: ventaActual.detalles[i].cantidad,
+        precio_unitario:ventaActual.detalles[i].precio_unitario
+      })
+    }
   }
+    
 
 // DEBERIA SER CON EL JSON DE ARTICULOS  
 //   ListarArticulos() {
@@ -86,7 +94,7 @@ Listar() {
   agregarFila(event: Event): void {
     event.preventDefault();
     const producto = document.getElementById("producto") as HTMLSelectElement;
-    if (!this.ValidarProducto()) {
+    if (!this.presupuestoServ.validarProducto(this.formData)) {
       return;
     }
     const productoSeleccionado = producto.options[producto.selectedIndex].text;
@@ -104,47 +112,22 @@ Listar() {
     this.filas.push({
       id: producto.value,
       producto: productoSeleccionado,
-      cantidad: this.venta.detalles[0].cantidad,
+      cantidad: this.formData.cantidad,
       precio_unitario: precioUnitario,
     });
     this.productos.push({
       id_producto: producto.options[producto.selectedIndex].value,
       descripcion: producto.options[producto.selectedIndex].text,
-      cantidad: this.venta.detalles[0].cantidad,
+      cantidad: this.formData.cantidad,
       unidad: 'Kgs',
     });
     this.productosVenta.push({
       id_producto: producto.options[producto.selectedIndex].value,
       precio_unitario: precioUnitario,
-      cantidad: this.venta.detalles[0].cantidad,
+      cantidad: this.formData.cantidad,
     });
   }
-  ValidarProducto(): boolean {
-    // if (
-    //   this.venta.detalles.producto !== 0 &&
-    //   this.venta.detalles.cantidad !== 0 &&
-    //   this.venta.detalles.cantidad !== null
-    // ) {
-    //   return true;
-    // }
-    if (
-      this.venta.detalles &&
-      this.venta.detalles.length > 0 &&
-      this.venta.detalles[0].producto !== 0 &&
-      this.venta.detalles[0].cantidad !== 0 &&
-      this.venta.detalles[0].cantidad !== null
-    ) {
-      return true;
-    }
-    Swal.fire({
-      icon: 'warning',
-      title: 'Seleccione un producto y una cantidad',
-      showCancelButton: false,
-      showConfirmButton: true,
-      confirmButtonText: 'Aceptar',
-    });
-    return false;
-  }
+  
   getPrecioUnitario(productoSeleccionado: string): number | undefined {
     const productoEnLista = this.myList.find((item) => item.producto_name === productoSeleccionado);
     return productoEnLista?.precio_unitario;
