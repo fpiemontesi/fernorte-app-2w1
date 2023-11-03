@@ -136,10 +136,10 @@ export class ConsultarVentaComponent {
   actualizarEstado(){
     
   }
-  modificarVenta(id:number){
-    this.service.guardarId(id);
+  modificarVenta(venta:Ventas){
+    this.service.guardarId(venta);
     this.router.navigate(['modificar-venta']);
-    console.log("id de la venta");
+    console.log(venta);
   }
   
   verDetalle(venta: Ventas){

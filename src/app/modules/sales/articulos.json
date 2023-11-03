@@ -1,0 +1,214 @@
+{
+    "articulos": [
+        {
+            "id": "d5d26be0-5760-4d0d-9dd6-0b5f7c21e97a",
+            "product_nombre": "Producto 1",
+            "descripcion": "Descripción del Producto 1",
+            "activo": true,
+            "precio_compra": 39.99,
+            "precio_minorista": 49.99,
+            "precio_mayorista": 44.99,
+            "origen": "Argentina",
+            "peso": 15,
+            "color": "rojo",
+            "materia": "Metal",
+            "dimensiones": "15x14",
+            "images": [
+              {
+                "id": "e097e6f9-3686-4dd2-b071-8c1ac8445de6",
+                "url": "https://example.com/image1.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              },
+              {
+                "id": "b1b84d12-1c4f-457f-b3f4-832d82f8b69f",
+                "url": "https://example.com/image2.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              }
+            ],
+            "marca": {
+              "id": "996634e1-75f7-4b67-8a20-18a4c8fda2a7",
+              "nombre": "Marca 1"
+            },
+            "categorias": [
+              {
+                "id": "848e4d3c-17a6-48ea-ba89-f9c60f9e0ae3",
+                "nombre": "Electrónica"
+              },
+              {
+                "id": "ea31a318-854f-4572-9bca-2b49f0e0d96c",
+                "nombre": "Hogar"
+              }
+            ]
+          },
+          {
+            "id": "d5d26be0-5760-4d0d-9dd6-0b5f7c21e97a",
+            "product_nombre": "Producto 1",
+            "descripcion": "Descripción del Producto 1",
+            "activo": true,
+            "precio_compra": 39.99,
+            "precio_minorista": 49.99,
+            "precio_mayorista": 44.99,
+            "origen": "Argentina",
+            "peso": 15,
+            "color": "rojo",
+            "materia": "Metal",
+            "dimensiones": "15x14",
+            "images": [
+              {
+                "id": "e097e6f9-3686-4dd2-b071-8c1ac8445de6",
+                "url": "https://example.com/image1.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              },
+              {
+                "id": "b1b84d12-1c4f-457f-b3f4-832d82f8b69f",
+                "url": "https://example.com/image2.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              }
+            ],
+            "marca": {
+              "id": "996634e1-75f7-4b67-8a20-18a4c8fda2a7",
+              "nombre": "Marca 1"
+            },
+            "categorias": [
+              {
+                "id": "848e4d3c-17a6-48ea-ba89-f9c60f9e0ae3",
+                "nombre": "Electrónica"
+              },
+              {
+                "id": "ea31a318-854f-4572-9bca-2b49f0e0d96c",
+                "nombre": "Hogar"
+              }
+            ]
+          },
+          {
+            "id": "d5d26be0-5760-4d0d-9dd6-0b5f7c21e97a",
+            "product_nombre": "Producto 1",
+            "descripcion": "Descripción del Producto 1",
+            "activo": true,
+            "precio_compra": 39.99,
+            "precio_minorista": 49.99,
+            "precio_mayorista": 44.99,
+            "origen": "Argentina",
+            "peso": 15,
+            "color": "rojo",
+            "materia": "Metal",
+            "dimensiones": "15x14",
+            "images": [
+              {
+                "id": "e097e6f9-3686-4dd2-b071-8c1ac8445de6",
+                "url": "https://example.com/image1.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              },
+              {
+                "id": "b1b84d12-1c4f-457f-b3f4-832d82f8b69f",
+                "url": "https://example.com/image2.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              }
+            ],
+            "marca": {
+              "id": "996634e1-75f7-4b67-8a20-18a4c8fda2a7",
+              "nombre": "Marca 1"
+            },
+            "categorias": [
+              {
+                "id": "848e4d3c-17a6-48ea-ba89-f9c60f9e0ae3",
+                "nombre": "Electrónica"
+              },
+              {
+                "id": "ea31a318-854f-4572-9bca-2b49f0e0d96c",
+                "nombre": "Hogar"
+              }
+            ]
+          },
+          {
+            "id": "d5d26be0-5760-4d0d-9dd6-0b5f7c21e97a",
+            "product_nombre": "Producto 1",
+            "descripcion": "Descripción del Producto 1",
+            "activo": true,
+            "precio_compra": 39.99,
+            "precio_minorista": 49.99,
+            "precio_mayorista": 44.99,
+            "origen": "Argentina",
+            "peso": 15,
+            "color": "rojo",
+            "materia": "Metal",
+            "dimensiones": "15x14",
+            "images": [
+              {
+                "id": "e097e6f9-3686-4dd2-b071-8c1ac8445de6",
+                "url": "https://example.com/image1.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              },
+              {
+                "id": "b1b84d12-1c4f-457f-b3f4-832d82f8b69f",
+                "url": "https://example.com/image2.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              }
+            ],
+            "marca": {
+              "id": "996634e1-75f7-4b67-8a20-18a4c8fda2a7",
+              "nombre": "Marca 1"
+            },
+            "categorias": [
+              {
+                "id": "848e4d3c-17a6-48ea-ba89-f9c60f9e0ae3",
+                "nombre": "Electrónica"
+              },
+              {
+                "id": "ea31a318-854f-4572-9bca-2b49f0e0d96c",
+                "nombre": "Hogar"
+              }
+            ]
+          },
+          {
+            "id": "d5d26be0-5760-4d0d-9dd6-0b5f7c21e97a",
+            "product_nombre": "Producto 1",
+            "descripcion": "Descripción del Producto 1",
+            "activo": true,
+            "precio_compra": 39.99,
+            "precio_minorista": 49.99,
+            "precio_mayorista": 44.99,
+            "origen": "Argentina",
+            "peso": 15,
+            "color": "rojo",
+            "materia": "Metal",
+            "dimensiones": "15x14",
+            "images": [
+              {
+                "id": "e097e6f9-3686-4dd2-b071-8c1ac8445de6",
+                "url": "https://example.com/image1.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              },
+              {
+                "id": "b1b84d12-1c4f-457f-b3f4-832d82f8b69f",
+                "url": "https://example.com/image2.jpg",
+                "ancho": "800px",
+                "alto": "600px"
+              }
+            ],
+            "marca": {
+              "id": "996634e1-75f7-4b67-8a20-18a4c8fda2a7",
+              "nombre": "Marca 1"
+            },
+            "categorias": [
+              {
+                "id": "848e4d3c-17a6-48ea-ba89-f9c60f9e0ae3",
+                "nombre": "Electrónica"
+              },
+              {
+                "id": "ea31a318-854f-4572-9bca-2b49f0e0d96c",
+                "nombre": "Hogar"
+              }
+            ]
+          }
+    ]
+}

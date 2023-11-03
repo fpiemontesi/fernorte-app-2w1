@@ -3,6 +3,7 @@ import { VentasService } from '../../services/ventas.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'fn-modificar-venta',
@@ -11,8 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class ModificarVentaComponent implements OnInit{
 
-  ventaId!: number;
-  venta: any;
+  venta: any = {};
   productos : any[] = [];
   productosVenta : any[] = [];
   filas: any[] = [];
@@ -21,47 +21,57 @@ export class ModificarVentaComponent implements OnInit{
   form!: NgForm;
   action!: string; 
 
+  formData: any = {
+    fecha: new Date().toISOString().split('T')[0],
+    cliente: '',
+    tipo: '',
+    formaEntrega: '',
+    vendedor: '',
+    producto :'',
+    cantidad: 0
+  };
 
-  constructor(private service: VentasService, private route: ActivatedRoute){
-    this.ventaId= this.service.obtenerId();
-  }
-    
-  listarClientes(){
-    this.service.getClientes().subscribe(data => {
-      this.myList= data.results;
-    })
+  constructor(private service: VentasService, private http: HttpClient) {
+   
   }
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id');
-      if (idParam !== null) {
-        this.ventaId = +idParam;
-        this.loadData();
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudo cargar el id de la venta',
-        });
-      }
-    });
+   console.log(this.service.obtenerVentas());
+   console.log(this.service.obtenerVentas().detalles[0].descripcion);
+   this.cargarDatosVenta();
+  //this.ListarArticulos();
+    this.Listar();
   }
-  loadData(): void {
-    this.service.getVentaById(this.ventaId).subscribe(
-      (data) => {
-        this.venta = data; // Asigna los datos directamente a la instancia de la clase Ventas
-      },
-      (error) => {
-        console.error('Error al cargar los datos de la venta', error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudieron cargar los datos de la venta',
-        });
-      }
-    );
+    
+  cargarDatosVenta() {
+    const ventaActual = this.service.obtenerVentas(); 
+    this.formData.cliente = ventaActual.id_cliente;
+    this.formData.vendedor = ventaActual.id_vendedor;
+    this.formData.tipo = ventaActual.tipo_venta;
+    this.formData.formaEntrega = ventaActual.forma_entrega;
+    this.formData.producto = ventaActual.detalles[0].descripcion;
+    this.formData.cantidad = ventaActual.detalles[0].cantidad;
   }
 
+// DEBERIA SER CON EL JSON DE ARTICULOS  
+//   ListarArticulos() {
+//     this.http.get('http://localhost:3000/articulos')
+//     .subscribe((data: any) => {
+//       this.myList = data.map((item: any) => ({
+//         id_producto: item.id,
+//         producto_nombre: item.product_nombre,
+//         precio: item.precio_minorista
+//       }));
+//       console.log(this.myList);
+//     });
+// }
+  
+Listar() {
+  this.http.get('https://rickandmortyapi.com/api/character')
+    .subscribe((data: any) => {
+      this.myList = data.results;
+      console.log(this.myList);
+    });
+}
   onSubmit(){
     if (this.form.valid) {
       return true;
@@ -110,10 +120,19 @@ export class ModificarVentaComponent implements OnInit{
     });
   }
   ValidarProducto(): boolean {
+    // if (
+    //   this.venta.detalles.producto !== 0 &&
+    //   this.venta.detalles.cantidad !== 0 &&
+    //   this.venta.detalles.cantidad !== null
+    // ) {
+    //   return true;
+    // }
     if (
-      this.venta.detalles.producto !== 0 &&
-      this.venta.detalles.cantidad !== 0 &&
-      this.venta.detalles.cantidad !== null
+      this.venta.detalles &&
+      this.venta.detalles.length > 0 &&
+      this.venta.detalles[0].producto !== 0 &&
+      this.venta.detalles[0].cantidad !== 0 &&
+      this.venta.detalles[0].cantidad !== null
     ) {
       return true;
     }
@@ -126,16 +145,39 @@ export class ModificarVentaComponent implements OnInit{
     });
     return false;
   }
-  getPrecioUnitario(productoSeleccionado: string): string | undefined {
-    const productoEnLista = this.myList.find((item) => item.name === productoSeleccionado);
-    return productoEnLista?.species;
-  }
+  getPrecioUnitario(productoSeleccionado: string): number | undefined {
+    const productoEnLista = this.myList.find((item) => item.producto_name === productoSeleccionado);
+    return productoEnLista?.precio_unitario;
+}
   guardarModificacion(){
     if(!this.onSubmit())
     {
       return ;
     }
-    
+    this.service.realizarModificacionVenta(this.formData, this.productosVenta)
+      .subscribe(
+        (response) => {
+          console.log('Solicitud PUT exitosa. Respuesta:', response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Se ha modificado la Venta',
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'Aceptar'
+          });
+          this.Clean();
+        },
+        (error) => {
+          console.error('Error al realizar la solicitud PUT:', error);
+        }
+      );
+  }
+
+  Clean() {
+    this.form.resetForm({ producto: 0 });
+    this.filas = [];
+    this.productos = [];
+    this.productosVenta = [];
   }
 }
 

@@ -1,11 +1,134 @@
-<div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;">
+<div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;" >
+  <h1>Generar</h1>
+  <form #form="ngForm" style="margin: 20px;" (ngSubmit)="onSubmit()">
+      <div class="row" style="margin-bottom: 20px;">
+       
+        <div class="col-md-4">
+          <label for="cliente" class="form-label">Cliente</label>
+          <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="formData.cliente" name="cliente" required #cliente="ngModel">
+            <option value="1">Tomas Benza</option>
+            <option value="2">Cande Mello</option>
+          </select>
+          <div *ngIf="(form.submitted || cliente.touched) && cliente.invalid">
+            <span class="text-danger">El nombre del Cliente es Obligatorio</span>
+          </div>
+          
+          </div>
+          
+        <div class="col-md-5">
+          <label for="tipo" class="form-label">Tipo Pedido</label>
+          <select name="tipo" id="tipo" class="form-select " [ngClass]="{'is-invalid': (form.submitted || tipo.touched) && tipo.invalid}" [(ngModel)]="formData.tipo" #tipo="ngModel" required>
+            <option value="1">Minorista</option>
+            <option value="2">Mayorista</option>
+          </select>
+          <div *ngIf="(form.submitted || tipo.touched) && tipo.invalid">
+            <span class="text-danger">Debe seleccionar un tipo de pedido</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="vendedor" class="form-label">Vendedor</label>
+        <select name="vendedor" id="vendedor" class="form-select " [ngClass]="{'is-invalid': (form.submitted || vendedor.touched) && vendedor.invalid}" [(ngModel)]="formData.vendedor" name="vendedor" required #vendedor="ngModel">
+            <option value="1">Tomas Benza</option>
+            <option value="2">Cande Mello</option>
+          </select>
+          <div *ngIf="(form.submitted || vendedor.touched) && vendedor.invalid">
+            <span class="text-danger">Debe seleccionar un Vendedor</span>
+          </div>
+          </div>
+        <div class="col-md-5">
+          <label for="formaEntrega" class="form-label">Forma Entrega</label>
+          <select name="formaEntrega" id="formaEntrega" class="form-select" [ngClass]="{'is-invalid': (form.submitted || formaEntrega.touched) && formaEntrega.invalid}"  [(ngModel)]="formData.formaEntrega" required #formaEntrega="ngModel">
+            <option value="1">Caja</option>
+            <option value="2">Deposito</option>
+          </select>
+          <div *ngIf="(form.submitted || formaEntrega.touched) && formaEntrega.invalid">
+            <span class="text-danger">Debe seleccionar una forma de entrega</span>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6">
+          <label for="producto" class="form-label">Producto</label>
+          <select name="producto" id="producto" class="form-select" [ngClass]="{'is-invalid': (form.submitted || producto.touched) && producto.invalid}" [(ngModel)]="formData.producto" required #producto="ngModel">
+            <!-- PARA QUE FUNCIONE CON EL JSON DE ARTICULOS
+               <option *ngFor="let producto of myList" [value]="producto.id_producto">{{ producto.producto_nombre }}</option> -->
+            <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option>
+          </select>
+          
+        </div>
+        <div class="col-md-3">
+          <label for="cantidad" class="form-label">Cantidad</label>
+          <input type="number" min="1" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad" [ngClass]="{'is-invalid': (form.submitted || cantidad.touched) && cantidad.invalid}" required [(ngModel)]="formData.cantidad" #cantidad="ngModel">
+        </div>
+        <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
+          <button (click)="agregarFila($event)" class="btn btn-dark btn-block m-sm-2">Agregar</button>
+        </div>
+      </div>
+      <div style="max-height: 250px; overflow-y: auto;">
+        <table id="tabla" class="table table-bordered table-hover table-striped" style="text-align: center;align-content: center;vertical-align: middle;">
+          <thead class="thead-dark">
+              <tr>
+                  <th scope="col" style="width: 400px;">Productos</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Precio Unitario</th>
+                  <th scope="col">Precio Total</th>
+                  <th scope="col" style="width: 50px;"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let fila of filas; let i = index">
+                  <td>{{ fila.producto }}</td>
+                  <td>{{ fila.cantidad }}</td>
+                  <td>{{fila.precio_unitario}}</td>
+                  <td>Fila 1, Celda 4</td>
+                  <td>
+                    <button class="btn" (click)="eliminarFila(i)">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </td>
+              <tr>
+                  <td colspan="3">TOTAL</td>
+                  <td>Fila 3, Celda 4</td>
+                  <td></td>
+              </tr>
+          </tbody>
+          
+      </table>
+      <div *ngIf="(form.submitted && filas.length === 0 )">
+        <span class="text-danger">Debe seleccionar al menos un producto</span>
+      </div>
+      </div> 
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="col-md-6" >               
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-dark">Cancelar</button>
+                <button type="submit" (click)="guardarModificacion()" class="btn btn-dark ">Guardar Presupuesto</button>
+              </div>
+            </div>
+            
+          </div>
+
+      </div>
+    </form>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;">
     <h1>Modificar Venta</h1>
     <form #form="ngForm" style="margin: 20px;" (ngSubmit)="onSubmit()">
       <div class="row" style="margin-bottom: 20px;">
-        <div class="col-md-4">
-          <label for="id">Id</label>
-          <input id="id" type="text" name="id" class="form-control" placeholder="Id de la venta" [(ngModel)]="venta.id">
-        </div>
         <div class="col-md-4">
           <label for="cliente" class="form-label">Cliente</label>
           <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="venta.id_cliente" name="cliente" required #cliente="ngModel">
@@ -110,4 +233,4 @@
         </div>
       </div>
     </form>
-  </div>
+  </div> -->
