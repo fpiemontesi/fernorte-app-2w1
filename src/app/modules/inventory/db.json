@@ -1,13 +1,8 @@
 {
   "existencias": [
     {
-      "id": 1,
-      "stock_minimo": 1,
-      "nombre": "Destornillador"
-    },
-    {
       "id": 3,
-      "stock_minimo": "50",
+      "stock_minimo": 16,
       "nombre": "Martillo"
     },
     {

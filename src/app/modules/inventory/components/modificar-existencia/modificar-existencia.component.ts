@@ -35,16 +35,16 @@ export class ModificarExistenciaComponent implements OnInit {
     })
   }
 
-  logearse(form: NgForm) {
+  confirmar(form: NgForm) {
     if(form.valid){
       this.service.modificarExistencia(this.existenciaAModificar).subscribe({
         next:() =>{
-          this.notificar("Exito",'Producto modificado correctamente!');
+          // this.notificar("Exito",'Producto modificado correctamente!');
           // alert('Producto modificado correctamente!');
-          // this.router.navigate(['/inventory/listar-existencias']);
+          this.router.navigate(['/inventory/listar-existencias']);
         },
         error:() =>{
-          this.notificar("Error",'Ocurrio un error al elimar el producto!');
+          this.notificar("Error",'Ocurrio un error al modificar el producto!');
           // alert('Ocurrio un error al elimar el producto!');
         }
       })
@@ -52,6 +52,10 @@ export class ModificarExistenciaComponent implements OnInit {
       this.notificar("Error",'Valores invalidos');
       this.invalido=true
     }
+  }
+  cancelar(){
+    
+    this.router.navigate(['/inventory/listar-existencias']);
   }
 
   notificar(header: string, body: string) {

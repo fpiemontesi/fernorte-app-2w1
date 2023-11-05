@@ -1,38 +1,61 @@
-<h1 class="text-center bg-light py-3">Modificar Existencia</h1>
+<h1 class="bg-secondary text-white p-5 text-center">Modificar Existencia</h1>
 <div class="container">
-
   <div class="card bg-light p-1 fs-3">
     <div class="row justify-content-between">
       <div class="col">
-        <div class="fw-bold ">Id del Producto</div>
-        <div>#{{existenciaAModificar.id}}</div>
+        <div class="fw-bold">Id del Producto</div>
+        <div>#{{ existenciaAModificar.id }}</div>
       </div>
       <div class="col">
         <div class="fw-bold">Nombre del Producto</div>
-        <div>#{{existenciaAModificar.nombre}}</div>
+        <div>#{{ existenciaAModificar.nombre }}</div>
       </div>
     </div>
   </div>
 
-  <form class="p-3" #formModExi="ngForm" (ngSubmit)="logearse(formModExi)">
+  <form class="p-3" #formModExi="ngForm" (ngSubmit)="confirmar(formModExi)">
     <div class="mb-3">
-      <label for="stockMin" class="form-label">Stock Minimo</label>
+      <label for="stockMin" class="form-label fw-bold">Stock Minimo</label>
       <div>
-        <input type="number" class="form-control w-25" id="stockMin" required min="1"
-        [(ngModel)]="existenciaAModificar.stock_minimo" name="stockMin" #stockMin="ngModel" /> <span>Unidades</span>
+        <input
+          type="number"
+          class="form-control w-25"
+          id="stockMin"
+          required
+          min="1"
+          [(ngModel)]="existenciaAModificar.stock_minimo"
+          name="stockMin"
+          #stockMin="ngModel"
+        />
+        <span>Unidades</span>
       </div>
 
-      <div *ngIf="stockMin.getError('required') && (stockMin.dirty || invalido )" class="text-danger text-end fst-italic">
+      <div
+        *ngIf="stockMin.getError('required') && (stockMin.dirty || invalido)"
+        class="text-danger text-end fst-italic"
+      >
         El nombre de alumno es requerido
       </div>
-      <div [hidden]="!stockMin.errors?.['min'] || stockMin.pristine" class="text-danger text-end fst-italic">
-        El nombre debe tener menos de 200 caracteres</div>
+      <div
+        [hidden]="!stockMin.errors?.['min'] || stockMin.pristine"
+        class="text-danger text-end fst-italic"
+      >
+        El nombre debe tener menos de 200 caracteres
+      </div>
     </div>
-    <button type="submit" [disabled]="formModExi.invalid" class="btn btn-primary w-100">Guardar</button>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+      <button
+        type="submit"
+        [disabled]="formModExi.invalid || formModExi.pristine"
+        class="btn btn-success"
+      >
+        Confirmar
+      </button>
+    </div>
   </form>
 </div>
 
-<ngb-toast [header]="toast.header"
-  *ngFor="let toast of toasts; index as index" >
-  {{toast.body}} 
+<ngb-toast [header]="toast.header" *ngFor="let toast of toasts; index as index">
+  {{ toast.body }}
 </ngb-toast>

@@ -7,7 +7,7 @@
       <tr>
         <th scope="col">PRODUCTO</th>
         <th scope="col">STOCK MINIMO</th>
-        <th scope="col">ACCIONES</th>
+        <th scope="col" class="text-end">ACCIONES</th>
       </tr>
     </thead>
     <tbody>
@@ -15,21 +15,26 @@
         <td>{{ exist.nombre }}</td>
         <td>{{ exist.stock_minimo }}</td>
 
-        <td>
+        <td class="text-end">
           <button
             class="btn btn-warning mx-2"
-            (click)="ModificarExistencia(exist.id)"
+            (click)="modificarExistencia(exist.id)"
           >
-            Editar
+          <i class="bi bi-pencil-fill"></i>
           </button>
           <button
             class="btn btn-danger mx-2"
-            (click)="EliminarExistencia(exist.id)"
+            (click)="eliminarExistencia(exist.id)"
           >
-            Borrar
+          <i class="bi bi-trash-fill"></i>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<ngb-toast [header]="toast.header"
+  *ngFor="let toast of toasts; index as index" >
+  {{toast.body}} 
+</ngb-toast>
