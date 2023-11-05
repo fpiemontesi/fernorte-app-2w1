@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Existencia } from '../../models/existencia';
-import { ListarExistenciasService } from '../../services/existance.service';
+import { ExistenciasService } from '../../services/existance.service';
 import { Router } from '@angular/router';
 import { ToastInfo } from '../../models/notification';
 
@@ -14,14 +14,14 @@ export class ListarExistenciasComponent implements OnInit {
   list: Existencia[] = [];
   toasts: ToastInfo[] = [];
 
-  constructor(private listarExistenciasService: ListarExistenciasService, private router:Router) {}
+  constructor(private existenciaService: ExistenciasService, private router:Router) {}
 
   ngOnInit(): void {
     this.llenarList();
   }
 
   llenarList() {
-    this.listarExistenciasService.getExistencias().subscribe((list) => {
+    this.existenciaService.getExistencias().subscribe((list) => {
       this.list = list;
       console.log(this.list);
     });
@@ -32,7 +32,7 @@ export class ListarExistenciasComponent implements OnInit {
     const confirmed = confirm('Seguro desea eliminar un producto?');
 
     if (confirmed) {
-      this.listarExistenciasService.deleteExistencia(id).subscribe({
+      this.existenciaService.deleteExistencia(id).subscribe({
         next: () => {
           this.notificar('Exito','Producto eliminado correctamente!')
           this.llenarList();

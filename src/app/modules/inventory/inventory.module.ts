@@ -6,6 +6,7 @@ import { NgbNavModule, NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ListarExistenciasComponent } from './components/listar-existencias/listar-existencias.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ExistenciasService } from './services/existance.service';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
   declarations: [HomeComponent,
     ModificarExistenciaComponent, 
     ListarExistenciasComponent],
-  providers: [],
+  providers: [ExistenciasService],
   imports: [CommonModule, 
     FormsModule, 
     NgbNavModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Existencia } from '../../models/existencia';
-import { ListarExistenciasService } from '../../services/existance.service';
+import { ExistenciasService } from '../../services/existance.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastInfo } from '../../models/notification';
 
@@ -20,13 +20,13 @@ export class ModificarExistenciaComponent implements OnInit {
   toasts: ToastInfo[] = [];
   invalido=false
   
-  constructor(private service: ListarExistenciasService, private activatedRoute: ActivatedRoute, private router:Router){
+  constructor(private existenciasService: ExistenciasService, private activatedRoute: ActivatedRoute, private router:Router){
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe({
       next: (params: Params) => {
-        this.service.getExistencia(params['id']).subscribe({
+        this.existenciasService.getExistencia(params['id']).subscribe({
           next:(e)=>{
             this.existenciaAModificar = e
           }
@@ -37,7 +37,7 @@ export class ModificarExistenciaComponent implements OnInit {
 
   confirmar(form: NgForm) {
     if(form.valid){
-      this.service.modificarExistencia(this.existenciaAModificar).subscribe({
+      this.existenciasService.modificarExistencia(this.existenciaAModificar).subscribe({
         next:() =>{
           // this.notificar("Exito",'Producto modificado correctamente!');
           // alert('Producto modificado correctamente!');

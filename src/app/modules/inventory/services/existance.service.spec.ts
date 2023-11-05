@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ListarExistenciasService } from './existance.service';
+import { ExistenciasService } from './existance.service';
 
-describe('ListarExistenciasService', () => {
-  let service: ListarExistenciasService;
+describe('ExistenciasService', () => {
+  let service: ExistenciasService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ListarExistenciasService);
+    service = TestBed.inject(ExistenciasService);
   });
 
   it('should be created', () => {

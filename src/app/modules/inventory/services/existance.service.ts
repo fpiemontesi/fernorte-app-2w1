@@ -3,10 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Existencia } from '../models/existencia';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ListarExistenciasService {
+@Injectable()
+export class ExistenciasService {
 
   private url='http://localhost:3000/existencias';
 
