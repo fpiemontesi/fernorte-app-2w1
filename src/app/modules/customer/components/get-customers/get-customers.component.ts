@@ -35,22 +35,12 @@ export class GetCustomersComponent implements OnInit {
     if (this.nroDocumento != 0) {
       this.clienteFiltro = this.clienteArray.filter((persona) => {
         return (
-          persona.nro_doc &&
-          persona.nro_doc.toString().includes(this.nroDocumento.toString())
+          persona.nroDoc &&
+          persona.nroDoc.toString().includes(this.nroDocumento.toString())
         );
       });
 
       this.listaFiltrada = true;
-
-      // if (this.nroDocumento == 0) {
-      //   Swal.fire({
-      //     icon: 'warning',
-      //     title: 'El filtro de busqueda esta vacio',
-      //     text: `Debe ingresar un número de doumento para poder aplicar el filtro`,
-      //     confirmButtonText: 'Aceptar',
-      //     confirmButtonColor: '#808080',
-      //   });
-      // }
 
       if (this.clienteFiltro.length === 0) {
         Swal.fire({
@@ -60,11 +50,13 @@ export class GetCustomersComponent implements OnInit {
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#808080',
         });
+        this.borrarFiltro();
       }
     } else {
       this.clienteFiltro = [...this.clienteArray];
       this.listaFiltrada = false;
     }
+
   }
 
   ngOnInit(): void {
