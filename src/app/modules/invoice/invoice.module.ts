@@ -42,7 +42,12 @@ const routes: Routes = [
   ],
 
   providers: [],
-  imports: [CommonModule, FormsModule, RouterModule.forRoot(routes)],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+  ],
   exports: [HomeComponent, RouterModule],
 })
 export class InvoiceModule {}

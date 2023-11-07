@@ -10,6 +10,8 @@ import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { DiscountDTO } from '../../models/DiscountDTO';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegistrarPagoComponent } from '../registrar-pago/registrar-pago.component';
 registerLocaleData(localeEs);
 
 @Component({
@@ -18,6 +20,12 @@ registerLocaleData(localeEs);
   styleUrls: ['./registrar-factura.component.css'],
 })
 export class RegistrarFacturaComponent {
+  openModal() {
+    const modalRef = this.modalService.open(RegistrarPagoComponent, {
+      size: 'lg',
+    });
+    modalRef.componentInstance.invoiceTotal = this.orderSelected.total;
+  }
   orderSelected: Order = new Order();
   client: Client = new Client();
   id: number = 0;
@@ -26,7 +34,8 @@ export class RegistrarFacturaComponent {
     private orderService: OrderService,
     private invoiceservice: InvoiceService,
     private customerserv: CustomerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {}
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

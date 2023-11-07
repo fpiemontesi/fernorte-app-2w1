@@ -5,7 +5,9 @@ import { PaymentMethodService } from '../../services/payment-method.service';
 import { payDetailDTO } from '../../models/payDetailDTO';
 import { requestInvoiceDto } from '../../models/requestInvoiceDTO';
 import { OrderService } from '../../services/order.service';
-
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { paymentMethodDTO } from '../../models/paymentMethodDTO';
 
 @Component({
   selector: 'fn-registrar-pago',
@@ -13,64 +15,52 @@ import { OrderService } from '../../services/order.service';
   styleUrls: ['./registrar-pago.component.css'],
 })
 export class RegistrarPagoComponent {
-
-  @Input() invoiceTotal: number = 10000; //viene de ventas. test funcionalidad componente
-  @Input() resto: number = 0;
-  //lista de los pagos que se hicieron
+  @Input() invoiceTotal: number = 0;
+  public montoTotal: number = 0;
   listPays: payDetailDTO[] = [];
-  //variable para ver si esta pagado ya
-  pagado: boolean = false;
-  constructor(private modalService: NgbModal, private servinvoice: InvoiceService, private payserv: PaymentMethodService, private orderserv: OrderService) { }
+  paymentMethodDtos: Observable<paymentMethodDTO[]>;
+  formulario: FormGroup;
 
-  ngOnInit() {
-    this.resto = this.invoiceTotal;
-    this.payserv.getPaidsObservable().subscribe((pays) => {
-      this.listPays = pays;
+  constructor(
+    private formBuilder: FormBuilder,
+    private paymentMethodService: PaymentMethodService
+  ) {
+    this.paymentMethodDtos = this.paymentMethodService.obtenerFormasPago();
+    this.formulario = this.formBuilder.group({
+      paymentMethodList: this.formBuilder.array([]),
     });
-
+    //Inicializa el form con una forma de pago por defecto
+    this.agregarFormaDePago();
   }
 
-
-  deletePay(pay: payDetailDTO) {
-    const index = this.listPays.indexOf(pay);
-    if (index !== -1) {
-      this.listPays.splice(index, 1);
-      this.resto = this.invoiceTotal - this.listPays.reduce((total, pay) => total + (pay.amount || 0), 0);
-      this.payserv.setListPaids(this.listPays);
-    }
+  agregarFormaDePago() {
+    const formaDePago = this.formBuilder.group({
+      paymentMethod: '',
+      amount: 0,
+      observations: '',
+    });
+    this.paymentMethodList.push(formaDePago);
   }
 
-
-  //abre el modal para agregar pagos
-  openModal(content: any) {
-    if (this.pagado) {
-      const request: requestInvoiceDto = new requestInvoiceDto();
-      request.orderId = this.orderserv.getOrderSelected()?.id;
-      request.paymentMethodList = this.listPays;
-      this.servinvoice.loadInvoice(request);
-      alert("LA FACTURA SE CARGO TODO EXITO");
-    } else {
-      //cargamos la variable invoiceTotal con el total a pagar a traves del servicio de factura y seteamos el resto igual
-      this.invoiceTotal = this.servinvoice.getTotalpay();
-      this.resto = this.invoiceTotal;
-      this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false, scrollable: true });
-    }
-
+  eliminarFormaDePago(index: number) {
+    this.paymentMethodList.removeAt(index);
   }
-  //toma el resto del hijo y lo guarda en el padre
-  guardarResto(resto: any) {
-    this.resto = resto;
-    this.listPays = this.payserv.getListPaids();
+
+  get paymentMethodList() {
+    return this.formulario.get('paymentMethodList') as FormArray;
   }
-  //finaliza todos los pagos
-  endPays(content: any) {
-    if (this.resto > 0) {
-      alert("Pagos insuficientes")
+
+  onSubmit() {
+    if (this.formulario.valid) {
+      const formData = this.formulario.value;
+      console.log(formData);
     }
-    else {
-      alert("Pagos totales ingresados")
-      this.modalService.dismissAll();
-      this.pagado = true;
+  }
+  calcularTotal() {
+    this.montoTotal = 0;
+    for (const formaDePago of this.paymentMethodList.controls) {
+      this.montoTotal += formaDePago.value.amount;
     }
+    console.log(this.montoTotal);
   }
 }
