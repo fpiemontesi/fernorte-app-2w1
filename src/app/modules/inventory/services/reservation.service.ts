@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { reservation } from '../models/reservation';
-import { stock } from '../models/stock';
+import { existence } from '../models/existence';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { stock } from '../models/stock';
 export class ReservationService {
 
   urlReservation:string="http://localhost:3000/reservations";
-  urlStock:string="http://localhost:3000/stock/";
+  urlStock:string="http://localhost:3000/existences/";
 
   constructor(private http : HttpClient) { }
 
@@ -18,8 +18,8 @@ export class ReservationService {
     return this.http.get<reservation[]>(this.urlReservation);
   }
 
-  getStockById(id:number): Observable<stock>{
-    return this.http.get<stock>(this.urlStock+id);
+  getStockById(id:number): Observable<existence>{
+    return this.http.get<existence>(this.urlStock+id);
   }
 
 }

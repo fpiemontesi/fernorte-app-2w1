@@ -3,7 +3,7 @@ import { reservation } from '../../models/reservation';
 import { reservationDetail } from '../../models/reservation-detail';
 import { ReservationService } from '../../services/reservation.service';
 import { Subscription } from 'rxjs';
-import { stock } from '../../models/stock';
+import { existence } from '../../models/existence';
 
 @Component({
   selector: 'fn-reservation-list',
@@ -41,7 +41,7 @@ export class ReservationListComponent {
     if (selectedReserv) {
         this.reservationDetails = selectedReserv.details;
         this.reservationDetails.forEach((detail) => {
-          this.getStock(detail.batch.id_existence);
+          this.getStock(detail.batch.existenceId);
         });
       } 
     else {
@@ -55,7 +55,7 @@ export class ReservationListComponent {
   getStock(id:number){
     this.subscription.add(
       this.reservationService.getStockById(id).subscribe({
-        next:(stockResponse : stock)=>{
+        next:(stockResponse : existence)=>{
           this.assignProductNameToDetails(id, stockResponse.name);
         }
       })
@@ -64,7 +64,7 @@ export class ReservationListComponent {
   
   assignProductNameToDetails(id_existence: number, name: string) {
     this.reservationDetails.forEach((detail) => {
-      if (detail.batch.id_existence === id_existence) {
+      if (detail.batch.existenceId === id_existence) {
         detail.productName = name;
       }
     });
