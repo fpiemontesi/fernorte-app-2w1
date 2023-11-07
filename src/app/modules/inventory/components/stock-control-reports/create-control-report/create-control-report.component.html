@@ -1,0 +1,106 @@
+<div class="container mt-2">
+  <h2>Registrar reporte de control de stock</h2>
+  <form class="row gy-2 gx-3 row-gap-2 justify-content-center p-2"
+        [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+    <div class="col-12 col-sm-6">
+      <label for="batch" class="form-label">Lote</label>
+      <div class="input-group">
+        <input type="number" class="form-control" formControlName="batch" id="batch"
+               placeholder="ingrese la id del lote inspeccionado"
+               [class.is-valid]="formGroup.get('batch')?.valid && (formGroup.get('batch')?.dirty ||
+               formGroup.get('batch')?.touched)"
+               [class.is-invalid]="formGroup.get('batch')?.invalid && (formGroup.get('batch')?.dirty ||
+               formGroup.get('batch')?.touched)">
+        <button class="btn btn-outline-secondary" type="button" id="find-batch-btn" (click)="openModal()">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+      <div class="error-control-message" *ngIf="formGroup.get('batch')?.errors && (formGroup.get('batch')?.dirty ||
+               formGroup.get('batch')?.touched)">
+            <span *ngIf="formGroup.get('batch')?.hasError('required')">Debe ingresar el id
+              del lote inspeccionado</span>
+        <span *ngIf="formGroup.get('batch')?.hasError('min')">El id del lote no puede ser menor a 1</span>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <label for="date-of-control" class="form-label">Fecha</label>
+      <input type="date" formControlName="date" id="date-of-control" class="form-control"
+             [class.is-valid]="formGroup.get('date')?.valid && (formGroup.get('date')?.dirty ||
+             formGroup.get('date')?.touched)"
+             [class.is-invalid]="formGroup.get('date')?.invalid && (formGroup.get('date')?.dirty ||
+             formGroup.get('date')?.touched)">
+      <div class="error-control-message" *ngIf="formGroup.get('date')?.errors && (formGroup.get('date')?.dirty ||
+               formGroup.get('date')?.touched)">
+            <span *ngIf="formGroup.get('date')?.hasError('required')">Debe ingresar la fecha
+              de la inspección</span>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <label for="quantity-inspected" class="form-label">Cantidad inspeccionada</label>
+      <input type="number" formControlName="inspectedQuantity" id="quantity-inspected" step="0.1" min="1"
+             class="form-control" [class.is-valid]="formGroup.get('inspectedQuantity')?.valid &&
+             (formGroup.get('inspectedQuantity')?.dirty ||
+             formGroup.get('inspectedQuantity')?.touched)"
+             [class.is-invalid]="formGroup.get('inspectedQuantity')?.invalid &&
+             (formGroup.get('inspectedQuantity')?.dirty || formGroup.get('inspectedQuantity')?.touched)">
+      <div class="error-control-message" *ngIf="formGroup.get('inspectedQuantity')?.errors &&
+          (formGroup.get('inspectedQuantity')?.dirty || formGroup.get('inspectedQuantity')?.touched)">
+            <span *ngIf="formGroup.get('inspectedQuantity')?.hasError('required')">Debe ingresar la
+              cantidad inspeccionado (debe ser ingresada en forma de digito decimal)</span>
+        <span *ngIf="formGroup.get('inspectedQuantity')?.hasError('min')">la cantidad no puede
+          ser menor a 0.1</span>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+      <label for="quantity-damaged" class="form-label">Cantidad dañada</label>
+      <input type="number" formControlName="damagedQuantity" id="quantity-damaged"
+             step="0.1" min="0" class="form-control"
+             [class.is-valid]="formGroup.get('damagedQuantity')?.valid &&
+             (formGroup.get('damagedQuantity')?.dirty ||
+             formGroup.get('damagedQuantity')?.touched)"
+             [class.is-invalid]="formGroup.get('damagedQuantity')?.invalid &&
+             (formGroup.get('damagedQuantity')?.dirty || formGroup.get('damagedQuantity')?.touched)">
+      <div class="error-control-message" *ngIf="formGroup.get('damagedQuantity')?.errors &&
+          (formGroup.get('damagedQuantity')?.dirty || formGroup.get('damagedQuantity')?.touched)
+          && !formGroup.get('expired')?.value">
+        <span *ngIf="formGroup.get('damagedQuantity')?.hasError('required')">Debe ingresar la cantidad que se
+          encontro dañada (debe ser ingresada en forma de digito decimal)</span>
+        <span *ngIf="formGroup.get('damagedQuantity')?.hasError('min')">la cantidad no puede
+          ser menor a 0</span>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="form-check">
+        <input type="checkbox" formControlName="expired" class="form-check-input" id="batch-is-expired">
+        <label class="form-check-label" for="batch-is-expired">Lote vencido</label>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <label for="descriptionInput" class="form-label">Descripción</label>
+      <textarea formControlName="description" id="descriptionInput" cols="30" rows="5" class="form-control"
+                [class.is-valid]="formGroup.get('description')?.valid && (formGroup.get('description')?.dirty
+                || formGroup.get('description')?.touched)"
+                [class.is-invalid]="formGroup.get('description')?.invalid && (formGroup.get('description')?.dirty
+                || formGroup.get('description')?.touched)"></textarea>
+      <div class="error-control-message" *ngIf="formGroup.get('description')?.errors &&
+          (formGroup.get('description')?.dirty || formGroup.get('description')?.touched)">
+            <span *ngIf="formGroup.get('description')?.hasError('required')">Debe ingresar las
+              observaciones del control</span>
+        <span *ngIf="formGroup.get('description')?.hasError('minlength')">La descripción de las observaciones
+          no debe tener menos de 20 caracteres</span>
+      </div>
+    </div>
+
+    <div class="col-12 text-end">
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </div>
+  </form>
+</div>
+<fn-toasts></fn-toasts>
+

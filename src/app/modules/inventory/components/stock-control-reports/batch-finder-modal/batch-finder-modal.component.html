@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h4 class="modal-title">Buscar lote</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <div class="row row-gap-3" [formGroup]="finderForm">
+    <div class="col-auto">
+      <label for="storage-zone" class="form-label">Zona de almacenamiento</label>
+      <select class="form-select" (change)="onZoneSelected($event)" id="storage-zone"
+              aria-label="Default select example">
+        <option disabled selected></option>
+        <ng-container *ngFor="let z of zones">
+          <option value="{{z.id}}">{{z.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-auto">
+      <label for="section" class="form-label">Sección</label>
+      <select class="form-select" [disabled]="!zoneIsSelected"
+              (change)="onSectionSelected($event)" (focus)="onSectionSelected($event)"
+              id="section" aria-label="Default select example">
+        <option selected disabled></option>
+        <ng-container *ngFor="let s of sections">
+          <option value="{{s.id}}">{{s.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+
+  <div class="mt-2">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Estante</th>
+        <th scope="col">Existencia</th>
+        <th scope="col">Cantidad</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let b of batches; index as i">
+        <tr class="clickable-row" (click)="batchSelected(i)">
+          <th scope="row">{{b.id}}</th>
+          <td>{{b.shelf}}</td>
+          <td>{{b.existenceId}}</td>
+          <td>{{b.quantity}}</td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+    <div class="form-text">*Para seleccionar un lote, presione en la fila que contiene el deseado</div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
