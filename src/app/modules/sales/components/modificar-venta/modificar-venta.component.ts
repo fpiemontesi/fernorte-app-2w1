@@ -21,6 +21,8 @@ export class ModificarVentaComponent implements OnInit{
   @ViewChild('form', { static: false })
   form!: NgForm;
   action!: string; 
+  precio_total_total: number = 0;
+  precio_total: number = 0;
 
   formData: any = {
     fecha: new Date().toISOString().split('T')[0],
@@ -39,47 +41,50 @@ export class ModificarVentaComponent implements OnInit{
    console.log(this.service.obtenerVentas());
    console.log(this.service.obtenerVentas().detalles[0].descripcion);
    this.cargarDatosVenta();
-  //this.ListarArticulos();
-    this.Listar();
+  this.ListarArticulos();
+    //this.Listar();
   }
     
   cargarDatosVenta() {
-    const ventaActual = this.service.obtenerVentas(); 
+    const ventaActual = this.service.obtenerVentas();
     this.formData.cliente = ventaActual.id_cliente;
     this.formData.vendedor = ventaActual.id_vendedor;
     this.formData.tipo = ventaActual.tipo_venta;
     this.formData.formaEntrega = ventaActual.forma_entrega;
-    for(let i = 0; i < ventaActual.detalles.length; i++) {
+    this.precio_total= ventaActual.total;
+    for (let i = 0; i < ventaActual.detalles.length; i++) {
       this.filas.push({
         id: ventaActual.detalles[i].id_producto,
         producto: ventaActual.detalles[i].descripcion,
         cantidad: ventaActual.detalles[i].cantidad,
-        precio_unitario:ventaActual.detalles[i].precio_unitario
-      })
+        precio_unitario: ventaActual.detalles[i].precio_unitario,
+        precio_total: ventaActual.detalles[i].precio_unitario * ventaActual.detalles[i].cantidad,
+      });
     }
+    // Inicializa precio_total_total con el valor de la venta actual
+    this.precio_total_total = this.precio_total;
   }
-    
 
 // DEBERIA SER CON EL JSON DE ARTICULOS  
-//   ListarArticulos() {
-//     this.http.get('http://localhost:3000/articulos')
-//     .subscribe((data: any) => {
-//       this.myList = data.map((item: any) => ({
-//         id_producto: item.id,
-//         producto_nombre: item.product_nombre,
-//         precio: item.precio_minorista
-//       }));
-//       console.log(this.myList);
-//     });
-// }
-  
-Listar() {
-  this.http.get('https://rickandmortyapi.com/api/character')
+  ListarArticulos() {
+    this.http.get('http://localhost:3000/articulos')
     .subscribe((data: any) => {
-      this.myList = data.results;
+      this.myList = data.map((item: any) => ({
+        id_producto: item.id,
+        product_nombre: item.product_nombre,
+        precio: item.precio_minorista
+      }));
       console.log(this.myList);
     });
 }
+  
+// Listar() {
+//   this.http.get('https://rickandmortyapi.com/api/character')
+//     .subscribe((data: any) => {
+//       this.myList = data.results;
+//       console.log(this.myList);
+//     });
+// }
   onSubmit(){
     if (this.form.valid) {
       return true;
@@ -87,6 +92,7 @@ Listar() {
     return false;
   }
   eliminarFila(index: number): void {
+    this.precio_total_total -= this.filas[index].precio_total;
     this.filas.splice(index, 1);
     this.productos.splice(index, 1);
     this.productosVenta.splice(index, 1);
@@ -94,10 +100,15 @@ Listar() {
   agregarFila(event: Event): void {
     event.preventDefault();
     const producto = document.getElementById("producto") as HTMLSelectElement;
+  
+    // Verifica si el producto es válido
     if (!this.presupuestoServ.validarProducto(this.formData)) {
       return;
     }
+  
     const productoSeleccionado = producto.options[producto.selectedIndex].text;
+  
+    // Comprueba si el producto ya ha sido seleccionado
     if (this.filas.some((fila) => fila.producto === productoSeleccionado)) {
       Swal.fire({
         icon: 'warning',
@@ -108,36 +119,94 @@ Listar() {
       });
       return;
     }
+  
+    // Obtiene el precio unitario del producto seleccionado
     const precioUnitario = this.getPrecioUnitario(productoSeleccionado);
-    this.filas.push({
-      id: producto.value,
-      producto: productoSeleccionado,
-      cantidad: this.formData.cantidad,
-      precio_unitario: precioUnitario,
-    });
-    this.productos.push({
-      id_producto: producto.options[producto.selectedIndex].value,
-      descripcion: producto.options[producto.selectedIndex].text,
-      cantidad: this.formData.cantidad,
-      unidad: 'Kgs',
-    });
-    this.productosVenta.push({
-      id_producto: producto.options[producto.selectedIndex].value,
-      precio_unitario: precioUnitario,
-      cantidad: this.formData.cantidad,
-    });
+  
+    if (precioUnitario !== undefined) {
+      console.log(precioUnitario);
+  
+      // Calcula el precio total de la fila
+      const precioTotal = this.formData.cantidad * precioUnitario;
+  
+      // Agrega la fila a la lista de filas
+      this.filas.push({
+        id: producto.value,
+        producto: productoSeleccionado,
+        cantidad: this.formData.cantidad,
+        precio_unitario: precioUnitario,
+        precio_total: precioTotal,
+      });
+  
+      // Agrega el producto a la lista de productos
+      this.productos.push({
+        id_producto: producto.options[producto.selectedIndex].value,
+        descripcion: producto.options[producto.selectedIndex].text,
+        cantidad: this.formData.cantidad,
+        unidad: 'Kgs',
+      });
+  
+      // Agrega el producto a la lista de productos de venta
+      this.productosVenta.push({
+        id_producto: producto.options[producto.selectedIndex].value,
+        precio_unitario: precioUnitario,
+        cantidad: this.formData.cantidad,
+      });
+  
+      // Actualiza el precio_total_total sumando el nuevo precioTotal
+      this.precio_total_total += precioTotal;
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'El precio del producto no existe, será asignado por defecto un precio de 1',
+        showCancelButton: false,
+        showConfirmButton: true,
+        confirmButtonText: 'Aceptar',
+      });
+  
+      // Agrega la fila con precio por defecto
+      const precioTotalPorDefecto = this.formData.cantidad * 1;
+      this.filas.push({
+        id: producto.value,
+        producto: productoSeleccionado,
+        cantidad: this.formData.cantidad,
+        precio_unitario: 1,
+        precio_total: precioTotalPorDefecto,
+      });
+  
+      // Agrega el producto a la lista de productos
+      this.productos.push({
+        id_producto: producto.options[producto.selectedIndex].value,
+        descripcion: producto.options[producto.selectedIndex].text,
+        cantidad: this.formData.cantidad,
+        unidad: 'Kgs',
+      });
+  
+      // Agrega el producto a la lista de productos de venta
+      this.productosVenta.push({
+        id_producto: producto.options[producto.selectedIndex].value,
+        precio_unitario: 1,
+        cantidad: this.formData.cantidad,
+      });
+  
+      // Actualiza el precio_total_total sumando el nuevo precioTotalPorDefecto
+      this.precio_total_total += precioTotalPorDefecto;
+    }
   }
   
+  
   getPrecioUnitario(productoSeleccionado: string): number | undefined {
-    const productoEnLista = this.myList.find((item) => item.producto_name === productoSeleccionado);
-    return productoEnLista?.precio_unitario;
-}
+    const productoEnLista = this.myList.find((item) => item.product_nombre === productoSeleccionado);
+    return productoEnLista?.precio;
+  }
+  
   guardarModificacion(){
     if(!this.onSubmit())
     {
       return ;
     }
-    this.service.realizarModificacionVenta(this.formData, this.productosVenta)
+    console.log(this.service.obtenerVentas().id);
+    this.service.realizarModificacionVentaa(this.formData)
       .subscribe(
         (response) => {
           console.log('Solicitud PUT exitosa. Respuesta:', response);

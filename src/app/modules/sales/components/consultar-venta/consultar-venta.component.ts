@@ -73,7 +73,7 @@ export class ConsultarVentaComponent {
     }
   
     if (this.venta.id_cliente) {
-      params = params.set('id_cliente', this.venta.id_cliente.toString());
+      params = params.set('doc_cliente', this.venta.id_cliente.toString());
     }
   
     if (this.venta.id_vendedor) {

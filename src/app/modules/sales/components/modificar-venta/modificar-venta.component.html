@@ -5,7 +5,7 @@
        
         <div class="col-md-4">
           <label for="cliente" class="form-label">Cliente</label>
-          <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="formData.cliente" name="cliente" required #cliente="ngModel">
+          <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="formData.cliente" name="cliente" required #cliente="ngModel" disabled>
             <option value="1">Tomas Benza</option>
             <option value="2">Cande Mello</option>
           </select>
@@ -52,9 +52,9 @@
         <div class="col-md-6">
           <label for="producto" class="form-label">Producto</label>
           <select name="producto" id="producto" class="form-select" [ngClass]="{'is-invalid': (form.submitted || producto.touched) && producto.invalid}" [(ngModel)]="formData.producto" required #producto="ngModel">
-            <!-- PARA QUE FUNCIONE CON EL JSON DE ARTICULOS
-               <option *ngFor="let producto of myList" [value]="producto.id_producto">{{ producto.producto_nombre }}</option> -->
-            <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option>
+            <!-- PARA QUE FUNCIONE CON EL JSON DE ARTICULOS -->
+               <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.product_nombre }}</option> 
+            <!-- <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option> -->
           </select>
           
         </div>
@@ -82,17 +82,19 @@
                   <td>{{ fila.producto }}</td>
                   <td>{{ fila.cantidad }}</td>
                   <td>{{fila.precio_unitario}}</td>
-                  <td>Fila 1, Celda 4</td>
+                  <td>{{fila.precio_total}}</td>
                   <td>
                     <button class="btn" (click)="eliminarFila(i)">
                       <i class="fa fa-times"></i>
                     </button>
                   </td>
-              <tr>
+              <tr >
                   <td colspan="3">TOTAL</td>
-                  <td>Fila 3, Celda 4</td>
+                  <td>{{precio_total_total}}</td>
                   <td></td>
               </tr>
+              
+          
           </tbody>
           
       </table>
@@ -107,7 +109,7 @@
             <div class="row">
               <div class="d-flex justify-content-between">
                 <button class="btn btn-dark">Cancelar</button>
-                <button type="submit" (click)="guardarModificacion()" class="btn btn-dark ">Guardar Presupuesto</button>
+                <button type="submit" (click)="guardarModificacion()" class="btn btn-dark ">Guardar Modiciación</button>
               </div>
             </div>
             
