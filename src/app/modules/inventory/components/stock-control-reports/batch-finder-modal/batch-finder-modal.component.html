@@ -6,7 +6,7 @@
   <div class="row row-gap-3" [formGroup]="finderForm">
     <div class="col-auto">
       <label for="storage-zone" class="form-label">Zona de almacenamiento</label>
-      <select class="form-select" (change)="onZoneSelected($event)" id="storage-zone"
+      <select class="form-select" formControlName="zones" id="storage-zone"
               aria-label="Default select example">
         <option disabled selected></option>
         <ng-container *ngFor="let z of zones">
@@ -16,8 +16,7 @@
     </div>
     <div class="col-auto">
       <label for="section" class="form-label">Sección</label>
-      <select class="form-select" [disabled]="!zoneIsSelected"
-              (change)="onSectionSelected($event)" (focus)="onSectionSelected($event)"
+      <select class="form-select" formControlName="sections"
               id="section" aria-label="Default select example">
         <option selected disabled></option>
         <ng-container *ngFor="let s of sections">
@@ -54,3 +53,4 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>
+<fn-toasts></fn-toasts>

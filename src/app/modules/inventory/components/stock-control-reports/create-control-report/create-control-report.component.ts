@@ -61,7 +61,8 @@ export class CreateControlReportComponent implements OnInit {
               {classname: 'bg-danger text-light'});
             batchExists = false;
           } else {
-            console.log(err);
+            this.toastService.show("Hubo un error: " + err.message,
+              {classname: 'bg-danger text-light'});
           }
         }
       }))
@@ -85,7 +86,7 @@ export class CreateControlReportComponent implements OnInit {
         this.batch = null;
       },
       error: err => {
-        this.toastService.show("Hubo un error: " + err,
+        this.toastService.show("Hubo un error: " + err.message,
           {classname: 'bg-danger text-light'});
       }
     });
