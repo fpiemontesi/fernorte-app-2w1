@@ -1,0 +1,58 @@
+{
+    "control":[
+
+        {
+            "id": 1,
+            "lote_id": 123,
+            "descripcion": "Control de stock del lote 123",
+            "cantidad_inspeccionada": 100,
+            "cantidad_dañada": 5,
+            "lote_vencido": false,
+            "fecha":"2028-11-11"
+
+            
+          }
+          ,
+          {
+            "id": 2,
+            "lote_id": 456,
+            "descripcion": "Control de stock del lote 456",
+            "cantidad_inspeccionada": 250,
+            "cantidad_dañada": 10,
+            "lote_vencido": true,
+            "fecha":"2028-11-11"
+          },
+          {
+            "id": 3,
+            "lote_id": 789,
+            "descripcion": "Control de stock del lote 789",
+            "cantidad_inspeccionada": 75,
+            "cantidad_dañada": 2,
+            "lote_vencido": false,
+            "fecha":"2028-10-11"
+          },
+          {
+            "id": 4,
+            "lote_id": 101,
+            "descripcion": "Control de stock del lote 101",
+            "cantidad_inspeccionada": 300,
+            "cantidad_dañada": 15,
+            "lote_vencido": true,
+            "fecha":"2028-10-11"
+          },
+          {
+            "id": 5,
+            "lote_id": 222,
+            "descripcion": "Control de stock del lote 222",
+            "cantidad_inspeccionada": 150,
+            "cantidad_dañada": 7,
+            "lote_vencido": false,
+            "fecha":"2028-12-11"
+          }
+          
+          
+          
+          
+
+    ]
+}

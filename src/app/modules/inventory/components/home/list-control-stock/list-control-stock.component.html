@@ -1,0 +1,26 @@
+<div> <h2 class="bg-secondary text-white p-5 text-center">LISTA CONTROL STOCK ULTIMO MES</h2></div>
+<div class="container my-5 ">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Lote</th>
+            <th scope="col">Cantidad Inspeccionada</th>
+            <th scope="col">cantidad Dañada </th>
+            <th scope="col">Lote vencido</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listaControl">
+            <td>{{item.descripcion}}</td>
+            <td>{{item.lote_id}}</td>
+            <td>{{item.cantidad_inspeccionada}}</td>
+            <td>{{item['cantidad_dañada']}}</td>
+            <td>{{item.lote_vencido}}</td>
+        
+          </tr>
+        </tbody>
+      </table>
+
+</div>
