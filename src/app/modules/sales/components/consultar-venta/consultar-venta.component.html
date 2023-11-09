@@ -93,18 +93,8 @@
           <td>{{ venta.fecha | date: 'dd/MM/yyyy' }}</td>
           <td>{{ venta.forma_entrega }}</td>
           <td>{{ venta.tipo_venta }}</td>
-          <td>{{ venta.estado }}</td>
-          <td>{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
-          <td>
-            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="verDetalle(venta)">
-              <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
-            </button>
-          </td>
-          <td>
-            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="modificarVenta(venta)">
-              <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
-            </button>
-          </td>
+          <!-- <td>{{ venta.estado }}</td> -->
+          
         </tr>
       </tbody>
     </table>
@@ -130,21 +120,5 @@
       </tr>
     </tbody>
   </table>
-  <div class="container" *ngIf="mostrarActualizarEstado">
-    <h3 class="h4">Modificar Estado</h3>
-    <div class="row" style="padding-top: 1%;">
-      <div class="col-md-3 col-sm-12">
-        <label>Estado</label>
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <select class="form-control" id="estado" name="estado" [(ngModel)]="nuevoEstado">
-          <option [value]="1" [selected]="venta.estado === 1" >Pendiente</option>
-          <option [value]="2" [selected]="venta.estado === 2">Entregado</option>
-        </select>
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="actualizarEstado()">Actualizar</button>
-      </div>
-    </div>
   </div>
 </div>

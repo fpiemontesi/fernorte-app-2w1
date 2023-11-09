@@ -45,6 +45,8 @@ export class VentasService {
     return this.http.get(`${this.urlId}/${ventaId}`);
   }
 
+
+
   realizarSolicitudPostVenta(formData: any, productosVenta: any): Observable<any> {
     
     const url = 'http://localhost:8080/ventas/save';
@@ -70,17 +72,17 @@ export class VentasService {
 
   realizarModificacionVenta(formData: any, productosVenta: any): Observable<any> {
     
-    const url = 'http://localhost:3000/ventas/';
+    const url = 'http://localhost:8080/ventas/';
     const body = {
       fecha: new Date().toISOString(),
-      id_cliente: formData.cliente,
+      doc_cliente: this.obtenerVentas().id_cliente,
       tipo_venta: formData.tipo,
       forma_entrega: formData.formaEntrega,
       fecha_entrega: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
       id_vendedor: formData.vendedor,
       detalles: productosVenta
     };
-
+    console.log(body);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -89,32 +91,5 @@ export class VentasService {
 
     return this.http.put(url + this.obtenerVentas().id, body, httpOptions);
   }
-  realizarModificacionVentaa(formData: any): Observable<any> {
-    const venta = this.obtenerVentas();
-  if (!venta) {
-    // Manejar el caso en el que la venta no se haya obtenido
-    return throwError('No se pudo obtener la venta');
-  }
-  
-  const url = `http://localhost:8080/ventas/${venta.id}`;
-  console.log(url);
-    const body = {
-      fecha: new Date().toISOString(),
-      cod_cliente: formData.cliente,
-      tipo_venta: formData.tipo,
-      forma_entrega: formData.formaEntrega,
-      fecha_entrega: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      id_vendedor: formData.vendedor,
-      detalles : formData.detalles
-    };
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    return this.http.put(url, body, httpOptions);
-   
-  }
+ 
 }

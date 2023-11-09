@@ -31,41 +31,9 @@ export class ConsultarVentaComponent {
   }
   ngOnInit() {
   }
-  // filtrarVentas() {
-  //   this.ventasService.getVentas().subscribe({
-  //     next: (ventas) => {
-  //       this.ventas = ventas.filter((venta) =>
-  //         (!this.venta.id || venta.id.toString().includes(this.venta.id.toString())) &&
-  //         (!this.venta.cliente || venta.cliente.toLowerCase().includes(this.venta.cliente.toLowerCase())) &&
-  //         (!this.venta.vendedor || venta.vendedor.toLowerCase().includes(this.venta.vendedor.toLowerCase())) &&
-  //         (!this.venta.formaEntrega || venta.formaEntrega.toLowerCase().includes(this.venta.formaEntrega.toLowerCase())) &&
-  //         (!this.venta.tipoPedido || venta.tipoPedido.toLowerCase().includes(this.venta.tipoPedido.toLowerCase())) &&
-  //         (!this.venta.estado || venta.estado.toLowerCase().includes(this.venta.estado.toLowerCase())) &&
-  //         (!this.montoDesde || venta.monto >= this.montoDesde) &&
-  //         (!this.montoHasta || venta.monto <= this.montoHasta) &&
-  //         (!this.fechaDesde || venta.fecha >= this.fechaDesde) &&
-  //         (!this.fechaHasta || venta.fecha <= this.fechaHasta)
-  //        );
-  //     },
-  //     error: (error) => {
-  //       console.error("Error al conectar con la API", error);
-  //     }
-  //   });
-  // } 
-  // .set('id', this.venta.id ? this.venta.id.toString() : '')
-      // .set('id_cliente', this.venta.id_cliente ? this.venta.id_cliente.toString() : '')
-      // .set('id_vendedor', this.venta.id_vendedor ? this.venta.id_vendedor.toString() : '')
-      // .set('tipo_venta', this.venta.tipo_venta || '')
-      // .set('forma_entrega', this.venta.forma_entrega || '')
-      // .set('monto_desde', this.montoDesde ? this.montoDesde.toString() : '')
-      // .set('monto_hasta', this.montoHasta ? this.montoHasta.toString() : '')
-      // .set('fecha_desde', this.fechaDesde ? this.fechaDesde.toISOString() : '')
-      // .set('fecha_hasta', this.fechaHasta ? this.fechaHasta.toISOString() : '')
-      // .set('estado', this.venta.estado || '');
   
   // FILTRAR VENTAS POR GET
   filtrarVentas() {
-   
     // Construye los parámetros de la consulta
     let params = new HttpParams()
     if(this.venta.id){
@@ -133,9 +101,8 @@ export class ConsultarVentaComponent {
   }
   
   
-  actualizarEstado(){
-    
-  }
+
+  
   modificarVenta(venta:Ventas){
     this.service.guardarId(venta);
     this.router.navigate(['modificar-venta']);

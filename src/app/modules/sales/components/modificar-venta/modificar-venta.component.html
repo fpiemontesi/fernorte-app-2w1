@@ -51,7 +51,7 @@
       <div class="row" style="margin-top: 20px;">
         <div class="col-md-6">
           <label for="producto" class="form-label">Producto</label>
-          <select name="producto" id="producto" class="form-select" [ngClass]="{'is-invalid': (form.submitted || producto.touched) && producto.invalid}" [(ngModel)]="formData.producto" required #producto="ngModel">
+          <select name="producto" id="producto" class="form-select"  [(ngModel)]="formData.producto"  #producto="ngModel">
             <!-- PARA QUE FUNCIONE CON EL JSON DE ARTICULOS -->
                <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.product_nombre }}</option> 
             <!-- <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option> -->
@@ -60,7 +60,7 @@
         </div>
         <div class="col-md-3">
           <label for="cantidad" class="form-label">Cantidad</label>
-          <input type="number" min="1" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad" [ngClass]="{'is-invalid': (form.submitted || cantidad.touched) && cantidad.invalid}" required [(ngModel)]="formData.cantidad" #cantidad="ngModel">
+          <input type="number" min="1" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad" [(ngModel)]="formData.cantidad" #cantidad="ngModel">
         </div>
         <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
           <button (click)="agregarFila($event)" class="btn btn-dark btn-block m-sm-2">Agregar</button>

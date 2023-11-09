@@ -26,7 +26,7 @@ export class ModificarVentaComponent implements OnInit{
 
   formData: any = {
     fecha: new Date().toISOString().split('T')[0],
-    cliente: '',
+    cliente: this.service.obtenerVentas().id_cliente,
     tipo: '',
     formaEntrega: '',
     vendedor: '',
@@ -39,9 +39,8 @@ export class ModificarVentaComponent implements OnInit{
   }
   ngOnInit(): void {
    console.log(this.service.obtenerVentas());
-   console.log(this.service.obtenerVentas().detalles[0].descripcion);
    this.cargarDatosVenta();
-  this.ListarArticulos();
+   this.ListarArticulos();
     //this.Listar();
   }
     
@@ -70,7 +69,7 @@ export class ModificarVentaComponent implements OnInit{
     this.http.get('http://localhost:3000/articulos')
     .subscribe((data: any) => {
       this.myList = data.map((item: any) => ({
-        id_producto: item.id,
+        id: item.id,
         product_nombre: item.product_nombre,
         precio: item.precio_minorista
       }));
@@ -101,10 +100,10 @@ export class ModificarVentaComponent implements OnInit{
     event.preventDefault();
     const producto = document.getElementById("producto") as HTMLSelectElement;
   
-    // Verifica si el producto es válido
-    if (!this.presupuestoServ.validarProducto(this.formData)) {
-      return;
-    }
+    // No hace falta que si o si tenga que ingresar un nuevo producto  y cantidad
+    // if (!this.presupuestoServ.validarProducto(this.formData)) {
+    //   return;
+    // }
   
     const productoSeleccionado = producto.options[producto.selectedIndex].text;
   
@@ -140,7 +139,7 @@ export class ModificarVentaComponent implements OnInit{
   
       // Agrega el producto a la lista de productos
       this.productos.push({
-        id_producto: producto.options[producto.selectedIndex].value,
+        cod_producto: producto.options[producto.selectedIndex].value,
         descripcion: producto.options[producto.selectedIndex].text,
         cantidad: this.formData.cantidad,
         unidad: 'Kgs',
@@ -148,7 +147,7 @@ export class ModificarVentaComponent implements OnInit{
   
       // Agrega el producto a la lista de productos de venta
       this.productosVenta.push({
-        id_producto: producto.options[producto.selectedIndex].value,
+        cod_producto: producto.options[producto.selectedIndex].value,
         precio_unitario: precioUnitario,
         cantidad: this.formData.cantidad,
       });
@@ -176,7 +175,7 @@ export class ModificarVentaComponent implements OnInit{
   
       // Agrega el producto a la lista de productos
       this.productos.push({
-        id_producto: producto.options[producto.selectedIndex].value,
+        cod_producto: producto.options[producto.selectedIndex].value,
         descripcion: producto.options[producto.selectedIndex].text,
         cantidad: this.formData.cantidad,
         unidad: 'Kgs',
@@ -184,7 +183,7 @@ export class ModificarVentaComponent implements OnInit{
   
       // Agrega el producto a la lista de productos de venta
       this.productosVenta.push({
-        id_producto: producto.options[producto.selectedIndex].value,
+        cod_producto: producto.options[producto.selectedIndex].value,
         precio_unitario: 1,
         cantidad: this.formData.cantidad,
       });
@@ -200,29 +199,67 @@ export class ModificarVentaComponent implements OnInit{
     return productoEnLista?.precio;
   }
   
-  guardarModificacion(){
-    if(!this.onSubmit())
-    {
-      return ;
+  // guardarModificacion(){
+  //   if(!this.onSubmit())
+  //   {
+  //     return ;
+  //   }
+  //   this.service.realizarModificacionVenta(this.service.obtenerVentas().id , this.productos)
+  //   .subscribe(
+  //     (response) => {
+  //       console.log('Solicitud PUT exitosa. Respuesta:', response);
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'Se ha modificado la Venta',
+  //         showCancelButton: false,
+  //         showConfirmButton: true,
+  //         confirmButtonText: 'Aceptar'
+  //       });
+  //       this.Clean();
+  //     },
+  //     (error) => {
+  //       console.error('Error al realizar la solicitud PUT:', error);
+  //     }
+  //   );
+
+  // }
+  guardarModificacion() {
+    if (!this.onSubmit()) {
+      return;
     }
-    console.log(this.service.obtenerVentas().id);
-    this.service.realizarModificacionVentaa(this.formData)
-      .subscribe(
-        (response) => {
-          console.log('Solicitud PUT exitosa. Respuesta:', response);
-          Swal.fire({
-            icon: 'success',
-            title: 'Se ha modificado la Venta',
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonText: 'Aceptar'
-          });
-          this.Clean();
-        },
-        (error) => {
-          console.error('Error al realizar la solicitud PUT:', error);
-        }
-      );
+  
+    // Obtén el ID de la venta que deseas modificar
+    const ventaId = this.service.obtenerVentas().id;
+  
+    // Configura el cuerpo de la solicitud con los datos adecuados
+    const body = {
+      fecha: this.formData.fecha,
+      doc_cliente: this.formData.cliente,
+      tipo_venta: this.formData.tipo,
+      forma_entrega: this.formData.formaEntrega,
+      fecha_entrega: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+      id_vendedor: this.formData.vendedor,
+      detalles: this.productosVenta // Asegúrate de que productosVenta se configure correctamente
+      
+    };
+  
+    // Realiza la solicitud PUT
+    this.service.realizarModificacionVenta(ventaId, body).subscribe(
+      (response) => {
+        console.log('Solicitud PUT exitosa. Respuesta:', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha modificado la Venta',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar'
+        });
+        this.Clean();
+      },
+      (error) => {
+        console.error('Error al realizar la solicitud PUT:', error);
+      }
+    );
   }
 
   Clean() {
