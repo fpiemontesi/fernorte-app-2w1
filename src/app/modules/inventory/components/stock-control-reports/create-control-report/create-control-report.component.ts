@@ -33,7 +33,8 @@ export class CreateControlReportComponent implements OnInit {
   }
 
   openModal(): void {
-    const modalRef: NgbModalRef = this.modalService.open(BatchFinderModalComponent);
+    const modalRef: NgbModalRef = this.modalService.open(BatchFinderModalComponent,
+      {size: 'lg', centered: true, scrollable: true});
     modalRef.componentInstance.onBatchSelected.subscribe((batch: Batch) => {
       this.batch = batch;
       this.formGroup.controls['batch'].setValue(this.batch.id);
