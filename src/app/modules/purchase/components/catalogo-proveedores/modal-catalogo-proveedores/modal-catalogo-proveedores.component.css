@@ -1,0 +1,12 @@
+.btn{
+    margin-left: 3px;
+}
+
+.btn-agregar{
+    margin-top: 10px;
+}
+
+.containerButton{
+    display: flex;
+    justify-content: flex-end;
+}
