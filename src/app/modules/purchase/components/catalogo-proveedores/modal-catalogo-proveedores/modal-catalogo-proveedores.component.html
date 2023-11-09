@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h4 class="modal-title" >Catálogo Proveedores</h4>
+  </div>
+  <br>
+  <div class="container">
+      <div class="grid-container">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th>Detalle</th>
+                  <th>Precio</th>
+                  <th>Marca</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let proveedor of catalogoProveedores; let i = index">
+                  <td>{{ proveedor.producto }}</td>
+                  <td>{{ proveedor.detalle }}</td>
+                  <td>${{ proveedor.precio }}</td>
+                  <td>{{ proveedor.marca }}</td>
+                  <td>
+                    <button class="button btn btn-outline-danger" (click)="eliminarProducto(i)">Eliminar</button>
+                  </td>
+              </tbody>
+          </table>
+      </div>
+      <div class="containerButton">
+        <div class="row">
+          <div>
+            <button class="button btn btn-success">Editar</button>
+            <button class="button btn btn-primary" (click)="toggleFormulario()">Nuevo</button>
+          </div>
+        </div>
+        <br>
+  </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="mostrarFormulario">
+          <h4>Agregar Nuevo Producto</h4>
+          <div class="form-group">
+            <label for="producto">Producto: </label>
+            <input type="text" id="producto" class="form-control" [(ngModel)]="nuevoProducto.producto">
+          </div>
+          <div class="form-group">
+            <label for="detalle">Detalle:</label>
+            <input type="text" id="detalle" class="form-control" [(ngModel)]="nuevoProducto.detalle">
+          </div>
+          <div class="form-group">
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" class="form-control" [(ngModel)]="nuevoProducto.precio">
+          </div>
+          <div class="form-group">
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" class="form-control" [(ngModel)]="nuevoProducto.marca">
+          </div>
+          <div class="containerButton">
+          <button class="button btn btn-primary btn-agregar" (click)="agregarProducto()">Agregar Producto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
