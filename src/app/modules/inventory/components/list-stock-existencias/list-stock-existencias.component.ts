@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListExistenciasService } from '../../services/list-existencias.service';
+
 import { ExistenciaStock } from '../../models/existenciaStock';
+import { ListExistenciasService } from '../../services/list-existencias.service';
 
 
 @Component({
