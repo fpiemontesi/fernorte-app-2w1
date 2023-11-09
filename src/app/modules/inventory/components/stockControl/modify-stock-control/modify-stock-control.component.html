@@ -1,0 +1,42 @@
+<div class="container main-content">
+    <h1>Modificar control de stock:</h1>
+  <form [formGroup]="stockControlForm" (ngSubmit)="updateStockControl()">
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="batchId">Id de Lote:</label>
+        <input type="number" class="form-control" id="batchId" formControlName="batchId">
+      </div>
+      <div class="col-md-3 form-group">
+          <label for="description">Descripción:</label>
+          <input type="text" class="form-control" id="description" formControlName="description">
+      </div> 
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="inspectedQuantity">Cantidad inspeccionada:</label>
+        <input type="number" class="form-control" id="inspectedQuantity" formControlName="inspectedQuantity">
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="damagedQuantity">Cantidad dañada:</label>
+        <input type="number" class="form-control" id="damagedQuantity" formControlName="damagedQuantity">
+      </div>
+    </div>
+    <br>
+    <div class="col-md-3 form-group">
+        <label>Lote expirado?</label>
+        <div>
+            <label>
+                <input type="radio" formControlName="batchIsExpired" [value]="true"> Sí
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" formControlName="batchIsExpired" [value]="false"> No
+            </label>
+        </div>
+      </div>
+    <br><br><br>
+    <button type="submit" class="btn btn-primary">Guardar control de stock</button>
+  </form>
+</div>

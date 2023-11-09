@@ -1,0 +1,31 @@
+{
+  "stockControlReports": [
+    {
+      "id": 1,
+      "batchId": 1,
+      "date": "2023-11-18",
+      "description": "Editado",
+      "inspectedQuantity": 90,
+      "damagedQuantity": 80,
+      "batchIsExpired": true
+    },
+    {
+      "id": 2,
+      "batchId": 2,
+      "date": "2023-10-17",
+      "description": "Batch B-2 Inspection Report",
+      "inspectedQuantity": 700,
+      "damagedQuantity": 50,
+      "batchIsExpired": true
+    },
+    {
+      "id": 3,
+      "batchId": 3,
+      "date": "2023-11-22",
+      "description": "Batch C-3 Inspection Report",
+      "inspectedQuantity": 300,
+      "damagedQuantity": 10,
+      "batchIsExpired": false
+    }
+  ]
+}
