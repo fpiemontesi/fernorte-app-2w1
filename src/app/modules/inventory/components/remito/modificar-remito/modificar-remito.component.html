@@ -1,0 +1,70 @@
+<div class="container main-content">
+  <h1>Modificar remito:</h1>
+  <form [formGroup]="receiptForm" (ngSubmit)="updateReceipt()">
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="arrivalDate">Fecha de llegada:</label>
+        <input type="date" class="form-control" id="arrivalDate" formControlName="arrivalDate">
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="purchaseOrderNumber">Numero de orden:</label>
+        <input type="number" class="form-control" id="purchaseOrderNumber" formControlName="purchaseOrderNumber">
+      </div>
+      <div class="col-md-3 form-group">
+          <label for="receiptNumber">Numero de remito:</label>
+          <input type="number" class="form-control" id="receiptNumber" formControlName="receiptNumber">
+      </div> 
+      <div class="col-md-3 form-group">
+          <label for="supplierName">Proveedor:</label>
+          <input type="text" class="form-control" id="supplierName" formControlName="supplierName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="productName">Producto:</label>
+        <input type="text" class="form-control" id="productName" formControlName="productName">
+      </div>
+      <div class="col-md-3 form-group">
+        <label for="quantity">Cantidad:</label>
+        <input type="number" class="form-control" id="quantity" formControlName="quantity">
+      </div>
+      <div class="col-md-3 form-group align-self-end">
+        <button type="button" (click)="addReceiptDetail()" class="btn btn-primary">Agregar</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label for="detail">Detalles de remito:</label>
+        <input type="text" class="form-control" id="detail" formControlName="detail">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary button-to-bottom">Guardar remito</button>
+  </form>
+
+  <div class="table-container">
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of receiptDetails; let i = index">
+          <td>{{ detail.productName }}</td>
+          <td>{{ detail.quantity }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteDetail(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>
+
