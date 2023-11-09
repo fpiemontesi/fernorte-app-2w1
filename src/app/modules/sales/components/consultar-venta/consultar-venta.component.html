@@ -94,7 +94,23 @@
           <td>{{ venta.forma_entrega }}</td>
           <td>{{ venta.tipo_venta }}</td>
           <!-- <td>{{ venta.estado }}</td> -->
-          
+          <td>
+            <select class="form-control" id="estado" name="estado" [(ngModel)]="venta.estado" (change)="actualizarEstado(venta)">
+              <option [value]="1">Pendiente</option>
+              <option [value]="2">Entregado</option>
+            </select>
+          </td>
+          <td>{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td>
+            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="verDetalle(venta)">
+              <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="modificarVenta(venta)">
+              <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

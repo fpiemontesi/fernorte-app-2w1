@@ -10,12 +10,12 @@ import { Ventas } from '../models/Ventas';
 export class VentasService {
   venta: Ventas= {} as Ventas;
   idVenta!: number;
-  constructor(private http : HttpClient) { 
+  constructor(private http : HttpClient) {
  }
 
  // private apiUrl = 'http://localhost:3000/ventas';
   private urlId = 'http://localhost:8080/ventas'
-  
+
   // getVentas(): Observable<Ventas[]>{
   //  const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
   //  return result;
@@ -25,7 +25,7 @@ export class VentasService {
     const url = 'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes';
     return this.http.get(url);
   }
-    
+
   getArticulos(): Observable<any> {
     const url = 'http://localhost:3000/articulos';
     return this.http.get(url);
@@ -45,10 +45,15 @@ export class VentasService {
     return this.http.get(`${this.urlId}/${ventaId}`);
   }
 
+  actualizarEstado(ventaId: number, nuevoEstado: number) {
+    const url = `${this.urlId}/estado/${ventaId}`;
+    const body = { estado: nuevoEstado };
 
+    return this.http.put(url, body);
+  }
 
   realizarSolicitudPostVenta(formData: any, productosVenta: any): Observable<any> {
-    
+
     const url = 'http://localhost:8080/ventas/save';
     const body = {
       fecha: new Date().toISOString(),
@@ -68,10 +73,10 @@ export class VentasService {
 
     return this.http.post(url, body, httpOptions);
   }
-  
+
 
   realizarModificacionVenta(formData: any, productosVenta: any): Observable<any> {
-    
+
     const url = 'http://localhost:8080/ventas/';
     const body = {
       fecha: new Date().toISOString(),
@@ -91,5 +96,5 @@ export class VentasService {
 
     return this.http.put(url + this.obtenerVentas().id, body, httpOptions);
   }
- 
+
 }
