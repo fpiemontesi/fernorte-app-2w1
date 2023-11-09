@@ -1,29 +1,24 @@
-<!-- <fn-registrar-pago></fn-registrar-pago> -->
-<!-- <fn-form-pago></fn-form-pago> -->
-
-<!-- <fn-pending-orders></fn-pending-orders> -->
-<!-- <fn-gestion-factura></fn-gestion-factura> -->
-<!-- <fn-registrar-factura></fn-registrar-factura> -->
-
 <div class="card text-center">
- 
   <div class="card-header">
-    
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link menu-option-custom" routerLink="/ConsultarPedidos" >Consultar Pedido</a>
+        <a class="nav-link menu-option-custom" routerLink="/ConsultarPedidos">Consultar Pedido</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link menu-option-custom" routerLink="/GestionarFactura" >Gestionar Factura</a>
+        <a class="nav-link menu-option-custom" routerLink="/GestionarFactura">Gestionar Factura</a>
       </li>
       <li class="nav-item">
         <p class="nav-link menu-option-custom" routerLink="/Reportes">Reportes</p>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" (click)="modalPaymentMethod()" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Parametros
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/paymentMethods">Payment Methods</a></li>
+        </ul>
       </li>
     </ul>
   </div>
   <router-outlet></router-outlet>
 </div>
-
-
-
-

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InvoiceService } from '../../services/invoice.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
 import { payDetailDTO } from '../../models/payDetailDTO';
@@ -63,4 +62,5 @@ export class RegistrarPagoComponent {
     }
     console.log(this.montoTotal);
   }
+
 }

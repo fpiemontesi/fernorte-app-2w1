@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DolarServiceService } from '../../services/dolar-service.service';
 import { Dolar } from '../../models/Dolar';
 import { Order } from '../../models/order';
+import { PaymentsMethodsModalComponent } from '../payments-methods-modal/payments-methods-modal.component';
 @Component({
   selector: 'fn-home-invoice',
   templateUrl: './home.component.html',
@@ -13,7 +14,7 @@ export class HomeComponent {
   dolar?: number;
   orden: Order = new Order();
 
-  constructor(private dola:DolarServiceService) { }
+  constructor(private dola:DolarServiceService, private modalService: NgbModal) { }
   
   ngOnInit() {
     this.dola.obtenerDolar().subscribe((dol: Dolar) => {
@@ -35,11 +36,11 @@ export class HomeComponent {
   selectedOrder(order: Order) {
     this.orden = order;
     console.log("BORRAR",order)
-    this.activeIndex = 1;
-
- 
-
-
-   
+    this.activeIndex = 1;   
+  }
+  modalPaymentMethod(){
+    const modalRef = this.modalService.open(PaymentsMethodsModalComponent, {
+      size: 'lg',
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { payDetailDTO } from '../models/payDetailDTO';
 import { paymentMethodDTO } from '../models/paymentMethodDTO';
@@ -9,7 +9,7 @@ import { paymentMethodDTO } from '../models/paymentMethodDTO';
 })
 export class PaymentMethodService {
 
-  private apiUrl = 'http://localhost:8081/paymentMethods';
+  private apiUrl = 'http://localhost:8081/api/v1/paymentMethods';
   listpayment?: paymentMethodDTO[] = [];
 
   private paidListSubject = new BehaviorSubject<payDetailDTO[]>([]);
@@ -32,5 +32,15 @@ export class PaymentMethodService {
 
   getPaidsObservable(): Observable<payDetailDTO[]> {
     return this.paidList$; // Devuelve el Observable para suscribirse a los cambios
+  }
+
+  addPay(pay: paymentMethodDTO) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json' 
+      })
+    };
+    console.log(pay)
+    return this.http.post<paymentMethodDTO>(this.apiUrl + '/' + pay.name, httpOptions);
   }
 }

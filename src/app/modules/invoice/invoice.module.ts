@@ -10,6 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsModalComponent } from './components/details-modal/details-modal.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReportesComponent } from './components/reportes/reportes.component';
+import { PaymentsMethodsModalComponent } from './components/payments-methods-modal/payments-methods-modal.component';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainer } from "./components/toasts/toasts-container.component";
 
 const routes: Routes = [
   {
@@ -28,26 +32,30 @@ const routes: Routes = [
 
   { path: 'GestionarFactura', component: GestionFacturaComponent },
   { path: 'Reportes', component: ReportesComponent },
+  {path: 'paymentMethods', component: PaymentsMethodsModalComponent}
 ];
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    RegistrarFacturaComponent,
-    PendingOrdersComponent,
-    GestionFacturaComponent,
-    RegistrarPagoComponent,
-    FormPagoComponent,
-    DetailsModalComponent,
-  ],
-
-  providers: [],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-  ],
-  exports: [HomeComponent, RouterModule],
+    declarations: [
+        HomeComponent,
+        RegistrarFacturaComponent,
+        PendingOrdersComponent,
+        GestionFacturaComponent,
+        RegistrarPagoComponent,
+        FormPagoComponent,
+        DetailsModalComponent,
+        PaymentsMethodsModalComponent,
+    ],
+    providers: [],
+    exports: [HomeComponent, RouterModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule,
+        NgbToastModule,
+        NgbTooltipModule,
+        ToastsContainer
+    ]
 })
 export class InvoiceModule {}

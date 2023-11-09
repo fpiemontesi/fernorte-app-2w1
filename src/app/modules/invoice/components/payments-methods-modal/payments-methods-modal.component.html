@@ -1,0 +1,18 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+    <h4 class="modal-title text-center">Nueva forma de pago</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-4 m-4">
+          <label for="observations" class="form-label">Descripción:</label>
+          <input type="text" id="observations" formControlName="name" class="form-control" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="showToast()">toast</button>
+    </div>
+  </div>
+</form>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
