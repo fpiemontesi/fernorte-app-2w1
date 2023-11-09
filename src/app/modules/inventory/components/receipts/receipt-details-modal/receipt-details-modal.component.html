@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">Detalles remito: {{receipt.receiptNumber}}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <div class="container main-content">
+    <div class="table-container">
+      <table class="table mt-4">
+        <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let detail of receipt.details">
+          <td>{{ detail.productName }}</td>
+          <td>{{ detail.quantity }}</td>
+          <td>{{ detail.detail }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>

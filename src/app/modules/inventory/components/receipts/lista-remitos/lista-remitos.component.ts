@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { receipt } from '../../models/remito';
-import { ReceiptService } from '../../services/remito.service';
+import { Receipt } from '../../../models/receipt';
+import { ReceiptService } from '../../../services/remito.service';
 import { Subscription } from 'rxjs';
-import { receiptDetail } from '../../models/detalle-remito';
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {ReceiptDetailsModalComponent} from "../receipt-details-modal/receipt-details-modal.component";
 
 @Component({
   selector: 'fn-lista-remitos',
@@ -10,13 +11,13 @@ import { receiptDetail } from '../../models/detalle-remito';
   styleUrls: ['./lista-remitos.component.css']
 })
 export class ReceiptListComponent implements OnInit {
-  receipts: receipt[] = [];
+  receipts: Receipt[] = [];
   startDate: Date;
   endDate: Date;
-  filteredReceipts: receipt[] = [];
+  filteredReceipts: Receipt[] = [];
   private subscription = new Subscription();
 
-  constructor(private receiptService: ReceiptService) {
+  constructor(private receiptService: ReceiptService, private modalService: NgbModal) {
     this.endDate = new Date();
     this.startDate = new Date();
   }
@@ -38,10 +39,16 @@ export class ReceiptListComponent implements OnInit {
     });
   }
 
+  openModal(receiptIndex: number){
+    const modalRef: NgbModalRef = this.modalService.open(ReceiptDetailsModalComponent, {size: 'xl',
+      centered: true, scrollable: true});
+    this.receiptService.selectedReceipt = this.filteredReceipts[receiptIndex];
+  }
+
   private loadReceipts() {
     this.subscription.add(
       this.receiptService.getReceipts().subscribe({
-        next: (receiptsResponse: receipt[]) => {
+        next: (receiptsResponse: Receipt[]) => {
           this.receipts = receiptsResponse;
           this.filteredReceipts = receiptsResponse;
         }

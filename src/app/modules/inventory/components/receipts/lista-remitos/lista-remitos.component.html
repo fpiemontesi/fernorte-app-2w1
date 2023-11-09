@@ -26,7 +26,7 @@
             <button class="btn btn-primary boton-css" (click)="filter()">Filtrar</button>
         </div>
 
-    </div>    
+    </div>
 </div>
 
 <h4 style="text-align: center;">Lista de remitos</h4>
@@ -40,11 +40,12 @@
             <th>Acción</th>
         </tr>
         <tbody>
-        <tr *ngFor="let r of filteredReceipts" >
+        <tr *ngFor="let r of filteredReceipts; let i = index" >
             <td>{{r.receiptNumber}}</td>
             <td>{{r.purchaseOrderNumber}}</td>
             <td>{{r.supplierName}}</td>
             <td>{{r.arrivalDate | date:'dd/MM/yyyy' }}</td>
+            <td><button class="btn btn-primary" (click)="openModal(i)">Ver detalles</button></td>
             <td><button class="btn btn-primary" (click)="modify(r.id)">Modificar</button></td>
         </tr>
         </tbody>
