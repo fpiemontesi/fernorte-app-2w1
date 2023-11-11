@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { requestInvoiceDto } from '../models/requestInvoiceDTO';
 import { InvoiceDto } from '../models/InvoiceDto';
+import { Invoice } from '../models/Invoice';
+
 
 
 
@@ -33,4 +35,10 @@ export class InvoiceService {
   getTotalpay() {
     return this.totalPay;
   }
+
+  createInvoice(invoice:Invoice) :Observable<Invoice>{
+    return this.http.post<Invoice> ("http://localhost:8081/api/v1/invoice/",invoice)
+  }
+
+
 }

@@ -22,7 +22,7 @@
                   formControlName="paymentMethod"
                   class="form-select"
                 >
-                  <option [value]="pm.id" *ngFor="let pm of payments">
+                  <option [ngValue]="pm.id" *ngFor="let pm of payments">
                     {{ pm.name }}
                   </option>
                 </select>
@@ -81,4 +81,6 @@
     </div>
     <button type="submit" class="btn btn-success">Finalizar Pago</button>
   </div>
+
+  {{invoice | json}}
 </form>

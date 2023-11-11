@@ -12,6 +12,9 @@ import { DiscountDTO } from '../../models/DiscountDTO';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrarPagoComponent } from '../registrar-pago/registrar-pago.component';
+import { tap } from 'rxjs';
+import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
+import { DiscountRequest, Invoice, OrderDetail, Product } from '../../models/Invoice';
 registerLocaleData(localeEs);
 
 @Component({
@@ -27,27 +30,80 @@ export class RegistrarFacturaComponent {
     modalRef.componentInstance.invoiceTotal = this.orderSelected.total;
   }
   orderSelected: Order = new Order();
-  client: Client = new Client();
+  client: Client[] = [];
   id: number = 0;
   fechaHoy: Date = new Date();
+  invoice:Invoice = new Invoice();
+  tipoFactura:string = 'A'
+
   constructor(
     private orderService: OrderService,
     private invoiceservice: InvoiceService,
     private customerserv: CustomerService,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private sharedDataInvoice:SharedDataInvoiceService
   ) {}
+
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.orderSelected = this.orderService.getOrderSelected();
 
+    
     this.customerserv
-      .obtenerClienteById(this.orderSelected.idCliente)
+      .obtenerClienteByNroDoc(this.orderSelected.idCliente) //PUSE ESTE NUMERO PORQUE EN LA JSON SERVER DE LA ORDEN NO HAY ID CLIENTE DICE 0
       .subscribe((data) => {
-        console.log(data);
         this.client = data;
-        console.log(this.client);
       });
+      this.calcularDescuentos();
+      
   }
   realizarPago() {}
+
+  calcularDescuentos() {
+    for (const disc of this.orderSelected.descuentos) {
+      disc.discounted = (disc.porcentaje / 100) * this.orderSelected.total;
+    }
+  }
+
+  obtenerInvoiceData(){
+    this.invoice.orderId = this.orderSelected.id
+    this.invoice.clientId = 87654321    //this.orderSelected.idCliente
+    this.invoice.type = this.tipoFactura
+    this.invoice.status = 'PENDING'
+    this.invoice.iva = 0.21
+    this.invoice.reservationId = this.orderSelected.idReserva
+
+    let listDiscount:DiscountRequest [] = []
+    //CREO LA LISTA DE DESCUENTOS
+    for(let discount of this.orderSelected.descuentos){
+      let discountRequest:DiscountRequest = new DiscountRequest();
+      discountRequest.percentage = discount.porcentaje
+      discountRequest.description = discount.descripcion
+      listDiscount.push(discountRequest)
+    }  
+    this.invoice.discountRequestList = listDiscount;
+
+    //CREO LA LISTA DE DETALLES
+    let listDetail:OrderDetail [] = []
+    for(let detail of this.orderSelected.detalles){
+      let producto:Product =  new Product();
+      let detalleOrden:OrderDetail = new OrderDetail();
+
+      //CREO EL PRODUCTO
+      producto.product_id = detail.idProducto
+      producto.name =detail.descripcion
+      producto.price = detail.precioUnitario
+
+      //CREO EL DETALLE
+      detalleOrden.product = producto
+      detalleOrden.amount = detail.cantidad
+      detalleOrden.measurementUnit = ''
+      listDetail.push(detalleOrden)
+    }
+
+    this.invoice.details = listDetail
+
+    this.sharedDataInvoice.setInvoiceData(this.invoice)
+  }
 }

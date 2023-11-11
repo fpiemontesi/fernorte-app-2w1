@@ -13,10 +13,10 @@ export class CustomerService {
       'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes'
     );
   }
-  obtenerClienteById(id: number): Observable<Client> {
-    return this.http.get<Client>(
-      'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes/' +
-        id
+  obtenerClienteByNroDoc(nro_doc: number): Observable<Client[]> {
+    return this.http.get<Client[]>(
+      'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes/?nro_doc=' +
+      nro_doc
     );
   }
 }

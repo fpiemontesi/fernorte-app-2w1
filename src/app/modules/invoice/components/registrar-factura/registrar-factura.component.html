@@ -13,85 +13,93 @@
         </div>
         <div class="col-md-6 text-end pt-2 .texto-primario">N° 1000</div>
       </div>
-      <div class="row">
-        <div class="col-10">
-          <div class="row pb-2">
-            <div class="col align-items-end d-flex justify-content-end">
-              <label for="" class="margenR">Cliente</label>
-              <input
-                type="text"
-                name=""
-                id="nombreCliente"
-                [value]="client.nombre + ' ' + client.apellido"
-                disabled
-                class="input-text"
-              />
+
+      <form action="" >
+        <div class="row">
+          <div class="col-10">
+            <div class="row pb-2">
+              <div class="col align-items-end d-flex justify-content-end">
+                <label for="" class="margenR">Cliente</label>
+                <input
+                  type="text"
+                  name="nombre"
+                  id="nombreCliente"
+                  [ngModel]="client[0].nombre + ' ' + client[0].apellido"
+                  disabled
+                  class="input-text"
+                  style="color:white"
+                />
+              </div>
+              <div class="col align-items-end d-flex justify-content-end">
+                <label for="" class="margenR">Fecha</label>
+                <input
+                  type="text"
+                  name="fechaHoy"
+                  id="fechaFactura"
+                  [value]="fechaHoy | date : 'yyyy-MM-dd'"
+                  disabled
+                  class="input-text"
+                />
+              </div>
+              <div class="col align-items-end d-flex justify-content-end">
+                <label for="" class="margenR">Tipo Documento</label>
+                <input
+                  type="text"
+                  name="tipo_documento"
+                  id="tipoDni"
+                  [(ngModel)]="client[0].id_tipo_doc.tipo_documento"
+                  disabled
+                  class="input-text"
+                />
+              </div>
             </div>
-            <div class="col align-items-end d-flex justify-content-end">
-              <label for="" class="margenR">Fecha</label>
-              <input
-                type="text"
-                name=""
-                id="fechaFactura"
-                [value]="fechaHoy | date : 'yyyy-MM-dd'"
-                disabled
-                class="input-text"
-              />
-            </div>
-            <div class="col align-items-end d-flex justify-content-end">
-              <label for="" class="margenR">Tipo Documento</label>
-              <input
-                type="text"
-                name=""
-                id="tipoDni"
-                [value]="client.id_tipo_doc.tipo_documento"
-                disabled
-                class="input-text"
-              />
+            <div class="row">
+              <div class="col align-items-end d-flex justify-content-end">
+                <label for="" class="margenR">Tipo Cliente</label>
+                <input
+                  type="text"
+                  name="tipo_cliente"
+                  id="tipoCliente"
+                  [(ngModel)]="client[0].id_tipo_cliente.tipo_cliente"
+                  disabled
+                  class="input-text"
+                />
+              </div>
+              <div class="col align-items-end d-flex justify-content-end">
+                <label for="" class="margenR">Domicilio</label>
+                <input
+                  type="text"
+                  name="domicilio"
+                  id="domicilio"
+                  [(ngModel)]="client[0].domicilio"
+                  disabled
+                  class="input-text"
+                />
+              </div>
+              <div class="col align-items-end d-flex justify-content-end">
+                <label for="" class="margenR">Documento</label>
+                <input
+                  type="text"
+                  name="nro_doc"
+                  id="nroDoc"
+                  [(ngModel)]="client[0].nro_doc"
+                  disabled
+                  class="input-text"
+                />
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col align-items-end d-flex justify-content-end">
-              <label for="" class="margenR">Tipo Cliente</label>
-              <input
-                type="text"
-                name=""
-                id="tipoCliente"
-                [value]="client.id_tipo_cliente.tipo_cliente"
-                disabled
-                class="input-text"
-              />
-            </div>
-            <div class="col align-items-end d-flex justify-content-end">
-              <label for="" class="margenR">Domicilio</label>
-              <input
-                type="text"
-                name=""
-                id="domicilio"
-                [value]="client.domicilio"
-                disabled
-                class="input-text"
-              />
-            </div>
-            <div class="col align-items-end d-flex justify-content-end">
-              <label for="" class="margenR">Documento</label>
-              <input
-                type="text"
-                name=""
-                id="nroDoc"
-                [value]="client.nro_doc"
-                disabled
-                class="input-text"
-              />
-            </div>
+          <div class="col-2 mr-5">
+            <div class="row text-end r-1"><div class="col">tipo</div></div>
+            <div class="row text-end h1"><div class="col">C</div></div>
           </div>
         </div>
-        <div class="col-2 mr-5">
-          <div class="row text-end r-1"><div class="col">tipo</div></div>
-          <div class="row text-end h1"><div class="col">C</div></div>
-        </div>
-      </div>
+
+
+      </form>
+      
     </div>
+    
     <div class="container pt-2 pb-3 mt-3">
       <div class="container pt-2 pb-3 mt-3 mb-3 table-container sombra">
         <table class="table border">
@@ -122,8 +130,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let disc of orderSelected.descuentos">
-              <td>{{ disc.description }}</td>
-              <td>{{ disc.porcentage }}</td>
+              <td>{{ disc.descripcion }}</td>
+              <td>{{ disc.porcentaje + '%'}}</td>
               <td>{{ disc.discounted | currency }}</td>
             </tr>
           </tbody>
@@ -148,7 +156,7 @@
           />
         </div>
         <div class="col d-flex justify-content-end">
-          <button class="btn btn-success" (click)="openModal()">
+          <button class="btn btn-success" (click)="obtenerInvoiceData()" (click)="openModal()">
             Facturar
           </button>
         </div>

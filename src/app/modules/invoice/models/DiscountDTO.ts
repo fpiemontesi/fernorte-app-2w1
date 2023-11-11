@@ -1,5 +1,5 @@
 export class DiscountDTO {
-  public porcentage: number = 0;
-  public description: string = '';
+  public porcentaje: number = 0;
+  public descripcion: string = '';
   public discounted: number = 0;
 }
