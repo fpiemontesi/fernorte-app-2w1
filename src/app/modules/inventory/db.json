@@ -1,24 +1,9 @@
 {
   "existencias": [
     {
-      "id": 3,
-      "stock_minimo": 16,
-      "nombre": "Martillo"
-    },
-    {
       "id": 4,
-      "stock_minimo": "200",
+      "stock_minimo": 168,
       "nombre": "Aerosol"
-    },
-    {
-      "id": 5,
-      "stock_minimo": "500",
-      "nombre": "Tornillo"
-    },
-    {
-      "id": 6,
-      "stock_minimo": "50",
-      "nombre": "Taladro"
     }
   ]
 }

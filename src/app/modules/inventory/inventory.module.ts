@@ -11,30 +11,34 @@ import { ExistenciasService } from './services/existance.service';
 const routes: Routes = [
   {
     path: 'inventory',
-    component: HomeComponent
-  },
-  {
-    path: 'inventory/listar-existencias',
-    component: ListarExistenciasComponent
-  },
-  {
-    path: 'inventory/modificar-existencia/:id',
-    component: ModificarExistenciaComponent
+    component: HomeComponent,
+    children: [
+      {
+        path: 'listar-existencias',
+        component: ListarExistenciasComponent,
+      },
+      {
+        path: 'modificar-existencia/:id',
+        component: ModificarExistenciaComponent,
+      },
+    ],
   },
 ];
 
 @NgModule({
-  declarations: [HomeComponent,
-    ModificarExistenciaComponent, 
-    ListarExistenciasComponent],
-  providers: [ExistenciasService],
-  imports: [CommonModule, 
-    FormsModule, 
-    NgbNavModule,
-    RouterModule.forRoot(routes),
-    NgbToast
+  declarations: [
+    HomeComponent,
+    ModificarExistenciaComponent,
+    ListarExistenciasComponent,
   ],
-  exports: [HomeComponent,
-    RouterModule],
+  providers: [ExistenciasService],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgbNavModule,
+    RouterModule.forChild(routes),
+    NgbToast,
+  ],
+  exports: [HomeComponent, RouterModule],
 })
 export class InventaryModule {}
