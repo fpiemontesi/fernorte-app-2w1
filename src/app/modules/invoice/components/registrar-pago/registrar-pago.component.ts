@@ -80,8 +80,7 @@ export class RegistrarPagoComponent {
       this.sharedDataInvoice.formData$.subscribe((invoiceData) => {
         this.invoice = invoiceData
       })
-
-      this.invoice.paymentMethodList = [paymentMethods];
+      this.invoice.paymentMethodList = paymentMethods;
       console.log(this.invoice)
       this.invoiceService.createInvoice(this.invoice).subscribe({
         next: (response) => {
@@ -90,6 +89,7 @@ export class RegistrarPagoComponent {
         },
         error: (error) => {
           console.log(error)
+          alert(error);
         }
       })
 
