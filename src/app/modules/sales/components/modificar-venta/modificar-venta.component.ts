@@ -25,13 +25,15 @@ export class ModificarVentaComponent implements OnInit{
   precio_total: number = 0;
 
   formData: any = {
-    fecha: new Date().toISOString().split('T')[0],
-    cliente: this.service.obtenerVentas().id_cliente,
-    tipo: '',
-    formaEntrega: '',
-    vendedor: '',
-    producto :'',
-    cantidad: 0
+   // fecha: new Date().toISOString().split('T')[0],
+    doc_cliente: this.service.obtenerVentas().doc_cliente,
+    tipo_venta: 0,
+    forma_entrega: 0,
+    id_vendedor: 0,
+    cod_producto :'',
+    cantidad: 0, 
+    precio_unitario: 0,
+    total: 0
   };
 
   constructor(private service: VentasService, private http: HttpClient, private presupuestoServ: PresupuestoService) {
@@ -46,15 +48,16 @@ export class ModificarVentaComponent implements OnInit{
     
   cargarDatosVenta() {
     const ventaActual = this.service.obtenerVentas();
-    this.formData.cliente = ventaActual.id_cliente;
-    this.formData.vendedor = ventaActual.id_vendedor;
-    this.formData.tipo = ventaActual.tipo_venta;
-    this.formData.formaEntrega = ventaActual.forma_entrega;
+    this.formData.doc_cliente = ventaActual.doc_cliente;
+    this.formData.id_vendedor = ventaActual.id_vendedor;
+    this.formData.tipo_venta = ventaActual.tipo_venta;
+    this.formData.forma_entrega = ventaActual.forma_entrega;
+    this.formData.fecha = new Date(ventaActual.fecha).toISOString();
     this.precio_total= ventaActual.total;
     for (let i = 0; i < ventaActual.detalles.length; i++) {
       this.filas.push({
-        id: ventaActual.detalles[i].id_producto,
-        producto: ventaActual.detalles[i].descripcion,
+        cod_producto: ventaActual.detalles[i].cod_producto,
+        descripcion: ventaActual.detalles[i].descripcion,
         cantidad: ventaActual.detalles[i].cantidad,
         precio_unitario: ventaActual.detalles[i].precio_unitario,
         precio_total: ventaActual.detalles[i].precio_unitario * ventaActual.detalles[i].cantidad,
@@ -130,8 +133,8 @@ export class ModificarVentaComponent implements OnInit{
   
       // Agrega la fila a la lista de filas
       this.filas.push({
-        id: producto.value,
-        producto: productoSeleccionado,
+        cod_producto: producto.value,
+        descripcion: productoSeleccionado,
         cantidad: this.formData.cantidad,
         precio_unitario: precioUnitario,
         precio_total: precioTotal,
@@ -166,8 +169,8 @@ export class ModificarVentaComponent implements OnInit{
       // Agrega la fila con precio por defecto
       const precioTotalPorDefecto = this.formData.cantidad * 1;
       this.filas.push({
-        id: producto.value,
-        producto: productoSeleccionado,
+        cod_producto: producto.value,
+        descripcion: productoSeleccionado,
         cantidad: this.formData.cantidad,
         precio_unitario: 1,
         precio_total: precioTotalPorDefecto,
@@ -233,18 +236,17 @@ export class ModificarVentaComponent implements OnInit{
   
     // Configura el cuerpo de la solicitud con los datos adecuados
     const body = {
-      fecha: this.formData.fecha,
-      doc_cliente: this.formData.cliente,
-      tipo_venta: this.formData.tipo,
-      forma_entrega: this.formData.formaEntrega,
-      fecha_entrega: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      id_vendedor: this.formData.vendedor,
-      detalles: this.productosVenta // Asegúrate de que productosVenta se configure correctamente
-      
+      doc_cliente: this.formData.doc_cliente,
+      fecha: new Date().toISOString(),
+      tipo_venta: this.formData.tipo_venta,
+      forma_entrega: this.formData.forma_entrega,
+      fecha_entrega: new Date().toISOString(),
+      id_vendedor: this.formData.id_vendedor,
+      detalles: this.productos // Asegúrate de que productos se configure correctamente
     };
-  
+    console.log(body);
     // Realiza la solicitud PUT
-    this.service.realizarModificacionVenta(ventaId, body).subscribe(
+    this.service.realizarModificacionVenta(ventaId, this.formData, this.productos).subscribe(
       (response) => {
         console.log('Solicitud PUT exitosa. Respuesta:', response);
         Swal.fire({

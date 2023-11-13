@@ -5,7 +5,7 @@
        
         <div class="col-md-4">
           <label for="cliente" class="form-label">Cliente</label>
-          <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="formData.cliente" name="cliente" required #cliente="ngModel" disabled>
+          <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="formData.doc_cliente" name="cliente" required #cliente="ngModel" disabled>
             <option value="1">Tomas Benza</option>
             <option value="2">Cande Mello</option>
           </select>
@@ -17,7 +17,7 @@
           
         <div class="col-md-5">
           <label for="tipo" class="form-label">Tipo Pedido</label>
-          <select name="tipo" id="tipo" class="form-select " [ngClass]="{'is-invalid': (form.submitted || tipo.touched) && tipo.invalid}" [(ngModel)]="formData.tipo" #tipo="ngModel" required>
+          <select name="tipo" id="tipo" class="form-select " [ngClass]="{'is-invalid': (form.submitted || tipo.touched) && tipo.invalid}" [(ngModel)]="formData.tipo_venta" #tipo="ngModel" required>
             <option value="1">Minorista</option>
             <option value="2">Mayorista</option>
           </select>
@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-md-4">
           <label for="vendedor" class="form-label">Vendedor</label>
-        <select name="vendedor" id="vendedor" class="form-select " [ngClass]="{'is-invalid': (form.submitted || vendedor.touched) && vendedor.invalid}" [(ngModel)]="formData.vendedor" name="vendedor" required #vendedor="ngModel">
+        <select name="vendedor" id="vendedor" class="form-select " [ngClass]="{'is-invalid': (form.submitted || vendedor.touched) && vendedor.invalid}" [(ngModel)]="formData.id_vendedor" name="vendedor" required #vendedor="ngModel">
             <option value="1">Tomas Benza</option>
             <option value="2">Cande Mello</option>
           </select>
@@ -39,7 +39,7 @@
           </div>
         <div class="col-md-5">
           <label for="formaEntrega" class="form-label">Forma Entrega</label>
-          <select name="formaEntrega" id="formaEntrega" class="form-select" [ngClass]="{'is-invalid': (form.submitted || formaEntrega.touched) && formaEntrega.invalid}"  [(ngModel)]="formData.formaEntrega" required #formaEntrega="ngModel">
+          <select name="formaEntrega" id="formaEntrega" class="form-select" [ngClass]="{'is-invalid': (form.submitted || formaEntrega.touched) && formaEntrega.invalid}"  [(ngModel)]="formData.forma_entrega" name="formaEntrega" required #formaEntrega="ngModel">
             <option value="1">Caja</option>
             <option value="2">Deposito</option>
           </select>
@@ -51,7 +51,7 @@
       <div class="row" style="margin-top: 20px;">
         <div class="col-md-6">
           <label for="producto" class="form-label">Producto</label>
-          <select name="producto" id="producto" class="form-select"  [(ngModel)]="formData.producto"  #producto="ngModel">
+          <select name="producto" id="producto" class="form-select"  [(ngModel)]="formData.cod_producto"  #producto="ngModel">
             <!-- PARA QUE FUNCIONE CON EL JSON DE ARTICULOS -->
                <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.product_nombre }}</option> 
             <!-- <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option> -->
@@ -79,7 +79,7 @@
           </thead>
           <tbody>
               <tr *ngFor="let fila of filas; let i = index">
-                  <td>{{ fila.producto }}</td>
+                  <td>{{ fila.descripcion }}</td>
                   <td>{{ fila.cantidad }}</td>
                   <td>{{fila.precio_unitario}}</td>
                   <td>{{fila.precio_total}}</td>
@@ -109,7 +109,7 @@
             <div class="row">
               <div class="d-flex justify-content-between">
                 <button class="btn btn-dark">Cancelar</button>
-                <button type="submit" (click)="guardarModificacion()" class="btn btn-dark ">Guardar Modiciación</button>
+                <button type="submit" (click)="guardarModificacion()" class="btn btn-dark ">Guardar Modifiación</button>
               </div>
             </div>
             

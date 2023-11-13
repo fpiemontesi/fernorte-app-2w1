@@ -75,26 +75,32 @@ export class VentasService {
   }
 
 
-  realizarModificacionVenta(formData: any, productosVenta: any): Observable<any> {
-
+  realizarModificacionVenta(ventaId: number, formData: any, productosVenta: any): Observable<any> {
     const url = 'http://localhost:8080/ventas/';
     const body = {
+      doc_cliente: formData.doc_cliente,
       fecha: new Date().toISOString(),
-      doc_cliente: this.obtenerVentas().id_cliente,
-      tipo_venta: formData.tipo,
-      forma_entrega: formData.formaEntrega,
-      fecha_entrega: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      id_vendedor: formData.vendedor,
-      detalles: productosVenta
+      tipo_venta: formData.tipo_venta,
+      forma_entrega: formData.forma_entrega,
+      fecha_entrega: new Date().toISOString(),
+      id_vendedor: formData.id_vendedor,
+      detalles: productosVenta // Asegúrate de que productosVenta se configure correctamente
     };
-    console.log(body);
+  
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-
-    return this.http.put(url + this.obtenerVentas().id, body, httpOptions);
+  
+    return this.http.put(url + ventaId, body, httpOptions);
   }
 
+  apiUrl = 'http://localhost:8080';
+  modificarVenta(ventaId: number, ventaData: any): Observable<any> {
+    const url = `${this.apiUrl}/ventas/${ventaId}`; // Reemplaza con la URL correcta
+    return this.http.put(url, ventaData);
+  }
+
+  
 }

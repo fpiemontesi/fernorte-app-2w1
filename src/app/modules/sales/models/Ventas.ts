@@ -3,22 +3,22 @@ import { Detalles } from "./Detalles";
 
 export class Ventas {
     id: number;
-    id_cliente: number;
-    id_vendedor: string;
+    doc_cliente: number;
+    id_vendedor: number;
     fecha: Date;
-    forma_entrega: string;
-    tipo_venta: string;
+    forma_entrega: number;
+    tipo_venta: number;
     estado: number;
     total: number;
     detalles: Array<Detalles> = [];
 
     constructor() {
        this.id = 0;
-       this.id_cliente = 0;
-       this.id_vendedor = "";
+       this.doc_cliente = 0;
+       this.id_vendedor = 0;
        this.fecha = new Date();
-       this.forma_entrega = "";
-       this.tipo_venta = "";
+       this.forma_entrega = 0;
+       this.tipo_venta = 0;
        this.estado = 0;
        this.total = 0;
     }

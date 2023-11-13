@@ -7,12 +7,19 @@
       </div>
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label>Cliente</label>
-        <input type="text" class="form-control" name="cliente" placeholder="Nombre del cliente" [(ngModel)]="venta.id_cliente">
+        <select class="form-control" id="cliente" name="cliente" [(ngModel)]="venta.doc_cliente">
+          <option disabled selected value="">Selecciona el cliente de la venta</option>
+          <option value="1">Cande</option>
+          <option value="2">Tomi</option>
+        </select>
       </div>
-      <div class="col-md-3 col-sm-12" style="padding: 1%;">
-        <label>Vendedor</label>
-        <input type="text" class="form-control" id="vendedor" name="vendedor" placeholder="Nombre del vendedor" [(ngModel)]="venta.id_vendedor">
-      </div>
+    <div class="col-md-3 col-sm-12" style="padding: 1%;">
+      <label>Vendedor</label>
+      <select class="form-control" id="vendedor" name="vendedor" [(ngModel)]="venta.id_vendedor">
+        <option disabled selected value="">Selecciona el vendedor de la venta</option>
+        <option value="1">Cande</option>
+        <option value="2">Tomi</option>
+      </select>
     </div>
     <div class="row">
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
@@ -88,7 +95,7 @@
       <tbody>
         <tr *ngFor="let venta of ventas">
           <td>{{ venta.id }}</td>
-          <td>{{ venta.id_cliente }}</td>
+          <td>{{ venta.cod_cliente }}</td>
           <td>{{ venta.id_vendedor }}</td>
           <td>{{ venta.fecha | date: 'dd/MM/yyyy' }}</td>
           <td>{{ venta.forma_entrega }}</td>
@@ -129,7 +136,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let detalle of venta.detalles">
-        <td>{{ detalle.id_producto }}</td>
+        <td>{{ detalle.cod_producto }}</td>
         <td>{{ detalle.descripcion }}</td>
         <td>{{ detalle.cantidad }}</td>
         <td>{{ detalle.precio_unitario | currency:'USD':'symbol':'1.2-2' }}</td>

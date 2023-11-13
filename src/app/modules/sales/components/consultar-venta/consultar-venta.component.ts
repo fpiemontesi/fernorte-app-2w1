@@ -42,15 +42,15 @@ export class ConsultarVentaComponent {
     // Construye los parámetros de la consulta
     let params = new HttpParams()
     if(this.venta.id){
-      params = params.set('id', this.venta.id.toString());
+      params = params.set('id', this.venta.id);
     }
 
-    if (this.venta.id_cliente) {
-      params = params.set('doc_cliente', this.venta.id_cliente.toString());
+    if (this.venta.doc_cliente) {
+      params = params.set('doc_cliente', this.venta.doc_cliente);
     }
 
     if (this.venta.id_vendedor) {
-      params = params.set('id_vendedor', this.venta.id_vendedor.toString());
+      params = params.set('id_vendedor', this.venta.id_vendedor);
     }
 
     if (this.venta.tipo_venta) {
