@@ -5,9 +5,10 @@ import { RegistrarLotesComponent } from './components/registrar-lotes/registrar-
 import { FormsModule } from '@angular/forms';
 import { ToastsComponent } from './components/toast/toasts.component';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { ModificarLoteComponent } from './components/modificar-lote/modificar-lote.component';
 
 @NgModule({
-  declarations: [HomeComponent, RegistrarLotesComponent, ToastsComponent],
+  declarations: [HomeComponent, RegistrarLotesComponent, ToastsComponent, ModificarLoteComponent],
   providers: [],
   imports: [
     CommonModule,

@@ -44,15 +44,15 @@
   "batchs": [
     {
       "id": 1,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
+      "existenceCode": "1",
+      "sectionId": 4,
+      "quantity": "5",
+      "dueDate": "2024-10-27",
       "shelf": "6"
     },
     {
       "id": 2,
-      "existenceId": 1,
+      "existenceCode": "2",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -60,7 +60,7 @@
     },
     {
       "id": 3,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -68,7 +68,7 @@
     },
     {
       "id": 4,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -76,7 +76,7 @@
     },
     {
       "id": 5,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -84,7 +84,7 @@
     },
     {
       "id": 6,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 1,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -92,7 +92,7 @@
     },
     {
       "id": 7,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "4",
       "dueDate": "2023-10-26",
@@ -100,7 +100,7 @@
     },
     {
       "id": 8,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-30",
@@ -109,17 +109,17 @@
   ],
   "existences": [
     {
-      "id": 1,
+      "code": "1",
       "name": "tornillos",
       "minimunStock": 100
     },
     {
-      "id": 2,
+      "code": "2",
       "name": "tablones",
       "minimunStock": 20
     },
     {
-      "id": 3,
+      "code": "3",
       "name": "tuercas",
       "minimunStock": 150
     }

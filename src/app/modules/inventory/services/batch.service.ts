@@ -13,7 +13,16 @@ export class BatchService {
   create(body: Batch): Observable<Batch>{
     return this.http.post<Batch>('http://localhost:3000/batchs', body);
   }
+
   getAll(): Observable<Batch[]>{
-    return this.http.get<Batch[]>(`http://localhost:3000/batchs`);
+    return this.http.get<Batch[]>('http://localhost:3000/batchs');
+  }
+
+  getById(id: number):Observable<Batch>{
+    return this.http.get<Batch>('http://localhost:3000/batchs/'+id)
+  }
+
+  modificate(body: Batch, id: number): Observable<Batch>{
+    return this.http.put<Batch>('http://localhost:3000/batchs/'+id, body)
   }
 }

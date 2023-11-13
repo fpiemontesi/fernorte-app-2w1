@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <h1>Modificar Lote</h1>
+    </div>
+  </nav>
+  
+  <fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>
+  <div class="container mt-4">
+    <form #myForm="ngForm" (ngSubmit)="modificate()">
+      
+      <div class="row mt-4">
+        <div class="col d-flex align-items-center d-flex justify-content-center">
+          <div class="row">
+            <div class="col">
+              <h5>Producto:</h5>
+            </div>
+            <div class="col">
+              <div class="d-flex justify-content-start badge bg-success text-wrap fs-6">{{existence.name}}</div>
+            </div>
+          </div>   
+        </div>
+
+        <div class="col">
+          <label for="section-select" class="form-label">Sección</label>
+            <select
+              class="form-select"
+              id="section-select"
+              aria-label="Default select example"
+              name="setcion-select"
+              #selectSetcion="ngModel"
+              [(ngModel)]="sectionSelect.id"
+              [class.is-valid]="selectSetcion.valid && selectSetcion.dirty"
+              [class.is-invalid]="
+              sectionSelect.id == '' &&
+                (selectSetcion.dirty || selectSetcion.touched)
+              "
+              required
+            >
+              <option
+                [ngValue]="0"
+                [selected]="sectionSelect.id == ''"
+                disabled
+              ></option>
+              <ng-container *ngFor="let section of sections">
+                <option
+                  [ngValue]="section.id"
+                  [selected]="sectionSelect.id == section.id"
+                >
+                  {{ section.id }}
+                </option>
+              </ng-container>
+            </select>
+        </div>
+
+        <div class="col">
+          <label for="inputShelf" class="form-label">Estante</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputShelf"
+              #shelfControll="ngModel"
+              [(ngModel)]="inputShelf"
+              (input)="chargeShelf($event)"
+              name="inputShelf"
+              required
+            />
+            <div *ngIf="shelfControll.dirty" style="color: red">
+              <p *ngIf="shelfControll.hasError('pattern')">
+                No es el formato correcto
+              </p>
+              <p *ngIf="inputShelf <= 0">
+                El estante no puede ser menor o igual a 0
+              </p>
+            </div>
+        </div>
+      </div>
+        <div class="row mt-4">
+          <div class="col"></div>
+
+          <div class="col">
+            <label for="inputQuantity" class="form-label">Cantidad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputQuantity"
+              #quantityControll="ngModel"
+              [(ngModel)]="inputQuantity"
+              (input)="chargeQuantity($event)"
+              name="inputQuantity"
+              required
+            />
+            <div *ngIf="quantityControll.dirty" style="color: red">
+              <p *ngIf="quantityControll.hasError('pattern')">
+                No es el formato correcto
+              </p>
+              <p *ngIf="inputQuantity <= 0">
+                La cantidad no puede ser menor o igual a 0
+              </p>
+              <p *ngIf="inputQuantity>batch.quantity">La cantidad no puede ser mayor a la existente</p>
+            </div>
+          </div>
+
+          <div class="col">
+            <label for="inputDate" class="form-label">Fecha de vencimiento</label>
+            <input
+              type="date"
+              class="form-control"
+              id="inputDate"
+              #dateControll="ngModel"
+              [(ngModel)]="inputDate"
+              (input)="chargeDate($event)"
+              name="inputDate"
+              required
+            />
+            <div *ngIf="dateControll.dirty" style="color: red">
+              <p *ngIf="dateControll.hasError('pattern')">
+                No es el formato correcto
+              </p>
+              <p *ngIf="compareDates()">La fecha no puede ser menor a la actual</p>
+            </div>
+          </div>
+
+          <div class="col"></div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-danger ">Cancelar</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
+              Guardar
+            </button>
+          </div>
+        </div>
+
+      </form>
+  </div>
+  

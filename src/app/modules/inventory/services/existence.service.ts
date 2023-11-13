@@ -13,4 +13,8 @@ export class ExistenceService {
   getAll(): Observable<Existence[]>{
     return this.http.get<Existence[]>(`http://localhost:3000/existences`);
   }
+
+  getById(id: string):Observable<Existence[]>{
+    return this.http.get<Existence[]>('http://localhost:3000/existences?code='+id)
+  }
 }
