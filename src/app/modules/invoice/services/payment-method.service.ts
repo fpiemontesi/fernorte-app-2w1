@@ -9,7 +9,7 @@ import { paymentMethodDTO } from '../models/paymentMethodDTO';
 })
 export class PaymentMethodService {
 
-  private apiUrl = 'http://localhost:8080/api/v1/paymentMethods';
+  private apiUrl = 'http://localhost:8081/api/v1/paymentMethods';
   listpayment?: paymentMethodDTO[] = [];
 
   private paidListSubject = new BehaviorSubject<payDetailDTO[]>([]);
