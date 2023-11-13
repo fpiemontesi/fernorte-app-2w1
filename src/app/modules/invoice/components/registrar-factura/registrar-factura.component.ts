@@ -33,8 +33,8 @@ export class RegistrarFacturaComponent {
   client: Client[] = [];
   id: number = 0;
   fechaHoy: Date = new Date();
-  invoice:Invoice = new Invoice();
-  tipoFactura:string = 'A'
+  invoice: Invoice = new Invoice();
+  tipoFactura: string = 'A'
 
   constructor(
     private orderService: OrderService,
@@ -42,31 +42,49 @@ export class RegistrarFacturaComponent {
     private customerserv: CustomerService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private sharedDataInvoice:SharedDataInvoiceService
-  ) {}
+    private sharedDataInvoice: SharedDataInvoiceService
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.orderSelected = this.orderService.getOrderSelected();
 
-    
     this.customerserv
-      .obtenerClienteByNroDoc(this.orderSelected.idCliente) //PUSE ESTE NUMERO PORQUE EN LA JSON SERVER DE LA ORDEN NO HAY ID CLIENTE DICE 0
+      .obtenerClienteByNroDoc(this.orderSelected.idCliente)
       .subscribe((data) => {
         this.client = data;
       });
-      this.calcularDescuentos();
-      
+    this.calcularDescuentos();
+
   }
-  realizarPago() {}
+  realizarPago() { }
 
   calcularDescuentos() {
+    //HICE UNOS CALCULOS PORQUE EL TOTAL ESTA MAL
+    let totalDescuento = 0
+    this.orderSelected.total = parseFloat(
+      (
+        ((this.orderSelected.detalles[0].precioUnitario * this.orderSelected.detalles[0].cantidad) +
+          (this.orderSelected.detalles[1].precioUnitario * this.orderSelected.detalles[1].cantidad))
+      ).toFixed(2)
+    );
+
+    console.log(this.orderSelected.total)
+
     for (const disc of this.orderSelected.descuentos) {
       disc.discounted = (disc.porcentaje / 100) * this.orderSelected.total;
+      totalDescuento += disc.discounted
     }
+
+    console.log(totalDescuento)
+    this.orderSelected.total = this.orderSelected.total - totalDescuento
+
+    console.log(this.orderSelected.total)
   }
 
-  obtenerInvoiceData(){
+
+
+  obtenerInvoiceData() {
     this.invoice.orderId = this.orderSelected.id
     this.invoice.clientId = 87654321    //this.orderSelected.idCliente
     this.invoice.type = this.tipoFactura
@@ -74,25 +92,25 @@ export class RegistrarFacturaComponent {
     this.invoice.iva = 0.21
     this.invoice.reservationId = this.orderSelected.idReserva
 
-    let listDiscount:DiscountRequest [] = []
+    let listDiscount: DiscountRequest[] = []
     //CREO LA LISTA DE DESCUENTOS
-    for(let discount of this.orderSelected.descuentos){
-      let discountRequest:DiscountRequest = new DiscountRequest();
+    for (let discount of this.orderSelected.descuentos) {
+      let discountRequest: DiscountRequest = new DiscountRequest();
       discountRequest.percentage = discount.porcentaje
       discountRequest.description = discount.descripcion
       listDiscount.push(discountRequest)
-    }  
+    }
     this.invoice.discountRequestList = listDiscount;
 
     //CREO LA LISTA DE DETALLES
-    let listDetail:OrderDetail [] = []
-    for(let detail of this.orderSelected.detalles){
-      let producto:Product =  new Product();
-      let detalleOrden:OrderDetail = new OrderDetail();
+    let listDetail: OrderDetail[] = []
+    for (let detail of this.orderSelected.detalles) {
+      let producto: Product = new Product();
+      let detalleOrden: OrderDetail = new OrderDetail();
 
       //CREO EL PRODUCTO
       producto.product_id = detail.idProducto
-      producto.name =detail.descripcion
+      producto.name = detail.descripcion
       producto.price = detail.precioUnitario
 
       //CREO EL DETALLE

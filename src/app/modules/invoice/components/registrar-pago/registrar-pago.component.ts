@@ -30,9 +30,6 @@ export class RegistrarPagoComponent {
     private invoiceService:InvoiceService
   ) {
     this.paymentMethodDtos = this.paymentMethodService.obtenerFormasPago();
-    this.paymentMethodDtos.subscribe((data)=> {
-      console.log(data)
-    })
     this.formulario = this.formBuilder.group({
       paymentMethodList: this.formBuilder.array([]),
     });
@@ -79,12 +76,17 @@ export class RegistrarPagoComponent {
 
     }
   }
+
+
   calcularTotal() {
     this.montoTotal = 0;
     for (const formaDePago of this.paymentMethodList.controls) {
       this.montoTotal += formaDePago.value.amount;
     }
     console.log(this.montoTotal);
+
+    
+
   }
 
 }
