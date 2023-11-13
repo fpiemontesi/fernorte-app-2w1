@@ -1,3 +1,9 @@
-<fn-create-control-report></fn-create-control-report>
-<fn-modify-stock-control></fn-modify-stock-control>
-<fn-list-control-stock></fn-list-control-stock>
+<nav ngbNav #nav="ngbNav" class="nav-tabs">
+    <ng-container ngbNavItem>
+        <button ngbNavLink>Remitos</button>
+    </ng-container>
+    <ng-container ngbNavItem>
+        <button ngbNavLink routerLink="stock-controls">Controles de stock</button>
+    </ng-container>
+</nav>
+<router-outlet></router-outlet>
