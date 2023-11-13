@@ -5,12 +5,16 @@ import { CreateControlReportComponent } from './components/stock-control-reports
 import { BatchFinderModalComponent } from './components/stock-control-reports/batch-finder-modal/batch-finder-modal.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { ToastsContainer } from './components/toasts/toasts-container.component';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbToast, NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
+import {
+  ModifyStockControlComponent
+} from "./components/stock-control-reports/modify-stock-control/modify-stock-control.component";
 
 @NgModule({
-  declarations: [HomeComponent, CreateControlReportComponent, BatchFinderModalComponent, ToastsContainer],
+  declarations: [HomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
+    ModifyStockControlComponent, ToastsContainer],
   providers: [],
-    imports: [CommonModule, ReactiveFormsModule, NgbToastModule],
+    imports: [CommonModule, ReactiveFormsModule, NgbToast, NgbToastModule],
   exports: [HomeComponent],
 })
 export class InventaryModule {}
