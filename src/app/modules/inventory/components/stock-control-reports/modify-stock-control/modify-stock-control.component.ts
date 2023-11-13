@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StockControlReport } from '../../../models/StockControlReport';
 import { Subscription } from 'rxjs';
 import { StockControlReportService } from '../../../services/stock-control-report.service';
-import { AppToastService } from '../../../services/app-toast.service';
+import {ToastsContainer} from "../../toasts/toasts-container.component";
+import {ToastService} from "../../../services/toast.service";
 
 @Component({
   selector: 'fn-modify-stock-control',
@@ -16,7 +17,8 @@ export class ModifyStockControlComponent implements OnInit, OnDestroy{
   stockControl: StockControlReport = new StockControlReport();
   private subscription: Subscription = new Subscription();
 
-  constructor(private formBuilder: FormBuilder, private stockControlService: StockControlReportService, private toastService: AppToastService) {}
+  constructor(private formBuilder: FormBuilder, private stockControlService: StockControlReportService,
+              private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.stockControlForm = this.formBuilder.group({
@@ -26,7 +28,7 @@ export class ModifyStockControlComponent implements OnInit, OnDestroy{
       damagedQuantity: [null, Validators.required],
       batchIsExpired: false
     });
-    
+
     this.subscription = this.stockControlService.getById(1).subscribe((data: StockControlReport) => {
       this.stockControl = data || new StockControlReport();
       this.loadStockControlData();
@@ -52,11 +54,11 @@ export class ModifyStockControlComponent implements OnInit, OnDestroy{
       this.stockControl.batchIsExpired = this.stockControlForm.get('batchIsExpired')?.value;
 
       this.stockControlService.modify(this.stockControl).subscribe((updatedControl: StockControlReport) => {
-        this.toastService.show("Formulario valido","Control de stock modificado con exito.");
+        this.toastService.show("Formulario valido",{classname: 'bg-success text-light'});
       });
     }
     else{
-      this.toastService.show("Formulario invalido","Datos del formulario invalidos");
+      this.toastService.show("Formulario invalido",{classname: 'bg-danger text-light'});
     }
   }
 
@@ -66,5 +68,5 @@ export class ModifyStockControlComponent implements OnInit, OnDestroy{
     }
   }
 
-    
+
 }

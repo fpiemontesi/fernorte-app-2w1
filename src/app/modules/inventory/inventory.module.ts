@@ -9,10 +9,11 @@ import {NgbToast, NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
 import {
   ModifyStockControlComponent
 } from "./components/stock-control-reports/modify-stock-control/modify-stock-control.component";
+import {ListControlStockComponent} from "./components/stock-control-reports/list-control-stock/list-control-stock.component";
 
 @NgModule({
   declarations: [HomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
-    ModifyStockControlComponent, ToastsContainer],
+    ModifyStockControlComponent, ListControlStockComponent, ToastsContainer],
   providers: [],
     imports: [CommonModule, ReactiveFormsModule, NgbToast, NgbToastModule],
   exports: [HomeComponent],

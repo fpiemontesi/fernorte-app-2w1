@@ -21,4 +21,8 @@ export class StockControlReportService {
   modify(control: StockControlReport): Observable<StockControlReport>{
       return this.http.put<StockControlReport>('http://localhost:3000/stockControlReports/'+control.id,control);
   }
+
+  public get():Observable<StockControlReport[]>{
+    return this.http.get<StockControlReport[]>("http://localhost:3000/stockControlReports");
+  }
 }
