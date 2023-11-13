@@ -1,0 +1,45 @@
+<div class="container big-cart">
+    <h3>Crear Cargo</h3>
+    <form #crearCargoForm="ngForm">
+      <div class="row">
+        <!-- Primera columna -->
+        <div class="col-md-6">
+          <div class="form-group mt-3">
+            <label for="cargo">Cargo:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cargo"
+              placeholder="Cargo del Usuario"
+              name="cargo"
+                [(ngModel)]="cargoBody.descripcion"
+              required
+            />
+  
+            <div
+              *ngIf="
+                crearCargoForm.controls['cargo'].invalid &&
+                crearCargoForm.controls['cargo'].touched
+              "
+            >
+              <div
+                *ngIf="crearCargoForm.controls['cargo'].errors?.['required']"
+                class="error"
+              >
+                El nombre del cargo es requerido.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success mt-3"
+        (click)="crearCargo()"
+        [disabled]="crearCargoForm.invalid"
+      >
+        Guardar Cargo
+      </button>
+    </form>
+  </div>
+  

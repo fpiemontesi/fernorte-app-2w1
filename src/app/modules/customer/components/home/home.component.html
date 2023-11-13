@@ -1,1 +1,23 @@
-<p>home clients works!</p>
+
+
+<div class="containerBtn">
+    <button (click)="toggleComponent('mostrarComponentesClientes')" *ngIf="isLogged" class="buttonComponent">Clientes</button>
+    <button (click)="toggleComponent('mostrarComponentesUsuarios')" *ngIf="isLogged" class="buttonComponent">Usuarios</button>
+    <button (click)="toggleComponent('mostrarComponenteTurnero')" *ngIf="isLogged" class="buttonComponent">Turnos</button>
+</div>
+
+<fn-crear-cliente *ngIf="isComponentVisible('mostrarComponentesClientes') && isLogged"></fn-crear-cliente>
+<fn-modificar-clientes *ngIf="isComponentVisible('mostrarComponentesClientes') && isLogged"></fn-modificar-clientes>
+<fn-lista-clientes *ngIf="isComponentVisible('mostrarComponentesClientes') && isLogged"></fn-lista-clientes>
+<fn-crear-user *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-crear-user>
+<fn-delete-user *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-delete-user>
+<fn-get-user *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-get-user>
+<fn-crear-position *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-crear-position>
+<fn-turnero *ngIf="isComponentVisible('mostrarComponenteTurnero') && isLogged"></fn-turnero>
+<fn-lista-turnero *ngIf="isComponentVisible('mostrarComponenteTurnero') && isLogged"></fn-lista-turnero>
+
+
+
+<fn-login (loginSuccess)="onLoginSuccess()" *ngIf="showLoginForm && !isLogged"></fn-login>
+
+<fn-logout *ngIf="isLogged"></fn-logout>

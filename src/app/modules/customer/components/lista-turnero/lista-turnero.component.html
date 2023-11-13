@@ -1,0 +1,182 @@
+<div class="container big-cart">
+    <h3>Listado de Turnos</h3>
+  
+    <!-- Lista de Turnos -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Número de Documento</th>
+          <th>Número de Turno</th>
+          <th>Fecha</th>
+          <th>Atendido</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="listaTurnos">
+        <tr *ngFor="let turno of turnosArray">
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalNombre"
+            >
+              {{ turno.cliente.nombre }}
+            </ng-container>
+            <ng-template #clienteTemporalNombre>
+              {{ turno.clienteTemporal.nombre }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalApellido"
+            >
+              {{ turno.cliente.apellido }}
+            </ng-container>
+            <ng-template #clienteTemporalApellido>
+              {{ turno.clienteTemporal.apellido }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalNroDoc"
+            >
+              {{ turno.cliente.nroDoc }}
+            </ng-container>
+            <ng-template #clienteTemporalNroDoc>
+              {{ turno.clienteTemporal.nroDoc }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalNroTurno"
+            >
+              <b class="turno">{{ turno.nro_turno }}</b>
+            </ng-container>
+            <ng-template #clienteTemporalNroTurno>
+              <b class="turno">{{ turno.nro_turno }}</b>
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalFecha"
+            >
+              <p>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.fecha | date:'HH:mm' }}</p>
+            </ng-container>
+            <ng-template #clienteTemporalFecha>
+              <p>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.fecha | date:'HH:mm' }}</p>
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalAtendido"
+            >
+              {{ turno.atendido ? "Si" : "No" }}
+            </ng-container>
+            <ng-template #clienteTemporalAtendido>
+              {{ turno.atendido ? "Si" : "No" }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <button class="btn btn-primary" (click)="atender(turno)">
+              Atender
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  <div class="container big-cart">
+    <h3>Listado de clientes atendidos</h3>
+  
+    <!-- Lista de Turnos -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Número de Documento</th>
+          <th>Número de Turno</th>
+          <th>Fecha</th>
+          <th>Atendido</th>
+        </tr>
+      </thead>
+      <tbody id="listaTurnos">
+        <tr *ngFor="let turno of atendidosArray">
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalNombre"
+            >
+              {{ turno.cliente.nombre }}
+            </ng-container>
+            <ng-template #clienteTemporalNombre>
+              {{ turno.clienteTemporal.nombre }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalApellido"
+            >
+              {{ turno.cliente.apellido }}
+            </ng-container>
+            <ng-template #clienteTemporalApellido>
+              {{ turno.clienteTemporal.apellido }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalNroDoc"
+            >
+              {{ turno.cliente.nroDoc }}
+            </ng-container>
+            <ng-template #clienteTemporalNroDoc>
+              {{ turno.clienteTemporal.nroDoc }}
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalNroTurno"
+            >
+              <b class="turno">{{ turno.nro_turno }}</b>
+            </ng-container>
+            <ng-template #clienteTemporalNroTurno>
+              <b class="turno">{{ turno.nro_turno }}</b>
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalFecha"
+            >
+            <p>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.fecha | date:'HH:mm' }}</p>
+            </ng-container>
+            <ng-template #clienteTemporalFecha>
+              <p>{{ turno.fecha | date:'dd/MM/yyyy' }} - {{ turno.fecha | date:'HH:mm' }}</p>
+            </ng-template>
+          </td>
+  
+          <td>
+            <ng-container
+              *ngIf="turno.clienteTemporal === null; else clienteTemporalAtendido"
+            >
+              {{ turno.atendido ? "Si" : "No" }}
+            </ng-container>
+            <ng-template #clienteTemporalAtendido>
+              {{ turno.atendido ? "Si" : "No" }}
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

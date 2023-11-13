@@ -1,0 +1,149 @@
+<div class="container big-cart" *ngIf="!mostrarFormTemporal">
+    <h2>Turnero</h2>
+  
+    <form #generarTurnoForm="ngForm">
+      <div class="d-flex flex-column col-md-6">
+        <label for="numeroDocumento" class="text-nowrap"
+          >Número de Documento:</label
+        >
+        <input
+          type="number"
+          id="numeroDocumento"
+          name="numeroDocumento"
+          class="mt-1 form-control"
+          [(ngModel)]="numeroDocumento"
+          placeholder="Número de Documento"
+          required
+        />
+  
+        <div
+          *ngIf="
+            generarTurnoForm.controls['numeroDocumento'].invalid &&
+            generarTurnoForm.controls['numeroDocumento'].touched
+          "
+        >
+          <div
+            *ngIf="generarTurnoForm.controls['numeroDocumento'].errors?.['required']"
+            class="error"
+          >
+            El número de documento es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <button
+        class="btn btn-primary mt-3"
+        (click)="verificarCliente()"
+        [disabled]="generarTurnoForm.invalid"
+      >
+        Generar Turno
+      </button>
+    </form>
+  </div>
+  
+  <div class="container big-cart" *ngIf="mostrarFormTemporal">
+    <h2>Turnero clientes temporales</h2>
+  
+    <form #generarTurnoTemporalesForm="ngForm">
+      <div class="d-flex flex-column col-md-6">
+        <label for="nombre" class="text-nowrap">Nombre:</label>
+        <input
+          type="string"
+          id="nombre"
+          name="nombre"
+          class="mt-1 form-control"
+          [(ngModel)]="clienteTemporal.nombre"
+          placeholder="Nombre del cliente"
+          required
+        />
+  
+        <div
+          *ngIf="
+            generarTurnoTemporalesForm.controls['nombre'].invalid &&
+            generarTurnoTemporalesForm.controls['nombre'].touched
+          "
+        >
+          <div
+            *ngIf="generarTurnoTemporalesForm.controls['nombre'].errors?.['required']"
+            class="error"
+          >
+            El nombre del cliente es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <div class="d-flex flex-column col-md-6">
+        <label for="apellido" class="text-nowrap mt-3">Apellido:</label>
+        <input
+          type="string"
+          id="apellido"
+          name="apellido"
+          class="mt-1 form-control"
+          [(ngModel)]="clienteTemporal.apellido"
+          placeholder="Apellido del cliente"
+          required
+        />
+  
+        <div
+          *ngIf="
+            generarTurnoTemporalesForm.controls['apellido'].invalid &&
+            generarTurnoTemporalesForm.controls['apellido'].touched
+          "
+        >
+          <div
+            *ngIf="generarTurnoTemporalesForm.controls['apellido'].errors?.['required']"
+            class="error"
+          >
+            El apellido del cliente es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <div class="d-flex flex-column col-md-6">
+        <label for="numeroDocumentoTemporal" class="text-nowrap mt-3"
+          >Número de Documento:</label
+        >
+        <input
+          type="number"
+          id="numeroDocumentoTemporal"
+          name="numeroDocumentoTemporal"
+          class="mt-1 form-control"
+          [(ngModel)]="clienteTemporal.nroDoc"
+          placeholder="Número de docuemnto del cliente"
+          required
+        />
+  
+        <div
+          *ngIf="
+            generarTurnoTemporalesForm.controls['numeroDocumentoTemporal']
+              .invalid &&
+            generarTurnoTemporalesForm.controls['numeroDocumentoTemporal'].touched
+          "
+        >
+          <div
+            *ngIf="generarTurnoTemporalesForm.controls['numeroDocumentoTemporal'].errors?.['required']"
+            class="error"
+          >
+            El número de docuemento del cliente es requerido.
+          </div>
+        </div>
+      </div>
+  
+      <button
+        class="btn btn-primary mt-3"
+        style="margin-right: 10px"
+        (click)="generarTurnoClienteTemporal()"
+        [disabled]="generarTurnoTemporalesForm.invalid"
+      >
+        Generar Turno
+      </button>
+  
+      <button
+        class="btn btn-secondary mt-3"
+        (click)="cancelarGenerarTurnoTemporal()"
+      >
+        Cancelar
+      </button>
+    </form>
+  </div>
+  

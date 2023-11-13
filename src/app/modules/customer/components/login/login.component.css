@@ -1,0 +1,10 @@
+.big-cart{
+    padding: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.error{
+    color: red;
+    font-weight: 600;
+}
