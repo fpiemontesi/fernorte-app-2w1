@@ -1,91 +1,117 @@
 <body class="bg-secundario">
-    <div class="container-fluid bg-primario text-white pt-3 pb-4 sombra">
-
-        <div class="row">
-            <div class="col-lg col-md-4 col-sm-6 mt-1">
-                <div class="d-flex align-items-center">
-                    <input class="input-text me-2" type="text" placeholder="Number Invoice">
-                    <button type="button" class="btn btn-outline-success">Search</button>
-                </div>
-            </div>
-            <div class="col-lg col-md-4 col-sm-6 mt-1">
-                <div class="d-flex align-items-center">
-                    <input class="input-text me-2" type="text" placeholder="Client">
-                    <button type="button" class="btn btn-outline-success">Search</button>
-                </div>
-            </div>
-            <div class="col-lg col-md-4 col-sm-6 mt-1">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <label for="inputPassword6" class="col-form-label">Desde</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg col-md-4 col-sm-6 mt-1">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <label for="" class="col-form-label">Hasta</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg col-md-4 col-sm-6 mt-1">
-                <div class="form-check form-switch ">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Show invoice canceled</label>
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                </div>
-            </div>
+  <div class="container-fluid bg-primario text-white pt-3 pb-4 sombra">
+    <form action="" [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-lg col-md-4 col-sm-6 mt-1">
+          <div class="d-flex align-items-center">
+            <input
+              class="input-text me-2"
+              type="text"
+              placeholder="Client"
+              formControlName="client"
+            />
+          </div>
         </div>
-
-
-    </div>
-
-    <div class="table-container pt-2 pb-3 mt-3">
-        <div class="container pt-2 pb-3 mt-3 mb-4 ">
-            <div class="table-responsive">
-                <table class="table border sombra">
-                    <thead>
-                        <tr class="text-center">
-                            <th>N°</th>
-                            <th>Fecha</th>
-                            <th>Cliente</th>
-                            <th>Monto</th>
-                            <th>Tipo cliente</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let invoice of invoices" class="text-center">
-                            <td>{{ invoice.id }}</td>
-                            <td>{{ invoice.date }}</td>
-                            <td>{{ invoice.client }}</td>
-                            <td>{{ invoice.totalAmount }}</td>
-                            <td>{{ invoice.clientType }}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col mt-1">
-                                        <button>
-                                            <img class="img-fluid " src="../../assets/ojo2.png" alt="">
-                                        </button>
-                                    </div>
-                                    <div class="col mt-1">
-                                        <img class="img-fluid" src="../../assets/basura.png" alt="">
-                                    </div>
-                                    <div class="col mt-1">
-                                        <img class="img-fluid mt-1" src="../../assets/impresora.png" alt="">
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-lg col-md-4 col-sm-6 mt-1">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <label for="inputPassword6" class="col-form-label">Desde</label>
             </div>
+            <div class="col-auto">
+              <input
+                type="date"
+                class="form-control"
+                formControlName="dateFrom"
+              />
+            </div>
+          </div>
         </div>
-    </div>
+        <div class="col-lg col-md-4 col-sm-6 mt-1">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <label for="" class="col-form-label">Hasta</label>
+            </div>
+            <div class="col-auto">
+              <input
+                type="date"
+                class="form-control"
+                formControlName="dateTo"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg col-md-4 col-sm-6 mt-1">
+          <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault"
+              >Show invoice canceled</label
+            >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            />
+          </div>
+        </div>
+        <div class="col-lg col-md-4 col-sm-6 mt-1">
+          <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+      </div>
+    </form>
+  </div>
 
+  <div class="table-container pt-2 pb-3 mt-3">
+    <div class="container pt-2 pb-3 mt-3 mb-4">
+      <div class="table-responsive">
+        <table class="table border sombra">
+          <thead>
+            <tr class="text-center">
+              <th>N°</th>
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Monto</th>
+              <th>Tipo cliente</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let invoice of invoices" class="text-center">
+              <td>{{ invoice.id }}</td>
+              <td>{{ invoice.date }}</td>
+              <td>{{ invoice.client }}</td>
+              <td>{{ invoice.totalAmount }}</td>
+              <td>{{ invoice.clientType }}</td>
+              <td>
+                <div class="row">
+                  <div class="col mt-1">
+                    <button>
+                      <img
+                        class="img-fluid"
+                        src="../../assets/ojo2.png"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                  <div class="col mt-1">
+                    <img
+                      class="img-fluid"
+                      src="../../assets/basura.png"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col mt-1">
+                    <img
+                      class="img-fluid mt-1"
+                      src="../../assets/impresora.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </body>
