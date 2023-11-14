@@ -93,7 +93,11 @@ export class ConsultarPresupuestoComponent implements OnInit {
     });
   }
 
-
+  modificarPresupuesto(presupuesto : Presupuesto){
+    this.service.guardarPresupuesto(presupuesto);
+    this.router.navigate(['modificar-presupuesto']);
+    console.log(presupuesto);
+  }
   // modificarVenta(presupuesto:Presupuesto){
   //   this.service.guardarId(presupuesto);
   //   this.router.navigate(['modificar-venta']);

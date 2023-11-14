@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'alta-presupuesto',
     component: AltaPresupuestoComponent
+  },
+  {
+    path: 'modificar-presupuesto',
+    component: ModificarPresupuestoComponent
   }
 
 ];
