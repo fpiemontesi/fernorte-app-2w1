@@ -69,9 +69,10 @@ export class ConsultarPresupuestoComponent implements OnInit {
     }
 
     const url = 'http://localhost:8080/ventas/';
+    const urlPresupuesto ='http://localhost:8080/presupuesto'
 
     // Agrega los parámetros a la URL de manera adecuada
-    const urlWithParams = `${url}?${params.toString()}`;
+    const urlWithParams = `${urlPresupuesto}?${params.toString()}`;
 
     this.http.get(urlWithParams).subscribe({
       next: (response) => {

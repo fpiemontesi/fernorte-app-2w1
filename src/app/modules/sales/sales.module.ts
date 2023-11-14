@@ -12,6 +12,7 @@ import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-pre
 import { DetallesProductosComponent } from './components/detalles-productos/detalles-productos.component';
 import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ModificarPresupuestoComponent } from './components/modificar-presupuesto/modificar-presupuesto.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
     AltaPresupuestoComponent,
     DetallesProductosComponent,
     ModificarVentaComponent,
+    ModificarPresupuestoComponent,
   ],
   providers: [],
   imports: [CommonModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],
