@@ -18,8 +18,11 @@ export class PresupuestoService {
   getPresupuestoById(id: number): Observable<Presupuesto> {
     return this.http.get<Presupuesto>(`${this.baseUrl}/ById/${id}`);
   }
-  guardarId(presupuesto: Presupuesto) {
+  guardarPresupuesto(presupuesto: Presupuesto) {
     this.presupuesto = presupuesto;
+  }
+  MostrarPresupuesto(){
+    return this.presupuesto
   }
 
   realizarSolicitudPostPresupuesto(cliente: string, productos: any[]): Observable<any> {
