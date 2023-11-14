@@ -207,7 +207,12 @@ export class AltaPresupuestoComponent {
       this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
         if(response.length != 0){
           this.formData.cliente = doc;
-          this.cliente = response[0];
+          this.cliente.nombre = response[0].nombre;
+          this.cliente.apellido = response[0].apellido;
+          this.cliente.cant_puntos = response[0].cant_puntos;
+          this.cliente.nro_doc = response[0].nro_doc;
+          this.categoria = this.cliente.calcularCategoria().nombre;
+          this.descuento = this.cliente.calcularCategoria().descuento;
           this.nombre_cliente = response[0].apellido + ", " + response[0].nombre;
           console.log("Cliente consultado");
         } else{
