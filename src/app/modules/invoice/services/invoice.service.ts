@@ -26,7 +26,7 @@ export class InvoiceService {
   }
 
   getInvoices(): Observable<InvoiceDto[]> {
-    return this.http.get<InvoiceDto[]>('http://localhost:8080/api/v1/invoice/all');
+    return this.http.get<InvoiceDto[]>('http://localhost:8081/api/v1/invoice/all');
   }
 
   setTotalpay(num: number) {

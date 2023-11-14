@@ -11,6 +11,6 @@ export class ReportesService {
   constructor(private http: HttpClient) { }
 
   obtenerMontoTotalPorCliente(): Observable<ClientReportDTO[]>{
-    return this.http.get<ClientReportDTO[]>('http://localhost:8081/ReportsByClients?dateFrom=2%2F10%2F2023&dateTo=2%2F11%2F2023');
+    return this.http.get<ClientReportDTO[]>('http://localhost:8081/ReportsByClients?dateFrom=05%2F10%2F2023&dateTo=13%2F11%2F2023');
   }
 }

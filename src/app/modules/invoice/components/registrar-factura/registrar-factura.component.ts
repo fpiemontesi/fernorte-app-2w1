@@ -53,6 +53,7 @@ export class RegistrarFacturaComponent {
       .obtenerClienteByNroDoc(this.orderSelected.idCliente)
       .subscribe((data) => {
         this.client = data;
+        console.log(this.client);
       });
     this.calcularDescuentos();
 
