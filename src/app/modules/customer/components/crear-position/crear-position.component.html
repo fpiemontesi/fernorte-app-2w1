@@ -24,7 +24,7 @@
             >
               <div
                 *ngIf="crearCargoForm.controls['cargo'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El nombre del cargo es requerido.
               </div>
@@ -38,7 +38,7 @@
         (click)="crearCargo()"
         [disabled]="crearCargoForm.invalid"
       >
-        Guardar Cargo
+        Crear
       </button>
     </form>
   </div>

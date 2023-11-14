@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'fn-delete-user',
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.css']
+  styleUrls: ['./delete-user.component.css'],
 })
 export class DeleteUserComponent {
   numeroDoc: number = 0;
@@ -17,11 +17,19 @@ export class DeleteUserComponent {
   ) {}
 
   borrarUsuario() {
-    if (this.numeroDoc === 0) {
+    if (!this.numeroDoc && this.numeroDoc !== 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'El número de documento no puede estar vacío',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+    } else if (this.numeroDoc == 0 || this.numeroDoc < 0) {
       Swal.fire({
         icon: 'error',
-        title: 'Número de documento vacío',
-        text: 'Por favor, ingrese un número de documento válido distinto de cero.',
+        title: 'El número de documento no puede ser 0 o negativo',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });

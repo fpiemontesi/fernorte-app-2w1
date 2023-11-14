@@ -7,7 +7,7 @@ import { Cliente } from '../../models/cliente';
 @Component({
   selector: 'fn-modificar-clientes',
   templateUrl: './modificar-clientes.component.html',
-  styleUrls: ['./modificar-clientes.component.css']
+  styleUrls: ['./modificar-clientes.component.css'],
 })
 export class ModificarClientesComponent implements OnInit {
   clienteArray: any[] = [];
@@ -35,7 +35,23 @@ export class ModificarClientesComponent implements OnInit {
     console.log(this.numeroDoc + 'doc');
     console.log(this.clienteArray);
 
-    if (this.numeroDoc !== null && this.numeroDoc !== undefined) {
+    if (!this.numeroDoc && this.numeroDoc !== 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'El número de documento no puede estar vacío',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+    } else if (this.numeroDoc == 0 || this.numeroDoc < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser 0 o negativo',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+    } else if (this.numeroDoc !== null && this.numeroDoc !== undefined) {
       let clienteEncontrado = this.clienteArray.find(
         (cliente) => cliente.nroDoc === this.numeroDoc
       );
@@ -53,23 +69,6 @@ export class ModificarClientesComponent implements OnInit {
           confirmButtonColor: '#808080',
         });
       }
-    } else {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Número de documento vacío',
-        text: 'Por favor, ingrese un número de documento válido para buscar al cliente.',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#808080',
-      });
-    }
-    if (this.numeroDoc == 0 || this.numeroDoc < 0) {
-      Swal.fire({
-        icon: 'error',
-        title: 'El numero ingresado no puede ser 0 o negativo',
-        text: 'Vuelva a ingresar el documento del cliente.',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#808080',
-      });
     }
   }
 
@@ -79,7 +78,7 @@ export class ModificarClientesComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: 'Cliente actualizado',
-          text: 'Los cambios se guardaron con éxito.',
+          text: 'Los cambios se actualizaron con éxito.',
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#808080',
         });

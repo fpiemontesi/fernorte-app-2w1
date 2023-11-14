@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { RestService } from '../../services/rest.service';
 import { CustomerService } from '../../services/customer.service';
@@ -6,7 +6,7 @@ import { CustomerService } from '../../services/customer.service';
 @Component({
   selector: 'fn-lista-clientes',
   templateUrl: './lista-clientes.component.html',
-  styleUrls: ['./lista-clientes.component.css']
+  styleUrls: ['./lista-clientes.component.css'],
 })
 export class ListaClientesComponent {
   clienteArray: any[] = [];
@@ -28,11 +28,35 @@ export class ListaClientesComponent {
 
   borrarFiltro() {
     this.nroDocumento = 0;
-    this.filtrarPersonas();
+    this.clienteFiltro = [...this.clienteArray];
+    this.listaFiltrada = false;
   }
 
   filtrarPersonas() {
-    if (this.nroDocumento != 0) {
+    if (!this.nroDocumento && this.nroDocumento !== 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'El número de documento no puede estar vacío',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+      this.clienteFiltro = [...this.clienteArray];
+      this.listaFiltrada = false;
+    }
+    else if (this.nroDocumento == 0 || this.nroDocumento < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser 0 o negativo',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+      this.clienteFiltro = [...this.clienteArray];
+      this.listaFiltrada = false;
+    }
+
+    else {
       this.clienteFiltro = this.clienteArray.filter((persona) => {
         return (
           persona.nroDoc &&
@@ -50,13 +74,11 @@ export class ListaClientesComponent {
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#808080',
         });
-        this.borrarFiltro();
-      }
-    } else {
-      this.clienteFiltro = [...this.clienteArray];
-      this.listaFiltrada = false;
-    }
 
+        this.clienteFiltro = [...this.clienteArray];
+        this.listaFiltrada = false;
+      }
+    }
   }
 
   ngOnInit(): void {

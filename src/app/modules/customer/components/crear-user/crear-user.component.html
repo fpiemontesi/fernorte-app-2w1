@@ -24,7 +24,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['nombre'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El nombre es requerido.
               </div>
@@ -51,14 +51,14 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['email'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El email es requerido.
               </div>
   
               <div
                 *ngIf="crearUsuarioForm.controls['email'].errors?.['pattern']"
-                class="error"
+                class="invalid-feedback"
               >
                 El formato del email es incorrecto.
               </div>
@@ -84,7 +84,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['username'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El nombre de usuario es requerido.
               </div>
@@ -115,7 +115,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['tipoDocumento'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El tipo de documento es requerido.
               </div>
@@ -147,7 +147,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['tipoCargo'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El tipo de cargo es requerido.
               </div>
@@ -177,7 +177,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['apellido'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El apellido es requerido.
               </div>
@@ -204,7 +204,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['telefono'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El teléfono es requerido.
               </div>
@@ -232,14 +232,14 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['password'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 La contraseña es requerida.
               </div>
   
               <div
                 *ngIf="crearUsuarioForm.controls['password'].errors?.['minlength']"
-                class="error"
+                class="invalid-feedback"
               >
                 La contraseña debe tener al menos 6 caracteres.
               </div>
@@ -266,7 +266,7 @@
             >
               <div
                 *ngIf="crearUsuarioForm.controls['numeroDocumento'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El número de documento es requerido.
               </div>
@@ -280,7 +280,7 @@
         (click)="crearUsuario()"
         [disabled]="crearUsuarioForm.invalid"
       >
-        Guardar Usuario
+        Crear
       </button>
     </form>
   </div>

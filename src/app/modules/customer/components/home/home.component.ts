@@ -30,7 +30,8 @@ export class HomeComponent {
   visibilityState: { [key: string]: boolean } = {
     mostrarComponentesClientes: false,
     mostrarComponentesUsuarios: false,
-    mostrarComponenteTurnero: false,
+    mostrarComponentesTurnero: false,
+    mostrarComponentesBeneficios: false,
   };
 
   toggleComponent(component: string) {

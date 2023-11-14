@@ -25,14 +25,14 @@
                 >
                   <div
                     *ngIf="loginUsuarioForm.controls['username'].errors?.['required']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     El email es requerido.
                   </div>
   
                   <div
                     *ngIf="loginUsuarioForm.controls['username'].errors?.['pattern']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     El formato del email es incorrecto.
                   </div>
@@ -59,7 +59,7 @@
                 >
                   <div
                     *ngIf="loginUsuarioForm.controls['password'].errors?.['required']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     La contraseña es requerida.
                   </div>
@@ -77,7 +77,7 @@
           </div>
           <div class="card-footer">
             <p class="text-center">
-              <a href="#" (click)="recuperarContrasena()"
+              <a class="ref" (click)="recuperarContrasena()"
                 >¿Has olvidado la contraseña?</a
               >
             </p>
@@ -116,14 +116,14 @@
                 >
                   <div
                     *ngIf="resetPasswordUsuarioForm.controls['email'].errors?.['required']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     El email es requerido.
                   </div>
   
                   <div
                     *ngIf="resetPasswordUsuarioForm.controls['email'].errors?.['pattern']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     El formato del email es incorrecto.
                   </div>
@@ -191,7 +191,7 @@
                 >
                   <div
                     *ngIf="verifyUsuarioForm.controls['codigo'].errors?.['required']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     El codigo es requerido.
                   </div>
@@ -261,14 +261,14 @@
                 >
                   <div
                     *ngIf="changePasswordUsuarioForm.controls['contrasenaNueva'].errors?.['required']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     La contraseña es requerida.
                   </div>
   
                   <div
                     *ngIf="changePasswordUsuarioForm.controls['contrasenaNueva'].errors?.['minlength']"
-                    class="error"
+                    class="invalid-feedback"
                   >
                     La contraseña debe tener al menos 6 caracteres.
                   </div>
@@ -288,7 +288,7 @@
                 (click)="cambiarContrasenaUsuario()"
                 [disabled]="changePasswordUsuarioForm.invalid"
               >
-                Guardar
+                Crear
               </button>
             </form>
           </div>

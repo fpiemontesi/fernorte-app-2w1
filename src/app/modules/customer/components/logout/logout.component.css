@@ -1,27 +1,27 @@
-.containerBtn{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0px 100px;
+.containerBtn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0px 100px;
 }
 
 .buttonComponent {
-    margin-top: 15px;
-    padding: 15px 35px; /* Aumenté el padding para hacer el botón más grande */
-    font-size: 18px; /* Aumenté el tamaño de la fuente */
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    border: 2px solid red;
-    border-radius: 5px;
-    color: red;
-    background-color: white;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  }
-  
-  .buttonComponent:hover {
-    background-color:rgb(236, 109, 109);
-    color: white;
-    border-color: rgb(236, 109, 109);;
-  }
-  
+  height: 50px;
+  width: 200px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+  background-color: white;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  margin-bottom: 20px;
+}
+
+.buttonComponent:hover {
+  background-color: rgb(236, 109, 109);
+  color: white;
+  border-color: rgb(236, 109, 109);
+}

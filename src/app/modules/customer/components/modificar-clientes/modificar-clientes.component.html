@@ -1,15 +1,16 @@
 <div class="container big-cart">
     <h3>Actualizar Cliente</h3>
   
-    <div class="row mb-3 d-flex align-items-end">
+    <div class="row mb-3 d-flex align-items-end filter-container">
       <div class="col-md-6">
         <label for="numeroDocumento" class="text-nowrap"
-          >Buscar cliente por número de documento:</label
+          >Cargar campos del cliente por número de documento:</label
         >
         <input
           type="number"
-          class="form-control"
+          class="form-control mt-1"
           id="numeroDocumento"
+          placeholder="Número de Documento"
           [(ngModel)]="numeroDoc"
         />
       </div>
@@ -59,7 +60,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['nombre'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El nombre es requerido.
               </div>
@@ -85,7 +86,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['email'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El email es requerido.
               </div>
@@ -117,7 +118,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['tipoDocumento'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El tipo de documento es requerido.
               </div>
@@ -148,7 +149,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['categoriaFiscal'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 La categoria fiscal es requerida.
               </div>
@@ -166,7 +167,7 @@
               required
             />
             <div *ngIf="crearClienteForm.controls['domicilio'].invalid && crearClienteForm.controls['domicilio'].touched">
-              <div *ngIf="crearClienteForm.controls['domicilio'].errors?.['required']" class="error">El domicilio es requerido.
+              <div *ngIf="crearClienteForm.controls['domicilio'].errors?.['required']" class="invalid-feedback">El domicilio es requerido.
               </div>
             </div>
           </div>
@@ -195,7 +196,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['apellido'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El apellido es requerido.
               </div>
@@ -222,7 +223,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['telefono'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El teléfono es requerido.
               </div>
@@ -250,7 +251,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['numeroDocumento'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El número de documento es requerido.
               </div>
@@ -293,7 +294,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['clasificacion'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 La categoría monotributista es requerida.
               </div>
@@ -324,7 +325,7 @@
             >
               <div
                 *ngIf="crearClienteForm.controls['tipoCliente'].errors?.['required']"
-                class="error"
+                class="invalid-feedback"
               >
                 El tipo de cliente es requerido.
               </div>
@@ -338,7 +339,7 @@
         (click)="actualizarCliente()"
         [disabled]="crearClienteForm.invalid"
       >
-        Actualizar Cliente
+        Actualizar
       </button>
     </form>
   </div>

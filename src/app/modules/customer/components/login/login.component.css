@@ -1,10 +1,16 @@
-.big-cart{
-    padding: 50px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+.big-cart {
+  padding: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.error{
-    color: red;
-    font-weight: 600;
+.error {
+  color: red;
+  font-weight: 600;
+}
+
+.ref{
+    color: #0D6EFD;
+    text-decoration: underline;
+    cursor: pointer;
 }

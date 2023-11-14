@@ -1,27 +1,55 @@
-.containerBtn{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0px 100px;
-    gap: 10px;
+.containerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px 100px;
+  gap: 10px;
 }
+
+.logout-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0px 100px;
+}
+
 .buttonComponent {
-    margin-top: 15px;
-    padding: 15px 35px; /* Aumenté el padding para hacer el botón más grande */
-    font-size: 18px; /* Aumenté el tamaño de la fuente */
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    border: 2px solid #3498db;
-    border-radius: 5px;
-    color: #3498db;
-    background-color: white;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  }
-  
-  .buttonComponent:hover {
-    background-color: #3498db;
-    color: white;
-    border-color: #2980b9;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 200px;
+  height: 100px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  color: #3498db;
+  background-color: white;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.buttonComponent:hover {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  background-color: #3498db;
+  padding: 5px;
+  border-radius: 50px;
+}
+
+.active{
+  background-color: #3498db;
+  color: #ffffff;
+}

@@ -2,14 +2,14 @@
     <h3>Listado de clientes</h3>
   
     <!-- Filtros de Búsqueda -->
-    <div class="row mb-3">
+    <div class="row mb-3 filter-container">
       <div class="col-md-3">
         <label for="filtroNumeroDocumento" class="text-nowrap"
           >Filtrar por número de documento:</label
         >
         <input
           type="number"
-          class="form-control"
+          class="form-control mt-1"
           id="filtroNumeroDocumento"
           placeholder="Número de Documento"
           [(ngModel)]="nroDocumento"
@@ -18,7 +18,7 @@
       <div class="col-md-3">
         <label>&nbsp;</label>
         <button
-          class="btn btn-primary form-control"
+          class="btn btn-primary form-control mt-1"
           id="buscarClientesBtn"
           (click)="filtrarPersonas()"
         >
@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-3" *ngIf="listaFiltrada">
         <label>&nbsp;</label>
-        <button class="btn btn-secondary form-control" (click)="borrarFiltro()">
+        <button class="btn btn-secondary form-control mt-1" (click)="borrarFiltro()">
           Borrar filtro
         </button>
       </div>

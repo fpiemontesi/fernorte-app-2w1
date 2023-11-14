@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { RestService } from '../../services/rest.service';
@@ -7,7 +7,7 @@ import { TurnoService } from '../../services/turno.service';
 @Component({
   selector: 'fn-turnero',
   templateUrl: './turnero.component.html',
-  styleUrls: ['./turnero.component.css']
+  styleUrls: ['./turnero.component.css'],
 })
 export class TurneroComponent {
   @ViewChild('generarTurnoForm', { static: false }) generarTurnoForm!: NgForm;
@@ -42,15 +42,27 @@ export class TurneroComponent {
   }
 
   verificarCliente() {
-    if (this.numeroDocumento === 0) {
+    Object.keys(this.generarTurnoForm.controls).forEach((controlName) => {
+      this.generarTurnoForm.controls[controlName].markAsTouched();
+    });
+
+    if (!this.numeroDocumento && this.numeroDocumento != 0) {
       Swal.fire({
-        icon: 'error',
-        title: 'Número de documento inválido',
-        text: 'El número de documento no puede ser 0. Por favor, ingrese un número válido.',
+        icon: 'warning',
+        title: 'El número de documento no puede estar vacío',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });
-      return;
+    }
+    else if (this.numeroDocumento == 0 || this.numeroDocumento < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser 0 o negativo',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
     }
 
     this.restService.getTurnos().subscribe((turnos) => {
@@ -78,10 +90,30 @@ export class TurneroComponent {
             this.generarTurnoClienteRegistrado();
             this.generarTurnoForm.reset();
           } else {
+
+            if (!this.numeroDocumento && this.numeroDocumento != 0) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'El número de documento no puede estar vacío',
+                text: 'Vuelva a ingresar el número de documento del cliente.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#808080',
+              });
+            }
+            else if (this.numeroDocumento == 0 || this.numeroDocumento < 0) {
+              Swal.fire({
+                icon: 'error',
+                title: 'El número de documento no puede ser 0 o negativo',
+                text: 'Vuelva a ingresar el número de documento del cliente.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#808080',
+              });
+            } else {
+
             Swal.fire({
               icon: 'error',
               title: 'Cliente no encontrado',
-              text: 'El número de documento ingresado no corresponde a ningún cliente existente en la base de datos',
+              text: 'El número de documento ingresado no corresponde a ningún cliente existente',
               showCancelButton: true,
               showConfirmButton: true,
               cancelButtonText: 'Cancelar',
@@ -94,7 +126,7 @@ export class TurneroComponent {
                 this.clienteTemporal.nroDoc = this.numeroDocumento;
               } else if (result.isDismissed) {
               }
-            });
+            });}
           }
         });
       }
