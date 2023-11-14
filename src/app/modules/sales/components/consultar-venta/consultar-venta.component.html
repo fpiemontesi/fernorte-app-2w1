@@ -89,7 +89,6 @@
           <th class="centered">Estado</th>
           <th class="centered">Monto</th>
           <th style="text-align: center; margin-top: 3%;">Ver<br> Detalle</th>
-          <th style="text-align: center; margin-top: 3%;">Modificar<br> Venta</th>
         </tr>
       </thead>
       <tbody>
@@ -110,11 +109,6 @@
           <td>{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
           <td>
             <button class="btn btn-outline-dark btn-sm custom-btn" (click)="verDetalle(venta)">
-              <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
-            </button>
-          </td>
-          <td>
-            <button class="btn btn-outline-dark btn-sm custom-btn" (click)="modificarVenta(venta)">
               <i class="fas fa-eye fa-lg" style="color: rgb(202, 214, 210);"></i>
             </button>
           </td>

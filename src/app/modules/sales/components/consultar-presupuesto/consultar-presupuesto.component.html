@@ -21,7 +21,7 @@
                             <label class="form-label" for="cliente">Cliente</label>
                             <select name="selectCliente" id="cliente" class="form-control">
                                 <option selected disabled>Seleccione</option>
-                                <option *ngFor="let cliente of clientes" [value]="cliente.id">
+                                <option *ngFor="let cliente of clientes" [value]="cliente.nro_doc">
                                     {{ cliente.nombre }}, {{ cliente.apellido }}
                                 </option>
                             </select>

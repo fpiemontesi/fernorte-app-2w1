@@ -2,22 +2,31 @@
   <h1>Generar</h1>
   <form #form="ngForm" style="margin: 20px;" (ngSubmit)="onSubmit()">
       <div class="row" style="margin-bottom: 20px;">
-       
+        <div class="col-md-2">
+          <label for="nro_doc" class="form-label">Documento</label>
+          <input type="text" name="nro_doc" id="nro_doc" class="form-control" [(ngModel)]="nro_doc" (blur)="onBlur()">
+        </div>
         <div class="col-md-4">
           <label for="cliente" class="form-label">Cliente</label>
-          <select name="cliente" id="cliente" class="form-select " [ngClass]="{'is-invalid': (form.submitted || cliente.touched) && cliente.invalid}" [(ngModel)]="formData.cliente" name="cliente" required #cliente="ngModel">
-            <option value="1">Tomas Benza</option>
-            <option value="2">Cande Mello</option>
-          </select>
-          <div *ngIf="(form.submitted || cliente.touched) && cliente.invalid">
-            <span class="text-danger">El nombre del Cliente es Obligatorio</span>
-          </div>
+          <input 
+          type="text" 
+          name="cliente" 
+          id="cliente" 
+          class="form-control" 
+          [(ngModel)]="nombre_cliente" 
+          name="cliente" 
+          disabled="true">
           
           </div>
-          
+        <div class="col-md-2">
+          <label for="categoria" class="form-label">Categoría</label>
+          <input disabled="true" type="text" class="form-control" name="categoria" id="categoria" [(ngModel)]="categoria">
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-5">
           <label for="tipo" class="form-label">Tipo Pedido</label>
-          <select name="tipo" id="tipo" class="form-select " [ngClass]="{'is-invalid': (form.submitted || tipo.touched) && tipo.invalid}" [(ngModel)]="formData.tipo" #tipo="ngModel" required>
+          <select [disabled]="!tipo_activado" name="tipo" id="tipo" class="form-select " [ngClass]="{'is-invalid': (form.submitted || tipo.touched) && tipo.invalid}" [(ngModel)]="formData.tipo" #tipo="ngModel" required>
             <option value="1">Minorista</option>
             <option value="2">Mayorista</option>
           </select>
@@ -25,18 +34,6 @@
             <span class="text-danger">Debe seleccionar un tipo de pedido</span>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <label for="vendedor" class="form-label">Vendedor</label>
-        <select name="vendedor" id="vendedor" class="form-select " [ngClass]="{'is-invalid': (form.submitted || vendedor.touched) && vendedor.invalid}" [(ngModel)]="formData.vendedor" name="vendedor" required #vendedor="ngModel">
-            <option value="1">Tomas Benza</option>
-            <option value="2">Cande Mello</option>
-          </select>
-          <div *ngIf="(form.submitted || vendedor.touched) && vendedor.invalid">
-            <span class="text-danger">Debe seleccionar un Vendedor</span>
-          </div>
-          </div>
         <div class="col-md-5">
           <label for="formaEntrega" class="form-label">Forma Entrega</label>
           <select name="formaEntrega" id="formaEntrega" class="form-select" [ngClass]="{'is-invalid': (form.submitted || formaEntrega.touched) && formaEntrega.invalid}"  [(ngModel)]="formData.formaEntrega" required #formaEntrega="ngModel">
@@ -49,14 +46,25 @@
         </div>
       </div>
       <div class="row" style="margin-top: 20px;">
-        <div class="col-md-6">
-          <label for="producto" class="form-label">Producto</label>
-          <select name="producto" id="producto" class="form-select " [ngClass]="{'is-invalid': (form.submitted || producto.touched) && producto.invalid}" [(ngModel)]="formData.producto" required #producto="ngModel">
-            <option *ngFor="let producto of myList" [value]="producto.id">{{ producto.name }}</option>
-          </select>
-          
-        </div>
         <div class="col-md-3">
+          <label for="producto" class="form-label">Producto</label>
+          <select name="producto" id="producto" class="form-select " [ngClass]="{'is-invalid': (form.submitted || producto.touched) && producto.invalid}" (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto" required #producto="ngModel">
+            <option *ngFor="let producto of myList" [value]="producto.codigo">{{ producto.nombre }}</option>
+          </select>
+        </div>
+        <div class="col-md-1">
+          <label for="existencias" class="form-label">Existencias</label>
+          <input name="existencias" id="existencias" type="input" class="form-control" disabled="true" [(ngModel)]="existencias">
+        </div>
+        <div class="col-md-1">
+          <label for="dimension" class="form-label">Dimension</label>
+          <input name="dimension" id="dimension" type="input" class="form-control" disabled="true" [(ngModel)]="dimension">
+        </div>
+        <div class="col-md-1">
+          <label for="peso" class="form-label">Peso</label>
+          <input name="peso" id="peso" type="input" class="form-control" disabled="true" [(ngModel)]="peso">
+        </div>
+        <div class="col-md-2">
           <label for="cantidad" class="form-label">Cantidad</label>
           <input type="number" min="1" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad" [ngClass]="{'is-invalid': (form.submitted || cantidad.touched) && cantidad.invalid}" required [(ngModel)]="formData.cantidad" #cantidad="ngModel">
         </div>
@@ -80,7 +88,7 @@
                   <td>{{ fila.producto }}</td>
                   <td>{{ fila.cantidad }}</td>
                   <td>{{fila.precio_unitario}}</td>
-                  <td>Fila 1, Celda 4</td>
+                  <td >{{fila.total}}</td>
                   <td>
                     <button class="btn" (click)="eliminarFila(i)">
                       <i class="fa fa-times"></i>
@@ -88,7 +96,7 @@
                   </td>
               <tr>
                   <td colspan="3">TOTAL</td>
-                  <td>Fila 3, Celda 4</td>
+                  <td>{{total}}</td>
                   <td></td>
               </tr>
           </tbody>

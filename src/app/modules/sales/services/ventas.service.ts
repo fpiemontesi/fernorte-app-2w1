@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Ventas } from '../models/Ventas';
 
 
@@ -84,7 +84,7 @@ export class VentasService {
       forma_entrega: formData.forma_entrega,
       fecha_entrega: new Date().toISOString(),
       id_vendedor: formData.id_vendedor,
-      detalles: productosVenta // Asegúrate de que productosVenta se configure correctamente
+      detalles: productosVenta
     };
   
     const httpOptions = {
@@ -98,7 +98,7 @@ export class VentasService {
 
   apiUrl = 'http://localhost:8080';
   modificarVenta(ventaId: number, ventaData: any): Observable<any> {
-    const url = `${this.apiUrl}/ventas/${ventaId}`; // Reemplaza con la URL correcta
+    const url = `${this.apiUrl}/ventas/${ventaId}`;
     return this.http.put(url, ventaData);
   }
 

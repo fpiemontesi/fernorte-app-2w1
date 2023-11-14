@@ -104,16 +104,7 @@ export class ConsultarVentaComponent {
       },
     });
   }
-
-
-
-
-  modificarVenta(venta:Ventas){
-    this.service.guardarId(venta);
-    this.router.navigate(['modificar-venta']);
-    console.log(venta);
-  }
-
+  
   verDetalle(venta: Ventas){
     this.venta = venta;
     this.mostrarDetalle = true;
