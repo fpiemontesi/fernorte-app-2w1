@@ -48,6 +48,10 @@ export class PendingOrdersComponent implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   buscarPedidos(event: any): void {
     const termino = event.target.value;
     if (termino !== '') {
