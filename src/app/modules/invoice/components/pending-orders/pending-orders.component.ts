@@ -58,7 +58,7 @@ export class PendingOrdersComponent implements OnInit {
   calculateSubtotal(): void {
     if (this.SelectedDetails.length > 0) {
       this.SelectedDetails.forEach((detail) => {
-        detail.subtotal = detail.cantidad * detail.precioUnitario;
+        detail.subtotal = detail.cantidad * detail.precio_unitario;
       });
     }
   }
