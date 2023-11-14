@@ -21,6 +21,7 @@ export class ConsultarVentaComponent {
   ventas: any = [];
   venta: Ventas;
   mostrarModificar: boolean = false;
+  clientes: any[] = [];
 
   constructor(private http : HttpClient, private router: Router, private service : VentasService) {
     this.venta= {} as Ventas;
@@ -30,13 +31,17 @@ export class ConsultarVentaComponent {
     this.venta = {} as Ventas;
   }
   ngOnInit() {
+    this.service.getClientes().subscribe((data: any) => {
+      this.clientes = data;
+    });
   }
   actualizarEstado(venta:any){
     this.service.actualizarEstado(venta.id, venta.estado).subscribe(response => {
       console.log("Solicitud de modificación de Estado exitosa. Respuesta:" + venta.estado);
     
-    })
+    });
   }
+  
   // FILTRAR VENTAS POR GET
   filtrarVentas() {
     // Construye los parámetros de la consulta

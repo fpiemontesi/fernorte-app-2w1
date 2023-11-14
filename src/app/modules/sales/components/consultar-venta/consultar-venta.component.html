@@ -9,8 +9,8 @@
         <label>Cliente</label>
         <select class="form-control" id="cliente" name="cliente" [(ngModel)]="venta.doc_cliente">
           <option disabled selected value="">Selecciona el cliente de la venta</option>
-          <option value="1">Cande</option>
-          <option value="2">Tomi</option>
+          <!-- Use *ngFor to iterate over clients and populate the options -->
+          <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nombre }} {{ cliente.apellido }}</option>
         </select>
       </div>
     <div class="col-md-3 col-sm-12" style="padding: 1%;">

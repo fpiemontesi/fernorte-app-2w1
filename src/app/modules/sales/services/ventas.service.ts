@@ -12,14 +12,8 @@ export class VentasService {
   idVenta!: number;
   constructor(private http : HttpClient) {
  }
-
- // private apiUrl = 'http://localhost:3000/ventas';
   private urlId = 'http://localhost:8080/ventas'
 
-  // getVentas(): Observable<Ventas[]>{
-  //  const result= this.http.get<Ventas[]>('http://localhost:8080/ventas/get');
-  //  return result;
-  // }
 
   getClientes(): Observable<any> {
     const url = 'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes';

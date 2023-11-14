@@ -12,11 +12,14 @@ import { Producto } from '../models/Producto';
 })
 export class PresupuestoService {
   private baseUrl = 'http://localhost:8080/ventas/get';
-
+  presupuesto: Presupuesto= {} as Presupuesto;
   constructor(private http: HttpClient) {}
 
   getPresupuestoById(id: number): Observable<Presupuesto> {
     return this.http.get<Presupuesto>(`${this.baseUrl}/ById/${id}`);
+  }
+  guardarId(presupuesto: Presupuesto) {
+    this.presupuesto = presupuesto;
   }
 
   realizarSolicitudPostPresupuesto(cliente: string, productos: any[]): Observable<any> {
