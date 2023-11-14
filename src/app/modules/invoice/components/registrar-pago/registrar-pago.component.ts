@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { InvoiceService } from '../../services/invoice.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { payDetailDTO } from '../../models/payDetailDTO';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { PayDetailDTO } from '../../models/PayDetailDTO';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
 import { Invoice } from '../../models/Invoice';
@@ -18,7 +18,7 @@ export class RegistrarPagoComponent {
   @Input() invoiceTotal: number = 0;
   public montoTotal: number = 0;
   listPays: PayDetailDTO[] = [];
-  PaymentMethodDTOs: Observable<PaymentMethodDTO[]>;
+  paymentMethodDTOs: Observable<PaymentMethodDTO[]> | undefined;
   formulario: FormGroup;
   paymentMethodCount: number = 0;
   restanteTotal: number = 0;
@@ -32,7 +32,7 @@ export class RegistrarPagoComponent {
     private sharedDataInvoice: SharedDataInvoiceService,
     private invoiceService: InvoiceService
   ) {
-    this.paymentMethodDtos = this.paymentMethodService.obtenerFormasPago();
+    this.paymentMethodDTOs = this.paymentMethodService.obtenerFormasPago();
     this.formulario = this.formBuilder.group({
       paymentMethodList: this.formBuilder.array([]),
     });
