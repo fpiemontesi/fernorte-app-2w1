@@ -70,7 +70,7 @@ export class RegistrarFacturaComponent {
       ).toFixed(2)
     );
 
-
+    console.log(this.orderSelected.total)
 
     for (const disc of this.orderSelected.descuentos) {
       disc.discounted = (disc.porcentaje / 100) * this.orderSelected.total;
