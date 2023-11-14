@@ -1,5 +1,4 @@
-export interface paymentMethodDTO {
-    //idPayment : number;
+export interface PaymentMethodDTO {
     id : number; 
     name : string;
 }

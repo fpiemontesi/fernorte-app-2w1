@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { requestInvoiceDto } from '../models/requestInvoiceDTO';
+import { RequestInvoiceDto } from '../models/RequestInvoiceDTO';
 import { InvoiceDto } from '../models/InvoiceDto';
 import { Invoice } from '../models/Invoice';
 
@@ -17,12 +17,12 @@ export class InvoiceService {
   newInvoice?: InvoiceDto;
   totalPay: number = 0;
 
-  requestInvoice?: requestInvoiceDto;
+  requestInvoice?: RequestInvoiceDto;
 
   constructor(private http: HttpClient) { }
 
-  loadInvoice(body: requestInvoiceDto): Observable<requestInvoiceDto> {
-    return this.http.post<requestInvoiceDto>('https://api.example.com/data', body);
+  loadInvoice(body: RequestInvoiceDto): Observable<RequestInvoiceDto> {
+    return this.http.post<RequestInvoiceDto>('https://api.example.com/data', body);
   }
 
   getInvoices(): Observable<InvoiceDto[]> {

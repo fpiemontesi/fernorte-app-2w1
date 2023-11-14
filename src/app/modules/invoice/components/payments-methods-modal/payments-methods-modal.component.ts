@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { paymentMethodDTO } from '../../models/paymentMethodDTO';
+import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
 import { ToastService } from '../../services/toast.service';
 
 
@@ -27,7 +27,7 @@ export class PaymentsMethodsModalComponent implements OnInit {
 
   onSubmit() {
     if (this.formulario.valid) {
-      const paymentMethod: paymentMethodDTO = this.formulario.value;
+      const paymentMethod: PaymentMethodDTO = this.formulario.value;
       this.paymentMethodService.addPay(paymentMethod).subscribe(
         (response) => {
           console.log('Solicitud POST exitosa:', response);

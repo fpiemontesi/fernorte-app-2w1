@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { InvoiceService } from '../../services/invoice.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { payDetailDTO } from '../../models/payDetailDTO';
+import { PayDetailDTO } from '../../models/PayDetailDTO';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { paymentMethodDTO } from '../../models/paymentMethodDTO';
+import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
 import { Invoice } from '../../models/Invoice';
 import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
 
@@ -16,8 +16,8 @@ import { SharedDataInvoiceService } from '../../services/shared-data-invoice.ser
 export class RegistrarPagoComponent {
   @Input() invoiceTotal: number = 0;
   public montoTotal: number = 0;
-  listPays: payDetailDTO[] = [];
-  paymentMethodDtos: Observable<paymentMethodDTO[]>;
+  listPays: PayDetailDTO[] = [];
+  PaymentMethodDTOs: Observable<PaymentMethodDTO[]>;
   formulario: FormGroup;
 
   //COMO EL PROCESO FINALIZA UNA VEZ QUE PAGAMOS, HAGO EL POST DESDE ESTE COMPONETNE
@@ -29,7 +29,7 @@ export class RegistrarPagoComponent {
     private sharedDataInvoice:SharedDataInvoiceService,
     private invoiceService:InvoiceService
   ) {
-    this.paymentMethodDtos = this.paymentMethodService.obtenerFormasPago();
+    this.PaymentMethodDTOs = this.paymentMethodService.obtenerFormasPago();
     this.formulario = this.formBuilder.group({
       paymentMethodList: this.formBuilder.array([]),
     });

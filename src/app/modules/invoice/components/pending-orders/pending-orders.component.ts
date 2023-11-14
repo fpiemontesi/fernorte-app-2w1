@@ -3,6 +3,7 @@ import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/order';
 import { Detail } from '../../models/Detail';
 import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'fn-pending-orders',
@@ -20,17 +21,25 @@ export class PendingOrdersComponent implements OnInit {
 
   isModalOpen: boolean = false;
 
-  constructor(private orderService: OrderService, private route: Router) {}
+  constructor(
+    private orderService: OrderService,
+    private toastService: ToastService,
+    private route: Router
+  ) {}
   ngOnInit(): void {
-    this.orderService.obtenerOrdenes().subscribe(
-      (response: Order[]) => {
+    const listOrders = this.orderService.obtenerOrdenes();
+    listOrders.subscribe({
+      next: (response: Order[]) => {
         this.orders = response;
         this.ordersToShow = this.orders;
       },
-      (error: any) => {
-        console.error(error);
-      }
-    );
+      error: () => {
+        this.toastService.show('Error al obtener las ordenes', {
+          classname: 'bg-danger text-light',
+          delay: 15000,
+        });
+      },
+    });
   }
 
   buscarPedidos(event: any): void {
