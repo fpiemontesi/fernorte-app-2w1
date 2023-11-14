@@ -11,21 +11,9 @@
               let i = index
             ">
             <div [formGroupName]="i" class="row justify-content-end">
-<<<<<<< HEAD
-              <div class="col-4" *ngIf="PaymentMethodDTOs | async as payments">
-                <label for="paymentMethod" class="form-label"
-                  >Método de Pago:</label
-                >
-                <select
-                  id="paymentMethod"
-                  formControlName="paymentMethod"
-                  class="form-select"
-                >
-=======
-              <div class="col-4" *ngIf="paymentMethodDtos | async as payments">
+              <div class="col-4" *ngIf="paymentMethodDTOs | async as payments">
                 <label for="paymentMethod" class="form-label">Método de Pago:</label>
                 <select id="paymentMethod" formControlName="paymentMethod" class="form-select">
->>>>>>> 6d59604a790725f86da2b4957392458714edf6c3
                   <option [ngValue]="pm.id" *ngFor="let pm of payments">
                     {{ pm.name }}
                   </option>

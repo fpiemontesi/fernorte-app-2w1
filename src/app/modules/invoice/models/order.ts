@@ -4,8 +4,8 @@ import { DiscountDTO } from "./DiscountDTO";
 export class Order {
     id: number = 0;
     fecha: string = '';
-    idCliente: number = 0;
-    idReserva:number = 0;
+    doc_cliente: number = 0;
+    id_reserva:number = 0;
     detalles: Detail[] = [];
     descuentos: DiscountDTO[]=[];
     subtotal:number = 0;

@@ -50,7 +50,7 @@ export class RegistrarFacturaComponent {
     this.orderSelected = this.orderService.getOrderSelected();
 
     this.customerserv
-      .obtenerClienteByNroDoc(this.orderSelected.idCliente)
+      .obtenerClienteByNroDoc(this.orderSelected.doc_cliente)
       .subscribe((data) => {
         this.client = data;
         console.log(this.client);
@@ -65,8 +65,8 @@ export class RegistrarFacturaComponent {
     let totalDescuento = 0
     this.orderSelected.total = parseFloat(
       (
-        ((this.orderSelected.detalles[0].precioUnitario * this.orderSelected.detalles[0].cantidad) +
-          (this.orderSelected.detalles[1].precioUnitario * this.orderSelected.detalles[1].cantidad))
+        ((this.orderSelected.detalles[0].precio_unitario * this.orderSelected.detalles[0].cantidad) +
+          (this.orderSelected.detalles[1].precio_unitario * this.orderSelected.detalles[1].cantidad))
       ).toFixed(2)
     );
 
@@ -91,7 +91,7 @@ export class RegistrarFacturaComponent {
     this.invoice.type = this.tipoFactura
     this.invoice.status = 'PENDING'
     this.invoice.iva = 0.21
-    this.invoice.reservationId = this.orderSelected.idReserva
+    this.invoice.reservationId = this.orderSelected.id_reserva
 
     let listDiscount: DiscountRequest[] = []
     //CREO LA LISTA DE DESCUENTOS
@@ -110,9 +110,9 @@ export class RegistrarFacturaComponent {
       let detalleOrden: OrderDetail = new OrderDetail();
 
       //CREO EL PRODUCTO
-      producto.product_id = detail.idProducto
+      producto.product_id = detail.cod_prod
       producto.name = detail.descripcion
-      producto.price = detail.precioUnitario
+      producto.price = detail.precio_unitario
 
       //CREO EL DETALLE
       detalleOrden.product = producto

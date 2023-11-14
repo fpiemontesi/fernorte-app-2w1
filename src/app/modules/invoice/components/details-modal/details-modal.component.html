@@ -14,7 +14,7 @@
       <tbody>
         <tr *ngFor="let detail of selectedDetails">
           <td>{{ detail.descripcion }}</td>
-          <td>{{ detail.precioUnitario | currency : "ARS" : "" : "1.2-2" }}</td>
+          <td>{{ detail.precio_unitario | currency : "ARS" : "" : "1.2-2" }}</td>
           <td>{{ detail.cantidad }}</td>
           <td>{{ detail.subtotal | currency : "ARS" : "" : "1.2-2" }}</td>
         </tr>

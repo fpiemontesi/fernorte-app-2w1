@@ -1,7 +1,7 @@
 export class Detail {
-    idProducto: string = '';
+    cod_prod: string = '';
     descripcion: string = '';
-    precioUnitario: number =0;
+    precio_unitario: number =0;
     cantidad: number = 0;
     subtotal: number = 0;
 }

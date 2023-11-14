@@ -45,7 +45,7 @@
               <tr *ngFor="let order of ordersToShow">
                 <td>{{ order.id }}</td>
                 <td>{{ order.fecha }}</td>
-                <td>{{ order.idCliente }}</td>
+                <td>{{ order.doc_cliente }}</td>
                 <td>
                   {{ order.subtotal | currency : "ARS" : "" : "1.2-2" }}
                 </td>

@@ -115,8 +115,8 @@
             <tr *ngFor="let det of orderSelected.detalles">
               <td>{{ det.descripcion }}</td>
               <td>{{ det.cantidad }}</td>
-              <td>{{ det.precioUnitario | currency }}</td>
-              <td>{{ det.cantidad * det.precioUnitario | currency }}</td>
+              <td>{{ det.precio_unitario | currency }}</td>
+              <td>{{ det.cantidad * det.precio_unitario | currency }}</td>
             </tr>
           </tbody>
         </table>
