@@ -9,11 +9,13 @@ import { FormPagoComponent } from './components/form-pago/form-pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsModalComponent } from './components/details-modal/details-modal.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ReportesComponent } from './components/reportes/reportes.component';
 import { PaymentsMethodsModalComponent } from './components/payments-methods-modal/payments-methods-modal.component';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from "./components/toasts/toasts-container.component";
+import { ReporteHomeComponent } from './components/reportes/reporte-home/reporte-home.component';
+import { ReporteFormaDePagoComponent } from './components/reportes/reporte-forma-de-pago/reporte-forma-de-pago.component';
+import { ReporteClientesComponent } from './components/reportes/reporte-clientes/reporte-clientes.component';
 
 const routes: Routes = [
   {
@@ -31,7 +33,12 @@ const routes: Routes = [
   },
 
   { path: 'GestionarFactura', component: GestionFacturaComponent },
-  { path: 'Reportes', component: ReportesComponent },
+  { path: 'Reportes',
+  children:[
+    {path:'', component:ReporteHomeComponent},
+    {path:'Clientes', component:ReporteClientesComponent},
+    {path:'FormaPago', component:ReporteFormaDePagoComponent}
+  ] },
   {path: 'paymentMethods', component: PaymentsMethodsModalComponent}
 ];
 
@@ -45,6 +52,9 @@ const routes: Routes = [
         FormPagoComponent,
         DetailsModalComponent,
         PaymentsMethodsModalComponent,
+        ReporteHomeComponent,
+        ReporteFormaDePagoComponent,
+        ReporteClientesComponent,
     ],
     providers: [],
     exports: [HomeComponent, RouterModule],
