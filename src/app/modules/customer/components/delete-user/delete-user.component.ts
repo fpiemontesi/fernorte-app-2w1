@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { RestService } from '../../services/rest.service';
 import { UserService } from '../../services/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-delete-user',
@@ -9,6 +10,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./delete-user.component.css'],
 })
 export class DeleteUserComponent {
+  @ViewChild('borrarUsuarioForm', { static: false }) borrarUsuarioForm!: NgForm;
+
   numeroDoc: number = 0;
 
   constructor(
@@ -17,27 +20,39 @@ export class DeleteUserComponent {
   ) {}
 
   borrarUsuario() {
+    Object.keys(this.borrarUsuarioForm.controls).forEach((controlName) => {
+      this.borrarUsuarioForm.controls[controlName].markAsTouched();
+    });
+
     if (!this.numeroDoc && this.numeroDoc !== 0) {
       Swal.fire({
         icon: 'warning',
         title: 'El número de documento no puede estar vacío',
-        text: 'Vuelva a ingresar el número de documento del cliente.',
+        text: 'Vuelva a ingresar el número de documento del usuario.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });
-    } else if (this.numeroDoc == 0 || this.numeroDoc < 0) {
+    } else if (this.numeroDoc == 0) {
       Swal.fire({
         icon: 'error',
-        title: 'El número de documento no puede ser 0 o negativo',
-        text: 'Vuelva a ingresar el número de documento del cliente.',
+        title: 'El número de documento no puede ser 0',
+        text: 'Vuelva a ingresar el número de documento del usuario.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+    } else if (this.numeroDoc < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser negativo',
+        text: 'Vuelva a ingresar el número de documento del usuario.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });
     } else {
       Swal.fire({
         icon: 'warning',
-        title: '¿Estás seguro?',
-        text: `¿Deseas dar de baja al usuario con número de documento: ${this.numeroDoc}?`,
+        title: 'Confirmar baja de usuario',
+        text: `¿Estás seguro de que deseas dar de baja al usuario con número de documento: ${this.numeroDoc}? Esta acción no se puede deshacer.`,
         showCancelButton: true,
         confirmButtonText: 'Sí',
         cancelButtonText: 'No',

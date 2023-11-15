@@ -11,7 +11,7 @@
         id="numeroDocumento"
         name="numeroDocumento"
         class="mt-1 form-control"
-        [(ngModel)]="numeroDocumento"
+        [(ngModel)]="numeroDoc"
         placeholder="Número de Documento"
         required
         [ngClass]="{
@@ -28,20 +28,6 @@
         class="invalid-feedback"
       >
         El número de documento es requerido.
-      </div>
-
-      <div
-        *ngIf="
-          generarTurnoForm.controls['numeroDocumento'].invalid &&
-          generarTurnoForm.controls['numeroDocumento'].touched
-        "
-      >
-        <div
-          *ngIf="generarTurnoForm.controls['numeroDocumento'].errors?.['required']"
-          class="invalid-feedback"
-        >
-          El número de documento es requerido.
-        </div>
       </div>
     </div>
 
@@ -65,20 +51,20 @@
         [(ngModel)]="clienteTemporal.nombre"
         placeholder="Nombre del cliente"
         required
+        [ngClass]="{
+          'is-invalid':
+            generarTurnoTemporalesForm &&
+            generarTurnoTemporalesForm.controls['nombre'] &&
+            generarTurnoTemporalesForm.controls['nombre'].invalid &&
+            generarTurnoTemporalesForm.controls['nombre'].touched
+        }"
       />
 
       <div
-        *ngIf="
-          generarTurnoTemporalesForm.controls['nombre'].invalid &&
-          generarTurnoTemporalesForm.controls['nombre'].touched
-        "
+        *ngIf="generarTurnoTemporalesForm.controls['nombre'].errors?.['required']"
+        class="invalid-feedback"
       >
-        <div
-          *ngIf="generarTurnoTemporalesForm.controls['nombre'].errors?.['required']"
-          class="invalid-feedback"
-        >
-          El nombre del cliente es requerido.
-        </div>
+        El nombre del cliente es requerido.
       </div>
     </div>
 
@@ -92,20 +78,20 @@
         [(ngModel)]="clienteTemporal.apellido"
         placeholder="Apellido del cliente"
         required
+        [ngClass]="{
+          'is-invalid':
+            generarTurnoTemporalesForm &&
+            generarTurnoTemporalesForm.controls['apellido'] &&
+            generarTurnoTemporalesForm.controls['apellido'].invalid &&
+            generarTurnoTemporalesForm.controls['apellido'].touched
+        }"
       />
 
       <div
-        *ngIf="
-          generarTurnoTemporalesForm.controls['apellido'].invalid &&
-          generarTurnoTemporalesForm.controls['apellido'].touched
-        "
+        *ngIf="generarTurnoTemporalesForm.controls['apellido'].errors?.['required']"
+        class="invalid-feedback"
       >
-        <div
-          *ngIf="generarTurnoTemporalesForm.controls['apellido'].errors?.['required']"
-          class="invalid-feedback"
-        >
-          El apellido del cliente es requerido.
-        </div>
+        El apellido del cliente es requerido.
       </div>
     </div>
 
@@ -119,23 +105,25 @@
         name="numeroDocumentoTemporal"
         class="mt-1 form-control"
         [(ngModel)]="clienteTemporal.nroDoc"
-        placeholder="Número de docuemnto del cliente"
+        placeholder="Número de documento"
         required
+        readonly
+        [ngClass]="{
+          'is-invalid':
+            generarTurnoTemporalesForm &&
+            generarTurnoTemporalesForm.controls['numeroDocumentoTemporal'] &&
+            generarTurnoTemporalesForm.controls['numeroDocumentoTemporal']
+              .invalid &&
+            generarTurnoTemporalesForm.controls['numeroDocumentoTemporal']
+              .touched
+        }"
       />
 
       <div
-        *ngIf="
-          generarTurnoTemporalesForm.controls['numeroDocumentoTemporal']
-            .invalid &&
-          generarTurnoTemporalesForm.controls['numeroDocumentoTemporal'].touched
-        "
+        *ngIf="generarTurnoTemporalesForm.controls['apellido'].errors?.['required']"
+        class="invalid-feedback"
       >
-        <div
-          *ngIf="generarTurnoTemporalesForm.controls['numeroDocumentoTemporal'].errors?.['required']"
-          class="invalid-feedback"
-        >
-          El número de docuemento del cliente es requerido.
-        </div>
+        El número de documento del cliente es requerido.
       </div>
     </div>
 
@@ -143,7 +131,6 @@
       class="btn btn-primary mt-3"
       style="margin-right: 10px"
       (click)="generarTurnoClienteTemporal()"
-      [disabled]="generarTurnoTemporalesForm.invalid"
     >
       Generar Turno
     </button>

@@ -3,7 +3,8 @@
     <button (click)="toggleComponent('mostrarComponentesUsuarios')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesUsuarios')}" class="buttonComponent"><img class="icon" src="../../../../../assets/icons/user.svg" alt="Icono de usuarios"><p class="m-0">Usuarios</p></button>
     <button (click)="toggleComponent('mostrarComponentesTurnero')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesTurnero')}" class="buttonComponent"><img class="icon" src="../../../../../assets/icons/turn.svg" alt="Icono de turnero"><p class="m-0">Turnero</p></button>
     <button (click)="toggleComponent('mostrarComponentesBeneficios')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesBeneficios')}" class="buttonComponent"><img class="icon" src="../../../../../assets/icons/benefits.svg" alt="Icono de beneficios"><p class="m-0">Beneficios</p></button>
-</div>
+    <fn-logout *ngIf="isLogged"></fn-logout>
+  </div>
 
 
 
@@ -25,7 +26,3 @@
 
 
 <fn-login (loginSuccess)="onLoginSuccess()" *ngIf="showLoginForm && !isLogged"></fn-login>
-
-<div class="logout-btn-container">
-  <fn-logout *ngIf="isLogged"></fn-logout>
-</div>

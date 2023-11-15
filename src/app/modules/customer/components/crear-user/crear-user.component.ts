@@ -9,7 +9,7 @@ import { CargoService } from '../../services/cargo.service';
 @Component({
   selector: 'fn-crear-user',
   templateUrl: './crear-user.component.html',
-  styleUrls: ['./crear-user.component.css']
+  styleUrls: ['./crear-user.component.css'],
 })
 export class CrearUserComponent {
   ngOnInit() {
@@ -38,60 +38,57 @@ export class CrearUserComponent {
   }
 
   crearUsuario() {
-    this.restService.postUsuario(this.usuario).subscribe(
-      (response) => {
-        console.log('Usuario creado con éxito', response);
+    Object.keys(this.crearUsuarioForm.controls).forEach((controlName) => {
+      this.crearUsuarioForm.controls[controlName].markAsTouched();
+    });
 
-        this.crearUsuarioForm.reset();
-        this.userService.agregarUsuario(this.usuario);
+    if (this.crearUsuarioForm.valid) {
+      this.restService.postUsuario(this.usuario).subscribe(
+        (response) => {
+          console.log('Usuario creado con éxito', response);
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Usuario creado con exito!',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-      },
-      (error) => {
-        console.log(error);
-        if (error.error.message == 'Email already in use') {
+          this.crearUsuarioForm.reset();
+          this.userService.agregarUsuario(this.usuario);
+
           Swal.fire({
-            icon: 'error',
-            title: 'El Email ingresado ya esta en uso',
-            text: 'Por favor, ingrese un email diferente',
+            icon: 'success',
+            title: 'Usuario creado con exito!',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#808080',
           });
-          console.log('error: ' + error);
-        } else if (error.error.message == 'Username already in use') {
-          Swal.fire({
-            icon: 'error',
-            title: 'El username ingresado ya esta en uso',
-            text: 'Por favor, ingrese un username diferente',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
-          console.log('error: ' + error);
-        } else if (error.error.message == 'Document number already in use') {
-          Swal.fire({
-            icon: 'error',
-            title: 'El número de documento ingresado ya esta en uso',
-            text: 'Por favor, ingrese un número de documento diferente',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
-          console.log('error: ' + error);
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error al crear el usuario',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
-          console.log('error: ' + error);
+        },
+        (error) => {
+          console.log(error);
+          if (error.error.message == 'Email already in use') {
+            Swal.fire({
+              icon: 'error',
+              title: 'El Email ingresado ya esta en uso',
+              text: 'Por favor, ingrese un email diferente',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            console.log('error: ' + error);
+          } else if (error.error.message == 'Username already in use') {
+            Swal.fire({
+              icon: 'error',
+              title: 'El username ingresado ya esta en uso',
+              text: 'Por favor, ingrese un username diferente',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            console.log('error: ' + error);
+          } else if (error.error.message == 'Document number already in use') {
+            Swal.fire({
+              icon: 'error',
+              title: 'El número de documento ingresado ya esta en uso',
+              text: 'Por favor, ingrese un número de documento diferente',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            console.log('error: ' + error);
+          }
         }
-      }
-    );
+      );
+    }
   }
-
 }

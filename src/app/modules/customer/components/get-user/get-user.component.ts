@@ -7,13 +7,13 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'fn-get-user',
   templateUrl: './get-user.component.html',
-  styleUrls: ['./get-user.component.css']
+  styleUrls: ['./get-user.component.css'],
 })
 export class GetUserComponent {
   listaCargos: any[] = [];
   lsitaFiltroCargos: any[] = [];
 
-  getCargos(){
+  getCargos() {
     this.restService.getCargos().subscribe((info: any) => {
       this.listaCargos = info;
       this.lsitaFiltroCargos = [...info];
@@ -21,12 +21,12 @@ export class GetUserComponent {
   }
 
   ngOnInit() {
-    this.listaCargos = this.cargoService.getCargo()
+    this.listaCargos = this.cargoService.getCargo();
 
-    this.cargoService.cargos$.subscribe((cargos) =>{
+    this.cargoService.cargos$.subscribe((cargos) => {
       this.listaCargos = cargos;
-      this.getCargos()
-    })
+      this.getCargos();
+    });
   }
 
   cargoElegido: string = '';
@@ -46,30 +46,44 @@ export class GetUserComponent {
   }
 
   filtrarUsuarios() {
-    if (this.cargoElegido !== '') {
-      this.restService.getUsuariosPorCargo(this.cargoElegido).subscribe(
-        (data) => {
-          this.usuarioArray = data;
-          this.listaFiltrada = true;
-
-          console.log(data);
-        },
-        (error) => {
-          console.error('Error al obtener usuarios por cargo', error);
-
-          if (this.usuarioArray.length === 0) {
-            Swal.fire({
-              icon: 'warning',
-              title: 'No se encontraron usuarios',
-              text: `No se encontró ningún usuario con el cargo: ${this.cargoElegido}`,
-              confirmButtonText: 'Aceptar',
-              confirmButtonColor: '#808080',
-            });
-          }
-        }
-      );
-    } else {
-      this.listaFiltrada = false;
+    if (this.cargoElegido == '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debe seleccionar un cargo',
+        text: 'Seleccione un cargo de la lista desplegable',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+      return;
     }
+
+    // Reiniciar el array antes de realizar la búsqueda
+    this.usuarioArray = [];
+
+    this.restService.getUsuariosPorCargo(this.cargoElegido).subscribe(
+      (data) => {
+        this.usuarioArray = data;
+        this.listaFiltrada = true;
+
+        console.log(data);
+      },
+      (error) => {
+        console.error('Error al obtener usuarios por cargo', error);
+
+        if (this.usuarioArray.length === 0) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'No se encontraron usuarios',
+            text: `No se encontró ningún usuario con el cargo: ${this.cargoElegido}`,
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+
+          this.usuarioArray = [];
+          this.listaFiltrada = false;
+          this.cargoElegido = '';
+        }
+      }
+    );
   }
 }

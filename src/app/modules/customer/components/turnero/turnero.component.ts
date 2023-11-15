@@ -16,7 +16,7 @@ export class TurneroComponent {
 
   mostrarFormTemporal: boolean = false;
 
-  numeroDocumento: number = 0;
+  numeroDoc: number = 0;
 
   clienteTemporal = {
     nombre: '',
@@ -46,7 +46,7 @@ export class TurneroComponent {
       this.generarTurnoForm.controls[controlName].markAsTouched();
     });
 
-    if (!this.numeroDocumento && this.numeroDocumento != 0) {
+    if (!this.numeroDoc && this.numeroDoc != 0) {
       Swal.fire({
         icon: 'warning',
         title: 'El número de documento no puede estar vacío',
@@ -54,11 +54,18 @@ export class TurneroComponent {
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });
-    }
-    else if (this.numeroDocumento == 0 || this.numeroDocumento < 0) {
+    } else if (this.numeroDoc == 0) {
       Swal.fire({
         icon: 'error',
-        title: 'El número de documento no puede ser 0 o negativo',
+        title: 'El número de documento no puede ser 0',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+    } else if (this.numeroDoc < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser negativo',
         text: 'Vuelva a ingresar el número de documento del cliente.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
@@ -68,8 +75,8 @@ export class TurneroComponent {
     this.restService.getTurnos().subscribe((turnos) => {
       const clienteConTurno = turnos.some(
         (turno) =>
-          turno.cliente?.nroDoc === this.numeroDocumento ||
-          turno.clienteTemporal?.nroDoc === this.numeroDocumento
+          turno.cliente?.nroDoc === this.numeroDoc ||
+          turno.clienteTemporal?.nroDoc === this.numeroDoc
       );
 
       if (clienteConTurno) {
@@ -83,15 +90,14 @@ export class TurneroComponent {
       } else {
         this.restService.getClientes().subscribe((clientes) => {
           const clienteExiste = clientes.some(
-            (cliente) => cliente.nroDoc == this.numeroDocumento
+            (cliente) => cliente.nroDoc == this.numeroDoc
           );
 
           if (clienteExiste) {
             this.generarTurnoClienteRegistrado();
             this.generarTurnoForm.reset();
           } else {
-
-            if (!this.numeroDocumento && this.numeroDocumento != 0) {
+            if (!this.numeroDoc && this.numeroDoc != 0) {
               Swal.fire({
                 icon: 'warning',
                 title: 'El número de documento no puede estar vacío',
@@ -99,34 +105,41 @@ export class TurneroComponent {
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#808080',
               });
-            }
-            else if (this.numeroDocumento == 0 || this.numeroDocumento < 0) {
+            } else if (this.numeroDoc == 0) {
               Swal.fire({
                 icon: 'error',
-                title: 'El número de documento no puede ser 0 o negativo',
+                title: 'El número de documento no puede ser 0',
+                text: 'Vuelva a ingresar el número de documento del cliente.',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#808080',
+              });
+            } else if (this.numeroDoc < 0) {
+              Swal.fire({
+                icon: 'error',
+                title: 'El número de documento no puede ser negativo',
                 text: 'Vuelva a ingresar el número de documento del cliente.',
                 confirmButtonText: 'Aceptar',
                 confirmButtonColor: '#808080',
               });
             } else {
-
-            Swal.fire({
-              icon: 'error',
-              title: 'Cliente no encontrado',
-              text: 'El número de documento ingresado no corresponde a ningún cliente existente',
-              showCancelButton: true,
-              showConfirmButton: true,
-              cancelButtonText: 'Cancelar',
-              confirmButtonText: 'Registrar cliente temporal',
-              cancelButtonColor: '#808080',
-              confirmButtonColor: '#308B45',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.mostrarFormRegistrarClienteTemporal();
-                this.clienteTemporal.nroDoc = this.numeroDocumento;
-              } else if (result.isDismissed) {
-              }
-            });}
+              Swal.fire({
+                icon: 'error',
+                title: 'Cliente no encontrado',
+                text: 'El número de documento ingresado no corresponde a ningún cliente existente',
+                showCancelButton: true,
+                showConfirmButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Registrar cliente temporal',
+                cancelButtonColor: '#808080',
+                confirmButtonColor: '#308B45',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.mostrarFormRegistrarClienteTemporal();
+                  this.clienteTemporal.nroDoc = this.numeroDoc;
+                } else if (result.isDismissed) {
+                }
+              });
+            }
           }
         });
       }
@@ -138,7 +151,7 @@ export class TurneroComponent {
   }
 
   generarTurnoClienteRegistrado() {
-    const nroDoc = this.numeroDocumento;
+    const nroDoc = this.numeroDoc;
 
     this.restService
       .generarTurnoClienteRegistrado(nroDoc)
@@ -166,33 +179,43 @@ export class TurneroComponent {
   }
 
   generarTurnoClienteTemporal() {
-    this.restService
-      .generarTurnoClienteTemporal(this.clienteTemporal)
-      .subscribe((turno) => {
-        this.turnoGenerado = turno;
+    Object.keys(this.generarTurnoTemporalesForm.controls).forEach(
+      (controlName) => {
+        this.generarTurnoTemporalesForm.controls[controlName].markAsTouched();
+      }
+    );
 
-        console.log(this.turnoGenerado);
+    if (this.generarTurnoTemporalesForm.valid) {
+      this.restService
+        .generarTurnoClienteTemporal(this.clienteTemporal)
+        .subscribe((turno) => {
+          this.turnoGenerado = turno;
 
-        this.turnoService.agregarTurno(turno);
+          console.log(this.turnoGenerado);
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Turno generado exitosamente!',
-          text:
-            'El número de turno para ' +
-            this.turnoGenerado.clienteTemporal.nombre +
-            ' ' +
-            this.turnoGenerado.clienteTemporal.apellido +
-            ' es: ' +
-            this.turnoGenerado.nro_turno,
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
+          this.turnoService.agregarTurno(turno);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Turno generado exitosamente!',
+            text:
+              'El número de turno para ' +
+              this.turnoGenerado.clienteTemporal.nombre +
+              ' ' +
+              this.turnoGenerado.clienteTemporal.apellido +
+              ' es: ' +
+              this.turnoGenerado.nro_turno,
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+
+          this.generarTurnoTemporalesForm.reset();
+
+          this.numeroDoc = 0;
+
+          this.mostrarFormTemporal = false;
         });
-
-        this.generarTurnoTemporalesForm.reset();
-
-        this.mostrarFormTemporal = false;
-      });
+    }
   }
 
   cancelarGenerarTurnoTemporal() {

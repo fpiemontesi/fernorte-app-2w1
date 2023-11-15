@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'fn-crear-position',
   templateUrl: './crear-position.component.html',
-  styleUrls: ['./crear-position.component.css']
+  styleUrls: ['./crear-position.component.css'],
 })
 export class CrearPositionComponent {
   @ViewChild('crearCargoForm', { static: false }) crearCargoForm!: NgForm;
@@ -16,39 +16,47 @@ export class CrearPositionComponent {
     descripcion: '',
   };
 
-  constructor(private restService: RestService , private cargoService: CargoService) {}
+  constructor(
+    private restService: RestService,
+    private cargoService: CargoService
+  ) {}
 
   crearCargo() {
-    this.restService.postCargo(this.cargoBody).subscribe(
-      (response) => {
-        console.log('Cargo creado con éxito', response);
+    Object.keys(this.crearCargoForm.controls).forEach((controlName) => {
+      this.crearCargoForm.controls[controlName].markAsTouched();
+    });
 
-        // Limpia el input de cargo
-        this.cargoBody = {
-          descripcion: '',
-        };
+    if (this.crearCargoForm.valid) {
+      this.restService.postCargo(this.cargoBody).subscribe(
+        (response) => {
+          console.log('Cargo creado con éxito', response);
 
-        this.crearCargoForm.reset();
-        this.cargoService.agregarCargo(this.cargoBody)
-        // this.userService.agregarCargo(this.cargoBody);
+          // Limpia el input de cargo
+          this.cargoBody = {
+            descripcion: '',
+          };
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Cargo creado con exito!',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-      },
-      (error) => {
-        console.log(error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error al crear el cargo',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-        console.log('error: ' + error);
-      }
-    );
+          this.crearCargoForm.reset();
+          this.cargoService.agregarCargo(this.cargoBody);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Cargo creado con exito!',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+        },
+        (error) => {
+          console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al crear el cargo',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+          console.log('error: ' + error);
+        }
+      );
+    }
   }
 }

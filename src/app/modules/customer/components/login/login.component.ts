@@ -6,7 +6,7 @@ import { RestService } from '../../services/rest.service';
 @Component({
   selector: 'fn-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   @Output() loginSuccess: EventEmitter<void> = new EventEmitter<void>();
@@ -42,52 +42,55 @@ export class LoginComponent {
     newPassword: '',
   };
 
-  constructor(private restService: RestService) {
-    
-
-  }
+  constructor(private restService: RestService) {}
 
   login() {
-    this.restService.loginUsuario(this.credentials).subscribe(
-      (response) => {
-        console.log('Login exitoso!', response);    
+    Object.keys(this.loginUsuarioForm.controls).forEach((controlName) => {
+      this.loginUsuarioForm.controls[controlName].markAsTouched();
+    });
 
-        // Limpia los inputs de email y contraseña
-        this.credentials = {
-          username: '',
-          password: '',
-        };
+    if (this.loginUsuarioForm.valid) {
+      this.restService.loginUsuario(this.credentials).subscribe(
+        (response) => {
+          console.log('Login exitoso!', response);
 
-        this.loginUsuarioForm.reset();
-        localStorage.setItem('tokenLogin',JSON.stringify(response));        
-        Swal.fire({
-          icon: 'success',
-          title: 'Login exitoso!',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-        this.loginSuccess.emit();
-      },
-      (error) => {
-        if (error.error.message == 'User not active') {
+          // Limpia los inputs de email y contraseña
+          this.credentials = {
+            username: '',
+            password: '',
+          };
+
+          this.loginUsuarioForm.reset();
+          localStorage.setItem('tokenLogin', JSON.stringify(response));
           Swal.fire({
-            icon: 'error',
-            title: 'El Usuario esta inhabilitado',
+            icon: 'success',
+            title: 'Login exitoso!',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#808080',
           });
-          console.log('error: ' + error);
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Usuario o contraseña incorrectas',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
-          console.log('error: ' + error);
+          this.loginSuccess.emit();
+        },
+        (error) => {
+          if (error.error.message == 'User not active') {
+            Swal.fire({
+              icon: 'error',
+              title: 'El Usuario esta inhabilitado',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            console.log('error: ' + error);
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Usuario o contraseña incorrectas',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            console.log('error: ' + error);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   recuperarContrasena() {
@@ -107,35 +110,43 @@ export class LoginComponent {
   }
 
   enviarMailParaRecuperar() {
-    this.verification.email = this.bodyEmail.email;
-
-    this.restService.resetPasswordUsuario(this.bodyEmail).subscribe(
-      (response) => {
-        console.log('Email enviado', response);
-
-        this.resetPasswordUsuarioForm.reset();
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Codigo de verificacion enviado con exito!',
-          text: 'Revise su bandeja de entrada o spam.',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-
-        this.mostrarRecuperarContrasena = false;
-        this.mostrarIngresarCodigo = true;
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'El email ingresado no corresponde a ningun usuario!',
-          text: 'Ingrese un email existente',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
+    Object.keys(this.resetPasswordUsuarioForm.controls).forEach(
+      (controlName) => {
+        this.resetPasswordUsuarioForm.controls[controlName].markAsTouched();
       }
     );
+
+    this.verification.email = this.bodyEmail.email;
+
+    if (this.resetPasswordUsuarioForm.valid) {
+      this.restService.resetPasswordUsuario(this.bodyEmail).subscribe(
+        (response) => {
+          console.log('Email enviado', response);
+
+          this.resetPasswordUsuarioForm.reset();
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Codigo de verificacion enviado con exito!',
+            text: 'Revise su bandeja de entrada o spam.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+
+          this.mostrarRecuperarContrasena = false;
+          this.mostrarIngresarCodigo = true;
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'El email ingresado no corresponde a ningun usuario!',
+            text: 'Ingrese un email existente',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+        }
+      );
+    }
   }
 
   cancelarIngresarCodigo() {
@@ -145,40 +156,46 @@ export class LoginComponent {
   }
 
   verificarUsuario() {
-    this.restService.verifyUsuario(this.verification).subscribe(
-      (response) => {
-        console.log('Email verificado con exito!');
+    Object.keys(this.verifyUsuarioForm.controls).forEach((controlName) => {
+      this.verifyUsuarioForm.controls[controlName].markAsTouched();
+    });
 
-        // Limpia el input del codigo de verificacion
-        this.verification = {
-          email: '',
-          verificationCode: '',
-        };
+    if (this.verifyUsuarioForm.valid) {
+      this.restService.verifyUsuario(this.verification).subscribe(
+        (response) => {
+          console.log('Email verificado con exito!');
 
-        this.verifyUsuarioForm.reset();
+          // Limpia el input del codigo de verificacion
+          this.verification = {
+            email: '',
+            verificationCode: '',
+          };
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Email verificado con exito!',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
+          this.verifyUsuarioForm.reset();
 
-        this.password.token = response.token;
+          Swal.fire({
+            icon: 'success',
+            title: 'Email verificado con exito!',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
 
-        this.mostrarCambiarContrasena = true;
-        this.mostrarIngresarCodigo = false;
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'El código de verificación no es válido',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-        console.log('error: ' + error);
-      }
-    );
+          this.password.token = response.token;
+
+          this.mostrarCambiarContrasena = true;
+          this.mostrarIngresarCodigo = false;
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'El código de verificación no es válido',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+          console.log('error: ' + error);
+        }
+      );
+    }
   }
 
   cancelarCambiarContrasena() {
@@ -187,37 +204,45 @@ export class LoginComponent {
   }
 
   cambiarContrasenaUsuario() {
-    this.restService.updatePasswordUsuario(this.password).subscribe(
-      (response) => {
-        console.log('Contraseña actualizada con exito!');
-
-        // Limpia el input de la nueva contraseña
-        this.password = {
-          token: '',
-          newPassword: '',
-        };
-
-        this.changePasswordUsuarioForm.reset();
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Contraseña actualizada con exito!',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-
-        this.mostrarLogin = true;
-        this.mostrarCambiarContrasena = false;
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'No se pudo actualizar la contraseña',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-        console.log('error: ' + error);
+    Object.keys(this.changePasswordUsuarioForm.controls).forEach(
+      (controlName) => {
+        this.changePasswordUsuarioForm.controls[controlName].markAsTouched();
       }
     );
+
+    if (this.changePasswordUsuarioForm.valid) {
+      this.restService.updatePasswordUsuario(this.password).subscribe(
+        (response) => {
+          console.log('Contraseña actualizada con exito!');
+
+          // Limpia el input de la nueva contraseña
+          this.password = {
+            token: '',
+            newPassword: '',
+          };
+
+          this.changePasswordUsuarioForm.reset();
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Contraseña actualizada con exito!',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+
+          this.mostrarLogin = true;
+          this.mostrarCambiarContrasena = false;
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'No se pudo actualizar la contraseña',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+          console.log('error: ' + error);
+        }
+      );
+    }
   }
 }

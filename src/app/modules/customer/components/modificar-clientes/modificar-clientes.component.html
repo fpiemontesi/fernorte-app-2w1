@@ -1,11 +1,12 @@
 <div class="container big-cart">
-    <h3>Actualizar Cliente</h3>
-  
-    <div class="row mb-3 d-flex align-items-end filter-container">
-      <div class="col-md-6">
-        <label for="numeroDocumento" class="text-nowrap"
-          >Cargar campos del cliente por número de documento:</label
-        >
+  <h3>Actualizar Cliente</h3>
+
+  <div class="row mb-3 d-flex align-items-end filter-container">
+    <div class="col-md-6 d-flex flex-column">
+      <label for="numeroDocumento"
+        >Cargar campos del cliente por número de documento:</label
+      >
+      <div class="d-flex flex-row gap-2">
         <input
           type="number"
           class="form-control mt-1"
@@ -13,334 +14,347 @@
           placeholder="Número de Documento"
           [(ngModel)]="numeroDoc"
         />
-      </div>
-  
-      <div class="col-md-6">
+
         <button
-          class="btn btn-primary d-block"
+          class="btn btn-primary mt-1"
           (click)="buscarClientePorNumeroDocumento()"
         >
           Buscar
         </button>
       </div>
     </div>
-  
-    <form #crearClienteForm="ngForm">
-      <div class="row">
-        <!-- Primera columna -->
-        <div class="col-md-6">
+  </div>
+
+  <form #actualizarClienteForm="ngForm">
+    <div class="row">
+      <!-- Primera columna -->
+      <div class="col-md-6">
+        <input
+          type="number"
+          class="form-control"
+          id="id"
+          placeholder="Id"
+          name="id"
+          [(ngModel)]="cliente.id"
+          required
+          hidden
+        />
+
+        <div class="form-group mt-3">
+          <label for="nombre">Nombre:</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
-            id="id"
-            placeholder="Id"
-            name="id"
-            [(ngModel)]="cliente.id"
+            id="nombre"
+            placeholder="Nombre del Cliente"
+            name="nombre"
+            [(ngModel)]="cliente.nombre"
             required
-            hidden
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['nombre'] &&
+                actualizarClienteForm.controls['nombre'].invalid &&
+                actualizarClienteForm.controls['nombre'].touched
+            }"
           />
-  
-          <div class="form-group mt-3">
-            <label for="nombre">Nombre:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nombre"
-              placeholder="Nombre del Cliente"
-              name="nombre"
-              [(ngModel)]="cliente.nombre"
-              required
-            />
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['nombre'].invalid &&
-                crearClienteForm.controls['nombre'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['nombre'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El nombre es requerido.
-              </div>
-            </div>
-          </div>
-  
-          <div class="form-group mt-3">
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Email del Cliente"
-              name="email"
-              [(ngModel)]="cliente.email"
-              required
-            />
-            <div
-              *ngIf="
-                crearClienteForm.controls['email'].invalid &&
-                crearClienteForm.controls['email'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['email'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El email es requerido.
-              </div>
-            </div>
-          </div>
-  
-          <div class="form-group mt-3">
-            <label for="tipoDocumento">Tipo de Documento:</label>
-            <select
-              class="form-control"
-              id="tipoDocumento"
-              name="tipoDocumento"
-              [(ngModel)]="cliente.id_tipo_doc.id_tipo_doc"
-              required
-            >
-              <option value="" selected disabled>
-                Seleccione un tipo de documento
-              </option>
-              <option value="1">DNI</option>
-              <option value="2">CUIL</option>
-              <option value="3">CUIT</option>
-            </select>
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['tipoDocumento'].invalid &&
-                crearClienteForm.controls['tipoDocumento'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['tipoDocumento'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El tipo de documento es requerido.
-              </div>
-            </div>
-          </div>
-  
-          <div class="form-group mt-3">
-            <label for="categoriaFiscal">Categoría Fiscal:</label>
-            <select
-              class="form-control"
-              id="categoriaFiscal"
-              name="categoriaFiscal"
-              [(ngModel)]="cliente.id_categoria_fiscal.id_categoria"
-              required
-            >
-              <option value="" selected disabled>
-                Seleccione una categoría fiscal
-              </option>
-              <option value="1">Monotributista</option>
-              <option value="2">Responsable Incripto</option>
-            </select>
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['categoriaFiscal'].invalid &&
-                crearClienteForm.controls['categoriaFiscal'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['categoriaFiscal'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                La categoria fiscal es requerida.
-              </div>
-            </div>
-          </div>
-          <div class="form-group mt-3">
-            <label for="domicilio">Domicilio:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="domicilio"
-              placeholder="Domicilio del Cliente"
-              name="domicilio"
-              [(ngModel)]="cliente.domicilio"
-              required
-            />
-            <div *ngIf="crearClienteForm.controls['domicilio'].invalid && crearClienteForm.controls['domicilio'].touched">
-              <div *ngIf="crearClienteForm.controls['domicilio'].errors?.['required']" class="invalid-feedback">El domicilio es requerido.
-              </div>
-            </div>
+
+          <div
+            *ngIf="actualizarClienteForm.controls['nombre'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El nombre es requerido.
           </div>
         </div>
-        
-  
-        <!-- Segunda columna -->
-        <div class="col-md-6">
-          <div class="form-group mt-3">
-            <label for="apellido">Apellido:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="apellido"
-              placeholder="Apellido del Cliente"
-              name="apellido"
-              [(ngModel)]="cliente.apellido"
-              required
-            />
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['apellido'].invalid &&
-                crearClienteForm.controls['apellido'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['apellido'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El apellido es requerido.
-              </div>
-            </div>
-          </div>
-  
-          <div class="form-group mt-3">
-            <label for="telefono">Teléfono:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="telefono"
-              placeholder="Teléfono del Cliente"
-              name="telefono"
-              [(ngModel)]="cliente.telefono"
-              required
-            />
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['telefono'].invalid &&
-                crearClienteForm.controls['telefono'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['telefono'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El teléfono es requerido.
-              </div>
-            </div>
-          </div>
-  
-          <div class="form-group mt-3">
-            <label for="numeroDocumento">Número de Documento:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="numeroDocumento"
-              placeholder="Número de Documento"
-              name="numeroDocumento"
-              [(ngModel)]="cliente.nroDoc"
-              required
-              readonly
-            />
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['numeroDocumento'].invalid &&
-                crearClienteForm.controls['numeroDocumento'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['numeroDocumento'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El número de documento es requerido.
-              </div>
-            </div>
-          </div>
-  
+
+        <div class="form-group mt-3">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Email del Cliente"
+            name="email"
+            [(ngModel)]="cliente.email"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['email'] &&
+                actualizarClienteForm.controls['email'].invalid &&
+                actualizarClienteForm.controls['email'].touched
+            }"
+          />
           <div
-            class="form-group mt-3"
-            *ngIf="cliente.id_categoria_fiscal.id_categoria == 1"
+            *ngIf="actualizarClienteForm.controls['email'].errors?.['required']"
+            class="invalid-feedback"
           >
-            <label for="clasificacion">Categoría Monotributista:</label>
-            <select
-              class="form-control"
-              id="clasificacion"
-              name="clasificacion"
-              [(ngModel)]="cliente.id_clasificacion.id_clasificacion"
-              required
-            >
-              <option value="" selected disabled>
-                Seleccione una categoría monotributista:
-              </option>
-              <option value="1">A</option>
-              <option value="2">B</option>
-              <option value="3">C</option>
-              <option value="4">D</option>
-              <option value="5">E</option>
-              <option value="6">F</option>
-              <option value="7">G</option>
-              <option value="8">H</option>
-              <option value="9">I</option>
-              <option value="10">J</option>
-              <option value="11">K</option>
-            </select>
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['clasificacion'].invalid &&
-                crearClienteForm.controls['clasificacion'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['clasificacion'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                La categoría monotributista es requerida.
-              </div>
-            </div>
+            El email es requerido.
           </div>
-  
-          <div class="form-group mt-3">
-            <label for="tipoCliente">Tipo de Cliente:</label>
-            <select
-              class="form-control"
-              id="tipoCliente"
-              name="tipoCliente"
-              [(ngModel)]="cliente.id_tipo_cliente.id_tipo_cliente"
-              required
-            >
-              <option value="" selected disabled>
-                Seleccione un tipo de cliente
-              </option>
-              <option value="1">Persona</option>
-              <option value="2">Empresa</option>
-            </select>
-  
-            <div
-              *ngIf="
-                crearClienteForm.controls['tipoCliente'].invalid &&
-                crearClienteForm.controls['tipoCliente'].touched
-              "
-            >
-              <div
-                *ngIf="crearClienteForm.controls['tipoCliente'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El tipo de cliente es requerido.
-              </div>
-            </div>
+
+          <div
+            *ngIf="actualizarClienteForm.controls['email'].errors?.['pattern']"
+            class="invalid-feedback"
+          >
+            El formato del email es incorrecto.
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="tipoDocumento">Tipo de Documento:</label>
+          <select
+            class="form-control"
+            id="tipoDocumento"
+            name="tipoDocumento"
+            [(ngModel)]="cliente.id_tipo_doc.id_tipo_doc"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['tipoDocumento'] &&
+                actualizarClienteForm.controls['tipoDocumento'].invalid &&
+                actualizarClienteForm.controls['tipoDocumento'].touched
+            }"
+          >
+            <option value="" selected disabled>
+              Seleccione un tipo de documento
+            </option>
+            <option value="1">DNI</option>
+            <option value="2">CUIL</option>
+            <option value="3">CUIT</option>
+          </select>
+
+          <div
+            *ngIf="actualizarClienteForm.controls['tipoDocumento'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El tipo de documento es requerido.
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="categoriaFiscal">Categoría Fiscal:</label>
+          <select
+            class="form-control"
+            id="categoriaFiscal"
+            name="categoriaFiscal"
+            [(ngModel)]="cliente.id_categoria_fiscal.id_categoria"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['categoriaFiscal'] &&
+                actualizarClienteForm.controls['categoriaFiscal'].invalid &&
+                actualizarClienteForm.controls['categoriaFiscal'].touched
+            }"
+          >
+            <option value="" selected disabled>
+              Seleccione una categoría fiscal
+            </option>
+            <option value="1">Monotributista</option>
+            <option value="2">Responsable Incripto</option>
+          </select>
+
+          <div
+            *ngIf="actualizarClienteForm.controls['tipoDocumento'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            La categoria fiscal es requerida.
+          </div>
+        </div>
+        <div class="form-group mt-3">
+          <label for="domicilio">Domicilio:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="domicilio"
+            placeholder="Domicilio del Cliente"
+            name="domicilio"
+            [(ngModel)]="cliente.domicilio"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['domicilio'] &&
+                actualizarClienteForm.controls['domicilio'].invalid &&
+                actualizarClienteForm.controls['domicilio'].touched
+            }"
+          />
+          <div
+            *ngIf="actualizarClienteForm.controls['domicilio'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El domicilio es requerido.
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        class="btn btn-warning text-white mt-3"
-        (click)="actualizarCliente()"
-        [disabled]="crearClienteForm.invalid"
-      >
-        Actualizar
-      </button>
-    </form>
-  </div>
-  
+
+      <!-- Segunda columna -->
+      <div class="col-md-6">
+        <div class="form-group mt-3">
+          <label for="apellido">Apellido:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="apellido"
+            placeholder="Apellido del Cliente"
+            name="apellido"
+            [(ngModel)]="cliente.apellido"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['apellido'] &&
+                actualizarClienteForm.controls['apellido'].invalid &&
+                actualizarClienteForm.controls['apellido'].touched
+            }"
+          />
+
+          <div
+            *ngIf="actualizarClienteForm.controls['apellido'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El apellido es requerido.
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="telefono">Teléfono:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="telefono"
+            placeholder="Teléfono del Cliente"
+            name="telefono"
+            [(ngModel)]="cliente.telefono"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['telefono'] &&
+                actualizarClienteForm.controls['telefono'].invalid &&
+                actualizarClienteForm.controls['telefono'].touched
+            }"
+          />
+
+          <div
+            *ngIf="actualizarClienteForm.controls['telefono'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El telefono es requerido.
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="numeroDocumento">Número de Documento:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="numeroDocumento"
+            placeholder="Número de Documento"
+            name="numeroDocumento"
+            [(ngModel)]="cliente.nroDoc"
+            required
+            readonly
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['numeroDocumento'] &&
+                actualizarClienteForm.controls['numeroDocumento'].invalid &&
+                actualizarClienteForm.controls['numeroDocumento'].touched
+            }"
+          />
+
+          <div
+            *ngIf="actualizarClienteForm.controls['numeroDocumento'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El número de documento es requerido.
+          </div>
+        </div>
+
+        <div
+          class="form-group mt-3"
+          *ngIf="cliente.id_categoria_fiscal.id_categoria == 1"
+        >
+          <label for="clasificacion">Categoría Monotributista:</label>
+          <select
+            class="form-control"
+            id="clasificacion"
+            name="clasificacion"
+            [(ngModel)]="cliente.id_clasificacion.id_clasificacion"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['clasificacion'] &&
+                actualizarClienteForm.controls['clasificacion'].invalid &&
+                actualizarClienteForm.controls['clasificacion'].touched
+            }"
+          >
+            <option value="" selected disabled>
+              Seleccione una categoría monotributista:
+            </option>
+            <option value="1">A</option>
+            <option value="2">B</option>
+            <option value="3">C</option>
+            <option value="4">D</option>
+            <option value="5">E</option>
+            <option value="6">F</option>
+            <option value="7">G</option>
+            <option value="8">H</option>
+            <option value="9">I</option>
+            <option value="10">J</option>
+            <option value="11">K</option>
+          </select>
+
+          <div
+            *ngIf="actualizarClienteForm.controls['clasificacion'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            La categoría monotributista es requerida.
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="tipoCliente">Tipo de Cliente:</label>
+          <select
+            class="form-control"
+            id="tipoCliente"
+            name="tipoCliente"
+            [(ngModel)]="cliente.id_tipo_cliente.id_tipo_cliente"
+            required
+            [ngClass]="{
+              'is-invalid':
+                actualizarClienteForm &&
+                actualizarClienteForm.controls['tipoCliente'] &&
+                actualizarClienteForm.controls['tipoCliente'].invalid &&
+                actualizarClienteForm.controls['tipoCliente'].touched
+            }"
+          >
+            <option value="" selected disabled>
+              Seleccione un tipo de cliente
+            </option>
+            <option value="1">Persona</option>
+            <option value="2">Empresa</option>
+          </select>
+
+          <div
+            *ngIf="actualizarClienteForm.controls['tipoCliente'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El tipo de cliente es requerido.
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-warning text-white mt-3"
+      (click)="actualizarCliente()"
+    >
+      Actualizar
+    </button>
+  </form>
+</div>

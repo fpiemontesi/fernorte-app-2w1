@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { RestService } from '../../services/rest.service';
 import { CustomerService } from '../../services/customer.service';
 import { Cliente } from '../../models/cliente';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-modificar-clientes',
@@ -10,6 +11,9 @@ import { Cliente } from '../../models/cliente';
   styleUrls: ['./modificar-clientes.component.css'],
 })
 export class ModificarClientesComponent implements OnInit {
+  @ViewChild('actualizarClienteForm', { static: false })
+  actualizarClienteForm!: NgForm;
+
   clienteArray: any[] = [];
 
   numeroDoc: number = 0;
@@ -43,10 +47,18 @@ export class ModificarClientesComponent implements OnInit {
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });
-    } else if (this.numeroDoc == 0 || this.numeroDoc < 0) {
+    } else if (this.numeroDoc == 0) {
       Swal.fire({
         icon: 'error',
-        title: 'El número de documento no puede ser 0 o negativo',
+        title: 'El número de documento no puede ser 0',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+    } else if (this.numeroDoc < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser negativo',
         text: 'Vuelva a ingresar el número de documento del cliente.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
@@ -62,7 +74,7 @@ export class ModificarClientesComponent implements OnInit {
         console.log(this.cliente);
       } else {
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Cliente no encontrado',
           text: 'No se encontró un cliente con el número de documento proporcionado.',
           confirmButtonText: 'Aceptar',
@@ -73,27 +85,33 @@ export class ModificarClientesComponent implements OnInit {
   }
 
   actualizarCliente() {
-    this.restService.actualizarCliente(this.cliente).subscribe(
-      (response) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Cliente actualizado',
-          text: 'Los cambios se actualizaron con éxito.',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
+    Object.keys(this.actualizarClienteForm.controls).forEach((controlName) => {
+      this.actualizarClienteForm.controls[controlName].markAsTouched();
+    });
 
-        this.customerService.actualizarCliente(this.cliente);
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error en la actualización',
-          text: 'Ocurrió un error al actualizar el cliente. Intente nuevamente.',
-          confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#808080',
-        });
-      }
-    );
+    if (this.actualizarClienteForm.valid) {
+      this.restService.actualizarCliente(this.cliente).subscribe(
+        (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Cliente actualizado',
+            text: 'Los cambios se actualizaron con éxito.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+
+          this.customerService.actualizarCliente(this.cliente);
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error en la actualización',
+            text: 'Ocurrió un error al actualizar el cliente. Intente nuevamente.',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#808080',
+          });
+        }
+      );
+    }
   }
 }

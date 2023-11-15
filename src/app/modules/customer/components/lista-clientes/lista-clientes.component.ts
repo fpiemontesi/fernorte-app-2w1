@@ -11,7 +11,7 @@ import { CustomerService } from '../../services/customer.service';
 export class ListaClientesComponent {
   clienteArray: any[] = [];
   clienteFiltro: any[] = [];
-  nroDocumento: number = 0;
+  numeroDoc: number = 0;
   listaFiltrada: boolean = false;
 
   constructor(
@@ -27,13 +27,13 @@ export class ListaClientesComponent {
   }
 
   borrarFiltro() {
-    this.nroDocumento = 0;
+    this.numeroDoc = 0;
     this.clienteFiltro = [...this.clienteArray];
     this.listaFiltrada = false;
   }
 
   filtrarPersonas() {
-    if (!this.nroDocumento && this.nroDocumento !== 0) {
+    if (!this.numeroDoc && this.numeroDoc !== 0) {
       Swal.fire({
         icon: 'warning',
         title: 'El número de documento no puede estar vacío',
@@ -43,24 +43,31 @@ export class ListaClientesComponent {
       });
       this.clienteFiltro = [...this.clienteArray];
       this.listaFiltrada = false;
-    }
-    else if (this.nroDocumento == 0 || this.nroDocumento < 0) {
+    } else if (this.numeroDoc == 0) {
       Swal.fire({
         icon: 'error',
-        title: 'El número de documento no puede ser 0 o negativo',
+        title: 'El número de documento no puede ser 0',
         text: 'Vuelva a ingresar el número de documento del cliente.',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#808080',
       });
       this.clienteFiltro = [...this.clienteArray];
       this.listaFiltrada = false;
-    }
-
-    else {
+    } else if (this.numeroDoc < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'El número de documento no puede ser negativo',
+        text: 'Vuelva a ingresar el número de documento del cliente.',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: '#808080',
+      });
+      this.clienteFiltro = [...this.clienteArray];
+      this.listaFiltrada = false;
+    } else {
       this.clienteFiltro = this.clienteArray.filter((persona) => {
         return (
           persona.nroDoc &&
-          persona.nroDoc.toString().includes(this.nroDocumento.toString())
+          persona.nroDoc.toString().includes(this.numeroDoc.toString())
         );
       });
 
@@ -70,7 +77,7 @@ export class ListaClientesComponent {
         Swal.fire({
           icon: 'warning',
           title: 'No se encontraron clientes',
-          text: `No se encontró ningún cliente con el número de documento: ${this.nroDocumento}`,
+          text: `No se encontró ningún cliente cuyo número de documento contenga: ${this.numeroDoc}`,
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#808080',
         });

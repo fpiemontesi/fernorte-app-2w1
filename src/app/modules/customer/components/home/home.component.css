@@ -8,15 +8,6 @@
   gap: 10px;
 }
 
-.logout-btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 0px 100px;
-}
-
 .buttonComponent {
   display: flex;
   align-items: center;

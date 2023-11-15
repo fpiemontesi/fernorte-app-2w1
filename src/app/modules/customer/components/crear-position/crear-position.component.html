@@ -1,45 +1,38 @@
 <div class="container big-cart">
-    <h3>Crear Cargo</h3>
-    <form #crearCargoForm="ngForm">
-      <div class="row">
-        <!-- Primera columna -->
-        <div class="col-md-6">
-          <div class="form-group mt-3">
-            <label for="cargo">Cargo:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="cargo"
-              placeholder="Cargo del Usuario"
-              name="cargo"
-                [(ngModel)]="cargoBody.descripcion"
-              required
-            />
-  
-            <div
-              *ngIf="
+  <h3>Crear Cargo</h3>
+  <form #crearCargoForm="ngForm">
+    <div class="row">
+      <!-- Primera columna -->
+      <div class="col-md-6">
+        <div class="form-group mt-3">
+          <label for="cargo">Cargo:</label>
+          <input
+            type="text"
+            class="form-control mt-1"
+            placeholder="Cargo del Usuario"
+            name="cargo"
+            [(ngModel)]="cargoBody.descripcion"
+            required
+            [ngClass]="{
+              'is-invalid':
+                crearCargoForm &&
+                crearCargoForm.controls['cargo'] &&
                 crearCargoForm.controls['cargo'].invalid &&
                 crearCargoForm.controls['cargo'].touched
-              "
-            >
-              <div
-                *ngIf="crearCargoForm.controls['cargo'].errors?.['required']"
-                class="invalid-feedback"
-              >
-                El nombre del cargo es requerido.
-              </div>
-            </div>
+            }"
+          />
+
+          <div
+            *ngIf="crearCargoForm.controls['cargo'].errors?.['required']"
+            class="invalid-feedback"
+          >
+            El cargo es requerido.
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        class="btn btn-success mt-3"
-        (click)="crearCargo()"
-        [disabled]="crearCargoForm.invalid"
-      >
-        Crear
-      </button>
-    </form>
-  </div>
-  
+    </div>
+    <button type="submit" class="btn btn-success mt-3" (click)="crearCargo()">
+      Crear
+    </button>
+  </form>
+</div>
