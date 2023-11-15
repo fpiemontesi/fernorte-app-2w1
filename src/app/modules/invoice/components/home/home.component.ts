@@ -13,6 +13,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  abrirReportes: boolean = false;
+  reportes() {
+    this.abrirReportes = !this.abrirReportes;
+  }
   dolar?: number;
   orden: Order = new Order();
 
@@ -26,7 +30,7 @@ export class HomeComponent {
 
   ngOnInit() {
     const dolar = this.dolarService.obtenerDolar();
-    
+
     this.subscription.add(
       dolar.subscribe({
         next: (dol: Dolar) => {
@@ -39,8 +43,8 @@ export class HomeComponent {
           });
         },
       })
-      );
-    }
+    );
+  }
 
   activeIndex: number = 0; //
 

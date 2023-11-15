@@ -2,7 +2,18 @@
   color: #d9d9d9;
   cursor: pointer;
 }
+
 .menu-option-custom:hover {
+  background-color: #d9d9d9;
+  color: #2e2e2e;
+  cursor: pointer;
+}
+.menu-option-custom-secondary {
+  color: #d9d9d9;
+  cursor: pointer;
+  background-color: #575656;
+}
+.menu-option-custom-secondary:hover {
   background-color: #d9d9d9;
   color: #2e2e2e;
   cursor: pointer;

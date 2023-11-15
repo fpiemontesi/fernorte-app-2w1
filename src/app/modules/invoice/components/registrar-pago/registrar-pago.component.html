@@ -6,14 +6,22 @@
     <div class="container text-center">
       <div>
         <div formArrayName="paymentMethodList" class="mb-2">
-          <div *ngFor="
+          <div
+            *ngFor="
               let formaDePago of paymentMethodList.controls;
               let i = index
-            ">
+            "
+          >
             <div [formGroupName]="i" class="row justify-content-end">
               <div class="col-4" *ngIf="paymentMethodDTOs | async as payments">
-                <label for="paymentMethod" class="form-label">Método de Pago:</label>
-                <select id="paymentMethod" formControlName="paymentMethod" class="form-select">
+                <label for="paymentMethod" class="form-label"
+                  >Método de Pago:</label
+                >
+                <select
+                  id="paymentMethod"
+                  formControlName="paymentMethod"
+                  class="form-select"
+                >
                   <option [ngValue]="pm.id" *ngFor="let pm of payments">
                     {{ pm.name }}
                   </option>
@@ -21,14 +29,26 @@
               </div>
 
               <div class="col-2">
-                <label for="amount" class="form-label">amount:</label>
-                <input type="number" id="amount" formControlName="amount" (input)="calcularTotal(i)"
-                  class="form-control" />
+                <label for="amount" class="form-label">Monto:</label>
+                <input
+                  type="number"
+                  id="amount"
+                  formControlName="amount"
+                  (input)="calcularTotal(i)"
+                  class="form-control"
+                />
               </div>
 
               <div class="col-4">
-                <label for="observations" class="form-label">Descripción:</label>
-                <input type="text" id="observations" formControlName="observations" class="form-control" />
+                <label for="observations" class="form-label"
+                  >Descripción:</label
+                >
+                <input
+                  type="text"
+                  id="observations"
+                  formControlName="observations"
+                  class="form-control"
+                />
               </div>
 
               <div class="col-auto d-flex flex-column justify-content-end">
@@ -36,25 +56,44 @@
                   [x]
                 </button>
               </div>
-              <div *ngIf="formaDePago.get('amount')?.getError('min') && formaDePago.get('amount')?.touched"
-                style="color: red;">
+              <div
+                *ngIf="
+                  formaDePago.get('amount')?.getError('min') &&
+                  formaDePago.get('amount')?.touched
+                "
+                style="color: red"
+              >
                 No puede ingresar numeros negativos
               </div>
               <div
-                *ngIf="formaDePago.get('paymentMethod')?.getError('required') && formaDePago.get('paymentMethod')?.touched"
-                style="color: red;">
+                *ngIf="
+                  formaDePago.get('paymentMethod')?.getError('required') &&
+                  formaDePago.get('paymentMethod')?.touched
+                "
+                style="color: red"
+              >
                 Tiene que ingresar un metodo de pago
               </div>
-
             </div>
           </div>
         </div>
         <div
-          *ngIf="paymentMethodList.at(0).get('amount')?.getError('maxAmountExceeded') && paymentMethodList.at(0).get('amount')?.touched"
-          style="color: red;">
+          *ngIf="
+            paymentMethodList
+              .at(0)
+              .get('amount')
+              ?.getError('maxAmountExceeded') &&
+            paymentMethodList.at(0).get('amount')?.touched
+          "
+          style="color: red"
+        >
           Sobrepasó el monto total
         </div>
-        <button class="btn btn-warning" type="button" (click)="agregarFormaDePago()">
+        <button
+          class="btn btn-warning"
+          type="button"
+          (click)="agregarFormaDePago()"
+        >
           Agregar forma de Pago
         </button>
       </div>
@@ -66,13 +105,14 @@
     </div>
     <div class="col">
       <!-- Muestra el restante -->
-      <label class="text-danger" *ngIf="invoiceTotal - montoTotal >= 0">Restante: {{ invoiceTotal - montoTotal |
-        currency }}</label>
+      <label class="text-danger" *ngIf="invoiceTotal - montoTotal >= 0"
+        >Restante: {{ invoiceTotal - montoTotal | currency }}</label
+      >
       <!-- Muestra el vuelto -->
-      <label class="text-success" *ngIf="invoiceTotal - montoTotal < 0">Vuelto: {{ (invoiceTotal - montoTotal) * -1 |
-        currency }}</label>
+      <label class="text-success" *ngIf="invoiceTotal - montoTotal < 0"
+        >Vuelto: {{ (invoiceTotal - montoTotal) * -1 | currency }}</label
+      >
     </div>
     <button type="submit" class="btn btn-success">Finalizar Pago</button>
-
   </div>
 </form>

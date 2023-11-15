@@ -11,7 +11,7 @@
               <a
                 class="nav-link menu-option-custom"
                 routerLink="/ConsultarPedidos"
-                >Consultar Pedido</a
+                >Pedidos pendientes</a
               >
             </li>
             <li class="nav-item">
@@ -21,10 +21,27 @@
                 >Gestionar Factura</a
               >
             </li>
-            <li class="nav-item">
-              <p class="nav-link menu-option-custom" routerLink="/Reportes">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link menu-option-custom dropdown-toggle"
+                (click)="reportes()"
+              >
                 Reportes
-              </p>
+              </a>
+            </li>
+            <li class="nav-item" *ngIf="abrirReportes">
+              <a
+                class="nav-link menu-option-custom-secondary"
+                routerLink="/Clientes"
+                >Clientes</a
+              >
+            </li>
+            <li class="nav-item" *ngIf="abrirReportes">
+              <a
+                class="nav-link menu-option-custom-secondary"
+                routerLink="/FormaPago"
+                >FormaPago</a
+              >
             </li>
             <li class="nav-item dropdown">
               <a
