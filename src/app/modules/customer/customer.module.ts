@@ -15,9 +15,10 @@ import { ModificarClientesComponent } from './components/modificar-clientes/modi
 import { TurneroComponent } from './components/turnero/turnero.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GetBenefitsComponent } from './components/get-benefits/get-benefits.component';
+import { GetCustomersPointsComponent } from './components/get-customers-points/get-customers-points.component';
 
 @NgModule({
-  declarations: [HomeComponent, CrearClienteComponent, CrearPositionComponent, CrearUserComponent, DeleteUserComponent, GetUserComponent, ListaClientesComponent, ListaTurneroComponent, LoginComponent, LogoutComponent, ModificarClientesComponent, TurneroComponent, GetBenefitsComponent],
+  declarations: [HomeComponent, CrearClienteComponent, CrearPositionComponent, CrearUserComponent, DeleteUserComponent, GetUserComponent, ListaClientesComponent, ListaTurneroComponent, LoginComponent, LogoutComponent, ModificarClientesComponent, TurneroComponent, GetBenefitsComponent, GetCustomersPointsComponent],
   providers: [],
   imports: [CommonModule, FormsModule,ReactiveFormsModule],
   exports: [HomeComponent],

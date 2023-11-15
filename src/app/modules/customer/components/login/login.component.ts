@@ -119,33 +119,42 @@ export class LoginComponent {
     this.verification.email = this.bodyEmail.email;
 
     if (this.resetPasswordUsuarioForm.valid) {
-      this.restService.resetPasswordUsuario(this.bodyEmail).subscribe(
-        (response) => {
-          console.log('Email enviado', response);
+      Swal.fire({
+        icon: "info",
+        title: 'Enviando codigo de verificación',
+        text: 'Esta acción puede demorar un tiempo...',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        showConfirmButton: false,
+        timer: 23000,
+        timerProgressBar: true,
+      }).then(() => {
+        this.restService.resetPasswordUsuario(this.bodyEmail).subscribe(
+          (response) => {
+            console.log('Email enviado', response);
+            Swal.fire({
+              icon: 'success',
+              title: 'Codigo de verificacion enviado con exito',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            this.resetPasswordUsuarioForm.reset();
+            this.mostrarRecuperarContrasena = false;
+            this.mostrarIngresarCodigo = true;
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'El email ingresado no corresponde a ningun usuario!',
+              text: 'Ingrese un email existente',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+          }
+        );
+      });
 
-          this.resetPasswordUsuarioForm.reset();
-
-          Swal.fire({
-            icon: 'success',
-            title: 'Codigo de verificacion enviado con exito!',
-            text: 'Revise su bandeja de entrada o spam.',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
-
-          this.mostrarRecuperarContrasena = false;
-          this.mostrarIngresarCodigo = true;
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'El email ingresado no corresponde a ningun usuario!',
-            text: 'Ingrese un email existente',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
-        }
-      );
     }
   }
 
