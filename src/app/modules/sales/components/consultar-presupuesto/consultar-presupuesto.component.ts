@@ -32,7 +32,12 @@ export class ConsultarPresupuestoComponent implements OnInit {
 
   limpiarCampos(){
     this.presupuesto = {} as Presupuesto;
+    this.montoDesde = 0;
+    this.montoHasta = 0;
+    this.fechaDesde = new Date();
+    this.fechaHasta = new Date();
   }
+
   ngOnInit() {
   }
 
