@@ -1,0 +1,47 @@
+.bg-secundario {
+  background-color: #cccccc;
+}
+
+.custom-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.bg-custom-color {
+  background-color: #3c2f81;
+}
+
+.input-text {
+  border: none;
+  border-bottom: #346ddc 1px solid;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
+.input-text:focus {
+  outline: none;
+}
+
+body {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.cust-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Aplicar borde redondeado a la esquina inferior izquierda de la tabla */
+.cust-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+/* Aplicar borde redondeado a la esquina inferior derecha de la tabla */
+.cust-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+

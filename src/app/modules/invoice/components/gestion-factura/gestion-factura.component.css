@@ -1,0 +1,68 @@
+.input-text {
+  border: none;
+  border-bottom: #346ddc 1px solid;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
+.input-text:focus {
+  outline: none;
+}
+
+.table-container {
+  max-height: 290px;
+  overflow-y: auto;
+}
+
+.bg-secundario {
+  background-color: #cccccc;
+}
+
+.bg-primario {
+  background-color: #3c2f81;
+}
+
+.texto-primario {
+  color: #fff;
+}
+
+.texto-secundario {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+body {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.margenR {
+  margin-right: 10px;
+}
+
+.sombra {
+  box-shadow: 10px 10px 13px 0px rgba(0, 0, 0, 0.48);
+  -webkit-box-shadow: 10px 10px 13px 0px rgba(0, 0, 0, 0.48);
+  -moz-box-shadow: 10px 10px 13px 0px rgba(0, 0, 0, 0.48);
+}
+.table img {
+  max-width: 30px !important ; /* Ajusta el ancho máximo de la imagen */
+  margin: 0 5px !important ; /* Ajusta el margen horizontal entre las imágenes */
+}
+.table-container{
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  border-radius: 4px; /* Agrega bordes redondeados */
+}
+
