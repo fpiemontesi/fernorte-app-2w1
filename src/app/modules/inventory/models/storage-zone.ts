@@ -1,4 +1,5 @@
-export class storageZone {
-    id:number = 0;
-    name:string = '';
-  }
+export class Zone {
+  id:number = 0;
+  name:string = '';
+}
+

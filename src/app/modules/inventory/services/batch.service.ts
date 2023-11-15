@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { batch } from '../models/batch';
+import { Batch } from '../models/batch';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,13 @@ import { batch } from '../models/batch';
 export class BatchService {
 
   constructor(private http: HttpClient) { }
-
+  
   getAll(): Observable<batch[]>{
     return this.http.get<batch[]>('http://localhost:3000/batches');
   }
+  
+  create(body: Batch): Observable<Batch>{
+    return this.http.post<Batch>('http://localhost:3000/batches', body);
+  }
+
 }

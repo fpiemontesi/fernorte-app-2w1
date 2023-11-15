@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+/* tslint:disable:no-unused-variable */
 
+import { TestBed, inject } from '@angular/core/testing';
 import { BatchService } from './batch.service';
 
-describe('BatchService', () => {
-  let service: BatchService;
-
+describe('Service: Lote', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(BatchService);
+    TestBed.configureTestingModule({
+      providers: [BatchService]
+    });
   });
 
-  it('should be created', () => {
+  it('should ...', inject([BatchService], (service: BatchService) => {
     expect(service).toBeTruthy();
-  });
+  }));
 });
