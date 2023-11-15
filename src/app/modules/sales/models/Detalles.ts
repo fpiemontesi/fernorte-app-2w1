@@ -1,5 +1,5 @@
 export class Detalles {
-  cod_producto: number;
+  cod_producto: any;
   precio_unitario: number;
   cantidad: number;
   descripcion: string;

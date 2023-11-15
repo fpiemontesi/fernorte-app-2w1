@@ -2,10 +2,13 @@ import { Component , OnInit, ViewChild } from '@angular/core';
 import { HttpClient  , HttpHeaders} from '@angular/common/http';
 import Swal from 'sweetalert2'
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PresupuestoService } from '../../services/presupuesto.service';
 import { VentasService } from '../../services/ventas.service';
 import { Producto } from '../../models/Producto';
 import { Cliente } from '../../models/Cliente';
+import { Presupuesto } from '../../models/Presupuesto';
+import { Detalles } from '../../models/Detalles';
 
 @Component({
   selector: 'fn-modificar-presupuesto',
@@ -14,14 +17,14 @@ import { Cliente } from '../../models/Cliente';
 })
 export class ModificarPresupuestoComponent {
 
-  constructor(private http: HttpClient , private presupuestoService: PresupuestoService , private ventasService: VentasService) { }
+  constructor(private http: HttpClient ,private router : Router , private presupuestoService: PresupuestoService , private ventasService: VentasService) { }
   
 
-  productos : any[] = [];
-  productosVenta : any[] = [];
+  
+  
   clienteName: any = '';
-  filas: any[] = [];
-  total:number = 0;
+  filas: Detalles[] = [];
+  
   existencias: number = 0;
   nro_doc: number = 0;
   nombre_cliente: string = '';
@@ -33,7 +36,7 @@ export class ModificarPresupuestoComponent {
   tipo_activado: boolean = true;
   categoria: string = '';
   descuento: number = 0;
-
+  presupuesto : Presupuesto = new Presupuesto();
   formData: any = {
     fecha: new Date().toISOString().split('T')[0],
     cliente: 0,
@@ -71,11 +74,8 @@ export class ModificarPresupuestoComponent {
   }
  
   eliminarFila(index: number): void {
-    this.total -= this.filas[index].total;
     this.filas.splice(index, 1);
-    this.productos.splice(index, 1);
-    this.productosVenta.splice(index ,1)
-    if(this.productos.length == 0){
+    if(this.filas.length == 0){
       this.tipo_activado = true;
     }
   }
@@ -83,12 +83,11 @@ export class ModificarPresupuestoComponent {
   agregarFila(event : Event): void {
     event.preventDefault();
     const producto = document.getElementById("producto") as HTMLSelectElement;
-    
     if (!this.presupuestoService.validarProducto(this.formData)) {
       return;
     }
     const productoSeleccionado = producto.options[producto.selectedIndex].text;
-    if (this.filas.some((fila) => fila.producto === productoSeleccionado)) {   
+    if (this.filas.some((fila) => fila.cod_producto === productoSeleccionado)) {   
       Swal.fire({
         icon: 'warning', // Puedes cambiar el icono a tu elección
         title: 'El producto ya ha sido seleccionado',
@@ -101,25 +100,15 @@ export class ModificarPresupuestoComponent {
     var precioUnitario = this.getPrecioUnitario(productoSeleccionado);
     this.filas.push({
       cod_producto: producto.value,
-      producto: producto.options[producto.selectedIndex].text,
+      descripcion: producto.options[producto.selectedIndex].text,
       cantidad: this.formData.cantidad,
       precio_unitario : precioUnitario,
       
     });
-    this.totalPorProducto =  precioUnitario * this.formData.cantidad
-    this.productos.push({
-      producto_id: producto.options[producto.selectedIndex].value,
-      descripcion: producto.options[producto.selectedIndex].text,
-      cantidad: this.formData.cantidad,
-      unidad: 'Kgs'
-    })
-    this.productosVenta.push({
-      id_producto: producto.options[producto.selectedIndex].value,
-      precio_unitario: 1,
-      cantidad: this.formData.cantidad
-    });
-    this.total = this.filas.reduce((total, item) => total + item.total, 0);
+    this.totalPorProducto =  precioUnitario * this.formData.cantidad;
+   
     this.tipo_activado = false;
+    console.log(this.presupuesto);
   }
 
   getPrecioUnitario(productoSeleccionado: string): number {
@@ -138,10 +127,10 @@ export class ModificarPresupuestoComponent {
   }
 
   CargarDatos(){
-    var presupuesto = this.presupuestoService.MostrarPresupuesto();
-    if(presupuesto){
-      this.nro_doc = presupuesto.doc_cliente;
-      this.filas = presupuesto.detalles;
+    this.presupuesto = this.presupuestoService.MostrarPresupuesto();
+    if(this.presupuesto){
+      this.nro_doc = this.presupuesto.doc_cliente;
+      this.filas = this.presupuesto.detalles;
     }
     
   }
@@ -176,8 +165,7 @@ export class ModificarPresupuestoComponent {
   Clean() {
     this.form.resetForm({ producto: 0 });
     this.filas = [];
-    this.productos = [];
-    this.productosVenta = [];
+    
   }
   
   onBlur(){
@@ -202,5 +190,30 @@ export class ModificarPresupuestoComponent {
       
     }
   }
+
+  UpdatePresupuesto(){
+    if(this.onSubmit()){
+      this.presupuesto.doc_cliente = this.nro_doc;
+    this.presupuesto.detalles = this.filas;
+    this.presupuestoService.realizarSolicitudPutPresupuesto(this.presupuesto).subscribe((response) => {
+      console.log(response,"se actualizo el presupuesto");
+      Swal.fire({
+        title: 'Se actualizó el presupuesto',
+        text: 'Será redirigido a consultar',
+        icon: 'success',
+        timer: 2000, 
+        showConfirmButton: false, 
+      }).then(() => {
+        this.router.navigate(['sales/consultar-presupuesto']);
+      });
+    });
+    }
+    else return;
+    
+      
+  }
+    
 }
+
+
 

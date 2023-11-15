@@ -48,7 +48,7 @@
         <div class="row" style="margin-top: 20px;">
           <div class="col-md-3">
             <label for="producto" class="form-label">Producto</label>
-            <select name="producto" id="producto" class="form-select " [ngClass]="{'is-invalid': (form.submitted || producto.touched) && producto.invalid}" (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto" required #producto="ngModel">
+            <select name="producto" id="producto" class="form-select "  (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto" required #producto="ngModel">
               <option *ngFor="let producto of myList" [value]="producto.codigo">{{ producto.nombre }}</option>
             </select>
           </div>
@@ -87,8 +87,8 @@
                 <tr *ngFor="let fila of filas; let i = index">
                     <td>{{ fila.cod_producto }}</td>
                     <td>{{ fila.cantidad }}</td>
-                    <td>{{fila.precio_unitario}}</td>
-                    <td >{{ CacularPrecioTotalporProducto(fila)}}</td>
+                    <td>{{fila.precio_unitario | currency:'USD':'symbol':'1.2-2'}}</td>
+                    <td >{{ CacularPrecioTotalporProducto(fila) | currency:'USD':'symbol':'1.2-2'}}</td>
                     <td>
                       <button class="btn" (click)="eliminarFila(i)">
                         <i class="fa fa-times"></i>
@@ -96,7 +96,7 @@
                     </td>
                 <tr>
                     <td colspan="3">TOTAL</td>
-                    <td>{{calcularTotal()}}</td>
+                    <td>{{calcularTotal() | currency:'USD':'symbol':'1.2-2'}} </td>
                     <td></td>
                 </tr>
             </tbody>
@@ -113,7 +113,7 @@
               <div class="row">
                 <div class="d-flex justify-content-between">
                   <button class="btn btn-dark">Cancelar</button>
-                  <button type="submit"  class="btn btn-dark ">Guardar Presupuesto</button>
+                  <button type="submit"  class="btn btn-dark "  (click)="UpdatePresupuesto()">Guardar Presupuesto</button>
                   <button type="submit"  class="btn btn-dark ">Generar Venta</button>
                 </div>
               </div>

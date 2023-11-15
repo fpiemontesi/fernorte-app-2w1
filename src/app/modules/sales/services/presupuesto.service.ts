@@ -25,6 +25,24 @@ export class PresupuestoService {
     return this.presupuesto
   }
 
+  realizarSolicitudPutPresupuesto( presupuesto: Presupuesto): Observable<any> {
+    const url = 'http://localhost:8080/presupuesto/{id}?id=' + presupuesto.id;
+    const body = {
+     doc_cliente: presupuesto.doc_cliente,
+     tipo_venta: presupuesto.tipo_venta,
+     fecha_creacion: presupuesto.fecha_creacion,
+     detalles : presupuesto.detalles
+    };
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+
+    return this.http.put(url, body, httpOptions);
+  }
+
   realizarSolicitudPostPresupuesto(cliente: string, productos: any[]): Observable<any> {
     
     const url = 'http://localhost:8080/presupuesto/Save';
@@ -74,4 +92,10 @@ export class PresupuestoService {
     const url = `https://my-json-server.typicode.com/113935-Quilpatay-Nahuel-Ignacio/fakeapi/productos`;
     return this.http.get<Producto[]>(url);
   }
+
+  deletePresupuesto(id : number): Observable<any> {
+    const url = `http://localhost:8080/presupuesto/`+id;
+    return this.http.delete<any>(url);
+  }
+
 }

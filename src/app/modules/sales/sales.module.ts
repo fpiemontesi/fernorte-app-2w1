@@ -17,23 +17,29 @@ import { ModificarPresupuestoComponent } from './components/modificar-presupuest
 
 const routes: Routes = [
   {
-    path: 'consultar-venta',
-    component: ConsultarVentaComponent
-  },
-  {
-    path: 'consultar-presupuesto',
-    component: ConsultarPresupuestoComponent
-  },
-  {
-    path: 'alta-presupuesto',
-    component: AltaPresupuestoComponent
-  },
-  {
-    path: 'modificar-presupuesto',
-    component: ModificarPresupuestoComponent
+    path: 'sales',
+    component: HomeComponent,
+    children: [
+      {
+        path: 'consultar-venta',
+        component: ConsultarVentaComponent
+      },
+      {
+        path: 'consultar-presupuesto',
+        component: ConsultarPresupuestoComponent
+      },
+      {
+        path: 'alta-presupuesto',
+        component: AltaPresupuestoComponent
+      },
+      {
+        path: 'modificar-presupuesto',
+        component: ModificarPresupuestoComponent
+      },
+    ]
   }
-
 ];
+
 
 @NgModule({
   declarations: [

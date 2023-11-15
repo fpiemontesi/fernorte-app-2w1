@@ -5,7 +5,7 @@ export class Presupuesto {
   doc_cliente: number;
   fecha_creacion: Date;
   precio_total: number;
-  tipo_ventas: number;
+  tipo_venta: number;
   detalles: Detalles[];
 
   constructor() {
@@ -13,7 +13,7 @@ export class Presupuesto {
     this.doc_cliente = 0;
     this.fecha_creacion = new Date();
     this.precio_total = 0;
-    this.tipo_ventas = 0;
+    this.tipo_venta = 0;
     this.detalles = [];
   }
 }

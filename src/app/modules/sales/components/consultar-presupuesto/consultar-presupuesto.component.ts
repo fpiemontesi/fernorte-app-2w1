@@ -48,8 +48,8 @@ export class ConsultarPresupuestoComponent implements OnInit {
       params = params.set('doc_cliente', this.presupuesto.doc_cliente);
     }
 
-    if (this.presupuesto.tipo_ventas) {
-      params = params.set('tipo_ventas', this.presupuesto.tipo_ventas);
+    if (this.presupuesto.tipo_venta) {
+      params = params.set('tipo_ventas', this.presupuesto.tipo_venta);
     }
 
     if (this.montoDesde) {
@@ -95,7 +95,7 @@ export class ConsultarPresupuestoComponent implements OnInit {
 
   modificarPresupuesto(presupuesto : Presupuesto){
     this.service.guardarPresupuesto(presupuesto);
-    this.router.navigate(['modificar-presupuesto']);
+    this.router.navigate(['sales/modificar-presupuesto']);
     console.log(presupuesto);
   }
   // modificarVenta(presupuesto:Presupuesto){
@@ -107,6 +107,25 @@ export class ConsultarPresupuestoComponent implements OnInit {
   verDetalle(presupuesto: Presupuesto){
     this.presupuesto = presupuesto;
     this.mostrarDetalle = true;
+  }
+  eliminarPresupuesto(id: number){
+    Swal.fire({
+      title: '¿Está seguro que desea eliminar el presupuesto?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.service.deletePresupuesto(id).subscribe((response) => {
+          this.filtrarPresupuestos();
+      });
+    }
+    });
+    
+    
   }
 
   // ngOnInit() {

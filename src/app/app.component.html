@@ -11,12 +11,12 @@
         <a class="nav-link" href="#" (click)="onShowPurchase()">Compras</a>
         <a class="nav-link" href="#" (click)="onShowInvoice()">Facturación</a>
         <a class="nav-link" href="#" (click)="onShowInventory()">Inventario</a>
-        <a class="nav-link" href="#" (click)="onShowSales()">Ventas</a>
+        <a class="nav-link" href="#" routerLink="sales">Ventas</a>
       </div>
     </div>
   </div>
 </nav>
-
+<router-outlet></router-outlet>
 <fn-home-catalog *ngIf="showCatalog"></fn-home-catalog>
 <fn-home-clients *ngIf="showClients"></fn-home-clients>
 <fn-home-inventory *ngIf="showInventory"></fn-home-inventory>
