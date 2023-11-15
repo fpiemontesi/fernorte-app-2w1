@@ -56,3 +56,13 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  border-radius: 4px; /* Agrega bordes redondeados */
+}
+

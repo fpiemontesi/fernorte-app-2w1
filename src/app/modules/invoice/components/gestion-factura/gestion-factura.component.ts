@@ -17,27 +17,6 @@ import { SharedDataInvoiceService } from '../../services/shared-data-invoice.ser
 export class GestionFacturaComponent {
 
 
-  onSubmit() {
-    console.log(this.filterForm.value);
-    this.invoiceService
-      .getInvoicesFiltered(
-        this.filterForm.value.dateFrom,
-        this.filterForm.value.dateTo,
-        this.filterForm.value.client
-      )
-      .subscribe({
-        next: (response: InvoiceDto[]) => {
-          this.invoices = response;
-          console.log(response);
-        },
-        error: () => {
-          this.toastService.show('Error al obtener las facturas', {
-            classname: 'bg-danger text-light',
-            delay: 15000,
-          });
-        },
-      });
-  }
 
   invoices: InvoiceDto[] = []; // Declarar una variable para almacenar las facturas
 
@@ -59,9 +38,7 @@ export class GestionFacturaComponent {
   }
 
   ngOnInit() {
-    
     const listInvoices = this.invoiceService.getInvoices();
-
     this.subscription.add(
       listInvoices.subscribe({
         next: (response: InvoiceDto[]) => {
@@ -82,6 +59,24 @@ export class GestionFacturaComponent {
     this.subscription.unsubscribe();
   }
 
+  onSubmit() {
+    this.invoiceService
+      .getInvoicesFiltered(this.filterForm.value.dateFrom,
+        this.filterForm.value.dateTo,
+        this.filterForm.value.client)
+      .subscribe({
+        next: (response: InvoiceDto[]) => {
+          this.invoices = response;
+          console.log(response);
+        },
+        error: () => {
+          this.toastService.show('Error al obtener las facturas', {
+            classname: 'bg-danger text-light',
+            delay: 15000,
+          });
+        },
+      });
+  }
   deleteFactura(id_invoice:number){
     this.invoiceService.deleteInvoice(id_invoice).subscribe((result)=>
     {
@@ -100,6 +95,53 @@ export class GestionFacturaComponent {
       
     })
   }
+
+  public searchInvoices() {
+    // Realiza la búsqueda de facturas utilizando los valores actuales del formulario
+    this.invoiceService
+      .getInvoicesFiltered(
+        this.filterForm.value.dateFrom,
+        this.filterForm.value.dateTo,
+        this.filterForm.value.client
+      )
+      .subscribe({
+        next: (response: InvoiceDto[]) => {
+          this.invoices = response;
+          console.log(response);
+        },
+        error: () => {
+          this.toastService.show('Error al obtener las facturas', {
+            classname: 'bg-danger text-light',
+            delay: 15000,
+          });
+        },
+      });
+  }
+  getPdf(id:number) {
+    try {
+      this.invoiceService.generateInvoicePdf(id).subscribe(
+        (blob: Blob) => {
+          this.toastService.show('Pdf de factura generado', {
+            classname: 'bg-success text-light',
+            delay: 15000,
+          })
+          const url = window.URL.createObjectURL(blob);
+          window.open(url, '_blank');
+        },
+        (error) => {
+          this.toastService.show('Error al generar el pdf', {
+            classname: 'bg-danger text-light',
+            delay: 15000,
+          });
+        }
+      );
+    } catch (error) {
+      this.toastService.show('Error al generar el pdf', {
+        classname: 'bg-danger text-light',
+        delay: 15000,
+      });
+  }
+}
 
 
 
