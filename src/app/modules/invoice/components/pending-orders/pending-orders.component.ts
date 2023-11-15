@@ -91,7 +91,7 @@ export class PendingOrdersComponent implements OnInit {
   }
   //guardamos la orden en el servicio order
   facturarOrden(order: Order) {
-    console.log(order);
+  
     this.orderService.setOrderSelected(order);
     this.route.navigate(['ConsultarPedidos/RegistrarFactura/' + order.id]);
   }

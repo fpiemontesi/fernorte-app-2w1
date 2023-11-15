@@ -12,7 +12,7 @@ import { DiscountDTO } from '../../models/DiscountDTO';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrarPagoComponent } from '../registrar-pago/registrar-pago.component';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
 import {
   DiscountRequest,
@@ -41,6 +41,8 @@ export class RegistrarFacturaComponent {
   invoice: Invoice = new Invoice();
   tipoFactura: string = 'A';
 
+  client$?:Observable<Client[]>;
+
   constructor(
     private orderService: OrderService,
     private invoiceservice: InvoiceService,
@@ -48,17 +50,23 @@ export class RegistrarFacturaComponent {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private sharedDataInvoice: SharedDataInvoiceService
-  ) {}
+  ) {
+
+
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.orderSelected = this.orderService.getOrderSelected();
 
+    this.client$ = this.customerserv.obtenerClienteByNroDoc(this.orderSelected.doc_cliente);
+
+
     this.customerserv
       .obtenerClienteByNroDoc(this.orderSelected.doc_cliente)
       .subscribe((data) => {
         this.client = data;
-        console.log(this.client);
+    
       });
     this.calcularDescuentos();
   }

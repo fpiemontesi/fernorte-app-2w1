@@ -37,6 +37,8 @@ export class RegistrarPagoComponent {
       paymentMethodList: this.formBuilder.array([]),
     });
 
+    paymentMethodService.obtenerFormasPago().subscribe((data) => this.paymentMethodCount = data.length);
+
     this.agregarFormaDePago();
   }
 
@@ -83,10 +85,10 @@ export class RegistrarPagoComponent {
         this.invoice = invoiceData;
       });
       this.invoice.paymentMethodList = paymentMethods;
-      console.log(this.invoice);
+      console.log("FACTURA QUE SE ENVIA",this.invoice);
       this.invoiceService.createInvoice(this.invoice).subscribe({
         next: (response) => {
-          console.log(response);
+          console.log("RESPUESTA DEL POSTEO",response);
           alert('se creo pa');
         },
         error: (error) => {
@@ -108,7 +110,7 @@ export class RegistrarPagoComponent {
     }
 
     this.restanteTotal -= this.montoTotal; // Actualizar el restante con el monto actual
-    console.log(this.restanteTotal);
+
     for (let i = 0; i < this.paymentMethodList.length; i++) {
       const amountControl = this.paymentMethodList.at(i).get('amount');
       amountControl?.setValidators([
