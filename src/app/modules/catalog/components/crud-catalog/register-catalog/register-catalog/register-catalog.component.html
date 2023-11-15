@@ -1,0 +1,92 @@
+<div class="container">
+  <ng-container *ngIf="alert">
+    <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
+  </ng-container>
+  <h2>Registrar Catalogo</h2>
+  <hr />
+  <form [formGroup]="formCatalog" (ngSubmit)="saveCatalog()">
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <label for="txtName" class="col-sm-2 col-form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtName"
+          formControlName="name"
+          placeholder="Nombre"
+          [ngStyle]="{'border': formCatalog.get('name')?.invalid && formCatalog.get('name')?.touched ? '1px solid red' : ''}"
+
+        />
+        <div *ngIf="formCatalog.get('name')?.invalid && formCatalog.get('name')?.touched"
+             class="text-danger">
+          El nombre es obligatorio
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <label for="txtDescription" class="col-sm-2 col-form-label">Descripcion</label>
+        <textarea class="form-control" id="txtDescription" rows="3" formControlName="description" placeholder="Añade una descripcion"
+                  [ngStyle]="{'border': formCatalog.get('description')?.invalid && formCatalog.get('description')?.touched ? '1px solid red' : ''}"
+        ></textarea>
+        <div *ngIf="formCatalog.get('description')?.invalid && formCatalog.get('description')?.touched"
+             class="text-danger">
+          La descripcion no puede estar vacia
+        </div>
+      </div>
+    </div>
+    <h4>Productos</h4>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <label for="selectProducto">Selecciona un producto para añadir:</label>
+            </div>
+            <div class="col-md-9 d-flex">
+              <select class="form-select flex-grow-1 me-2" id="selectProducto" aria-label="Seleccionar Producto" name="productCodeSelected" [formControl]="product"
+                      [ngStyle]="{'border': product.invalid && product.touched ? '1px solid red' : '' }">
+                <option selected disabled>Seleccionar Producto</option>
+                <ng-container *ngFor="let product of allProducts; let i = index">
+                  <option [value]="product.codigo">{{product.nombre}}</option>
+                </ng-container>
+              </select>
+            </div>
+            <div class="col-lg">
+              <button type="button" class="btn btn-success w-75" (click)="addProduct()" [disabled]="product.invalid">Añadir<i class="bi-plus"></i></button>
+            </div>
+          </div>
+          <div class="text-danger mt-2" *ngIf="product.invalid && product.touched">
+            Tienes que seleccionar un producto
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <table class="table mt-4">
+      <thead>
+      <tr>
+        <th scope="col">Producto Nro</th>
+        <th scope="col">Código</th>
+        <th scope="col">Nombre</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of productosSeleccionados; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{p.codigo}}</td>
+        <td>{{p.nombre}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="deleteProduct(i)">Borrar Producto</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="formCatalog.invalid || formCatalog.untouched || productosSeleccionados.length == 0">Guardar</button>
+    </div>
+
+  </form>
+</div>
