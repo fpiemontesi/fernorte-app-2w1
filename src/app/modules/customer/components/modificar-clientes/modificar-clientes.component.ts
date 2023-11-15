@@ -18,6 +18,8 @@ export class ModificarClientesComponent implements OnInit {
 
   numeroDoc: number = 0;
 
+  clienteEncontrado: boolean = false;
+
   cliente = new Cliente();
 
   constructor(
@@ -70,7 +72,7 @@ export class ModificarClientesComponent implements OnInit {
 
       if (clienteEncontrado) {
         this.cliente = { ...clienteEncontrado };
-
+        this.clienteEncontrado = true;
         console.log(this.cliente);
       } else {
         Swal.fire({
@@ -88,7 +90,6 @@ export class ModificarClientesComponent implements OnInit {
     Object.keys(this.actualizarClienteForm.controls).forEach((controlName) => {
       this.actualizarClienteForm.controls[controlName].markAsTouched();
     });
-
     if (this.actualizarClienteForm.valid) {
       this.restService.actualizarCliente(this.cliente).subscribe(
         (response) => {
@@ -103,13 +104,38 @@ export class ModificarClientesComponent implements OnInit {
           this.customerService.actualizarCliente(this.cliente);
         },
         (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error en la actualización',
-            text: 'Ocurrió un error al actualizar el cliente. Intente nuevamente.',
-            confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#808080',
-          });
+          if (
+            error.error.message.includes('El email ya está registrado para otro cliente.')
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'El Email ingresado ya esta en uso',
+              text: 'Por favor, ingrese un email diferente',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+            console.log('error: ' + error);
+          }
+          else if (
+            error.error.message.includes('El teléfono ya está registrado para otro cliente.')
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'El teléfono ingresado ya esta en uso',
+              text: 'Por favor, ingrese un teléfono diferente',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+          }
+          else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Error en la actualización',
+              text: 'Ocurrió un error al actualizar el cliente. Intente nuevamente.',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#808080',
+            });
+          }
         }
       );
     }
