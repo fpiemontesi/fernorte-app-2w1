@@ -14,7 +14,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrarPagoComponent } from '../registrar-pago/registrar-pago.component';
 import { tap } from 'rxjs';
 import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
-import { DiscountRequest, Invoice, OrderDetail, Product } from '../../models/Invoice';
+import {
+  DiscountRequest,
+  Invoice,
+  OrderDetail,
+  Product,
+} from '../../models/Invoice';
 registerLocaleData(localeEs);
 
 @Component({
@@ -34,7 +39,7 @@ export class RegistrarFacturaComponent {
   id: number = 0;
   fechaHoy: Date = new Date();
   invoice: Invoice = new Invoice();
-  tipoFactura: string = 'A'
+  tipoFactura: string = 'A';
 
   constructor(
     private orderService: OrderService,
@@ -43,7 +48,7 @@ export class RegistrarFacturaComponent {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private sharedDataInvoice: SharedDataInvoiceService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -56,14 +61,13 @@ export class RegistrarFacturaComponent {
         console.log(this.client);
       });
     this.calcularDescuentos();
-
   }
-  realizarPago() { }
+  realizarPago() {}
 
   calcularDescuentos() {
     //HICE UNOS CALCULOS PORQUE EL TOTAL ESTA MAL
-    let totalDescuento = 0
-    this.orderSelected.total = parseFloat(
+    let totalDescuento = 0;
+    /* this.orderSelected.total = parseFloat(
       (
         ((this.orderSelected.detalles[0].precio_unitario * this.orderSelected.detalles[0].cantidad) +
           (this.orderSelected.detalles[1].precio_unitario * this.orderSelected.detalles[1].cantidad))
@@ -80,49 +84,47 @@ export class RegistrarFacturaComponent {
     console.log(totalDescuento)
     this.orderSelected.total = this.orderSelected.total - totalDescuento
 
-    console.log(this.orderSelected.total)
+    console.log(this.orderSelected.total)*/
   }
 
-
-
   obtenerInvoiceData() {
-    this.invoice.orderId = this.orderSelected.id
-    this.invoice.clientId = 87654321    //this.orderSelected.idCliente
-    this.invoice.type = this.tipoFactura
-    this.invoice.status = 'PENDING'
-    this.invoice.iva = 0.21
-    this.invoice.reservationId = this.orderSelected.id_reserva
+    this.invoice.orderId = this.orderSelected.id;
+    this.invoice.clientId = 87654321; //this.orderSelected.idCliente
+    this.invoice.type = this.tipoFactura;
+    this.invoice.status = 'PENDING';
+    this.invoice.iva = 0.21;
+    this.invoice.reservationId = this.orderSelected.id_reserva;
 
-    let listDiscount: DiscountRequest[] = []
+    let listDiscount: DiscountRequest[] = [];
     //CREO LA LISTA DE DESCUENTOS
     for (let discount of this.orderSelected.descuentos) {
       let discountRequest: DiscountRequest = new DiscountRequest();
-      discountRequest.percentage = discount.porcentaje
-      discountRequest.description = discount.descripcion
-      listDiscount.push(discountRequest)
+      discountRequest.percentage = discount.porcentaje;
+      discountRequest.description = discount.descripcion;
+      listDiscount.push(discountRequest);
     }
     this.invoice.discountRequestList = listDiscount;
 
     //CREO LA LISTA DE DETALLES
-    let listDetail: OrderDetail[] = []
+    let listDetail: OrderDetail[] = [];
     for (let detail of this.orderSelected.detalles) {
       let producto: Product = new Product();
       let detalleOrden: OrderDetail = new OrderDetail();
 
       //CREO EL PRODUCTO
-      producto.product_id = detail.cod_prod
-      producto.name = detail.descripcion
-      producto.price = detail.precio_unitario
+      producto.product_id = detail.cod_prod;
+      producto.name = detail.descripcion;
+      producto.price = detail.precio_unitario;
 
       //CREO EL DETALLE
-      detalleOrden.product = producto
-      detalleOrden.amount = detail.cantidad
-      detalleOrden.measurementUnit = ''
-      listDetail.push(detalleOrden)
+      detalleOrden.product = producto;
+      detalleOrden.amount = detail.cantidad;
+      detalleOrden.measurementUnit = '';
+      listDetail.push(detalleOrden);
     }
 
-    this.invoice.details = listDetail
+    this.invoice.details = listDetail;
 
-    this.sharedDataInvoice.setInvoiceData(this.invoice)
+    this.sharedDataInvoice.setInvoiceData(this.invoice);
   }
 }
