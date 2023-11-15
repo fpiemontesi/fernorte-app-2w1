@@ -1,0 +1,17 @@
+.big-cart {
+  border: 1px solid grey;
+  border-radius: 30px;
+  padding: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 70px;
+  height: 70px;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 19%);
+  object-fit: contain;
+  border: 1px solid #8080808c;
+  pointer-events: none;
+}

@@ -1,0 +1,42 @@
+<div class="container big-cart">
+    <div class="d-flex flex-row gap-3 mb-4 align-items-center">
+      <h3>Listado de beneficios</h3>
+      <button class="btn btn-primary" (click)="enviarBeneficios()">
+        Enviar beneficios
+      </button>
+    </div>
+    <!-- Lista de beneficios -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Articulo</th>
+          <th>Descripcion</th>
+          <th>Codigo</th>
+          <th>Marca</th>
+          <th>Precio</th>
+          <th>Puntos</th>
+          <th>Imagen</th>
+        </tr>
+      </thead>
+      <tbody id="listaBeneficios">
+        <ng-container *ngFor="let beneficio of beneficioArray">
+          <tr
+            *ngIf="
+              beneficio.ofertas[0].activo &&
+              beneficio.ofertas[0].precio_oferta > 0
+            "
+          >
+            <td>{{ beneficio.nombre }}</td>
+            <td>{{ beneficio.descripcion }}</td>
+            <td>{{ beneficio.ofertas[0].codigo }}</td>
+            <td>{{ beneficio.marca.nombre }}</td>
+            <td>${{ beneficio.ofertas[0].precio_oferta }}</td>
+            <td>{{ beneficio.ofertas[0].puntos }}</td>
+            <td>
+              <img class="image" src="{{ beneficio.imageURL }}" alt="beneficio" />
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>

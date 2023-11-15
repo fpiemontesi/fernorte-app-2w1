@@ -9,6 +9,10 @@ export class RestService {
   private baseUrlCliente = 'http://localhost:8080/clientes';
   private baseUrlUsuario = 'http://localhost:8081/auth';
   private baseUrlTurnero = 'http://localhost:8080/turnero';
+  private urlGetBenefits =
+    'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-catalogo-bd/productos';
+  private urlPostBenefits =
+    'http://localhost:8080/fidelizacion/sendProductCatalogToAllClientsFilter';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -104,5 +108,16 @@ export class RestService {
   public putEstadoTurno(id: number): Observable<any> {
     const url = `${this.baseUrlTurnero}/atenderCliente/${id}`;
     return this.httpClient.put(url, {});
+  }
+
+  public getPromociones(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.urlGetBenefits);
+  }
+
+  public postBenefits(): Observable<any> {
+    const requestBody = {};
+    return this.httpClient.post(this.urlPostBenefits, requestBody, {
+      responseType: 'text',
+    });
   }
 }
