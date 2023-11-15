@@ -19,7 +19,7 @@ export class productService {
   }
 
   getProductsActive():Observable<Producto[]>{
-    return this.client.get<Producto[]>("http://localhost:8080/api/products/actives");
+    return this.client.get<Producto[]>("http://localhost:8080/api/products/actives-inactive?activo=true");
   }
   updateProduct(code:string, product:Producto):Observable<Producto>{
     return this.client.put<Producto>("http://localhost:8080/api/products/"+code, product);
