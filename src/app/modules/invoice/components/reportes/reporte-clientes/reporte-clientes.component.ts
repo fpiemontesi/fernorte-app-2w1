@@ -9,11 +9,11 @@ import { ReportesService } from '../../../services/reportes.service';
 })
 export class ReporteClientesComponent {
 
-  client:ClientReportDTO[] = [];
+  clients:ClientReportDTO[] = [];
 
   constructor(private reportService:ReportesService){
     reportService.obtenerMontoTotalPorCliente().subscribe((result) => 
-      console.log(result)
+      this.clients = result
     )
   }
 }
