@@ -11,7 +11,7 @@ export class Invoice {
 }
 
 export class DiscountRequest {
-  percentage: number = 0;
+  monto: number = 0;
   description: string = '';
 }
 

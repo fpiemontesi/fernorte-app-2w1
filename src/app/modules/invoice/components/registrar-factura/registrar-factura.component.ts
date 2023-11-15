@@ -99,7 +99,7 @@ export class RegistrarFacturaComponent {
     //CREO LA LISTA DE DESCUENTOS
     for (let discount of this.orderSelected.descuentos) {
       let discountRequest: DiscountRequest = new DiscountRequest();
-      discountRequest.percentage = discount.porcentaje;
+      discountRequest.monto = discount.monto;
       discountRequest.description = discount.descripcion;
       listDiscount.push(discountRequest);
     }

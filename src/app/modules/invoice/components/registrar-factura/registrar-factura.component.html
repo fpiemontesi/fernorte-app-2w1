@@ -132,15 +132,13 @@
           <thead>
             <tr>
               <th>Descripción</th>
-              <th>Porcentaje</th>
               <th>Descuento</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let disc of orderSelected.descuentos">
               <td>{{ disc.descripcion }}</td>
-              <td>{{ disc.porcentaje + "%" }}</td>
-              <td>{{ disc.discounted | currency }}</td>
+              <td>{{ disc.monto | currency }}</td>
             </tr>
           </tbody>
         </table>
