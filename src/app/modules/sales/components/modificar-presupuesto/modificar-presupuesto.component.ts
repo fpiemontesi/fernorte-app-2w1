@@ -87,7 +87,7 @@ export class ModificarPresupuestoComponent {
       return;
     }
     const productoSeleccionado = producto.options[producto.selectedIndex].text;
-    if (this.filas.some((fila) => fila.cod_producto === productoSeleccionado)) {   
+    if (this.filas.some((fila) => fila.descripcion === productoSeleccionado)) {   
       Swal.fire({
         icon: 'warning', // Puedes cambiar el icono a tu elección
         title: 'El producto ya ha sido seleccionado',

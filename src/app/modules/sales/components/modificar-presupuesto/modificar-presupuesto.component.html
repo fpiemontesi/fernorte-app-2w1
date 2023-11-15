@@ -48,7 +48,7 @@
         <div class="row" style="margin-top: 20px;">
           <div class="col-md-3">
             <label for="producto" class="form-label">Producto</label>
-            <select name="producto" id="producto" class="form-select "  (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto" required #producto="ngModel">
+            <select name="producto" id="producto" class="form-select "  (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto"  #producto="ngModel">
               <option *ngFor="let producto of myList" [value]="producto.codigo">{{ producto.nombre }}</option>
             </select>
           </div>
