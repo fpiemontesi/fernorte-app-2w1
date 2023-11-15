@@ -21,11 +21,13 @@ export class ModificarPresupuestoComponent {
   productosVenta : any[] = [];
   clienteName: any = '';
   filas: any[] = [];
+  total:number = 0;
   existencias: number = 0;
   nro_doc: number = 0;
   nombre_cliente: string = '';
   cliente: Cliente = new Cliente();
-  total: number = 0;
+  totalPresupuesto: number = 0;
+  totalPorProducto: number = 0;
   dimension?: string = "";
   peso?: string = "";
   tipo_activado: boolean = true;
@@ -98,13 +100,13 @@ export class ModificarPresupuestoComponent {
   }
     var precioUnitario = this.getPrecioUnitario(productoSeleccionado);
     this.filas.push({
-      id: producto.value,
+      cod_producto: producto.value,
       producto: producto.options[producto.selectedIndex].text,
       cantidad: this.formData.cantidad,
       precio_unitario : precioUnitario,
-      //unidad : producto.options[producto.selectedIndex].text,
-      total:  precioUnitario * this.formData.cantidad
+      
     });
+    this.totalPorProducto =  precioUnitario * this.formData.cantidad
     this.productos.push({
       producto_id: producto.options[producto.selectedIndex].value,
       descripcion: producto.options[producto.selectedIndex].text,
@@ -144,7 +146,19 @@ export class ModificarPresupuestoComponent {
     
   }
 
+  calcularTotal() : number {
+    this.totalPresupuesto = 0;
   
+    for (let fila of this.filas) {
+      this.totalPresupuesto += this.CacularPrecioTotalporProducto(fila);
+    }
+    return this.totalPresupuesto;
+  }
+
+  CacularPrecioTotalporProducto(fila :any) : number {
+    var total = fila.cantidad * fila.precio_unitario;
+    return total;
+  }
 
   consultarExistencia(){
     const producto = document.getElementById("producto") as HTMLSelectElement;
@@ -167,12 +181,10 @@ export class ModificarPresupuestoComponent {
   }
   
   onBlur(){
-    var cliente = document.getElementById("nro_doc") as HTMLSelectElement;
     try {
-      var doc = parseInt(cliente.value)
-      this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
+      this.presupuestoService.getClienteByDni(this.nro_doc).subscribe((response) => {
         if(response.length != 0){
-          this.formData.cliente = doc;
+          this.formData.cliente = this.nro_doc;
           this.cliente.nombre = response[0].nombre;
           this.cliente.apellido = response[0].apellido;
           this.cliente.cant_puntos = response[0].cant_puntos;

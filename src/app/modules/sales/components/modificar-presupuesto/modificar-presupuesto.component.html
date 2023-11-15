@@ -4,7 +4,7 @@
         <div class="row" style="margin-bottom: 20px;">
           <div class="col-md-2">
             <label for="nro_doc" class="form-label">Documento</label>
-            <input type="text" disabled="true" name="nro_doc" id="nro_doc" class="form-control" [(ngModel)]="nro_doc" (blur)="onBlur()">
+            <input type="text"  name="nro_doc" id="nro_doc" class="form-control" [(ngModel)]="nro_doc" (blur)="onBlur()">
           </div>
           <div class="col-md-4">
             <label for="cliente" class="form-label">Cliente</label>
@@ -85,10 +85,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let fila of filas; let i = index">
-                    <td>{{ fila.producto }}</td>
+                    <td>{{ fila.cod_producto }}</td>
                     <td>{{ fila.cantidad }}</td>
                     <td>{{fila.precio_unitario}}</td>
-                    <td >{{fila.total}}</td>
+                    <td >{{ CacularPrecioTotalporProducto(fila)}}</td>
                     <td>
                       <button class="btn" (click)="eliminarFila(i)">
                         <i class="fa fa-times"></i>
@@ -96,7 +96,7 @@
                     </td>
                 <tr>
                     <td colspan="3">TOTAL</td>
-                    <td>{{total}}</td>
+                    <td>{{calcularTotal()}}</td>
                     <td></td>
                 </tr>
             </tbody>
