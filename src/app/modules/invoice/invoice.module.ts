@@ -16,6 +16,7 @@ import { ToastsContainer } from "./components/toasts/toasts-container.component"
 import { ReporteHomeComponent } from './components/reportes/reporte-home/reporte-home.component';
 import { ReporteFormaDePagoComponent } from './components/reportes/reporte-forma-de-pago/reporte-forma-de-pago.component';
 import { ReporteClientesComponent } from './components/reportes/reporte-clientes/reporte-clientes.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,7 @@ const routes: Routes = [
         ReporteHomeComponent,
         ReporteFormaDePagoComponent,
         ReporteClientesComponent,
+        OrderDetailComponent,
     ],
     providers: [],
     exports: [HomeComponent, RouterModule],

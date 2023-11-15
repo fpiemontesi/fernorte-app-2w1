@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Detail } from '../../models/Detail';
+import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
+import { InvoiceDetail } from '../../models/InvoiceDetail';
 
 @Component({
   selector: 'fn-details-modal',
@@ -7,10 +8,26 @@ import { Detail } from '../../models/Detail';
   styleUrls: ['./details-modal.component.css']
 })
 export class DetailsModalComponent {
-  @Input() selectedDetails: Detail[] = []; 
-  @Output () onClose = new EventEmitter();
+  DetailInvoice:InvoiceDetail[] = []
+  invoiceDetailPresent:boolean = false;
 
   closeModal(){
-    this.onClose.emit();
+    this.invoiceDetailPresent = false
   }
+
+  constructor(private sharedDataInvoice:SharedDataInvoiceService,){
+    
+  }
+
+  ngOnInit(){
+    this.sharedDataInvoice.InvoiceDetailData$.subscribe((detailInvoice)=>
+    {
+      this.DetailInvoice = detailInvoice
+      this.invoiceDetailPresent = true;
+      console.log(detailInvoice)
+    })  
+  }
+
+
+
 }

@@ -5,6 +5,10 @@ import { Detail } from '../../models/Detail';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast.service';
 import { Subscription } from 'rxjs';
+import { SharedOrdenDetailService } from '../../services/shared-orden-detail.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetailsModalComponent } from '../details-modal/details-modal.component';
+import { OrderDetailComponent } from '../order-detail/order-detail.component';
 
 @Component({
   selector: 'fn-pending-orders',
@@ -27,8 +31,11 @@ export class PendingOrdersComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private toastService: ToastService,
-    private route: Router
+    private route: Router,
+    private sharedDataOrder:SharedOrdenDetailService,
+    private modalService: NgbModal,
   ) {}
+  
   ngOnInit(): void {
     const listOrders = this.orderService.obtenerOrdenes();
 
@@ -63,16 +70,17 @@ export class PendingOrdersComponent implements OnInit {
       this.ordersToShow = this.orders;
     }
   }
-  viewDetail(order: Order): void {
-    this.SelectedDetails = order.detalles;
+
+  obtenerDetalles(order: Order): void {
     this.calculateSubtotal();
-    this.isModalOpen = true;
+    this.modalService.open(OrderDetailComponent, {
+      size: 'lg',
+    });
+    this.sharedDataOrder.setInvoiceData(order)
+   
+
   }
 
-  closeModal() {
-    this.isModalOpen = false;
-    this.SelectedDetails = [];
-  }
 
   calculateSubtotal(): void {
     if (this.SelectedDetails.length > 0) {

@@ -57,7 +57,7 @@
                     <div class="col-auto">
                       <button
                         class="btn btn-primary"
-                        (click)="viewDetail(order)"
+                        (click)="obtenerDetalles(order)"
                       >
                         (0)
                       </button>
@@ -90,11 +90,5 @@
         </ul>
       </div>
     </div>
-  </div>
-  <div *ngIf="isModalOpen">
-    <fn-details-modal
-      [selectedDetails]="SelectedDetails"
-      (onClose)="closeModal()"
-    ></fn-details-modal>
   </div>
 </body>

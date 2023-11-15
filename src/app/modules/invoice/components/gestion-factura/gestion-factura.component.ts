@@ -5,6 +5,9 @@ import { InvoiceDto } from '../../models/InvoiceDto';
 import { ToastService } from '../../services/toast.service';
 import { Observable, Subscriber, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetailsModalComponent } from '../details-modal/details-modal.component';
+import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
 
 @Component({
   selector: 'fn-gestion-factura',
@@ -12,6 +15,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./gestion-factura.component.css'],
 })
 export class GestionFacturaComponent {
+
+
   onSubmit() {
     console.log(this.filterForm.value);
     this.invoiceService
@@ -33,6 +38,7 @@ export class GestionFacturaComponent {
         },
       });
   }
+
   invoices: InvoiceDto[] = []; // Declarar una variable para almacenar las facturas
 
   private subscription = new Subscription();
@@ -41,7 +47,9 @@ export class GestionFacturaComponent {
   constructor(
     private invoiceService: InvoiceService,
     private toastService: ToastService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    private sharedDataInvoice:SharedDataInvoiceService
   ) {
     this.filterForm = this.formBuilder.group({
       dateFrom: [''],
@@ -51,6 +59,7 @@ export class GestionFacturaComponent {
   }
 
   ngOnInit() {
+    
     const listInvoices = this.invoiceService.getInvoices();
 
     this.subscription.add(
@@ -72,4 +81,26 @@ export class GestionFacturaComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
+  deleteFactura(id_invoice:number){
+    this.invoiceService.deleteInvoice(id_invoice).subscribe((result)=>
+    {
+      console.log(result);
+    })
+  }
+
+  obtenerDetalles(id_invoice:number){
+    this.invoiceService.getDetailInvoices(id_invoice).subscribe((result) =>{
+      console.log(result)
+     
+      this.modalService.open(DetailsModalComponent, {
+        size: 'lg',
+      });
+      this.sharedDataInvoice.setDetailInvoice(result)
+      
+    })
+  }
+
+
+
 }

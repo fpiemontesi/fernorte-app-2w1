@@ -79,7 +79,7 @@ export class RegistrarPagoComponent {
         (payment: any) => payment
       );
 
-      this.sharedDataInvoice.formData$.subscribe((invoiceData) => {
+      this.sharedDataInvoice.InvoiceData$.subscribe((invoiceData) => {
         this.invoice = invoiceData;
       });
       this.invoice.paymentMethodList = paymentMethods;
