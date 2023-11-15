@@ -1,20 +1,29 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">Cliente</th>
-        <th scope="col">Documento</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Tipo de Cliente</th>
-        <th scope="col">Monto Total Facturado</th>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let client of clients">
-        <th >{{client.name + ' ' + client.lastName }}</th>
-        <td>{{client.nro_doc}}</td>
-        <td>{{client.phone}}</td>
-        <td>{{client.clientType}}</td>
-        <td>{{client.totalAmount | currency}}</td>
-      </tr>     
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+      </tr>
     </tbody>
   </table>
