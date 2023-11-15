@@ -21,3 +21,4 @@ export interface ToastInfo {
   body: string;
   delay?: number;
 }
+
