@@ -1,24 +1,56 @@
-<div class="card text-center">
-  <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
-      <li class="nav-item">
-        <a class="nav-link menu-option-custom" routerLink="/ConsultarPedidos">Consultar Pedido</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link menu-option-custom" routerLink="/GestionarFactura">Gestionar Factura</a>
-      </li>
-      <li class="nav-item">
-        <p class="nav-link menu-option-custom" routerLink="/Reportes">Reportes</p>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" (click)="modalPaymentMethod()" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Parametros
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" routerLink="/paymentMethods">Payment Methods</a></li>
-        </ul>
-      </li>
-    </ul>
+<div class="container-fluid">
+  <div class="row bg-secundario">
+    <div class="col-md-3 bg-secundario">
+      <!-- Menú lateral -->
+      <div class="card text-center sidebar text-white bg-dark">
+        <div class="card-header">
+          <span class="fs-4">Facturas</span>
+          <hr />
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a
+                class="nav-link menu-option-custom"
+                routerLink="/ConsultarPedidos"
+                >Consultar Pedido</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link menu-option-custom"
+                routerLink="/GestionarFactura"
+                >Gestionar Factura</a
+              >
+            </li>
+            <li class="nav-item">
+              <p class="nav-link menu-option-custom" routerLink="/Reportes">
+                Reportes
+              </p>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                (click)="modalPaymentMethod()"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Parametros
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/paymentMethods"
+                    >Payment Methods</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <!-- Contenido principal (router-outlet) -->
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  <router-outlet></router-outlet>
 </div>

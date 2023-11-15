@@ -61,3 +61,12 @@ body {
   padding: 20px;
   border-radius: 10px;
 }
+
+@media (min-width: 0px) and (max-width: 960px) {
+  label {
+    font-size: 14px;
+  }
+  .input-text {
+    font-size: 14px;
+  }
+}
