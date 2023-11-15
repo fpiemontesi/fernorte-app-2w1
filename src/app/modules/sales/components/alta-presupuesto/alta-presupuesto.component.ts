@@ -17,6 +17,8 @@ export class AltaPresupuestoComponent {
   constructor(private http: HttpClient , private presupuestoService: PresupuestoService , private ventasService: VentasService) { }
   
 
+ 
+  
   productos : any[] = [];
   productosVenta : any[] = [];
   clienteName: any = '';
@@ -38,7 +40,7 @@ export class AltaPresupuestoComponent {
     tipo: 1,
     formaEntrega: 1,
     vendedor: 1,
-    producto :'',
+    producto :this.productos,
     cantidad: 1
   };
  
@@ -138,8 +140,7 @@ export class AltaPresupuestoComponent {
     {
       return ;
     }
-    this.clienteName  = document.getElementById("cliente") as HTMLSelectElement;
-      this.presupuestoService.realizarSolicitudPostPresupuesto(this.clienteName.options[this.clienteName.selectedIndex].textContent , this.productos)
+      this.presupuestoService.realizarSolicitudPostPresupuesto(this.formData.Cliente,this.filas,this.formData.tipo)
       .subscribe(
         (response) => {
           console.log('Solicitud POST exitosa. Respuesta:', response);
@@ -181,6 +182,10 @@ export class AltaPresupuestoComponent {
   }
 
   consultarExistencia(){
+
+
+
+
     const producto = document.getElementById("producto") as HTMLSelectElement;
     this.dimension = this.myList.at(producto.selectedIndex)?.dimensiones;
     this.peso = this.myList.at(producto.selectedIndex)?.peso;
