@@ -7,6 +7,8 @@ import { Cliente } from '../../models/Cliente';
 import { Presupuesto } from '../../models/Presupuesto';
 import { Detalle } from '../../models/Detalles';
 import { Categoria } from '../../models/Categoria';
+import { FormBuilder,Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'fn-alta-presupuesto',
@@ -26,7 +28,6 @@ export class AltaPresupuestoComponent {
   productos: Producto[] = [];
   //clase presupuesto
   presupuesto: Presupuesto = new Presupuesto();
-  //cliente nullable
   cliente: Cliente = new Cliente();
   nombre_cliente = 'CONSUMIDOR FINAL';
 
@@ -34,14 +35,16 @@ export class AltaPresupuestoComponent {
   precio_producto: number = 0;
   cantidad: number = 1;
 
+  fecha:Date = new Date();
   tipo_activado: boolean = true;
   existencias: number = 0;
   categoria: Categoria = new Categoria("NORMAL", 0)
   total: number = 0;
   subtotal: number = 0;
 
-  constructor(private http: HttpClient , private presupuestoService: PresupuestoService , private ventasService: VentasService) {
+  constructor(private http: HttpClient , private presupuestoService: PresupuestoService , private ventasService: VentasService, private fb:FormBuilder) {
    }  
+
 
   action!: string; 
 
@@ -57,7 +60,12 @@ export class AltaPresupuestoComponent {
 
   Listar() {
     this.presupuestoService.getProductos().subscribe((data: any) => {
-      this.productos = data;
+      if(data.length !=0){
+        this.productos = data;
+        this.productoSeleccionado = this.productos[0];
+        this.consultarExistencia();
+      }
+      
     })
   }
  
@@ -73,6 +81,12 @@ export class AltaPresupuestoComponent {
     if(!this.valido()){
       return;
     }
+    for (let index = 0; index < this.presupuesto.detalles.length; index++) {
+      if(this.presupuesto.detalles[index].cod_producto==this.productoSeleccionado.codigo){
+        return
+      }
+    }
+    
     this.tipo_activado = false;
     var detalle = new Detalle();
     detalle.cantidad = this.cantidad;
@@ -124,9 +138,25 @@ export class AltaPresupuestoComponent {
   }
 
   guardarPresupuesto() {
-    this.presupuestoService.realizarSolicitudPostPresupuesto(this.presupuesto).subscribe((response) => {
-      console.log(response);
-    })
+      this.presupuestoService.realizarSolicitudPostPresupuesto(this.presupuesto).subscribe((response) => {
+        console.log(response);
+        Swal.fire({
+          title: "Exito!",
+          text: "Se ha guardado el presupuesto",
+          icon: "success",
+          timer:2000
+        });
+      },
+     (error) =>{
+        console.error(error)
+        Swal.fire({
+          title: "Ha habido un problema!",
+          text: "No se ha guardado el presupuesto",
+          icon: "error",
+          timer:2000
+        });
+      }
+    )
   }
 
   guardarVenta() {
@@ -159,32 +189,35 @@ export class AltaPresupuestoComponent {
   Clean() {
   }
   
-  onBlur(){
-    var doc = this.cliente.nro_doc;
-    try {
-      this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
-        if(response.length != 0){
-          this.cliente.nombre = response[0].nombre;
-          this.cliente.apellido = response[0].apellido;
-          this.cliente.cant_puntos = response[0].cant_puntos;
-          this.cliente.nro_doc = response[0].nro_doc;
-          this.categoria = this.cliente.calcularCategoria();
-          this.nombre_cliente = this.cliente.apellido + ", " + this.cliente.nombre;
-          this.calcularTotales();
-          console.log("Cliente consultado");
-        }
-        else{
-          this.cliente = new Cliente();
-          this.nombre_cliente = "CONSUMIDOR FINAL";
-          this.categoria = this.cliente.calcularCategoria();
-          console.log(this.categoria.nombre)
-          this.calcularTotales();
-        }
-      });
-    } catch (error) {
-      
-    } finally{
-      
+  onBlur(valid:any){
+    if(valid!){
+      var doc = this.cliente.nro_doc;
+      try {
+        this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
+          if(response.length != 0){
+            this.cliente.nombre = response[0].nombre;
+            this.cliente.apellido = response[0].apellido;
+            this.cliente.cant_puntos = response[0].cant_puntos;
+            this.cliente.nro_doc = response[0].nro_doc;
+            this.categoria = this.cliente.calcularCategoria();
+            this.nombre_cliente = this.cliente.apellido + ", " + this.cliente.nombre;
+            this.calcularTotales();
+            console.log("Cliente consultado");
+          }
+          else{
+            this.cliente = new Cliente();
+            this.cliente.nro_doc=doc;
+            this.nombre_cliente = "CONSUMIDOR FINAL";
+            this.categoria = this.cliente.calcularCategoria();
+            console.log(this.categoria.nombre)
+            this.calcularTotales();
+          }
+        });
+      } catch (error) {
+        
+      } finally{
+        
+      }
     }
   }
 }

@@ -4,18 +4,32 @@
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-md-2">
         <label for="nro_doc" class="form-label">Documento</label>
-        <input type="text" name="nro_doc" id="nro_doc" class="form-control" (blur)="onBlur()"
-          [(ngModel)]="cliente.nro_doc">
+        <input type="text" name="nro_doc" id="nro_doc" class="form-control" (blur)="onBlur(controlDocCliente.valid)"
+          [(ngModel)]="cliente.nro_doc" #controlDocCliente="ngModel" minlength="8" maxlength="8" required="number" pattern="[0-9]+">
+          <div class="error" *ngIf="controlDocCliente.invalid && (controlDocCliente.dirty|| controlDocCliente.touched)" >
+            <div *ngIf="controlDocCliente.getError('required');else numberError" class="error"> El documento del cliente es obligatorio.</div>
+            <ng-template #numberError>
+              <div *ngIf="controlDocCliente.getError('pattern'); else minlengthMaxlengthError " class="error">
+                El documento debe contener solo números.
+              </div>
+                <ng-template #minlengthMaxlengthError>
+                  <div *ngIf="controlDocCliente.getError('minlength') || controlDocCliente.getError('maxlength')" class="error">
+                    El documento debe tener 8 caracteres.
+                  </div>
+                </ng-template>
+            </ng-template>
+          </div>
       </div>
       <div class="col-md-4">
         <label for="cliente" class="form-label">Cliente</label>
-        <input type="text" name="cliente" id="cliente" class="form-control" [ngModel]="nombre_cliente" name="cliente"
+        <input type="text" name="cliente" id="cliente" class="form-control" [ngModel]="nombre_cliente"  name="cliente"
           disabled="true">
       </div>
       <div class="col-md-2">
         <label for="categoria" class="form-label">Categoría</label>
         <input disabled="true" type="text" class="form-control" name="categoria" id="categoria"
-          [ngModel]="categoria.nombre">
+          [ngModel]="categoria.nombre" >
+        
       </div>
       <div class="col-md-1">
         <label for="descuento" class="form-label">Descuento</label>
@@ -38,16 +52,20 @@
       </div>
       <div class="col-md-3">
         <label for="fecha" class="form-label">Fecha</label>
-        <input type="date" name="fecha" id="fecha" class="form-control">
+        <input type="date" name="fecha" id="fecha" class="form-control" [(ngModel)]="presupuesto.fecha_creacion" disabled="">
       </div>
     </div>
     <div class="row" style="margin-top: 20px;">
       <div class="col-md-3">
         <label for="producto" class="form-label">Producto</label>
         <select name="producto" id="producto" class="form-select " [(ngModel)]="productoSeleccionado"
-          (ngModelChange)="consultarExistencia()">
+          (ngModelChange)="consultarExistencia()"  #controlProducto="ngModel" required  >
           <option *ngFor="let producto of productos" [ngValue]="producto">{{ producto.nombre }}</option>
         </select>
+        <div class="error" *ngIf="(controlProducto.dirty|| controlProducto.touched)" >
+          <div *ngIf="controlProducto.getError('required')" class="error"> Debe seleccionar un producto obligatorio
+          </div>
+        </div>
       </div>
       <div class="col-md-1">
         <label for="precioUnitario" class="form-label">Precio</label>
@@ -72,10 +90,13 @@
       <div class="col-md-2">
         <label for="cantidad" class="form-label">Cantidad</label>
         <input type="number" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad"
-          [(ngModel)]="cantidad">
+          [(ngModel)]="cantidad" pattern="[1-9]+" #controlCantidad="ngModel">
+        <div *ngIf="controlCantidad.getError('pattern')">
+          <span class="text-danger">El numero debe ser positivo</span>
+        </div>
       </div>
       <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
-        <button (click)="agregarFila()" class="btn btn-dark btn-block m-sm-2" [disabled]="existencias == 0">Agregar</button>
+        <button (click)="agregarFila()" class="btn btn-dark btn-block m-sm-2" [disabled]="existencias == 0||existencias<cantidad">Agregar</button>
       </div>
     </div>
     <div style="max-height: 250px; overflow-y: auto;">
