@@ -7,7 +7,7 @@ import { ConsultarPresupuestoComponent } from './components/consultar-presupuest
 import { ConsultarVentaComponent } from './components/consultar-venta/consultar-venta.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
 import { DetallesProductosComponent } from './components/detalles-productos/detalles-productos.component';
 import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
@@ -53,7 +53,7 @@ const routes: Routes = [
     ModificarPresupuestoComponent,
   ],
   providers: [],
-  imports: [CommonModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],
 })
 export class SalesModule {}

@@ -1,4 +1,4 @@
-import { Detalles } from "./Detalles";
+import { Detalle } from "./Detalles";
 
 
 export class Ventas {
@@ -10,7 +10,7 @@ export class Ventas {
     tipo_venta: number;
     estado: number;
     total: number;
-    detalles: Array<Detalles> = [];
+    detalles: Array<Detalle> = [];
 
     constructor() {
        this.id = 0;

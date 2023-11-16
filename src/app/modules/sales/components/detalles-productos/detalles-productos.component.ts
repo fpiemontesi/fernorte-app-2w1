@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Detalles } from '../../models/Detalles';
+import { Detalle } from '../../models/Detalles';
 
 
 @Component({
@@ -13,5 +13,5 @@ export class DetallesProductosComponent implements OnInit {
 
   ngOnInit() {
   }
-  @Input() productos: Detalles[] = [];
+  @Input() productos: Detalle[] = [];
 }

@@ -43,16 +43,10 @@ export class PresupuestoService {
     return this.http.put(url, body, httpOptions);
   }
 
-  realizarSolicitudPostPresupuesto(cliente: string, productos: any[]): Observable<any> {
+  realizarSolicitudPostPresupuesto(presupuesto: Presupuesto): Observable<any> {
     
-    const url = 'http://localhost:8080/presupuesto/Save';
-    const body = {
-      nro_presupuesto: '',
-      cliente: cliente,
-      fecha_creacion: new Date().toISOString(),
-      fecha_vencimiento: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      productos: productos,
-    };
+    const url = 'http://localhost:8080/presupuesto';
+    const body = presupuesto;
 
     const httpOptions = {
       headers: new HttpHeaders({

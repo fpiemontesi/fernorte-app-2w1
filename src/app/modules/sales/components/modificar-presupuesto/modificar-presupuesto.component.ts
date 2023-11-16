@@ -8,7 +8,7 @@ import { VentasService } from '../../services/ventas.service';
 import { Producto } from '../../models/Producto';
 import { Cliente } from '../../models/Cliente';
 import { Presupuesto } from '../../models/Presupuesto';
-import { Detalles } from '../../models/Detalles';
+import { Detalle } from '../../models/Detalles';
 
 @Component({
   selector: 'fn-modificar-presupuesto',
@@ -23,7 +23,7 @@ export class ModificarPresupuestoComponent {
   
   
   clienteName: any = '';
-  filas: Detalles[] = [];
+  filas: Detalle[] = [];
   
   existencias: number = 0;
   nro_doc: number = 0;
