@@ -16,14 +16,21 @@ import {
 import {
     ListControlStockComponent
 } from "./components/stock-control-reports/list-control-stock/list-control-stock.component";
-import {AppRoutingModule} from "./AppRoutingModule";
 import { StockControlsHomeComponent } from './components/stock-control-reports/stock-controls-home/stock-controls-home.component';
+import {InventoryAppRoutingModule} from "./inventory-app-routing.module";
 
 @NgModule({
     declarations: [HomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
         ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent],
     providers: [],
-    imports: [CommonModule, ReactiveFormsModule, NgbToastModule, AppRoutingModule, NgbNav, NgbNavItem, NgbNavLinkButton, NgbNavContent],
+    imports: [CommonModule,
+      InventoryAppRoutingModule,
+      ReactiveFormsModule,
+      NgbToastModule,
+      NgbNav,
+      NgbNavItem,
+      NgbNavLinkButton,
+      NgbNavContent],
     exports: [HomeComponent],
 })
 export class InventaryModule {

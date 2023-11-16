@@ -54,8 +54,7 @@ export class ModifyStockControlComponent implements OnInit, OnDestroy {
       this.stockControl.batchIsExpired = this.stockControlForm.get('batchIsExpired')?.value;
 
       this.subscription.add(
-        this.stockControlService.modify(this.stockControl).subscribe((updatedControl: StockControlReport)
-          => {
+        this.stockControlService.modify(this.stockControl).subscribe((updatedControl: StockControlReport) => {
           this.toastService.show("Formulario valido", {classname: 'bg-success text-light'});
         })
       );
