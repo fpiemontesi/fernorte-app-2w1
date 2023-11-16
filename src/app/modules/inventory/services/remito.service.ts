@@ -21,11 +21,11 @@ export class ReceiptService {
     return this.http.post<Receipt>('http://localhost:3000/receipts', body);
   }
 
-  set selectedRecipt(receipt : Receipt){
+  set selectedReceipt(receipt : Receipt){
     this._selectedReceipt=receipt;
   }
 
-  get selectedRecipt(){
+  get selectedReceipt(){
     return this._selectedReceipt;
   }
 

@@ -42,7 +42,7 @@ export class ReceiptListComponent implements OnInit {
   openModal(receiptIndex: number){
     const modalRef: NgbModalRef = this.modalService.open(ReceiptDetailsModalComponent, {size: 'xl',
       centered: true, scrollable: true});
-    this.receiptService.selectedRecipt = this.filteredReceipts[receiptIndex];
+    this.receiptService.selectedReceipt = this.filteredReceipts[receiptIndex];
   }
 
   private loadReceipts() {
