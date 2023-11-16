@@ -1,8 +1,9 @@
-export class batch {
-    id: number = 0;
-    id_existence: string = '';
-    id_section: string = '';
-    quantity: number = 0;
-    due_date: Date = new Date();
-    shelf: number = 0;
-  }
+export class Batch {
+  id: number = 0;
+  existenceCode: string = "";
+  sectionId: string = '';
+  quantity: number = 0;
+  dueDate: Date = new Date();
+  shelf: number = 0;
+}
+

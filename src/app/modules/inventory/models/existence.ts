@@ -1,5 +1,6 @@
-export class existence{
-    id: string = "";
-    name: string = "";
-    minimum_stock:number = 0;
+export class Existence {
+  code: string = "";
+  name: string = '';
+  minimunStock:number = 0;
 }
+
