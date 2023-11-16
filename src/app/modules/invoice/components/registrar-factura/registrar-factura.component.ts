@@ -20,6 +20,7 @@ import {
   OrderDetail,
   Product,
 } from '../../models/Invoice';
+import { InvoiceDto } from '../../models/InvoiceDto';
 registerLocaleData(localeEs);
 
 @Component({
@@ -40,8 +41,10 @@ export class RegistrarFacturaComponent {
   fechaHoy: Date = new Date();
   invoice: Invoice = new Invoice();
   tipoFactura: string = 'A';
+  invoices: InvoiceDto[] = [];
+  nroFactura: number = 0;
 
-  client$?:Observable<Client[]>;
+  client$?: Observable<Client[]>;
 
   constructor(
     private orderService: OrderService,
@@ -56,21 +59,38 @@ export class RegistrarFacturaComponent {
   }
 
   ngOnInit() {
+    
     this.id = this.route.snapshot.params['id'];
     this.orderSelected = this.orderService.getOrderSelected();
 
     this.client$ = this.customerserv.obtenerClienteByNroDoc(this.orderSelected.doc_cliente);
-
-
     this.customerserv
       .obtenerClienteByNroDoc(this.orderSelected.doc_cliente)
       .subscribe((data) => {
         this.client = data;
-    
+
       });
+
+
+    this.invoiceservice.getInvoices()
+      .subscribe(invoices => {
+        this.invoices = invoices;
+
+        // Encuentra el ID más alto usando reduce
+        const highestId = this.invoices.reduce((maxId, invoice) => {
+          return (invoice.id > maxId) ? invoice.id : maxId;
+        }, 0);
+        this.nroFactura = highestId + 1;
+  
+      });
+
+
+
     this.calcularDescuentos();
+
+
   }
-  realizarPago() {}
+  realizarPago() { }
 
   calcularDescuentos() {
     //HICE UNOS CALCULOS PORQUE EL TOTAL ESTA MAL
