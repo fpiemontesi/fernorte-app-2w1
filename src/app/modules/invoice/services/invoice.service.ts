@@ -62,7 +62,6 @@ export class InvoiceService {
     return this.http.get<InvoiceDto[]>(apiUrl);
   }
   
-  
 
   setTotalpay(num: number) {
     this.totalPay = num;

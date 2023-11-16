@@ -17,6 +17,8 @@ import { ReporteHomeComponent } from './components/reportes/reporte-home/reporte
 import { ReporteFormaDePagoComponent } from './components/reportes/reporte-forma-de-pago/reporte-forma-de-pago.component';
 import { ReporteClientesComponent } from './components/reportes/reporte-clientes/reporte-clientes.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { ClientsConsumePieChartComponent } from './components/reportes/ClientsConsumePieChart/ClientsConsumePieChart.component';
+import { MonthsBilledColsChartComponent } from './components/reportes/monthsBilledColsChart/monthsBilledColsChart.component';
 
 const routes: Routes = [
   {
@@ -57,6 +59,8 @@ const routes: Routes = [
         ReporteFormaDePagoComponent,
         ReporteClientesComponent,
         OrderDetailComponent,
+        ClientsConsumePieChartComponent,
+        MonthsBilledColsChartComponent
     ],
     providers: [],
     exports: [HomeComponent, RouterModule],
