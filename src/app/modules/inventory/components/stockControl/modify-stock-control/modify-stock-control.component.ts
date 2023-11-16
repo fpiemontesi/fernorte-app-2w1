@@ -51,7 +51,7 @@ export class ModifyStockControlComponent implements OnInit, OnDestroy{
       this.stockControl.damagedQuantity = this.stockControlForm.get('damagedQuantity')?.value;
       this.stockControl.batchIsExpired = this.stockControlForm.get('batchIsExpired')?.value;
 
-      this.stockControlService.modify(this.stockControl).subscribe((updatedControl: StockControlReport) => {
+     this.subscription = this.stockControlService.modify(this.stockControl).subscribe((updatedControl: StockControlReport) => {
         this.toastService.show("Formulario valido","Control de stock modificado con exito.");
       });
     }
