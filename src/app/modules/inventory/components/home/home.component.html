@@ -1,34 +1,9 @@
-<ul class="nav flex-column">
-    <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Lotes</button>
-      <div ngbDropdownMenu>
-        <li ngbDropdownItem><a class="dropdown-item" href="inventory/lotes/registrar">Registrar lotes</a></li>
-      </div>
-    </li>
-    <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Remitos</button>
-      <div ngbDropdownMenu>
-        <li ngbDropdownItem><a class="dropdown-item" href="inventory/remitos/registrar">Registrar remitos</a></li>
-      </div>
-    </li>
-    <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Secciones</button>
-      <div ngbDropdownMenu>
-        <li ngbDropdownItem><a class="dropdown-item disabled" href="" aria-disabled="true">Registrar secciones</a></li>
-      </div>
-    </li>
-    <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Controles de stock</button>
-      <div ngbDropdownMenu>
-        <li ngbDropdownItem><a class="dropdown-item disabled" href="" aria-disabled="true">Registrar control</a></li>
-      </div>
-    </li>
-    <li ngbDropdown class="nav-item" role="presentation">
-      <button type="button" class="nav-link" ngbDropdownToggle>Existencias</button>
-      <div ngbDropdownMenu>
-        <li ngbDropdownItem><a class="dropdown-item disabled" href="" aria-disabled="true">Registrar existencia</a></li>
-      </div>
-    </li>
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li ngbNavItem="remitos">
+    <button ngbNavLink routerLink="remitos">Remitos</button>
+  </li>
+  <li ngbNavItem="lotes">
+    <button ngbNavLink routerLink="lotes">Lotes</button>
+  </li>
 </ul>
-
 <router-outlet></router-outlet>
