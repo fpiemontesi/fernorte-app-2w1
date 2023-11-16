@@ -3,7 +3,7 @@ import { reservation } from '../../models/reservation';
 import { reservationDetail } from '../../models/reservation-detail';
 import { ReservationService } from '../../services/reservation.service';
 import { Subscription } from 'rxjs';
-import { existence } from '../../models/existence';
+import { Existence } from '../../models/existence';
 
 @Component({
   selector: 'fn-reservation-list',
@@ -41,7 +41,7 @@ export class ReservationListComponent {
     if (selectedReserv) {
         this.reservationDetails = selectedReserv.details;
         this.reservationDetails.forEach((detail) => {
-          this.getStock(detail.batch.existenceId);
+            this.getStock(detail.batch.existenceCode);
         });
       } 
     else {
@@ -52,21 +52,28 @@ export class ReservationListComponent {
   //el chat me ayudo a mejorar el codigo porque cuando habia 2 detalles con el mismo nombre de producto
   //no me mostraba el nombre del segundo.
 
-  getStock(id:number){
+  getStock(code: string) {
     this.subscription.add(
-      this.reservationService.getStockById(id).subscribe({
-        next:(stockResponse : existence)=>{
-          this.assignProductNameToDetails(id, stockResponse.name);
+      this.reservationService.getStockById(code).subscribe({
+        next: (stockResponse: Existence[]) => {
+          // --- ACORDATE JSON-SERVER BUSCAR QUERYPARAM (STRING EL ID) TRAE UN ARRAY ---
+            const firstStock = stockResponse[0]; // Accede al primer elemento
+
+            this.assignProductNameToDetails(code, firstStock.name);
+        },
+        error: (error) => {
+          console.error("Error al llamar a la API:", error);
         }
       })
-    )
+    );
   }
   
-  assignProductNameToDetails(id_existence: number, name: string) {
+  assignProductNameToDetails(codeExistence: string, name: string) {
     this.reservationDetails.forEach((detail) => {
-      if (detail.batch.existenceId === id_existence) {
+      if (detail.batch.existenceCode === codeExistence) {
         detail.productName = name;
       }
     });
   }
+
 }

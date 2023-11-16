@@ -2,24 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { reservation } from '../models/reservation';
-import { existence } from '../models/existence';
+import { Existence } from '../models/existence';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservationService {
 
-  urlReservation:string="http://localhost:3000/reservations";
-  urlStock:string="http://localhost:3000/existences/";
-
   constructor(private http : HttpClient) { }
 
   getReservations(): Observable<reservation[]>{
-    return this.http.get<reservation[]>(this.urlReservation);
+    return this.http.get<reservation[]>("http://localhost:3000/reservations");
   }
 
-  getStockById(id:number): Observable<existence>{
-    return this.http.get<existence>(this.urlStock+id);
+  //---ACORDATE JSON-SERVER BUSCAR QUERYPARAM (STRING EL ID) TRAE UN ARRAY---
+  getStockById(code:String): Observable<Existence[]>{
+    return this.http.get<Existence[]>("http://localhost:3000/existences?code="+code);
   }
 
 }
