@@ -3,24 +3,29 @@
     <fn-alert mensaje="Se guardo exitosamente. Espere 5 Segundos" tipoAlert="alert alert-success"></fn-alert>
   </ng-container>
 
-  <form #formulario="ngForm" (ngSubmit)="editarDiscount()">
+  <form #formulario="ngForm" (ngSubmit)="enviarForm(formulario)">
       
       <div class="form-group">
         <label for="txtNombre">Nombre</label>
-        <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="discount.nombre">
+        <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="discount.nombre" #controlNombre="ngModel" required>
+        <div *ngIf="controlNombre.getError('required') && controlNombre.touched" style="color: red;">
+        El Nombre es requerido</div>
       </div>
       <div class="form-group">
         <label for="txtDescripcion">Descripcion</label>
-        <input type="text" class="form-control" id="txtDescripcion" name="descripcion" placeholder="Ingresar descripcion" [(ngModel)]="discount.descripcion">
+        <input type="text" class="form-control" id="txtDescripcion" name="descripcion" placeholder="Ingresar descripcion" [(ngModel)]="discount.descripcion" #controlDescripcion="ngModel" required>
+        <div *ngIf="controlDescripcion.getError('required') && controlDescripcion.touched" style="color: red;">
+        La descripcion es requerida</div>
       </div>
       <div class="form-group">
         <label for="">Producto</label>
-        <select class="form-select" id="selectProducto" aria-label="Seleccionar Producto" name="productCodeSelected"  [(ngModel)]="discount.codigo_producto">
+        <select class="form-select" id="selectProducto" aria-label="Seleccionar Producto" name="productCodeSelected"  [(ngModel)]="discount.codigo_producto" #controlSeleccionarProducto="ngModel" required>
           <option selected disabled>Seleccionar Producto</option>
           <ng-container *ngFor="let producto of lstProductos">
             <option value="{{producto.codigo}}">{{producto.nombre}}</option>
           </ng-container>
         </select>
+        <div *ngIf="controlSeleccionarProducto.getError('required') && controlSeleccionarProducto.touched" style="color: red;">Selecciona un producto es requerido</div>
       </div>
       <div class="form-group">
         <input type="checkbox" name="activo" [(ngModel)]="discount.activo">Activo
@@ -28,6 +33,8 @@
       
       <button routerLink="/listDiscounts" class="btn btn-danger m-2 ms-0 p-2">Volver</button>
       <button type="submit" class="btn btn-primary m-2 p-2">Editar</button>
+      <div *ngIf="formulario.invalid && formulario.touched" style="color: red;">
+      Formulario es invalido</div>
     </form>
   </div>
   

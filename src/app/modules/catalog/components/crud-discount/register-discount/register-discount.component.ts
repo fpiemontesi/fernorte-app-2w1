@@ -5,6 +5,7 @@ import { DiscountService } from '../../../services/discountService/discount.serv
 import { Router } from '@angular/router';
 import { productService } from '../../../services/productService/product.service';
 import { Producto } from '../../../models/producto';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-register-discount',
@@ -44,7 +45,12 @@ export class RegisterDiscountComponent implements OnDestroy,OnInit {
 
   }
 
-  agregarMarca(){
+  enviarForm(formulario: NgForm){
+    if(formulario.valid){
+      this.agregarDiscount()
+    }
+  }
+  agregarDiscount(){
     this.subscription.add(
       this.discountService.create(this.discount).subscribe({
         next: async (discount:Discount)=>{

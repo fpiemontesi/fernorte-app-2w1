@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../../../models/producto';
 import { productService } from '../../../services/productService/product.service';
 import { DiscountDtoProducto } from '../../dtos/discount-dto-producto';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-update-discount',
@@ -63,6 +64,11 @@ export class UpdateDiscountComponent {
     this.subscription.unsubscribe();
   }
 
+  enviarForm(formulario: NgForm){
+    if(formulario.valid){
+      this.editarDiscount()
+    }
+  }
   editarDiscount(){
     this.subscription.add(
         this.discountService.update(this.discount).subscribe({

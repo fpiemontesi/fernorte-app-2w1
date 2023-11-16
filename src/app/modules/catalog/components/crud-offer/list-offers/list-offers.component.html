@@ -3,8 +3,15 @@
     <ng-container *ngIf="alert">
       <fn-alert mensaje="Se elimino correctamente. Espere 5 segundos." tipoAlert="alert alert-success"></fn-alert>
     </ng-container>
-  
-    <button routerLink="registerOffer" class="btn btn-success float-end mt-2">Registrar Oferta</button>
+    <div class="d-flex">
+      <button routerLink="registerOffer" class="btn btn-success float-end me-2">Registrar Oferta</button>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" [(ngModel)]="check" (change)="loadOffers()">
+        <label class="form-check-label " for="flexCheckDefault">
+          Inactivos
+        </label>
+      </div>
+    </div>
     <h2 class="my-2 py-2">Listado de Ofertas</h2>
     <table class="table">
       <thead>

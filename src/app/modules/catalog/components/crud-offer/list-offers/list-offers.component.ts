@@ -14,6 +14,7 @@ import { Producto } from '../../../models/producto';
 export class ListOffersComponent {
   lista:OfferDtoProducto[]=[];
   listaproduct:Offer[]=[]
+  check:boolean=false;
   codigoOffer = "";
   alert:boolean = false;
   private subscription = new Subscription();
@@ -67,18 +68,43 @@ export class ListOffersComponent {
     }
   }
 
-  private loadOffers(){
-    this.subscription.add(
-      this.offerService.get().subscribe({
-        next: (offer:OfferDtoProducto[])=> {
-          this.lista =offer
+  loadOffers(){
+    if(this.check==false){
+      this.subscription.add(
+        this.offerService.get().subscribe({
+          next: (offer:OfferDtoProducto[])=> {
+            this.lista=[]
+            offer.forEach(o =>{
+              if(o.activo==true){
+                this.lista.push(o)
+              }
+            })
+  
+          },
+          error: ()=>{
+            console.log("Error al cargar las Descuento")
+          }
+        })
+      )
 
-        },
-        error: ()=>{
-          console.log("Error al cargar las Descuento")
-        }
-      })
-    )
+    }else{
+      this.subscription.add(
+        this.offerService.get().subscribe({
+          next: (offer:OfferDtoProducto[])=> {
+            this.lista=[]
+            offer.forEach(o =>{
+              if(o.activo==false){
+                this.lista.push(o)
+              }
+            })
+  
+          },
+          error: ()=>{
+            console.log("Error al cargar las Descuento")
+          }
+        })
+      )
+    }
   }
 
 }

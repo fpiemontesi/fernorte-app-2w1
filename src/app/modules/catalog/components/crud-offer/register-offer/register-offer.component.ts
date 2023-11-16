@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { OfferService } from '../../../services/offerService/offer.service';
 import { productService } from '../../../services/productService/product.service';
 import { OfferDto } from '../../dtos/offer-dto';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-register-offer',
@@ -45,8 +46,13 @@ export class RegisterOfferComponent {
     this.subscription.unsubscribe()
 
   }
+  enviarForm(formulario: NgForm){
+    if(formulario.valid){
+      this.agregarOffer()
+    }
+  }
 
-  agregarMarca(){
+  agregarOffer(){
     this.subscription.add(
       this.offerService.create(this.offer).subscribe({
         next: async (offer:OfferDto)=>{

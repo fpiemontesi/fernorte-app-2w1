@@ -6,11 +6,14 @@
   <form #formulario="ngForm" (ngSubmit)="enviarForm(formulario)">
   <div class="form-group">
       <label for="txtNombre">Nombre</label>
-      <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="marca.nombre">
+      <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="marca.nombre" #controlNombre="ngModel" required>
+      <div *ngIf="controlNombre.getError('required') && controlNombre.touched" style="color: red;">
+        El nombre es requerido</div>
     </div>
+    
     <button (click)="cleanForm()" class="btn btn-danger m-2 ms-0 p-2">Cancelar</button>
     <button type="submit" class="btn btn-primary m-2  p-2">Crear</button>
     <div *ngIf="formulario.invalid && formulario.touched" style="color: red;">
-    formulario invalido</div>
+    Formulario invalido</div>
   </form>
 </div>

@@ -6,6 +6,7 @@ import { OfferService } from '../../../services/offerService/offer.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { productService } from '../../../services/productService/product.service';
 import { OfferDtoProducto } from '../../dtos/offer-dto-producto';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-update-offer',
@@ -64,7 +65,12 @@ export class UpdateOfferComponent {
     this.subscription.unsubscribe();
   }
 
-  editarDiscount(){
+  enviarForm(formulario: NgForm){
+    if(formulario.valid){
+      this.editarOffer()
+    }
+  }
+  editarOffer(){
     this.subscription.add(
         this.offerService.update(this.offer).subscribe({
           next: async (offer:Offer)=>{
