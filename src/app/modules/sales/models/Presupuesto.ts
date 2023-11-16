@@ -1,6 +1,6 @@
 import { Detalle } from './Detalles';
 
-export class Presupuesto {
+export class  Presupuesto {
   id: number;
   doc_cliente: number;
   fecha_creacion: Date;
