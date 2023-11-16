@@ -1,0 +1,58 @@
+<div class="container">
+    <h1>Reportes de ventas</h1>
+  
+    <form>
+        <div class="row">
+        <div class="col-md-6">
+            <label for="mes">Mes</label>
+            <select class="form-control" id="mes">
+                <option value="00"></option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="año">Año</label>
+            <input type="number" class="form-control" id="año">
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-md-6">
+            <label for="tipo_venta">Tipo de venta</label>
+            <select class="form-control" id="tipo_venta">
+              <option value="1">Mayorista</option>
+              <option value="2">Minorista</option>
+            </select>
+          </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-outline-dark" (click)="generarGraficos()">Buscar</button>
+        </div>
+      </div>
+    </form>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="grafico-ventas" width="400" height="200"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="grafico-productos-mas-vendidos" width="400" height="200"></canvas>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12">
+        <canvas id="grafico-estado-ventas" width="400" height="200"></canvas>
+      </div>
+    </div>
+  </div>
+  

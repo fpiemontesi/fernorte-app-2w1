@@ -13,17 +13,20 @@ export class HomeComponent {
   mostrarConsultaPresupuesto: boolean = false;
   mostrarConsultaVenta: boolean = false;
   mostrarAltaPresupuesto:boolean = false;
+  mostrarReporte: boolean = false;
 
   MenuVenta(event : Event) {
       event.preventDefault();
       this.mostrarVenta = !this.mostrarVenta;
       this.mostrarPresupuesto = false;
+
   }
 
   MenuPresupuesto(event:Event) {
     event.preventDefault();
     this.mostrarPresupuesto = !this.mostrarPresupuesto;
     this.mostrarVenta = false;
+    this.mostrarReporte = false;
   }
 
   MostrarComponente(componente:string) {

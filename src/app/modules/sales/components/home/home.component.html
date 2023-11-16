@@ -8,6 +8,9 @@
                 <li class="nav-item" *ngIf="mostrarVenta">
                     <button class="btn text-white m-1" routerLink="consultar-venta">Consultar Venta</button>
                 </li>
+                <li class="nav-item" *ngIf="mostrarVenta">
+                    <button class="btn text-white m-1" routerLink="reporte-filtro">Reportes Venta</button>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link estilo" href="#" (click)="MenuPresupuesto($event)"> Presupuesto</a>
                 </li>
@@ -17,6 +20,7 @@
                 <li class="nav-item" *ngIf="mostrarPresupuesto">
                     <button class="btn text-white m-1" routerLink="consultar-presupuesto">Consultar Presupuesto</button>
                 </li>
+                
             </ul>
         </div>
         <div class="col-md-9 col-lg-10 fondo-formulario">

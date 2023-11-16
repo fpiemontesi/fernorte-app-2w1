@@ -9,10 +9,10 @@ import { ConsultarVentaComponent } from './components/consultar-venta/consultar-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
-import { DetallesProductosComponent } from './components/detalles-productos/detalles-productos.component';
 import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ModificarPresupuestoComponent } from './components/modificar-presupuesto/modificar-presupuesto.component';
+import { FiltroFechaComponent } from './components/reportes/filtro-fecha/filtro-fecha.component';
 
 
 const routes: Routes = [
@@ -36,6 +36,10 @@ const routes: Routes = [
         path: 'modificar-presupuesto',
         component: ModificarPresupuestoComponent
       },
+      {
+        path: 'reporte-filtro',
+        component: FiltroFechaComponent
+      }
     ]
   }
 ];
@@ -48,9 +52,9 @@ const routes: Routes = [
     ConsultarPresupuestoComponent,
     ConsultarVentaComponent,
     AltaPresupuestoComponent,
-    DetallesProductosComponent,
     ModificarVentaComponent,
     ModificarPresupuestoComponent,
+    FiltroFechaComponent,
   ],
   providers: [],
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],

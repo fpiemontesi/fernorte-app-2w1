@@ -1,0 +1,27 @@
+{
+    "datos":{
+        "monto": 3000,
+        "total_ventas": 40,
+        "monto_mes_anterior": 2300,
+        "total_mes_anterior": 30,
+        "mayorista": 10,
+        "minorista": 30,
+        "pendiente": 14,
+        "entregado": 26,
+        "productos": [
+          {
+            "producto": "Clavo",
+            "cantidad": 40
+          },
+          {
+            "producto": "Tornillo",
+            "cantidad": 20
+          },
+          {
+            "producto": "Martillo",
+            "cantidad": 2
+          }
+          ] 
+    }
+    
+}
