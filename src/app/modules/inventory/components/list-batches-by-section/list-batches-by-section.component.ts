@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { batch } from '../../models/batch';
+import { Batch } from '../../models/batch';
 import { BatchService } from '../../services/batch.service';
 import { Subscription } from 'rxjs';
 import { AppToastService } from '../../services/app-toast.service';
@@ -10,8 +10,8 @@ import { AppToastService } from '../../services/app-toast.service';
   styleUrls: ['./list-batches-by-section.component.css']
 })
 export class ListBatchesBySectionComponent implements OnInit, OnDestroy{
-  batches: batch[] = [];
-  batchesFiltered: batch[] = [];
+  batches: Batch[] = [];
+  batchesFiltered: Batch[] = [];
   sectionId!: string;
   private subscriptions = new Subscription();
 
@@ -20,7 +20,7 @@ export class ListBatchesBySectionComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.subscriptions.add(
       this.batchService.getAll().subscribe({
-        next: (response: batch[]) => {
+        next: (response: Batch[]) => {
           this.batches = response;
         },
         error: (err) => {
@@ -36,7 +36,7 @@ export class ListBatchesBySectionComponent implements OnInit, OnDestroy{
 
   filterBatchesBySection(): void {
     if (this.sectionId) {
-      this.batchesFiltered = this.batches.filter(batch => batch.id_section === this.sectionId);
+      this.batchesFiltered = this.batches.filter(batch => batch.sectionId === this.sectionId);
 
       if (this.batchesFiltered.length === 0) {
         this.toastService.show('No se encontraron lotes', 'No se encontraron lotes con el ID Sección seleccionado');

@@ -33,10 +33,10 @@
               <ng-container *ngFor="let batch of batchesFiltered.length > 0 ? batchesFiltered : batches">
                 <tr>
                   <td>{{ batch.id }}</td>
-                  <td>{{ batch.id_existence }}</td>
-                  <td>{{ batch.id_section }}</td>
+                  <td>{{ batch.existenceCode }}</td>
+                  <td>{{ batch.sectionId }}</td>
                   <td>{{ batch.quantity }}</td>
-                  <td>{{ batch.due_date | date: 'yyyy-MM-dd' }}</td>
+                  <td>{{ batch.dueDate | date: 'yyyy-MM-dd' }}</td>
                   <td>{{ batch.shelf }}</td>
                 </tr>
               </ng-container>

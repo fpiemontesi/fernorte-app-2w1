@@ -10,8 +10,8 @@ export class BatchService {
 
   constructor(private http: HttpClient) { }
   
-  getAll(): Observable<batch[]>{
-    return this.http.get<batch[]>('http://localhost:3000/batches');
+  getAll(): Observable<Batch[]>{
+    return this.http.get<Batch[]>('http://localhost:3000/batches');
   }
   
   create(body: Batch): Observable<Batch>{

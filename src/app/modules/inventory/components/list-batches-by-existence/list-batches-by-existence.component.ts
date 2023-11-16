@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { batch } from '../../models/batch';
+import { Batch } from '../../models/batch';
 import { Subscription } from 'rxjs';
 import { BatchService } from '../../services/batch.service';
 import { AppToastService } from '../../services/app-toast.service';
@@ -10,8 +10,8 @@ import { AppToastService } from '../../services/app-toast.service';
   styleUrls: ['./list-batches-by-existence.component.css']
 })
 export class ListBatchesByExistenceComponent implements OnInit, OnDestroy{
- batches: batch[] = [];
- batchesFiltered: batch[] = [];
+ batches: Batch[] = [];
+ batchesFiltered: Batch[] = [];
  existenceId!: string; 
  private subscriptions = new Subscription();
 
@@ -20,7 +20,7 @@ export class ListBatchesByExistenceComponent implements OnInit, OnDestroy{
  ngOnInit(): void {
    this.subscriptions.add(
      this.batchService.getAll().subscribe({
-       next: (response: batch[]) => {
+       next: (response: Batch[]) => {
          this.batches = response;
        },
        error: (err) => {
@@ -36,7 +36,7 @@ export class ListBatchesByExistenceComponent implements OnInit, OnDestroy{
 
  filterBatches(): void {
   if (this.existenceId) {
-    this.batchesFiltered = this.batches.filter(batch => batch.id_existence === this.existenceId);
+    this.batchesFiltered = this.batches.filter(batch => batch.existenceCode === this.existenceId);
 
     if (this.batchesFiltered.length === 0) {
       this.toastService.show('No se encontraron lotes', 'No se encontraron lotes con el ID Existencia seleccionado');
