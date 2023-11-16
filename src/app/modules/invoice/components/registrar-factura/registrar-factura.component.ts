@@ -83,37 +83,10 @@ export class RegistrarFacturaComponent {
         this.nroFactura = highestId + 1;
   
       });
-
-
-
-    this.calcularDescuentos();
-
-
   }
-  realizarPago() { }
 
-  calcularDescuentos() {
-    //HICE UNOS CALCULOS PORQUE EL TOTAL ESTA MAL
-    let totalDescuento = 0;
-    /* this.orderSelected.total = parseFloat(
-      (
-        ((this.orderSelected.detalles[0].precio_unitario * this.orderSelected.detalles[0].cantidad) +
-          (this.orderSelected.detalles[1].precio_unitario * this.orderSelected.detalles[1].cantidad))
-      ).toFixed(2)
-    );
-
-    console.log(this.orderSelected.total)
-
-    for (const disc of this.orderSelected.descuentos) {
-      disc.discounted = (disc.porcentaje / 100) * this.orderSelected.total;
-      totalDescuento += disc.discounted
-    }
-
-    console.log(totalDescuento)
-    this.orderSelected.total = this.orderSelected.total - totalDescuento
-
-    console.log(this.orderSelected.total)*/
-  }
+  
+  realizarPago() { } 
 
   obtenerInvoiceData() {
     this.invoice.orderId = this.orderSelected.id;

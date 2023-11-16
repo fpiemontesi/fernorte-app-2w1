@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailsModalComponent } from '../details-modal/details-modal.component';
 import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
+import { InvoiceDetail } from '../../models/InvoiceDetail';
 
 @Component({
   selector: 'fn-gestion-factura',
@@ -86,6 +87,11 @@ export class GestionFacturaComponent {
 
   obtenerDetalles(id_invoice:number){
     this.invoiceService.getDetailInvoices(id_invoice).subscribe((result) =>{
+      
+      for(let i of result){
+        i.subTotal = i.price * i.count;
+      }
+
       console.log(result)
      
       this.modalService.open(DetailsModalComponent, {
@@ -95,6 +101,8 @@ export class GestionFacturaComponent {
       
     })
   }
+
+ 
 
   public searchInvoices() {
     // Realiza la búsqueda de facturas utilizando los valores actuales del formulario

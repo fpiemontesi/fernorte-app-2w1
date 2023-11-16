@@ -37,9 +37,8 @@ const routes: Routes = [
   { path: 'GestionarFactura', component: GestionFacturaComponent },
   {
     path: 'Reportes',
-    component: ReporteHomeComponent,
     children: [
-      { path: '', redirectTo: 'Clientes', pathMatch: 'full' }, 
+      { path: '', component:ReporteHomeComponent }, 
       { path: 'Clientes', component: ReporteClientesComponent },
     ],
   },

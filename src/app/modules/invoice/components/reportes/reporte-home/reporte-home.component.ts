@@ -25,6 +25,7 @@ export class ReporteHomeComponent {
   search(){
     this.reportService.setFilters(this.filterForm.value.dateFrom, this.filterForm.value.dateTo);
   }
+  
   verDetallesReportClientes(){
     console.log('verDetallesReportClientes');
     this.route.navigate(['Reportes/Clientes']);
