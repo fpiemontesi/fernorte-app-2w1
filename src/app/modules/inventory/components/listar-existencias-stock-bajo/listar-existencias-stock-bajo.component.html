@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <h1>Listar Existencia con stock bajo</h1>
+    </div>
+</nav>
+<div class="container mx-auto mb-3" style="width: 70%;">
+    <div style="overflow: auto; max-height: 400px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" style="position: sticky; top: 0;">Producto</th>
+                    <th scope="col" style="position: sticky; top: 0;">Stock Minimo</th>
+                    <th scope="col" style="position: sticky; top: 0;">Stock Actual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let existencia of listaExistenciasStockBajo">
+                    <th scope="row">{{ existencia.name }}</th>
+                    <td scope="row">{{ existencia.minimumStock }}</td>
+                    <td scope="row">{{ existencia.stockNow }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
