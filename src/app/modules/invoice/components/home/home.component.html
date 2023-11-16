@@ -21,45 +21,24 @@
                 >Gestionar Factura</a
               >
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item ">
               <a
-                class="nav-link menu-option-custom dropdown-toggle"
-                (click)="reportes()"
+                class="nav-link menu-option-custom"
+                routerLink="/Reportes"
               >
                 Reportes
               </a>
             </li>
-            <li class="nav-item" *ngIf="abrirReportes">
-              <a
-                class="nav-link menu-option-custom-secondary"
-                routerLink="/Clientes"
-                >Clientes</a
-              >
-            </li>
-            <li class="nav-item" *ngIf="abrirReportes">
-              <a
-                class="nav-link menu-option-custom-secondary"
-                routerLink="/FormaPago"
-                >FormaPago</a
-              >
-            </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
-                (click)="modalPaymentMethod()"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                class="nav-link menu-option-custom dropdown-toggle"
+                (click)="dropdown()"
               >
                 Parametros
               </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" routerLink="/paymentMethods"
-                    >Payment Methods</a
-                  >
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item" *ngIf="abrirDropdown">
+              <a class="nav-link menu-option-custom-secondary" (click)="modalPaymentMethod()">FormaPago</a>
             </li>
           </ul>
         </div>

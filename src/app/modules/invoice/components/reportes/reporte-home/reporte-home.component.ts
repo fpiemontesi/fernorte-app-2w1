@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastService } from '../../../services/toast.service';
 import { ReportesService } from '../../../services/reportes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fn-reporte-home',
@@ -11,9 +12,9 @@ import { ReportesService } from '../../../services/reportes.service';
 export class ReporteHomeComponent {
   filterForm: FormGroup = new FormGroup({});
   dataLoaded: Boolean = false;
-   chartInstance: any;
+  chartInstance: any;
 
-  constructor( private formBuilder: FormBuilder, private toastService: ToastService, private reportService: ReportesService) {
+  constructor( private formBuilder: FormBuilder, private toastService: ToastService, private reportService: ReportesService,private route: Router) {
     this.filterForm = this.formBuilder.group({
       dateFrom: [''],
       dateTo: [''],
@@ -23,6 +24,9 @@ export class ReporteHomeComponent {
 
   search(){
     this.reportService.setFilters(this.filterForm.value.dateFrom, this.filterForm.value.dateTo);
-    
+  }
+  verDetallesReportClientes(){
+    console.log('verDetallesReportClientes');
+    this.route.navigate(['Reportes/Clientes']);
   }
 }

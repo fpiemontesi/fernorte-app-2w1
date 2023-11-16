@@ -13,9 +13,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  abrirReportes: boolean = false;
-  reportes() {
-    this.abrirReportes = !this.abrirReportes;
+  abrirDropdown: boolean = false;
+  dropdown() {
+    this.abrirDropdown = !this.abrirDropdown;
   }
   dolar?: number;
   orden: Order = new Order();

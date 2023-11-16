@@ -51,16 +51,21 @@ export class MonthsBilledColsChartComponent implements OnInit, OnDestroy {
   createChart() {
     const labels = this.billedMonths.map(month => this.getMonthName(Number(month.month)));
     const dataValues = this.billedMonths.map(month => month.totalAmount);
-
+  
+  // Ordenar los datos por los valores de month
+  const sortedData = this.billedMonths.slice().sort((a, b) => Number(a.month) - Number(b.month));
+  const sortedLabels = sortedData.map(month => this.getMonthName(Number(month.month)));
+  const sortedDataValues = sortedData.map(month => month.totalAmount);
+  
     const ctx = document.getElementById('MyBarChart') as HTMLCanvasElement;
-    
+  
     this.chartInstance = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: labels,
+        labels: sortedLabels,
         datasets: [{
           label: 'Monto total facturado por mes',
-          data: dataValues,
+          data: sortedDataValues,
           backgroundColor: 'rgba(75, 192, 192, 0.5)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1
@@ -91,6 +96,6 @@ export class MonthsBilledColsChartComponent implements OnInit, OnDestroy {
           }
         }
       }
-    });
+    });  
   }
 }

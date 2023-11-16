@@ -34,14 +34,15 @@ const routes: Routes = [
       },
     ],
   },
-
   { path: 'GestionarFactura', component: GestionFacturaComponent },
-  { path: 'Reportes',
-  children:[
-    {path:'', component:ReporteHomeComponent},
-    {path:'Clientes', component:ReporteClientesComponent},
-    {path:'FormaPago', component:ReporteFormaDePagoComponent}
-  ] },
+  {
+    path: 'Reportes',
+    component: ReporteHomeComponent,
+    children: [
+      { path: '', redirectTo: 'Clientes', pathMatch: 'full' }, 
+      { path: 'Clientes', component: ReporteClientesComponent },
+    ],
+  },
   {path: 'paymentMethods', component: PaymentsMethodsModalComponent}
 ];
 
