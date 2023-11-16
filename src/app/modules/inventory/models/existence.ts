@@ -3,3 +3,4 @@ export class Existence {
   name: string = '';
   minimunStock:number = 0;
 }
+

@@ -88,129 +88,129 @@
       ]
     }
   ],
-  "sections": [
-    {
-      "id": 1,
-      "name": "A",
-      "zoneId": 1
-    },
-    {
-      "id": 3,
-      "name": "C",
-      "zoneId": 2
-    },
-    {
-      "id": 4,
-      "name": "D",
-      "zoneId": 1
-    },
-    {
-      "id": 7,
-      "name": "ZZ",
-      "zoneId": 1
-    },
-    {
-      "id": 8,
-      "name": "Zh",
-      "zoneId": 1
-    },
-    {
-      "id": 9,
-      "name": "Z1",
-      "zoneId": 1
-    }
-  ],
-  "zones": [
-    {
-      "id": 1,
-      "name": "Galpon"
-    },
-    {
-      "id": 2,
-      "name": "Corralon"
-    }
-  ],
-  "batchs": [
-    {
-      "id": 1,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
-      "shelf": "6"
-    },
-    {
-      "id": 2,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
-      "shelf": "6"
-    },
-    {
-      "id": 3,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
-      "shelf": "6"
-    },
-    {
-      "id": 4,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
-      "shelf": "6"
-    },
-    {
-      "id": 5,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
-      "shelf": "3"
-    },
-    {
-      "id": 6,
-      "existenceId": 1,
-      "sectionId": 1,
-      "quantity": "3",
-      "dueDate": "2023-10-27",
-      "shelf": "3"
-    },
-    {
-      "id": 7,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "4",
-      "dueDate": "2023-10-26",
-      "shelf": "4"
-    },
-    {
-      "id": 8,
-      "existenceId": 1,
-      "sectionId": 3,
-      "quantity": "3",
-      "dueDate": "2023-10-30",
-      "shelf": "5"
-    }
-  ],
-  "existences": [
-    {
-      "id": 1,
-      "name": "tornillos",
-      "minimunStock": 100
-    },
-    {
-      "id": 2,
-      "name": "tablones",
-      "minimunStock": 20
-    },
-    {
-      "id": 3,
-      "name": "tuercas",
-      "minimunStock": 150
-    }
-  ]
-}
+   "sections": [
+      {
+        "id": 1,
+        "name": "A",
+        "id_zone": 1
+      },
+      {
+        "id": 2,
+        "name": "B",
+        "id_zone": 2
+      },
+      {
+        "id": 3,
+        "name": "C",
+        "id_zone": 2
+      },
+      {
+        "id": 4,
+        "name": "D",
+        "id_zone": 1
+      },
+      {
+        "id": 5,
+        "name": "E",
+        "id_zone": 2
+      },
+      {
+        "id": 6,
+        "name": "R",
+        "id_zone": 1
+      }
+    ],
+    "zones": [
+      {
+        "id": 1,
+        "name": "Warehouse"
+      },
+      {
+        "id": 2,
+        "name": "Yard"
+      }
+    ],
+    "batches": [
+      {
+        "id": 1,
+        "id_existence": "1",
+        "id_section": "3",
+        "quantity": "3",
+        "due_date": "2023-10-27",
+        "shelf": "6"
+      },
+      {
+        "id": 2,
+        "id_existence": "2",
+        "id_section": "3",
+        "quantity": "3",
+        "due_date": "2023-10-27",
+        "shelf": "6"
+      },
+      {
+        "id": 3,
+        "id_existence": "2",
+        "id_section": "4",
+        "quantity": "3",
+        "due_date": "2023-10-27",
+        "shelf": "6"
+      },
+      {
+        "id": 4,
+        "id_existence": "1",
+        "id_section": "3",
+        "quantity": "3",
+        "due_date": "2023-10-27",
+        "shelf": "6"
+      },
+      {
+        "id": 5,
+        "id_existence": "3",
+        "id_section": "2",
+        "quantity": "3",
+        "due_date": "2023-10-27",
+        "shelf": "3"
+      },
+      {
+        "id": 6,
+        "id_existence": "4",
+        "id_section": "1",
+        "quantity": "3",
+        "due_date": "2023-10-27",
+        "shelf": "3"
+      },
+      {
+        "id": 7,
+        "id_existence": "1",
+        "id_section": "1",
+        "quantity": "4",
+        "due_date": "2023-10-26",
+        "shelf": "4"
+      },
+      {
+        "id": 8,
+        "id_existence": "1",
+        "id_section": "1",
+        "quantity": "3",
+        "due_date": "2023-10-30",
+        "shelf": "5"
+      }
+    ],
+    "existences": [
+      {
+        "id": "1",
+        "name": "screws",
+        "minimum_stock": 100
+      },
+      {
+        "id": "2",
+        "name": "planks",
+        "minimum_stock": 20
+      },
+      {
+        "id": "3",
+        "name": "nuts",
+        "minimum_stock": 150
+      }
+    ]
+  }
