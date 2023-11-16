@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Receipt } from '../../../models/receipt';
 import { ReceiptDetail } from '../../../models/receipt-detail';
-import { RemitoService } from '../../../services/remito.service';
+import { ReceiptService } from '../../../services/remito.service';
 import { Subscription } from 'rxjs';
 import { AppToastService } from '../../../services/app-toast.service';
 
@@ -17,7 +17,7 @@ export class RegistrarRemitoComponent implements OnDestroy{
   detail: ReceiptDetail = new ReceiptDetail();
   private subscriptions = new Subscription();
 
-  constructor(private remitoService: RemitoService, private toastService: AppToastService){}
+  constructor(private remitoService: ReceiptService, private toastService: AppToastService){}
 
   addReceipt(form: NgForm) {
     if (form.invalid) {
