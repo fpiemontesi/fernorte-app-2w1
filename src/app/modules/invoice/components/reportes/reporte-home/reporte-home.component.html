@@ -1,6 +1,65 @@
-<!--¿¿¿Componente Obsoleto??-->
-
-<p>reporte-home works!</p>
+<div class="container-fluid bg-primario text-white pt-3 pb-4 sombra">
+    <form action="" [formGroup]="filterForm">
+        <div class="row">
+            <div class="col-lg col-md-4 col-sm-6 mt-1">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <label for="inputPassword6" class="col-form-label">Desde</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" class="form-control" formControlName="dateFrom" (change)="search()" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg col-md-4 col-sm-6 mt-1">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <label for="" class="col-form-label">Hasta</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" class="form-control" formControlName="dateTo" (change)="search()" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg col-md-4 col-sm-6 mt-1">
+            </div>
+            <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+        </div>
+    </form>
+</div>
+<!-- <p>reporte-home works!</p>
 <a href=" " routerLink="/Reportes/Clientes">ver clientes</a>
-<br />
-<a href=" " routerLink="/Reportes/FormaPago">ver forma de pago</a>
+<br>
+<a href=" " routerLink="/Reportes/FormaPago">ver forma de pago</a> -->
+<div class="row">
+    <div class="col-5 m-3">
+        <div class="card">
+            <div class="card-header">
+                Gráfico de Consumo de Clientes
+            </div>
+            <div class="card-body ">
+                <app-ClientsConsumePieChart></app-ClientsConsumePieChart>
+                <div class="row justify-content-center mt-2">
+                    <button class="btn btn-primary col-3" routerLink="/Reportes/Clientes">
+                        Ver detalles
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-5 m-3">
+        <div class="card">
+            <div class="card-header">
+                Gráfico de Consumo de Clientes
+            </div>
+            <div class="card-body ">
+                <app-monthsBilledColsChart></app-monthsBilledColsChart>
+                <div class="row justify-content-center mt-2">
+                    <button class="btn btn-primary col-3">
+                        Ver detalles
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { InvoiceDto } from '../models/InvoiceDto';
 import { Invoice } from '../models/Invoice';
@@ -20,7 +20,7 @@ export class InvoiceService {
 
   requestInvoice?: RequestInvoiceDto;
 
-  constructor(private http: HttpClient, private toolsService: ToolsService) {}
+  constructor(private http: HttpClient, private toolsService: ToolsService) { }
 
   loadInvoice(body: RequestInvoiceDto): Observable<RequestInvoiceDto> {
     return this.http.post<RequestInvoiceDto>(
@@ -30,7 +30,9 @@ export class InvoiceService {
   }
 
   getInvoices(): Observable<InvoiceDto[]> {
-    return this.http.get<InvoiceDto[]>(`${this.apiUrl}/all`);
+    return this.http.get<InvoiceDto[]>(
+      `${this.apiUrl}/all`
+    );
   }
   getInvoicesFiltered(
     dateFrom: string | null,
@@ -38,34 +40,28 @@ export class InvoiceService {
     client: string
   ): Observable<InvoiceDto[]> {
     let params = new HttpParams();
-
+  
     if (dateFrom !== null && dateFrom !== '') {
-      const formattedDateFrom: string = this.toolsService.formatDate(dateFrom);
-
-      params = params.set('dateFrom', formattedDateFrom);
+      let formatedDateFrom: string = this.toolsService.formatDate(dateFrom);
+      const encodedDateFrom = encodeURIComponent(formatedDateFrom);
+      params = params.set('dateFrom', encodedDateFrom);
     }
-
+  
     if (dateTo !== null && dateTo !== '') {
-      const formattedDateTo: string = this.toolsService.formatDate(dateTo);
-      params = params.set('dateTo', formattedDateTo);
+      let formatedDateTo: string = this.toolsService.formatDate(dateTo);
+      const encodedDateTo = encodeURIComponent(formatedDateTo);
+      params = params.set('dateTo', encodedDateTo);
     }
-
-    if (client !== '') {
+  
+    if(client !== '') {
       params = params.set('clientId', client);
-    }
-
+    }  
     // Construir la URL con parámetros codificados
     const apiUrl = `${this.apiUrl}/all/filtered?${params.toString()}`;
-
-    // Hacer la solicitud HTTP con parámetros
-    return this.http.get<InvoiceDto[]>(apiUrl).pipe(
-      catchError((error) => {
-        // Manejar el error aquí (puedes logearlo o realizar otras acciones)
-        console.error('Error en la solicitud HTTP:', error);
-        throw error; // Puedes lanzar el error nuevamente o realizar alguna acción específica.
-      })
-    );
+  
+    return this.http.get<InvoiceDto[]>(apiUrl);
   }
+  
 
   setTotalpay(num: number) {
     this.totalPay = num;
@@ -75,27 +71,28 @@ export class InvoiceService {
   }
 
   createInvoice(invoice: Invoice): Observable<Invoice> {
-    return this.http.post<Invoice>(this.apiUrl, invoice);
-  }
-
-  deleteInvoice(id_invoice: number): Observable<any> {
-    const url = `${this.apiUrl}/delete/${id_invoice}`;
-    return this.http.put(url, {});
-  }
-
-  getDetailInvoices(id_invoice: number): Observable<InvoiceDetail[]> {
-    return this.http.get<InvoiceDetail[]>(
-      `${this.apiUrl}/details/` + id_invoice
+    return this.http.post<Invoice>(
+      this.apiUrl,
+      invoice
     );
+  }
+
+  deleteInvoice(id_invoice:number) :Observable<any>{
+    const url = `${this.apiUrl}/delete/${id_invoice}`;
+    return this.http.put(url,{})
+  }
+
+  getDetailInvoices(id_invoice:number):Observable<InvoiceDetail[]>{
+    return this.http.get<InvoiceDetail[]>(`${this.apiUrl}/details/` + id_invoice)
   }
   generateInvoicePdf(id: number): Observable<Blob> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Accept: 'application/pdf',
+      'Accept': 'application/pdf'
     });
     return this.http.get(`${this.apiUrl}/generate-pdf-bytes/${id}`, {
       responseType: 'blob',
-      headers: headers,
+      headers: headers
     });
   }
 }

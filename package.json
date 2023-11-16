@@ -21,6 +21,7 @@
     "@ng-bootstrap/ng-bootstrap": "^15.1.1",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
+    "chart.js": "^4.4.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -30,6 +31,7 @@
     "@angular/cli": "^16.2.4",
     "@angular/compiler-cli": "^16.2.0",
     "@angular/localize": "^16.2.0",
+    "@types/chart.js": "^2.9.40",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",

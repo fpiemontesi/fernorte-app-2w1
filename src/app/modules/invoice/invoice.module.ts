@@ -12,11 +12,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PaymentsMethodsModalComponent } from './components/payments-methods-modal/payments-methods-modal.component';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsContainer } from './components/toasts/toasts-container.component';
+import { ToastsContainer } from "./components/toasts/toasts-container.component";
 import { ReporteHomeComponent } from './components/reportes/reporte-home/reporte-home.component';
 import { ReporteFormaDePagoComponent } from './components/reportes/reporte-forma-de-pago/reporte-forma-de-pago.component';
 import { ReporteClientesComponent } from './components/reportes/reporte-clientes/reporte-clientes.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { ClientsConsumePieChartComponent } from './components/reportes/ClientsConsumePieChart/ClientsConsumePieChart.component';
+import { MonthsBilledColsChartComponent } from './components/reportes/monthsBilledColsChart/monthsBilledColsChart.component';
 
 const routes: Routes = [
   {
@@ -34,40 +36,42 @@ const routes: Routes = [
   },
 
   { path: 'GestionarFactura', component: GestionFacturaComponent },
-  {
-    path: 'Reportes',
-    children: [{ path: '', component: ReporteHomeComponent }],
-  },
-  { path: 'paymentMethods', component: PaymentsMethodsModalComponent },
-  { path: 'Clientes', component: ReporteClientesComponent },
-  { path: 'FormaPago', component: ReporteFormaDePagoComponent },
+  { path: 'Reportes',
+  children:[
+    {path:'', component:ReporteHomeComponent},
+    {path:'Clientes', component:ReporteClientesComponent},
+    {path:'FormaPago', component:ReporteFormaDePagoComponent}
+  ] },
+  {path: 'paymentMethods', component: PaymentsMethodsModalComponent}
 ];
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    RegistrarFacturaComponent,
-    PendingOrdersComponent,
-    GestionFacturaComponent,
-    RegistrarPagoComponent,
-    FormPagoComponent,
-    DetailsModalComponent,
-    PaymentsMethodsModalComponent,
-    ReporteHomeComponent,
-    ReporteFormaDePagoComponent,
-    ReporteClientesComponent,
-    OrderDetailComponent,
-  ],
-  providers: [],
-  exports: [HomeComponent, RouterModule],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-    NgbToastModule,
-    NgbTooltipModule,
-    ToastsContainer,
-  ],
+    declarations: [
+        HomeComponent,
+        RegistrarFacturaComponent,
+        PendingOrdersComponent,
+        GestionFacturaComponent,
+        RegistrarPagoComponent,
+        FormPagoComponent,
+        DetailsModalComponent,
+        PaymentsMethodsModalComponent,
+        ReporteHomeComponent,
+        ReporteFormaDePagoComponent,
+        ReporteClientesComponent,
+        OrderDetailComponent,
+        ClientsConsumePieChartComponent,
+        MonthsBilledColsChartComponent
+    ],
+    providers: [],
+    exports: [HomeComponent, RouterModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule,
+        NgbToastModule,
+        NgbTooltipModule,
+        ToastsContainer
+    ]
 })
 export class InvoiceModule {}

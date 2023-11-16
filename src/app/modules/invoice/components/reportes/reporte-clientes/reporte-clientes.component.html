@@ -1,20 +1,36 @@
-<table class="table">
-    <thead>
+<div class="container mt-4">
+  <h2 class="text-center">Montos totales por cliente</h2>
+  <ng-container *ngIf="dateFrom && !dateTo">
+    <p class="text-center">Desde {{ dateFrom }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="!dateFrom && dateTo">
+    <p class="text-center">Hasta {{ dateTo }}</p>
+  </ng-container>
+
+  <ng-container *ngIf="dateFrom && dateTo">
+    <p class="text-center">Desde {{ dateFrom }} hasta {{ dateTo }}</p>
+  </ng-container>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+  <table class="table table-bordered table-striped mt-4">
+    <thead class="thead-dark">
       <tr>
         <th scope="col">Cliente</th>
         <th scope="col">Documento</th>
-        <th scope="col">Telefono</th>
+        <th scope="col">Teléfono</th>
         <th scope="col">Tipo de Cliente</th>
         <th scope="col">Monto Total Facturado</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let client of clients">
-        <th >{{client.name + ' ' + client.lastName }}</th>
-        <td>{{client.nro_doc}}</td>
-        <td>{{client.phone}}</td>
-        <td>{{client.clientType}}</td>
-        <td>{{client.totalAmount | currency}}</td>
-      </tr>     
+        <td>{{ client.name + ' ' + client.lastName }}</td>
+        <td>{{ client.nro_doc }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.clientType }}</td>
+        <td>{{ client.totalAmount | currency }}</td>
+      </tr>
     </tbody>
   </table>
+  <button class="btn btn-primary" (click)="generatePdf()">Generar PDF</button>
+</div>
