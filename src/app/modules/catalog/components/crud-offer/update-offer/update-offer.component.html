@@ -1,0 +1,37 @@
+<div class="container">
+    <ng-container *ngIf="alert">
+      <fn-alert mensaje="Se guardo exitosamente. Espere 5 Segundos" tipoAlert="alert alert-success"></fn-alert>
+    </ng-container>
+  
+    <form #formulario="ngForm" (ngSubmit)="editarDiscount()">
+        
+        <div class="form-group">
+          <label for="txtNombre">Nombre</label>
+          <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="offer.nombre">
+        </div>
+        <div class="form-group">
+          <label for="txtDescripcion">Descripcion</label>
+          <input type="text" class="form-control" id="txtDescripcion" name="descripcion" placeholder="Ingresar descripcion" [(ngModel)]="offer.descripcion">
+        </div>
+        <div class="form-group">
+          <label for="txtPrecio_min">Precio Oferta</label>
+          <input type="number" class="form-control" id="txtPrecio_min" name="precio_oferta" placeholder="Ingresar Precio Oferta" [(ngModel)]="offer.precio_oferta">
+        </div>
+        <div class="form-group">
+          <label for="">Producto</label>
+          <select class="form-select" id="selectProducto" aria-label="Seleccionar Producto" name="productCodeSelected"  [(ngModel)]="offer.codigo_producto">
+            <option selected disabled>Seleccionar Producto</option>
+            <ng-container *ngFor="let producto of lstProductos">
+              <option value="{{producto.codigo}}">{{producto.nombre}}</option>
+            </ng-container>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" name="activo" [(ngModel)]="offer.activo">Activo
+        </div>
+        
+        <button routerLink="/listDiscounts" class="btn btn-danger m-2 ms-0 p-2">Volver</button>
+        <button type="submit" class="btn btn-primary m-2 p-2">Editar</button>
+      </form>
+    </div>
+    

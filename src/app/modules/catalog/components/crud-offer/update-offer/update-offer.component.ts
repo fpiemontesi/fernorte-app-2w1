@@ -1,51 +1,52 @@
 import { Component } from '@angular/core';
-import { Discount } from '../../../models/discount';
-import { Subscription } from 'rxjs';
-import { DiscountService } from '../../../services/discountService/discount.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Offer } from '../../../models/offer';
 import { Producto } from '../../../models/producto';
+import { Subscription } from 'rxjs';
+import { OfferService } from '../../../services/offerService/offer.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { productService } from '../../../services/productService/product.service';
-import { DiscountDtoProducto } from '../../dtos/discount-dto-producto';
+import { OfferDtoProducto } from '../../dtos/offer-dto-producto';
 
 @Component({
-  selector: 'fn-update-discount',
-  templateUrl: './update-discount.component.html',
-  styleUrls: ['./update-discount.component.css']
+  selector: 'fn-update-offer',
+  templateUrl: './update-offer.component.html',
+  styleUrls: ['./update-offer.component.css']
 })
-export class UpdateDiscountComponent {
-  discount:Discount = {} as Discount;
+export class UpdateOfferComponent {
+  offer:Offer = {} as Offer;
   lstProductos:Producto[] = []
-  codeDiscountSelected:string = "";
+  codeOfferSelected:string = "";
   alert:boolean = false
   private subscription = new Subscription();
 
 
-  constructor(private discountService:DiscountService, private activatedRoute: ActivatedRoute, private route:Router,private pService:productService){
+  constructor(private offerService:OfferService, private activatedRoute: ActivatedRoute, private route:Router,private pService:productService){
   }
 
   ngOnInit(): void {
     this.subscription.add(
       this.activatedRoute.queryParams.subscribe(params => {
-        this.codeDiscountSelected = params["codigo"];
+        this.codeOfferSelected = params["codigo"];
       }),
     )
     this.subscription.add(
-      this.discountService.getByCode(this.codeDiscountSelected).subscribe(
-        (response:DiscountDtoProducto)=>{
-          this.discount={
-            codigo: response.codigo,
+      this.offerService.getByCode(this.codeOfferSelected).subscribe(
+        (response:OfferDtoProducto)=>{
+          this.offer={
             nombre: response.nombre,
+            codigo: response.codigo,
             descripcion: response.descripcion,
-            precio_min: response.precio_min,
+            puntos: response.puntos,
+            activo: response.activo,
             codigo_producto: response.producto.codigo,
-            activo: response.activo
-          }
+            precio_oferta : response.precio_oferta
+          };
         }),
     )
     this.subscription.add(
       this.pService.getAllProducts().subscribe({
         next: (data:Producto[])=>{
-          data.forEach(e => {
+          data.forEach(e =>{
             if(e.activo==true){
               this.lstProductos.push(e)
             }
@@ -65,11 +66,11 @@ export class UpdateDiscountComponent {
 
   editarDiscount(){
     this.subscription.add(
-        this.discountService.update(this.discount).subscribe({
-          next: async (discount:Discount)=>{
+        this.offerService.update(this.offer).subscribe({
+          next: async (offer:Offer)=>{
             await this.toggleAlert()
-            this.discount = {} as Discount
-            this.route.navigate(["/listDiscounts"])
+            this.offer = {} as Offer
+            this.route.navigate(["/listOffers"])
           },
           error:()=>{
             alert("Ocurrio un error")

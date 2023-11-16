@@ -18,6 +18,9 @@ import { ModalComponent } from './components/interactions/modal/modal.component'
 import { ListDiscountsComponent } from './components/crud-discount/list-discounts/list-discounts.component';
 import { RegisterDiscountComponent } from './components/crud-discount/register-discount/register-discount.component';
 import { UpdateDiscountComponent } from './components/crud-discount/update-discount/update-discount.component';
+import { ListOffersComponent } from './components/crud-offer/list-offers/list-offers.component';
+import { RegisterOfferComponent } from './components/crud-offer/register-offer/register-offer.component';
+import { UpdateOfferComponent } from './components/crud-offer/update-offer/update-offer.component';
 
 
 
@@ -46,10 +49,17 @@ const routes:Routes = [
         {path:'registerDiscount', component:RegisterDiscountComponent},
         {path:"", component:ListDiscountsComponent},
       ]},
+      {
+        path:'listOffers',
+        children:[
+          {path:'updateOffer',component: UpdateOfferComponent},
+          {path:'registerOffer',component: RegisterOfferComponent},
+          {path: '',component: ListOffersComponent}
+        ]},
 ];
 
 @NgModule({
-  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent],
+  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent],
   providers: [],
   imports: [CommonModule, FormsModule, NgbModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],

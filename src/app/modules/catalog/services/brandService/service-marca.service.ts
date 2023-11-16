@@ -21,8 +21,8 @@ export class ServiceMarcaService {
   getByCode(code:string):Observable<Marca>{
     return this.http.get<Marca>("http://localhost:8080/api/brands/" + code);
   }
-  create(marca:Marca):Observable<Marca>{
-    return this.http.post<Marca>("http://localhost:8080/api/brands",marca)
+  create(marca:BrandDto):Observable<BrandDto>{
+    return this.http.post<BrandDto>("http://localhost:8080/api/brands",marca)
   }
   update(marca:Marca):Observable<Marca>{
     console.log("Marca en service"+this.marca.nombre)

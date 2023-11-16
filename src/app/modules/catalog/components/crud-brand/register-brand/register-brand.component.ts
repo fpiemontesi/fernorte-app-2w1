@@ -3,6 +3,8 @@ import {ServiceMarcaService} from "../../../services/brandService/service-marca.
 import {Marca} from "../../../models/marca";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import { NgForm } from '@angular/forms';
+import { BrandDto } from '../../dtos/brand-dto';
 
 @Component({
   selector: 'fn-register-brand',
@@ -10,13 +12,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./register-brand.component.css']
 })
 export class RegisterBrandComponent implements OnDestroy{
-  marca:Marca = {} as Marca;
+  marca:BrandDto = {} as BrandDto;
   alert:boolean = false;
   private subscription = new Subscription();
   constructor(private marcaService:ServiceMarcaService, private router:Router){}
 
   cleanForm(){
-    this.marca = {} as Marca
+    this.marca = {} as BrandDto
     this.router.navigate(["/listBrands"])
   }
 
@@ -27,9 +29,9 @@ export class RegisterBrandComponent implements OnDestroy{
   agregarMarca(){
     this.subscription.add(
       this.marcaService.create(this.marca).subscribe({
-        next: async (marca:Marca)=>{
+        next: async (marca:BrandDto)=>{
           await this.toggleAlert()
-          this.marca = {} as Marca
+          this.marca = {} as BrandDto
           this.router.navigate(["listBrands"])
         },
         error:()=>{
@@ -37,6 +39,11 @@ export class RegisterBrandComponent implements OnDestroy{
         }
       })
     )
+  }
+  enviarForm(formulario: NgForm){
+    if(formulario.valid){
+      this.agregarMarca()
+    }
   }
 
   toggleAlert(): Promise<void> {

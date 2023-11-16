@@ -16,4 +16,6 @@ export class AlertComponent implements OnInit{
     }, 5000);
   }
 
+  
+
 }

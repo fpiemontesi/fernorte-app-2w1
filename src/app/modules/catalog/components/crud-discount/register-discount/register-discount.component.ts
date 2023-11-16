@@ -21,7 +21,11 @@ export class RegisterDiscountComponent implements OnDestroy,OnInit {
   ngOnInit(): void {
     this.pService.getAllProducts().subscribe({
       next: (data : Producto[]) =>{
-        this.lstProductos = data
+        data.forEach(e => {
+          if(e.activo==true){
+            this.lstProductos.push(e)
+          }
+        })
 
       },
       error: () => {

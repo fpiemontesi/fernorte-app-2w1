@@ -4,6 +4,7 @@ import { DiscountService } from '../../../services/discountService/discount.serv
 import { Subscription } from 'rxjs';
 import { productService } from '../../../services/productService/product.service';
 import { Producto } from '../../../models/producto';
+import { DiscountDtoProducto } from '../../dtos/discount-dto-producto';
 
 @Component({
   selector: 'fn-list-discounts',
@@ -11,10 +12,11 @@ import { Producto } from '../../../models/producto';
   styleUrls: ['./list-discounts.component.css']
 })
 export class ListDiscountsComponent {
-  lista:Discount[]=[];
+  lista:DiscountDtoProducto[]=[];
   listaproduct:Producto[]=[]
   codigoDiscount = "";
   alert:boolean = false;
+  check:boolean =false;
   private subscription = new Subscription();
   constructor(private discountService:DiscountService, private pService:productService) {
 
@@ -23,18 +25,7 @@ export class ListDiscountsComponent {
   ngOnInit(): void {
     this.loadDiscounts();
 
-    this.pService.getAllProducts().subscribe({
-      next:(productos:Producto[])=>{
-        this.listaproduct = productos
-      },
-      error:()=> {
-        alert("error")
-      }
-    })
-  }
-  obtenerNombreProducto(code:string): string{
-    const producto = this.listaproduct.find(m => m.codigo === code);
-    return producto ? producto.nombre : 'Desconocida';
+    
   }
 
   ngOnDestroy() {
@@ -75,18 +66,44 @@ export class ListDiscountsComponent {
     }
   }
 
-  private loadDiscounts(){
-    this.subscription.add(
-      this.discountService.get().subscribe({
-        next: (discount:Discount[])=> {
-          this.lista =discount
+  loadDiscounts(){
+    if(this.check==false){
+      this.subscription.add(
+        this.discountService.get().subscribe({
+          next: (discount:DiscountDtoProducto[])=> {
+            this.lista=[]
+            discount.forEach(d =>{
+              if(d.activo==true){
+                this.lista.push(d)
+              }
+            })
+  
+          },
+          error: ()=>{
+            console.log("Error al cargar las Descuento")
+          }
+        })
+      )
 
-        },
-        error: ()=>{
-          console.log("Error al cargar las Descuento")
-        }
-      })
-    )
+    }else{
+      this.subscription.add(
+        this.discountService.get().subscribe({
+          next: (discount:DiscountDtoProducto[])=> {
+            this.lista=[]
+            discount.forEach(d =>{
+              if(d.activo==false){
+                this.lista.push(d)
+              }
+            })
+  
+          },
+          error: ()=>{
+            console.log("Error al cargar las Descuento")
+          }
+        })
+      )
+    }
+    
   }
 
 }

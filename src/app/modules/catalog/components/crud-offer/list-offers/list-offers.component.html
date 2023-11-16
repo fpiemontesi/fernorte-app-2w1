@@ -1,0 +1,37 @@
+<div class="container">
+    <fn-modal mensaje="Seguro que quieres eliminar?" option1="Eliminar" option2="Cancelar" (evento)="eliminarMarca()" title="Eliminar marca"></fn-modal>
+    <ng-container *ngIf="alert">
+      <fn-alert mensaje="Se elimino correctamente. Espere 5 segundos." tipoAlert="alert alert-success"></fn-alert>
+    </ng-container>
+  
+    <button routerLink="registerOffer" class="btn btn-success float-end mt-2">Registrar Oferta</button>
+    <h2 class="my-2 py-2">Listado de Ofertas</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Precio Oferta</th>
+        <th scope="col">Puntos</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Activo</th>
+        <th scope="col">Modificar</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let o of lista">
+        <td>{{o.codigo}}</td>
+        <td>{{o.nombre}}</td>
+        <td>{{o.descripcion}}</td>
+        <td>{{o.precio_oferta}}</td>
+        <td>{{o.puntos}}</td>
+        <td>{{o.producto.nombre}}</td>
+        <td>{{o.activo}}</td>
+        <td><button  routerLink="updateOffer" [queryParams]={codigo:[o.codigo]}  class="btn btn-primary">Modificar</button></td>
+        <td><button (click)="guardarCodigo(o.codigo)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
