@@ -21,7 +21,7 @@ import { UpdateDiscountComponent } from './components/crud-discount/update-disco
 import { ListOffersComponent } from './components/crud-offer/list-offers/list-offers.component';
 import { RegisterOfferComponent } from './components/crud-offer/register-offer/register-offer.component';
 import { UpdateOfferComponent } from './components/crud-offer/update-offer/update-offer.component';
-
+import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog/register-catalog.component';
 
 
 
@@ -56,10 +56,11 @@ const routes:Routes = [
           {path:'registerOffer',component: RegisterOfferComponent},
           {path: '',component: ListOffersComponent}
         ]},
+        {path:"registerCatalog", component:RegisterCatalogComponent}
 ];
 
 @NgModule({
-  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent],
+  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent,RegisterCatalogComponent],
   providers: [],
   imports: [CommonModule, FormsModule, NgbModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],
