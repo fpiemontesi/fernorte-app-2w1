@@ -18,8 +18,7 @@
       "damagedQuantity": 0,
       "batchIsExpired": true
     }
-  ]
-}
+  ],
   "receipts": [
     {
       "id": 1,
@@ -316,6 +315,5 @@
           }
         ]
     }
-      
   ]
  }

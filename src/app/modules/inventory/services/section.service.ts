@@ -10,7 +10,7 @@ export class SectionService {
 
   constructor(private http: HttpClient) { }
 
-  getAllByZone(zoneId: number): Observable<Section[]> {
+  getByZone(zoneId: number): Observable<Section[]> {
     return this.http.get<Section[]>(`http://localhost:3000/sections?zoneId=${zoneId}`);
   }
 

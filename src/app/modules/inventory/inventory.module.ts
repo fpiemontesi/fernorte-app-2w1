@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
-import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
-import { ListBatchesByExistenceComponent } from './components/list-batches-by-existence/list-batches-by-existence.component';
-import { ListBatchesBySectionComponent } from './components/list-batches-by-section/list-batches-by-section.component';
+import { ReservationListComponent } from './components/reservations/reservation-list/reservation-list.component';
+import { ListBatchesByExistenceComponent } from './components/batches/list-batches-by-existence/list-batches-by-existence.component';
+import { ListBatchesBySectionComponent } from './components/batches/list-batches-by-section/list-batches-by-section.component';
 import { RegistrarRemitoComponent } from './components/remito/registrar-remito/registrar-remito.component';
-import { RegistrarLotesComponent } from './components/registrar-lotes/registrar-lotes.component';
+import { RegistrarLotesComponent } from './components/batches/registrar-lotes/registrar-lotes.component';
 import { FormsModule } from '@angular/forms';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import {

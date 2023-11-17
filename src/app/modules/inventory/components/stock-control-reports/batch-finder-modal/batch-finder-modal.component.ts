@@ -52,7 +52,7 @@ export class BatchFinderModalComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.finderForm.controls['zones'].valueChanges.subscribe(
         value => {
-          this.subscriptions.add(this.sectionService.getAllByZone(value).subscribe(
+          this.subscriptions.add(this.sectionService.getByZone(value).subscribe(
               {
                 next: (response: Section[]) => {
                   this.sections = response;
