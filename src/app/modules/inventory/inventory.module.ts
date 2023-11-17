@@ -15,7 +15,8 @@ import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
 
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
-                 RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent],
+                 RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent
+                , ReceiptListComponent],
   providers: [],
   imports: [
     CommonModule,
