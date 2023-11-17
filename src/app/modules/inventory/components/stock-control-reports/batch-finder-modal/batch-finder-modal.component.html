@@ -20,7 +20,7 @@
               id="section" aria-label="Default select example">
         <option selected disabled></option>
         <ng-container *ngFor="let s of sections">
-          <option value="{{s.id}}">{{s.name}}</option>
+          <option value="{{s.id}}">{{s.id}}</option>
         </ng-container>
       </select>
     </div>
@@ -41,7 +41,7 @@
         <tr class="clickable-row" (click)="batchSelected(i)">
           <th scope="row">{{b.id}}</th>
           <td>{{b.shelf}}</td>
-          <td>{{b.existenceId}}</td>
+          <td>{{b.existenceCode}}</td>
           <td>{{b.quantity}}</td>
         </tr>
       </ng-container>
@@ -53,4 +53,4 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>
-<fn-toasts></fn-toasts>
+<fn-toasts-container></fn-toasts-container>
