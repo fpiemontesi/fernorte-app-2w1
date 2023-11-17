@@ -6,11 +6,8 @@ export interface ToastInfo {
   delay?: number;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AppToastService {
-
   toasts: ToastInfo[] = [];
 
   show(header: string, body: string) {
