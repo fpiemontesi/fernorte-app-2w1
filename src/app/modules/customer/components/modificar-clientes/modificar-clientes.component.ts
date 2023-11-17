@@ -140,4 +140,10 @@ export class ModificarClientesComponent implements OnInit {
       );
     }
   }
+  
+  cambiarCategoria() {
+    if (this.cliente.id_categoria_fiscal.id_categoria !== 1) {
+      this.cliente.id_clasificacion.id_clasificacion = null;
+    }
+  }
 }

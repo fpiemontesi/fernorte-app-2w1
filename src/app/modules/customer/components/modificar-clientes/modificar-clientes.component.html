@@ -141,6 +141,7 @@
             name="categoriaFiscal"
             [(ngModel)]="cliente.id_categoria_fiscal.id_categoria"
             required
+            (change)="cambiarCategoria()"
             [ngClass]="{
               'is-invalid':
                 actualizarClienteForm &&
@@ -154,6 +155,7 @@
             </option>
             <option value="1">Monotributista</option>
             <option value="2">Responsable Incripto</option>
+            <option value="3">Consumidor Final</option>
           </select>
 
           <div
