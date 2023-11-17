@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="row">
+        <h2>Crear Orden de Compra</h2>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">
+                    <h4>Orden de Compra #0001</h4>
+                </div>
+                <form class="form-inline col-9">
+                    <div class="form-group form-inline" style="float: right;">
+                        <div class="row">
+                            <div class="col-6" style="align-self: center;">
+                                <label for="fecha">Fecha de Entrega</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="date" name="fecha" class="form-control" id="fecha" name="Fecha-pedido" required/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="proveedor">Proveedor</label>
+                            </div>
+                            <div class="col-6">
+                                <select name="proveedores" class="form-control" id="proveedores">
+                                    <option selected disabled value="">Seleccionar...</option>
+                                    <option value="">Ferrocons</option>
+                                    <option value="">Easy</option>
+                                </select>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <form #formulario="ngForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="producto-faltante">Producto faltante</label>
+                                <select [(ngModel)]="nuevoDato.producto" name="producto" class="form-control"
+                                    id="producto-faltante" required #productoSelect="ngModel">
+                                    <option selected disabled value="">Seleccionar...</option>
+                                    <option *ngFor="let producto of productos" [value]="producto">{{ producto }}
+                                    </option>
+                                </select>
+                                <div *ngIf="productoSelect.invalid && (productoSelect.dirty || productoSelect.touched)"
+                                    class="text-danger">Producto faltante requerido.</div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad</label>
+                                <input type="number" [(ngModel)]="nuevoDato.cantidad" name="cantidad"
+                                    class="form-control" id="cantidad" required #cantidadInput="ngModel">
+                                <div *ngIf="cantidadInput.invalid && (cantidadInput.dirty || cantidadInput.touched)"
+                                    class="text-danger">Cantidad requerida.</div>
+                                <div *ngIf="(cantidadInput.dirty || cantidadInput.touched) && nuevoDato.cantidad<=0"
+                                    class="text-danger">Cantidad no puede ser 0 o negativa.</div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="precioUnitario">Precio Unitario</label>
+                                <input type="number" [(ngModel)]="nuevoDato.precio" name="precio" class="form-control"
+                                    id="precio" required #precioInput="ngModel">
+
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary" style="float: right;" (click)="agregarDato()"
+                                [disabled]="productoSelect.invalid || cantidadInput.invalid || nuevoDato.cantidad <= 0">Cargar</button>
+                        </div>
+                    </form>
+                </div>
+                <br>
+                <div class="col-1"></div>
+                <div class="col-8">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio Unitario</th>
+                                <th scope="col">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dato of datos; let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{ dato.producto }}</td>
+                                <td>{{ dato.cantidad }} </td>
+                                <td>${{ dato.precio }}</td>
+                                <td>${{ dato.precio*dato.cantidad }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-2"style="float: right;">
+                    <table class="table" >
+                        <tr>
+                        <th>Total</th>
+                        <td>$ {{ calcularTotalOrden() }}</td>
+                    </tr>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary" style="float: right;">Generar y enviar</button>
+</div>

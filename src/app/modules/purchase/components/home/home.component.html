@@ -1,1 +1,89 @@
-<p>home purchase works!</p>
+<div class="row">
+  <div class="col-2">
+    <div class="menu d-flex flex-column flex-shrink-0 p-3 bg-dark text-light" style="height: 100%; position: fixed">
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link disabled link-light" aria-current="page">
+            <h5>Proveedores</h5>
+          </a>
+          <!--
+            <a class="nav-link link-light" aria-current="page" (click)="crearP()">
+            Crear
+          </a>
+        -->
+          <a class="nav-link link-light" aria-current="page" (click)="mostrarPs()">
+            Ver todos
+          </a>
+        </li>
+        <hr>
+        <li>
+          <a class="nav-link disabled link-light">
+            <h5>Pedidos de cotización</h5>
+          </a>
+          <a class="nav-link link-light" (click)="mostrarCrearPC()">
+            Crear
+          </a>
+          <a class="nav-link link-light" (click)="mostrarPC()">
+            Ver uno
+          </a>
+          <a class="nav-link link-light" (click)="mostrarPCs()">
+            Ver todos
+          </a>
+        </li>
+        <hr>
+        <li>
+          <a class="nav-link disabled link-light">
+            <h5>Ordenes de compra</h5>
+          </a>
+          <a class="nav-link link-light" (click)="crearOC()">
+            Crear
+          </a>
+          <a class="nav-link link-light" (click)="mostrarOCs()">
+            Ver todos
+          </a>
+          <a class="nav-link link-light" (click)="mostrarOC()">
+            Ver una
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-10">
+    <div class="container">
+      <div *ngIf="mostrarComponente">
+        <br>
+        <fn-crear-pedido-cotizacion></fn-crear-pedido-cotizacion>
+      </div>
+      <div *ngIf="mostrarOCs1">
+        <br>
+        <fn-ver-ordenes-de-compra></fn-ver-ordenes-de-compra>
+      </div>
+      <div *ngIf="mostrarOC1">
+        <br>
+        <fn-ver-orden-compra></fn-ver-orden-compra>
+      </div>
+      <div *ngIf="mostrarPCs1">
+        <br>
+        <fn-ver-pedidos-cotizacion></fn-ver-pedidos-cotizacion>
+      </div>
+      <div *ngIf="mostrarPC1">
+        <br>
+        <fn-ver-pedido-cotizacion></fn-ver-pedido-cotizacion>
+      </div>
+      <div *ngIf="mostrarPs1">
+        <br>
+        <fn-proveedores></fn-proveedores>
+      </div>
+      <!--
+      <div *ngIf="crearP1">
+        <br>
+        <fn-crear></fn-crear>
+      </div>
+      -->
+      <div *ngIf="crearOC1">
+        <br>
+        <fn-crear-orden-compra></fn-crear-orden-compra>
+      </div>
+    </div>
+  </div>
+</div>
