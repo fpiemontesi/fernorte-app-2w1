@@ -13,6 +13,8 @@ import { ModificarVentaComponent } from './components/modificar-venta/modificar-
 import { RouterModule, Routes } from '@angular/router';
 import { ModificarPresupuestoComponent } from './components/modificar-presupuesto/modificar-presupuesto.component';
 import { FiltroFechaComponent } from './components/reportes/filtro-fecha/filtro-fecha.component';
+//import { ChartsModule } from 'ng2-charts';
+
 
 
 const routes: Routes = [

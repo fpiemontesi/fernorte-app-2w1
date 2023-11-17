@@ -1,18 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Ventas } from '../models/Ventas';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportesService {
 
-  private apiUrl = 'http://localhost:3000/datos';
+
+  private apiUrl = 'http://localhost:8080/reportes'; 
+
   constructor(private http: HttpClient) { }
 
-  getReportes(mes: number, anio: number, tipo_venta: number): Observable<Ventas[]> {
-    const url = `${this.apiUrl}?mes=${mes}&anio=${anio}&tipo_venta=${tipo_venta}`;
-    return this.http.get<Ventas[]>(url);
+  getReportes(anio: number, mes?: number, tipo_venta?: number): Observable<any> {
+    let params = new HttpParams().set('anio', anio);
+
+    if (mes !== undefined) {
+      params = params.set('mes', mes);
+    }
+
+    if (tipo_venta !== undefined) {
+      params = params.set('tipoVenta', tipo_venta);
+    }
+
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      tap((reportes) => {
+        console.log('Reportes obtenidos:', reportes); // Agrega este console.log para imprimir la respuesta
+      })
+    );
   }
 }
