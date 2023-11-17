@@ -12,7 +12,7 @@ export class DeleteProductComponent implements OnInit,OnDestroy{
 
   constructor(private httpClientService:productService) {
   }
-
+  title = 'Modificar Producto ';
   products:Producto[] = [];
   private subscription = new Subscription();
 
@@ -25,7 +25,7 @@ export class DeleteProductComponent implements OnInit,OnDestroy{
 
   getProductsActive(){
     this.subscription.add(
-      this.httpClientService.getProductsActive().subscribe(
+      this.httpClientService.getAllProducts().subscribe(
         (response:Producto[])=>{
           this.products=response;
         })

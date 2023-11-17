@@ -24,3 +24,54 @@
   text-align: end;
 }
 
+input{
+  border-radius: 0px;
+  height: 3.5rem;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+select{
+  border-radius: 0px;
+  height: 3.5rem;
+  font-size: 1.1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#cardAddElement{
+  height: 6rem;
+  scroll-behavior: smooth;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+textarea{
+  border-radius: 0px;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.card-body {
+  overflow-y: auto;
+}
+
+.border-radius-0{
+  border-radius: 0px;
+}
+
+
+.logo-green{
+  color: #00a65a;
+}
+
+.logo-red{
+  color: #dd4b39;
+}
+
+input[type="file"]::file-selector-button {
+  height: 3.5rem;
+}
+

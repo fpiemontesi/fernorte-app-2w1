@@ -1,96 +1,80 @@
 .botonAbrirNav {
-    position: fixed;
-    top: 0; /* Lo anclamos en la parte superior */
-    left: 0; /* Lo anclamos a la izquierda */
-    width: 60px; /* Establecemos el ancho al 100% del ancho de la pantalla */
-    height: 100%; /* Establecemos la altura al 100% de la altura de la pantalla */
-    background-color: rgb(250, 250, 250);
-    border: none;
-    box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
-    -webkit-box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
-    -moz-box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0; /* Lo anclamos en la parte superior */
+  left: 0; /* Lo anclamos a la izquierda */
+  width: 60px; /* Establecemos el ancho al 100% del ancho de la pantalla */
+  height: 100%; /* Establecemos la altura al 100% de la altura de la pantalla */
+  background-color: rgb(250, 250, 250);
+  border: none;
+  box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
+  -webkit-box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .botonAbrirNav:active{
-   background-color: rgb(250, 250, 250);
-    border: none;
+ background-color: rgb(250, 250, 250);
+  border: none;
 }
 
 #svgInic{
-    width: 40px; /* Establece el tamaño del icono */
-    position: relative;
-    color: rgb(49, 49, 49);
-    animation-name: example;
-    animation-duration:2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-    animation-play-state: running;
+  width: 40px; /* Establece el tamaño del icono */
+  position: relative;
+  color: rgb(49, 49, 49);
+  animation-name: example;
+  animation-duration:2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-play-state: running;
 
-  }
-
-
-
-  svg:hover{
-    color: rgb(5, 5, 5);
-    cursor: pointer;
-    animation-play-state: paused;
-
-  }
-
-  @keyframes example {
-    0%   {left:0px; top:0px;}
-    50%  {left:5px; top:0px;}
-    100% {left:0px; top:0px;}
-
-  }
-
-
-
-  li{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  a{
-    text-decoration: none;
-    color: rgb(9, 9, 9);
-  }
+}
+li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+a{
+  text-decoration: none;
+  color: rgb(9, 9, 9);
+}
 
 #toggleProducts[aria-expanded="false"] svg {
-  transform: rotate(0deg);
+transform: rotate(0deg);
 }
 
 #toggleProducts[aria-expanded="true"] svg {
-  transform: rotate(-90deg);
+transform: rotate(-90deg);
 }
 
 #togglePromociones[aria-expanded="false"] svg {
-  transform: rotate(0deg);
+transform: rotate(0deg);
 }
 
 #togglePromociones[aria-expanded="true"] svg {
-  transform: rotate(-90deg);
+transform: rotate(-90deg);
 }
 
 #toggleCatalogo[aria-expanded="false"] svg {
-  transform: rotate(0deg);
+transform: rotate(0deg);
 }
 
 #toggleCatalogo[aria-expanded="true"] svg {
-  transform: rotate(-90deg);
+transform: rotate(-90deg);
 }
 
 #toggleOfertas[aria-expanded="false"] svg {
-  transform: rotate(0deg);
+transform: rotate(0deg);
 }
 
 #toggleOfertas[aria-expanded="true"] svg {
-  transform: rotate(-90deg);
+transform: rotate(-90deg);
 }
+
+
+
+

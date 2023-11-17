@@ -1,73 +1,58 @@
-<div class="container">
-    <h1 class="text-start fs-3">Registrar Producto</h1>
+<div class="container mt-5" id="formulario">
+    <h1 class="text-start fs-3">{{this.title}}</h1>
     <div class="">
         <form [formGroup]="formArticle">
-          <div class="container">
-            <div class="imagen-borde">
-              <img src="{{formArticle.value.imageURL}}" alt="" id="product-image">
+            <div class="info row">
+               <div class="col-md-12">
+                    <h5>Informacion Precargada:</h5>
+                    <p *ngIf="productsInactives && productsInactives.length > 0"> 
+                        <span style="font-weight: 600;">Codigo:</span> {{this.productsInactives[0]!.codigo}}, 
+                        <span style="font-weight: 600;"> Nombre:</span>{{this.productsInactives[0]!.nombre}},
+                        <span style="font-weight: 600;"> Precio Minorista:</span>{{this.productsInactives[0]!.precio_minorista || 'No tiene'}},
+                        <span style="font-weight: 600;"> Precio Mayorista:</span>{{this.productsInactives[0]!.precio_mayorista || 'No tiene'}},
+                        <span style="font-weight: 600;"> Precio Compra:</span>{{this.productsInactives[0]!.precio_compra}},
+                    </p>
+                   
+               </div>
+        
             </div>
-          </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="col-12 d-flex justify-content-between gap-2">
-                    <div class="form-floating col-8 mt-4">
-                        <select formControlName="codigo" class="form-select" id="" aria-label="Seleccionar Modelo a Registrar" (change)="getModelByCode()" [(ngModel)]="codeProductSelected">
-                          <option selected disabled>Seleccionar Modelo</option>
-                          <ng-container *ngFor="let product of allModels">
-                            <option value="{{product.codigo}}">{{product.nombre}}</option>
-                          </ng-container>
+                   
+               
+                    <div class="form-floating">
+                      <textarea 
+                      [ngClass]="{'is-invalid': formArticle.get('descripcion')?.invalid && formArticle.get('descripcion')?.touched}"
+                      formControlName="descripcion" 
+                      class="form-control"
+                       style="height: 100px" 
+                       placeholder="Descripcion relevante" 
+                       name="" id="descripcion"  
+                       cols="30" rows="10"></textarea>    
+                      <label for="descripcion">Descripcion del Producto</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <select formControlName="codigo_marca" id="codigo_marca" class="form-select" aria-label="Pais de Origen">
+                            <option [value]="marca.codigo" *ngFor="let marca of marcas">{{marca.nombre}}</option>
                         </select>
-                        <label for="floatingSelect">Seleccionar Modelo</label>
+                        <label for="codigo_marca">Seleccionar Marca</label>
                     </div>
-
-                    <div class="col-4 mt-4 form-floating">
-                        <div class="input-group flex-nowrap">
-                        <span class="input-group-text" id="addon-wrapping">$</span>
-                        <input type="text" style="height: 58px;" class="form-control" disabled value="300" aria-describedby="addon-wrapping">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="form-group mb-3 mt-4">
-                        <input name="nombre" style="height: 50px;" type="text" formControlName="nombre" class="form-control" id="nombre" placeholder="Nombre">
-                        <div class="mt-1 ms-1" *ngIf="formArticle.get('nombre')?.hasError('required') && formArticle.get('nombre')?.touched">
-                          El nombre es requerido.
-                        </div>
-                        <div *ngIf="formArticle.get('nombre')?.hasError('minlength') && formArticle.get('nombre')?.touched">
-                          El nombre debe tener al menos 1 carácter.
-                        </div>
-                        <div *ngIf="formArticle.get('nombre')?.hasError('maxlength') && formArticle.get('nombre')?.touched">
-                          El nombre no debe exceder los 100 caracteres.
-                        </div>
-                        <div *ngIf="formArticle.get('nombre')?.hasError('pattern') && formArticle.get('nombre')?.touched">
-                          El nombre debe contener solo letras y números.
-                        </div>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <select formControlName="codigo_marca" class="form-select" id="marca" aria-label="Seleccionar Marca">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label for="marca">Seleccionar Marca</label>
-                    </div>
-
+                 
 
                     <div class="form-floating">
                         <select formControlName="categorias_id" (change)="addElement()" class="form-select" id="categorias" aria-label="Seleccionar Categorias">
                             <!-- todas las opciones deben ser cargadas con un arreglo proveniente de un get -->
-                            <option value="1" person="tecnologia">Tecno</option>
-                            <option value="2" person="herramientas">Herramientas</option>
-                            <option value="3" person="nose">Nose</option>
+                            <option [value]="categoria.codigo" *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
                         </select>
                         <label for="categorias">Seleccionar Categorias</label>
-                        <div class="card mt-3">
+                        <div class="card border-radius-0">
                             <h6 class="card-title mt-2 ms-2">Categorias Seleccionadas</h6>
                             <div id="cardAddElement" class="card-body">
-                                <div *ngFor="let categories of categories; let i = index">
+                                <div *ngFor="let categories of categoriesNombre; let i = index">
                                     <div class="d-flex justify-content-between align-items-center gap-2" style="border-radius: 10px;">
                                         <p style="margin: 5px 5px 5px 5px;">{{categories}}</p>
-                                        <button (click)="removeCategory(categories)" style="margin: 5px 5px 5px 5px;" type="button" class="btn-close" aria-label="Close"></button>
+                                        <button (click)="removeCategory(i)" style="margin: 5px 5px 5px 5px;" type="button" class="btn-close" aria-label="Close"></button>
                                     </div>
                                 </div>
 
@@ -75,89 +60,52 @@
                         </div>
                     </div>
 
-                    <div class="form-group  mt-4  d-flex align-items-center">
-                        <label for="minorista"></label>
-                        <input formControlName="precio_minorista"  type="number" class="form-control w-50 me-4" id="minorista" placeholder="Porcentaje Minorista">
-                        <p style="margin: 0px; font-weight: bold;">Precio: {{(1 * (1 + (formArticle.value.precio_minorista || 0))) | currency }}</p>
-                    </div>
-                    <div class="ms-2" *ngIf="formArticle.get('precio_minorista')?.hasError('required') && formArticle.get('precio_minorista')?.touched">
-                        El porcentaje mayorista es requerido.
-                    </div>
-                    <div class="form-group mt-4 d-flex align-items-center">
-                        <label for="mayorista"></label>
-                        <input  formControlName="precio_mayorista"  type="number" class="form-control  w-50 me-4" id="mayorista" placeholder="Porcentaje Mayorista">
-                        <p style="margin: 0px; font-weight: bold;">Precio: {{(1 * (1 + (formArticle.value.precio_mayorista || 0))) | currency }}</p>
-
-                    </div>
-                    <div class="ms-2" *ngIf="formArticle.get('precio_mayorista')?.hasError('required') && formArticle.get('precio_mayorista')?.touched">
-                        El porcentaje mayorista es requerido.
-                    </div>
-
-                    <div class="input-group mt-4">
-                        <input type="file" formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
-                        <label class="input-group-text" for="imageURL">Subir Foto</label>
-                    </div>
+               
 
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="descripcion">Descripcion</label>
-                        <div class="form-floating">
-                            <textarea formControlName="descripcion" class="form-control" placeholder="Descripcion del producto" id="descripcion"
-                                style="height: 130px"></textarea>
-                        </div>
+                    <div class="form-floating">
+                        <input [ngClass]="{'is-invalid': formArticle.get('dimensiones')?.invalid && formArticle.get('dimensiones')?.touched}" formControlName="dimensiones" type="text" class="form-control" id="dimensiones" placeholder="Dimensiones del producto">
+                        <label for="dimensiones">Dimensiones del producto</label>
                     </div>
-                    <div class="mt-3">
-                        <h5>Caracteristicas</h5>
-                        <div class="form-group">
-                            <label for="dimensiones"></label>
-                            <input formControlName="dimensiones"  type="text" class="form-control" id="dimensiones" placeholder="Dimensiones">
-                            <div class="ms-2" *ngIf="formArticle.get('dimensiones')?.hasError('required') && formArticle.get('dimensiones')?.touched">
-                                Las dimensiones son requeridas
-                            </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label for="peso"></label>
-                            <input formControlName="peso"  type="text" class="form-control" id="peso" placeholder="Peso">
-                            <div class="ms-2" *ngIf="formArticle.get('peso')?.hasError('required') && formArticle.get('peso')?.touched">
-                                El peso son requeridas.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="color"></label>
-                            <input formControlName="color"  type="text" class="form-control" id="color" placeholder="Color">
-                            <div class="ms-2" *ngIf="formArticle.get('color')?.hasError('required') && formArticle.get('color')?.touched">
-                                El color es requerido
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="material"></label>
-                            <input formControlName="material"  type="text" class="form-control" id="material" placeholder="Material">
-                        </div>
+                    <div class="form-floating">
+                        
+                        <input [ngClass]="{'is-invalid': formArticle.get('peso')?.invalid && formArticle.get('peso')?.touched}" formControlName="peso" type="number" class="form-control" id="dimensiones" placeholder="Dimensiones del producto">
+                        <label for="peso">Peso del producto en KG</label>
+                    </div>
 
-                        <div class="form-floating mb-3 mt-4">
-                            <select formControlName="pais" class="form-select" id="floatingSelect" aria-label="Seleccionar Pais">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <label for="floatingSelect">Seleccionar Pais</label>
-                            <div class="ms-2" *ngIf="formArticle.get('pais')?.hasError('required') && formArticle.get('pais')?.touched">
-                                El pais es requerido
-                            </div>
-                        </div>
+                    <div class="form-floating">
+                        <input [ngClass]="{'is-invalid': formArticle.get('color')?.invalid && formArticle.get('color')?.touched}" formControlName="color" type="text" class="form-control" id="dimensiones" placeholder="Color del producto">
+                        <label for="color">Color del producto</label>
+                    </div>
 
+                    <div class="form-floating">
+                        <input [ngClass]="{'is-invalid': formArticle.get('material')?.invalid && formArticle.get('material')?.touched}" formControlName="material" type="text" class="form-control" id="material" placeholder="Material del producto">
+                        <label for="material">Material del producto</label>
                     </div>
 
 
+                    <div class="form-floating">
+                    <select id="pais" formControlName="pais" class="form-select" aria-label="Pais de Origen">
+                        <option value="1">Arg</option>
+                        <option value="2">awdawd</option>
+                        <option value="3">awd</option>
+                    </select>
+                    <label for="pais">Pais de Origen</label>
+                    </div>
+                  
+
+                    <div class="input-group">
+                        <input [ngClass]="{'is-invalid': formArticle.get('imagen')?.invalid && formArticle.get('imagen')?.touched}" placeholder="Imagen del Producto" title="Seleccione la imagen" type="file" formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">   
+                    </div>
+
+                    
                 </div>
-
-
             </div>
-            <div class="mt-3 d-grid gap-2">
-                <button (click)="onSubmit()" type="submit" class="btn btn-dark">Guardar</button>
-                <button (click)="resetFields()" class="btn btn-dark">Cancelar</button>
+            <div class="mt-3">
+                <button (click)="onSubmit()" type="submit" class="btn btn-dark me-3">Guardar</button>
+                <button (click)="resetFields()" type="reset" class="btn btn-dark">Cancelar</button>
             </div>
         </form>
     </div>

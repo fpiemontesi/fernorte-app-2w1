@@ -1,4 +1,4 @@
-<div class="">
+<div id="allContent" class="">
 
   <a class="btn btn-primary botonAbrirNav pt-5"  data-bs-toggle="offcanvas"  href="#offcanvasExample" role="button" aria-controls="offcanvasExample" data-bs-offcanvas>
         <svg id="svgInic" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
@@ -23,28 +23,12 @@
         <div class="collapse" id="orders-collapse">
           <ul class="btn-toggle-nav ms-3">
             <li><a class="dropdown-item" href="#" routerLink="registerProduct" data-bs-dismiss="offcanvas">Registrar Productos</a></li>
-            <li><a class="dropdown-item" href="#" routerLink="updateProduct" data-bs-dismiss="offcanvas">Modificar Productos</a></li>
-            <li><a class="dropdown-item" href="#" routerLink="deleteProduct" data-bs-dismiss="offcanvas">Listar Productos</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="registerProduct" data-bs-dismiss="offcanvas">Modificar Productos</a></li>
+            <li><a class="dropdown-item" href="#" routerLink="deleteProduct"  data-bs-dismiss="offcanvas">Listar Productos</a></li>
           </ul>
         </div>
       </li>
 
-
-      <li class="mb-2 ">
-        <button class="fs-5 btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-discount" aria-expanded="false" id="togglePromociones">
-          Promociones <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-          </svg>
-        </button>
-        <div class="collapse" id="orders-discount">
-          <ul class="btn-toggle-nav ms-3">
-            <li><a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">Registrar Promociones</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">Modificar Promociones</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">Eliminar Promociones</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-dismiss="offcanvas">Listar Promociones</a></li>
-          </ul>
-        </div>
-      </li>
 
       <li class="mb-2 ">
         <button class="fs-5 btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#orders-catalog" aria-expanded="false" id="toggleCatalogo">
@@ -89,119 +73,9 @@
     </div>
   </div>
 
-   <!--  <nav class="main-menu">
-            <ul>
-                <li>
-                    <a href="">
-                      <i class="fa bi bi-card-list fa-2x"></i>
-                      <div class="btn-group dropend">
-                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span style="margin-right: 70px;">Catalogo</span>
-                        </button>
-                        <ul class="dropdown-menu menu">
-                          <li><a class="dropdown-item" href="#">Registrar Catalogo</a></li>
-                          <li><a class="dropdown-item" href="#">Modificar Catalogo</a></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Catalogo</a></li>
-                          <li><a class="dropdown-item" href="#">Listar Catalogo</a></li>
-                        </ul>
-                      </div>
-                    </a>
+ 
+  
 
-                </li>
-                <hr>
-                <li class="has-subnav">
-                    <a href="#">
-                        <i class="fa bi bi-bag-fill fa-globe fa-2x"></i>
-                        <span class="nav-text">
-                            <div class="btn-group dropend">
-                                <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                  <span style="margin-right: 70px;">Productos</span>
-                                </button>
-                                <ul class="dropdown-menu menu">
-                                  <li><a class="dropdown-item" href="#" routerLink="registerProduct">Registrar Productos</a></li>
-                                  <li><a class="dropdown-item" href="#" routerLink="updateProduct">Modificar Productos</a></li>
-                                  <li><a class="dropdown-item" href="#" routerLink="deleteProduct">Listar Productos</a></li>
-                                </ul>
-                              </div>
-                        </span>
-                    </a>
-                </li>
-                <hr>
-                <li class="has-subnav">
-                  <a href="#">
-                    <i class="fa bi bi-grid-fill fa-globe fa-2x"></i>
-                    <span class="nav-text">
-                      <div class="btn-group dropend">
-                        <button type="button" routerLink="listCategories" class="btn flex-grow-1 boton-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span style="margin-right: 70px;">Categorias</span>
-                        </button>
-                      </div>
-                    </span>
-                  </a>
-                </li>
-                <hr>
-                <li class="has-subnav">
-                  <a href="#">
-                    <i class="fa bi bi-tags fa-globe fa-2x"></i>
-                    <span class="nav-text">
-                        <div class="btn-group dropend">
-                          <button type="button" routerLink="listBrands" class="btn flex-grow-1 boton-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span style="margin-right: 70px;">Marcas</span>
-                          </button>
-                        </div>
-                      </span>
-                  </a>
-                </li>
-                <hr>
-
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa bi bi bi-cash-stack fa-2x"></i>
-                       <div class="btn-group dropend">
-                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span style="margin-right: 80px;">Ofertas</span>
-                        </button>
-                        <ul class="dropdown-menu menu">
-                          <li><a class="dropdown-item" href="#">Registrar Ofertas</a></li>
-                          <li><a class="dropdown-item" href="#">Modificar Ofertas</a></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Ofertas</a></li>
-                          <li><a class="dropdown-item" href="#">Listar Ofertas</a></li>
-                        </ul>
-                      </div>
-                    </a>
-
-
-                </li>
-                <hr>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa bi bi-cash-coin fa-2x"></i>
-                       <div class="btn-group dropend">
-                        <button type="button" class="btn flex-grow-1 boton-dropdown dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          <span style="margin-right: 45px;">Promociones</span>
-                        </button>
-                        <ul class="dropdown-menu menu">
-                          <li><a class="dropdown-item" href="#">Registrar Promociones</a></li>
-                          <li><a class="dropdown-item" href="#">Modificar Promociones</a></li>
-                          <li><a class="dropdown-item" href="#">Eliminar Promociones</a></li>
-                          <li><a class="dropdown-item" href="#">Listar Promociones</a></li>
-                        </ul>
-                      </div>
-                    </a>
-                </li>
-            </ul>
-            <ul class="logout">
-              <hr>
-                <li>
-                   <a href="#">
-                         <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Logout
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
 </div>
 
 <router-outlet></router-outlet>

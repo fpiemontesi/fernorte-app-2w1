@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterProductComponent } from './components/crud-product/register-product/register-product.component';
-import { UpdateProductComponent } from './components/crud-product/update-product/update-product.component';
 import { DeleteProductComponent } from './components/crud-product/delete-product-list/delete-product.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AltaCategoriaComponent } from './components/crud-category/alta-categoria/alta-categoria.component';
@@ -23,13 +22,13 @@ import { ListOffersComponent } from './components/crud-offer/list-offers/list-of
 import { RegisterOfferComponent } from './components/crud-offer/register-offer/register-offer.component';
 import { UpdateOfferComponent } from './components/crud-offer/update-offer/update-offer.component';
 import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 
 
 
 const routes:Routes = [
   {path:"registerProduct", component:RegisterProductComponent},
-  {path:"updateProduct", component:UpdateProductComponent},
   {path:"deleteProduct", component:DeleteProductComponent},
   {path:"listCategories",
     children:[
@@ -58,11 +57,13 @@ const routes:Routes = [
           {path:'registerOffer',component: RegisterOfferComponent},
           {path: '',component: ListOffersComponent}
         ]},
-        {path:"registerCatalog", component:RegisterCatalogComponent}
+        {path:"registerCatalog", component:RegisterCatalogComponent},
+        {path:"", component:InicioComponent}
+    
 ];
 
 @NgModule({
-  declarations: [HomeComponent, RegisterProductComponent, UpdateProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent,RegisterCatalogComponent],
+  declarations: [HomeComponent, RegisterProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent,RegisterCatalogComponent, InicioComponent],
   providers: [],
   imports: [CommonModule, FormsModule, NgbModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],

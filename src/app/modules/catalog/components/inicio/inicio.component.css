@@ -1,0 +1,24 @@
+
+
+#allContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 94vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.5),
+      rgba(0, 0, 0, 0.4)
+    ), url("https://img.freepik.com/foto-gratis/sentar-planas-diversas-herramientas-tecnicas-aisladas-sobre-fondo-blanco_53876-138096.jpg?w=1380&t=st=1700246958~exp=1700247558~hmac=80e0f3068328acfbe004d39c1c21072694183288542b31d0c5e4a8b8ca46a085");
+  
+  }
+  
+  #textWelcome{
+    font-size: 3rem;
+    font-weight: 500;
+    color: rgb(9, 9, 9);
+    margin-bottom: 20px;
+  }

@@ -37,9 +37,8 @@ height:100%;
 left:0;
 width:60px;
 overflow:hidden;
--webkit-transition:width .08s linear;
-transition:width .05s linear;
--webkit-transform:translateZ(0) scale(1,1);
+
+
 z-index:1000;
 }
 
@@ -62,8 +61,7 @@ color:#999;
  font-family: arial;
 font-size: 14px;
 text-decoration:none;
--webkit-transform:translateZ(0) scale(1,1);
--webkit-transition:all .1s linear;
+
 transition: all 0.2 ease-in;
 color: #434343;
   
@@ -169,10 +167,6 @@ body {
     height: 93vh;
     background: #F8F9FA;
     position: absolute;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     z-index: 100;
     box-shadow: 5px 4px 5px 0px rgba(0,0,0,0.23);
@@ -201,10 +195,6 @@ body {
     padding: 18px 0 18px 25px;
     font-size: 15px;
     outline: 0;
-    -webkit-transition: all 200ms ease-in;
-    -moz-transition: all 200ms ease-in;
-    -o-transition: all 200ms ease-in;
-    -ms-transition: all 200ms ease-in;
     transition: all 0.2 ease-in;
 }
 .sidebar #leftside-navigation ul li a:hover {

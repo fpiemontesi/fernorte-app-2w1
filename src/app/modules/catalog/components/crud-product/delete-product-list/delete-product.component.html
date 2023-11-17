@@ -15,6 +15,7 @@
         <td>{{c.codigo}}</td>
         <td>{{c.nombre}}</td>
         <td><button (click)="deleteProduct(c.codigo)" class="btn btn-danger">Eliminar</button></td>
+        <td><button routerLink="/registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]} class="btn btn-dark">Editar</button></td>
       </tr>
       </tbody>
     </table>
