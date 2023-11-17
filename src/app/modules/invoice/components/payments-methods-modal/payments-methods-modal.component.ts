@@ -16,7 +16,8 @@ export class PaymentsMethodsModalComponent implements OnInit {
   formulario: FormGroup = new FormGroup({});
   constructor(    private formBuilder: FormBuilder,
     private paymentMethodService: PaymentMethodService,
-    private toastService : ToastService
+    private toastService : ToastService,
+    private modalService: NgbModal
     ){
   }
   ngOnInit(): void {
@@ -24,13 +25,15 @@ export class PaymentsMethodsModalComponent implements OnInit {
       name: '',
     });
   }
+  close() {
+    this.modalService.dismissAll();
+  }
 
   onSubmit() {
     if (this.formulario.valid) {
       const paymentMethod: PaymentMethodDTO = this.formulario.value;
       this.paymentMethodService.addPay(paymentMethod).subscribe(
         (response) => {
-          console.log('Solicitud POST exitosa:', response);
           // Utiliza el toastService para mostrar un mensaje de éxito
           this.toastService.show('Forma de pago ' + response.name + ' registrada', { classname: 'bg-success text-light', delay: 10000 });
           this.formulario.reset();
@@ -40,9 +43,6 @@ export class PaymentsMethodsModalComponent implements OnInit {
         }
       );
     }
-  }
-  showToast(){
-    this.toastService.show('I am a success toast', { classname: 'bg-success text-light', delay: 10000 });
   }
   
 }

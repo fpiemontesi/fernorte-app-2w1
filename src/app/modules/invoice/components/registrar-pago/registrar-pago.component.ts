@@ -8,6 +8,8 @@ import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
 import { Invoice } from '../../models/Invoice';
 import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
 import { Customvalidator } from '../validators/customvalidator';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'fn-registrar-pago',
@@ -23,14 +25,14 @@ export class RegistrarPagoComponent {
   paymentMethodCount: number = 0;
   restanteTotal: number = 0;
 
-  //COMO EL PROCESO FINALIZA UNA VEZ QUE PAGAMOS, HAGO EL POST DESDE ESTE COMPONETNE
-  invoice: Invoice = new Invoice();
 
   constructor(
     private formBuilder: FormBuilder,
     private paymentMethodService: PaymentMethodService,
     private sharedDataInvoice: SharedDataInvoiceService,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    public activeModal: NgbActiveModal,
+    private toastService: ToastService
   ) {
     this.paymentMethodDTOs = this.paymentMethodService.obtenerFormasPago();
     this.formulario = this.formBuilder.group({
@@ -42,6 +44,9 @@ export class RegistrarPagoComponent {
     this.agregarFormaDePago();
   }
 
+  close() {
+    this.activeModal.close();
+  }
   agregarFormaDePago() {
     const formaDePago = this.formBuilder.group({
       paymentMethod: ['', [Validators.required]],
@@ -62,7 +67,10 @@ export class RegistrarPagoComponent {
     ) {
       this.paymentMethodList.push(formaDePago);
     } else {
-      alert('NO HAY MAS FORMAS DE PAGO DISPONIBLES');
+      this.toastService.show('Ya se ha alcanzado el maximo de formas de pago', {
+        classname: 'bg-danger text-light',
+        delay: 3000,
+      })
     }
   }
 
@@ -76,28 +84,24 @@ export class RegistrarPagoComponent {
 
   onSubmit() {
     if (this.formulario.valid) {
-      ///const paymentsMethods = this.formulario.value.paymentMethodList;
+      if(this.restanteTotal > 0){
+        this.toastService.show('No se ha cubierto todo el monto', {
+          classname: 'bg-danger text-light',
+          delay: 3000,
+        })
+        return;
+      }else{
       const paymentMethods = this.formulario.value.paymentMethodList.flatMap(
         (payment: any) => payment
       );
-
-      this.sharedDataInvoice.InvoiceData$.subscribe((invoiceData) => {
-        this.invoice = invoiceData;
-      });
-      this.invoice.paymentMethodList = paymentMethods;
-      console.log("FACTURA QUE SE ENVIA",this.invoice);
-      this.invoiceService.createInvoice(this.invoice).subscribe({
-        next: (response) => {
-          console.log("RESPUESTA DEL POSTEO",response);
-          alert('se creo pa');
-        },
-        error: (error) => {
-          console.log(error);
-          alert(error);
-        },
-      });
+      this.sharedDataInvoice.setInvoicePayments(paymentMethods);
+      this.close();
+      }
     } else {
-      alert('FORM INVALIDO');
+      this.toastService.show('Error al registrar el pago, revise los campos', {
+        classname: 'bg-danger text-light',
+        delay: 3000,
+      })
     }
   }
 
@@ -124,11 +128,4 @@ export class RegistrarPagoComponent {
 
     this.formulario.updateValueAndValidity(); // Actualizar validación del formulario
   }
-
-  /*let restante = this.invoiceTotal - this.montoTotal;
-
-  const amountControl = this.paymentMethodList.at(index).get('amount');
-
-  amountControl?.setValidators([Validators.required, Validators.min(0), Customvalidator.maxAmountValidator(restante)]);
-  amountControl?.updateValueAndValidity();*/
 }

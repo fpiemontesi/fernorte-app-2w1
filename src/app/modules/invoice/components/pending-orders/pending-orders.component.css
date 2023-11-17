@@ -44,4 +44,11 @@ body {
 .cust-table tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
+.clickable {
+  cursor: pointer;
+}
 
+.clickable:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
+  border-radius: 4px; /* Agrega bordes redondeados */
+}

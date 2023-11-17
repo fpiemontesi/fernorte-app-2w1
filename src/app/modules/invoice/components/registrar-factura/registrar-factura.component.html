@@ -1,3 +1,6 @@
+<div class="row justify-content-center">
+  <app-toasts class="col"></app-toasts>
+</div>
 <div class="bg-secundario">
   <div class="">
     <div class="container-fluid card bg-primario text-white pb-4">
@@ -116,8 +119,11 @@
           <input type="button" class="btn btn-secondary" value="Cancelar" routerLink="/ConsultarPedidos" />
         </div>
         <div class="col d-flex justify-content-end">
-          <button class="btn btn-success" (click)="obtenerInvoiceData()" (click)="openModal()">
-            Facturar
+          <button *ngIf="paid" class="btn btn-success" (click)="obtenerInvoiceData()" (click)="openModal()">
+            Cobrar
+          </button>
+          <button *ngIf="!paid" class="btn btn-success" (click)="registrarFactura()">
+            Registrar
           </button>
         </div>
       </div>

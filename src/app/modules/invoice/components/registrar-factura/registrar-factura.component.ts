@@ -9,7 +9,7 @@ import { formatDate } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { DiscountDTO } from '../../models/DiscountDTO';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegistrarPagoComponent } from '../registrar-pago/registrar-pago.component';
 import { Observable, tap } from 'rxjs';
@@ -21,6 +21,7 @@ import {
   Product,
 } from '../../models/Invoice';
 import { InvoiceDto } from '../../models/InvoiceDto';
+import { ToastService } from '../../services/toast.service';
 registerLocaleData(localeEs);
 
 @Component({
@@ -43,6 +44,7 @@ export class RegistrarFacturaComponent {
   tipoFactura: string = 'A';
   invoices: InvoiceDto[] = [];
   nroFactura: number = 0;
+  paid: boolean = false;
 
   client$?: Observable<Client[]>;
 
@@ -52,7 +54,9 @@ export class RegistrarFacturaComponent {
     private customerserv: CustomerService,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private sharedDataInvoice: SharedDataInvoiceService
+    private sharedDataInvoice: SharedDataInvoiceService,
+    private toastService: ToastService,
+    private routeService: Router
   ) {
 
 
@@ -83,10 +87,37 @@ export class RegistrarFacturaComponent {
         this.nroFactura = highestId + 1;
   
       });
+      this.sharedDataInvoice.InvoicePayments$.subscribe((invoicePayments: any) => {
+        this.paid = !this.paid;
+        this.invoice.paymentMethodList = invoicePayments;
+      });
   }
 
   
-  realizarPago() { } 
+  registrarFactura() {
+    console.log(" this.invoice",this.invoice);
+    this.invoiceservice.createInvoice(this.invoice).subscribe({
+      next: (response) => {
+        this.toastService.show('Factura registrada', {
+          classname: 'bg-success text-light',
+          delay: 5000,
+        })
+        this.delayedNavigate(['ConsultarPedidos'], 2000);
+      },
+      error: (error) => {
+        this.toastService.show('Error al registrar la Factura', {
+          classname: 'bg-danger text-light',
+          delay: 5000,
+        })
+      },
+    });
+   } 
+
+   delayedNavigate(route: string[], delayTime: number) {
+    setTimeout(() => {
+      this.routeService.navigate(route);
+    }, delayTime);
+  }
 
   obtenerInvoiceData() {
     this.invoice.orderId = this.orderSelected.id;
