@@ -91,9 +91,9 @@ export class FiltroFechaComponent {
             ]
           };
       
-          reportes.productos.forEach((detalle : Detalle) => {
-            chartData.labels.push(detalle.descripcion);
-            chartData.datasets[0].data.push(detalle.cantidad);
+          reportes.productos.forEach((productos: any) => {
+            chartData.labels.push(productos.descripcion);
+            chartData.datasets[0].data.push(productos.cantidad);
             chartData.datasets[0].backgroundColor.push(this.generateRandomColor(5));
           });
       
