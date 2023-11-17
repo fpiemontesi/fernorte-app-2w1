@@ -3,6 +3,7 @@ import {ActivatedRoute, Route, Router} from "@angular/router";
 import {ServiceMarcaService} from "../../../services/brandService/service-marca.service";
 import {Marca} from "../../../models/marca";
 import {Subscription} from "rxjs";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'fn-update-brand',
@@ -35,6 +36,11 @@ export class UpdateBrandComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  enviarForm(formulario: NgForm){
+    if(formulario.valid){
+      this.editarMarca()
+    }
   }
 
   editarMarca(){

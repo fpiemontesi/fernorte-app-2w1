@@ -1,0 +1,33 @@
+<div class="container">
+    <ng-container *ngIf="alert">
+      <fn-alert mensaje="Se guardo exitosamente. Espere 5 Segundos" tipoAlert="alert alert-success"></fn-alert>
+    </ng-container>
+    <form #formulario="ngForm" (ngSubmit)="enviarForm(formulario)">
+      <div class="form-group">
+        <label for="txtNombre">Nombre</label>
+        <input type="text" class="form-control" id="txtNombre" name="nombre" placeholder="Ingresar Nombre" [(ngModel)]="discount.nombre" #controlNombre="ngModel" required>
+        <div *ngIf="controlNombre.getError('required') && controlNombre.touched" style="color: red;">
+        El nombre es requerido</div>
+      </div>
+      <div class="form-group">
+        <label for="txtDescripcion">Descripcion</label>
+        <input type="text" class="form-control" id="txtDescripcion" name="descripcion" placeholder="Ingresar descripcion" [(ngModel)]="discount.descripcion" #controlDescripcion="ngModel" required>
+        <div *ngIf="controlDescripcion.getError('required') && controlDescripcion.touched" style="color: red;">La descripcion es requerida</div>
+      </div>
+      <div class="form-group">
+        <label for="">Producto</label>
+        <select class="form-select" id="selectProducto" aria-label="Seleccionar Producto" name="productCodeSelected"  [(ngModel)]="discount.codigo_producto" #controlSeleccionarProducto="ngModel" required>
+          <option selected disabled>Seleccionar Producto</option>
+          <ng-container *ngFor="let producto of lstProductos">
+            <option value="{{producto.codigo}}">{{producto.nombre}}</option>
+          </ng-container>
+        </select>
+        <div *ngIf="controlSeleccionarProducto.getError('required') && controlSeleccionarProducto.touched" style="color: red;">Seleccionar un producto es requerido</div>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" name="activo" [(ngModel)]="discount.activo">Activo
+      </div>
+      <button (click)="cleanForm()" class="btn btn-danger m-2 ms-0 p-2">Cancelar</button>
+      <button type="submit" class="btn btn-primary m-2  p-2">Crear</button>
+    </form>
+  </div>
