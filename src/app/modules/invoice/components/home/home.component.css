@@ -18,6 +18,9 @@
   color: #2e2e2e;
   cursor: pointer;
 }
+.bg-custom-blue{
+  background-color: #45506a;
+}
 .bg-secundario {
   background-color: #cccccc;
 }

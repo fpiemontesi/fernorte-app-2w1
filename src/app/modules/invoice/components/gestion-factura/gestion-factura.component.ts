@@ -131,7 +131,7 @@ export class GestionFacturaComponent {
         (blob: Blob) => {
           this.toastService.show('Pdf de factura generado', {
             classname: 'bg-success text-light',
-            delay: 15000,
+            delay: 3000,
           })
           const url = window.URL.createObjectURL(blob);
           window.open(url, '_blank');
@@ -139,14 +139,14 @@ export class GestionFacturaComponent {
         (error) => {
           this.toastService.show('Error al generar el pdf', {
             classname: 'bg-danger text-light',
-            delay: 15000,
+            delay: 3000,
           });
         }
       );
     } catch (error) {
       this.toastService.show('Error al generar el pdf', {
         classname: 'bg-danger text-light',
-        delay: 15000,
+        delay: 3000,
       });
   }
 }

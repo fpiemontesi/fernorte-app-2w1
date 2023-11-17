@@ -7,9 +7,14 @@
   padding: 20px;
   border-radius: 10px;
 }
+.custom-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em; 
+  color: #ffffff; 
+}
 
 .bg-custom-color {
-  background-color: #3c2f81;
+  background-color: #8aa0ca;
 }
 
 .input-text {

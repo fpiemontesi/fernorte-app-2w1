@@ -51,7 +51,7 @@ export class ReporteClientesComponent {
     } catch (error) {
       this.toastService.show('Error al generar el pdf', {
         classname: 'bg-danger text-light',
-        delay: 15000,
+        delay: 3000,
       });
   }
   }
