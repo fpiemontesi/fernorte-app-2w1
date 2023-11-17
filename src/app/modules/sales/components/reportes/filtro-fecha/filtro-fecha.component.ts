@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
-import { Chart } from 'chart.js';
+import {  ChartType } from 'chart.js';
+import  {Chart } from 'chart.js/auto';
+import { Detalle } from '../../../models/Detalles';
 
 @Component({
   selector: 'fn-filtro-fecha',
@@ -8,72 +10,126 @@ import { Chart } from 'chart.js';
   styleUrls: ['./filtro-fecha.component.css']
 })
 export class FiltroFechaComponent {
-
   mes!: number;
-  anio!: number;
+  anio: number = 2023;
   tipo_venta!: number;
 
-  constructor(private reportesService: ReportesService) {}
+  formData = {
+    mes: this.mes,
+    anio: this.anio,
+    tipo_venta: this.tipo_venta
+  }
 
+  chart: any;
+  chartInstance!: Chart;
+
+  constructor(private reportesService: ReportesService) {
+    
+  }
+
+  
   onSubmit() {
-    this.mes = this.mes.valueOf();
-    this.anio = this.anio.valueOf();
-    this.tipo_venta = this.tipo_venta.valueOf();
-    this.generarGraficos();
+    if (!this.formData.anio) {
+      console.error('El año es obligatorio para generar el gráfico.');
+      return;
     }
 
-    generarGraficos(){
-      this.reportesService.getReportes(this.mes, this.anio, this.tipo_venta).subscribe(
+  //////  const acceso= this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe();
+    this.reporteEstadoVenta();
+  //  this.reporteTopProductos();
+
+  }   
+    
+    reporteTopProductos(){
+      this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
         (reportes) => {
-          this.crearGraficoVentas(reportes); 
+          const chartData = {
+            labels: [],
+            datasets: [
+              {
+                label: 'Estado de ventas',
+                data: [],
+                backgroundColor: this.generateRandomColor(2)
+              }
+            ]
+          };
+    
+          const canvas = document.getElementById('estado-venta') as HTMLCanvasElement;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            if (this.chartInstance) {
+              this.chartInstance.destroy(); 
+            }
+            
+            this.chartInstance = new Chart(ctx, {
+              type: 'bar',
+              data: chartData,
+              options: {
+              }
+            });
+          } else {
+            console.error('Failed to get the 2D rendering context for the canvas');
+          }
         },
         (error) => {
           console.error(error);
         }
       );
     }
-  
-    crearGraficoVentas(reportes: any[]) {
-      const ctx = document.getElementById('grafico-ventas') as HTMLCanvasElement;
     
-      if (Array.isArray(reportes) && reportes.length > 0) {
-        const labels = reportes.map(venta => `${venta.mes}-${venta.anio}`);
-        const data = reportes.map(venta => ({
-          mes: venta.mes,
-          anio: venta.anio,
-          total: venta.total_ventas 
-        }));
-    
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'Total Ventas',
-              data: data.map(item => item.total),
-              backgroundColor: 'rgba(54, 162, 235, 0.6)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'top',
-              },
-              title: {
-                display: true,
-                text: 'Gráfico de Ventas'
+    reporteEstadoVenta(){
+      this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
+        (reportes) => {
+          const chartData: { labels: string[], datasets: any[] } = {
+            labels: [],
+            datasets: [
+              {
+                label: 'Productos más vendidos',
+                data: [],
+                backgroundColor: []
               }
+            ]
+          };
+      
+          reportes.productos.forEach((detalle : Detalle) => {
+            chartData.labels.push(detalle.descripcion);
+            chartData.datasets[0].data.push(detalle.cantidad);
+            chartData.datasets[0].backgroundColor.push(this.generateRandomColor(5));
+          });
+      
+          const canvas = document.getElementById('top-productos') as HTMLCanvasElement;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            if (this.chartInstance) {
+              this.chartInstance.destroy();
             }
+            
+            this.chartInstance = new Chart(ctx, {
+              type: 'pie' as ChartType,
+              data: chartData,
+              options: {
+              }
+            });
+          } else {
+            console.error('Failed to get the 2D rendering context for the canvas');
           }
-        });
-      } else {
-        console.error('Los datos de reportes no son válidos o están vacíos.');
-      }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      
     }
-
-   
     
+
+   generateRandomColor(count: number): string[] {
+    const colors: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      colors.push(color);
+    }
+    return colors;
+  }
+
+
 }

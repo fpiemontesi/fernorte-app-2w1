@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './modules/sales/app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CatalogModule } from './modules/catalog/catalog.module';
@@ -22,7 +21,6 @@ import { InvoiceModule } from './modules/invoice/invoice.module';
     BrowserModule,
     
     NgbModule,
-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
