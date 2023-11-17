@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Proveedores</h2>
+  <br>
+    <div class="grid-container">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>CUIT</th>
+                <th>IVA</th>
+                <th>Ubicación</th>
+                <th>Provincia</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Catálogo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let proveedor of provedores; let i = index">
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.CUIT }}</td>
+                <td>{{ proveedor.IVA }}</td>
+                <td>{{ proveedor.Ubicacion }}</td>
+                <td>{{ proveedor.Provincia }}</td>
+                <td>{{ proveedor.Telefono }}</td>
+                <td>{{ proveedor.Email }}</td>
+                <td>
+                  <button class="button btn btn-primary" (click)="openCatalogo()">Catalogo</button>
+                
+            </tbody>
+        </table>
+    </div>
+ 
+  
+  <div class="buttons">
+    <button class="button btn btn-success" (click)="openModalAlta()">Nuevo</button>
+    <button class="button btn btn-danger"(click)="openModalBaja()">Eliminar</button>
+    <button class="button btn btn-warning"(click)="openModalEditar()">Editar</button>
+  </div>
+</div>
+
+

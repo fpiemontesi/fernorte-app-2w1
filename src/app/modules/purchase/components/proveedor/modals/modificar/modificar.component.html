@@ -1,0 +1,94 @@
+<div class="modal-header">
+    <h4 class="modal-title">Editar Proveedor</h4>
+  </div>
+  <div class="container">
+    <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+      <form class="row g-3 needs-validation" novalidate>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="validationCustom01" value="" required>
+        <div class="valid-feedback">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">CUIT</label>
+        <input type="text" class="form-control" id="validationCustom01" value="" required>
+        <div class="valid-feedback">
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="buttons btn btn-primary" type="button" >Buscar</button>
+      </div>
+      </form>
+    </div>
+    <form class="row g-3 needs-validation" novalidate>
+      <div class="col-md-4">
+        <!-- Se carga desde la base de datos -->
+        <label for="validationCustom01" class="form-label">IVA</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Email</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      </div>
+      <p>TELEFONO</p>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Tipo</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>--Seleccione uno--</option>
+          <option value="1">Telefono fijo</option>
+          <option value="2">celular</option>
+          <option value="3">Fax</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="validationCustom01" class="form-label">Numero</label>
+        <input type="text" class="form-control" id="validationCustom01" value="" required>
+        <div class="valid-feedback">
+        </div>
+      </div>
+      <p>UBICACION</p>
+      <div class="col-md-4">
+        <!-- Se carga desde la base de datos -->
+        <label for="validationCustom01" class="form-label">Provincia</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>--Seleccione uno--</option>
+          <option value="1">-</option>
+          <option value="2">-</option>
+          <option value="3">-</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <!-- Se carga desde la base de datos -->
+        <label for="validationCustom01" class="form-label">Barrio</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>--Seleccione uno--</option>
+          <option value="1">-</option>
+          <option value="2">-</option>
+          <option value="3">-</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <!-- Se carga desde la base de datos -->
+        <label for="validationCustom01" class="form-label">Localidad</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>--Seleccione uno--</option>
+          <option value="1">-</option>
+          <option value="2">-</option>
+          <option value="3">-</option>
+        </select>
+      </div>
+      
+      <div class="col-12">
+        <button class="buttons btn btn-primary" type="button" (click)="onSubmit()">Cargar</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-body">
+    <!-- Contenido del Modal: {{ data }} -->
+  </div>
