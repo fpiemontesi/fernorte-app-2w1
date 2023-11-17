@@ -128,4 +128,12 @@ export class RegistrarPagoComponent {
 
     this.formulario.updateValueAndValidity(); // Actualizar validación del formulario
   }
+  setTotal() {
+    this.paymentMethodList.controls.forEach((formaDePago) => {
+      if(this.restanteTotal>0){
+        formaDePago.get('amount')?.setValue(this.restanteTotal);
+      }else
+        formaDePago.get('amount')?.setValue(this.montoTotal);
+    });
+  }
 }

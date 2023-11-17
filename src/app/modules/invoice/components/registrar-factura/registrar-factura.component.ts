@@ -72,7 +72,6 @@ export class RegistrarFacturaComponent {
       .obtenerClienteByNroDoc(this.orderSelected.doc_cliente)
       .subscribe((data) => {
         this.client = data;
-
       });
 
 

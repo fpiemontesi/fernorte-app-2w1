@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 import { InvoiceDto } from '../models/InvoiceDto';
 import { Invoice } from '../models/Invoice';
@@ -40,28 +40,34 @@ export class InvoiceService {
     client: string
   ): Observable<InvoiceDto[]> {
     let params = new HttpParams();
-  
+
     if (dateFrom !== null && dateFrom !== '') {
-      let formatedDateFrom: string = this.toolsService.formatDate(dateFrom);
-      const encodedDateFrom = encodeURIComponent(formatedDateFrom);
-      params = params.set('dateFrom', encodedDateFrom);
+      const formattedDateFrom: string = this.toolsService.formatDate(dateFrom);
+
+      params = params.set('dateFrom', formattedDateFrom);
     }
-  
+
     if (dateTo !== null && dateTo !== '') {
-      let formatedDateTo: string = this.toolsService.formatDate(dateTo);
-      const encodedDateTo = encodeURIComponent(formatedDateTo);
-      params = params.set('dateTo', encodedDateTo);
+      const formattedDateTo: string = this.toolsService.formatDate(dateTo);
+      params = params.set('dateTo', formattedDateTo);
     }
-  
-    if(client !== '') {
+
+    if (client !== '') {
       params = params.set('clientId', client);
-    }  
+    }
+
     // Construir la URL con parámetros codificados
     const apiUrl = `${this.apiUrl}/all/filtered?${params.toString()}`;
-  
-    return this.http.get<InvoiceDto[]>(apiUrl);
+
+    // Hacer la solicitud HTTP con parámetros
+    return this.http.get<InvoiceDto[]>(apiUrl).pipe(
+      catchError((error) => {
+        // Manejar el error aquí (puedes logearlo o realizar otras acciones)
+        console.error('Error en la solicitud HTTP:', error);
+        throw error; // Puedes lanzar el error nuevamente o realizar alguna acción específica.
+      })
+    );
   }
-  
 
   setTotalpay(num: number) {
     this.totalPay = num;
