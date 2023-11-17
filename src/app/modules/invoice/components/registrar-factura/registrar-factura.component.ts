@@ -120,7 +120,7 @@ export class RegistrarFacturaComponent {
 
   obtenerInvoiceData() {
     this.invoice.orderId = this.orderSelected.id;
-    this.invoice.clientId = 87654321; //this.orderSelected.idCliente
+    this.invoice.clientId = this.orderSelected.doc_cliente;
     this.invoice.type = this.tipoFactura;
     this.invoice.status = 'PENDING';
     this.invoice.iva = 0.21;
