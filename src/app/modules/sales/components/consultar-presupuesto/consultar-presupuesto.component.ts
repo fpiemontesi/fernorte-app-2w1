@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Cliente } from '../../models/Cliente';
 import { ClienteService } from '../../services/cliente.service';
 import { Presupuesto } from '../../models/Presupuesto';
@@ -14,16 +14,22 @@ import Swal from 'sweetalert2';
   styleUrls: ['./consultar-presupuesto.component.css'],
 })
 export class ConsultarPresupuestoComponent implements OnInit {
+  @ViewChild('presupuestosDOM') presupuestosDOM!: ElementRef;
+  @ViewChild('detallePresupuestosDOM') detallePresupuestosDOM!: ElementRef;
   
+  presupuesto: Presupuesto;
+  mostrarTabla = false;      // Variable que controla la visibilidad de la tabla
+
+
   mostrarDetalle: boolean = false;
   mostrarActualizarEstado: boolean =false;
-  montoDesde!: number;
-  montoHasta!: number;
-  fechaDesde!: Date;
-  fechaHasta!: Date;
+  montoDesde!: number | null;
+  montoHasta!: number | null;
+  fechaDesde!: Date | null;
+  fechaHasta!: Date | null;
   nuevoEstado!: number;
   presupuestos: any = [];
-  presupuesto: Presupuesto;
+  
   mostrarModificar: boolean = false;
 
   constructor(private http : HttpClient, private router: Router, private service : PresupuestoService) {
@@ -32,17 +38,23 @@ export class ConsultarPresupuestoComponent implements OnInit {
 
   limpiarCampos(){
     this.presupuesto = {} as Presupuesto;
-    this.montoDesde = 0;
-    this.montoHasta = 0;
-    this.fechaDesde = new Date();
-    this.fechaHasta = new Date();
+    this.montoDesde = null;
+    this.montoHasta = null;
+    this.fechaDesde = null;
+    this.fechaHasta = null;
   }
 
   ngOnInit() {
+    
   }
-
+  // Método para mostrar/ocultar la tabla
+  toggleTabla(val:boolean) {
+    this.mostrarTabla = val;
+  }
   // FILTRAR VENTAS POR GET
   filtrarPresupuestos() {
+    
+    
     // Construye los parámetros de la consulta
     let params = new HttpParams()
     if(this.presupuesto.id){
@@ -72,13 +84,11 @@ export class ConsultarPresupuestoComponent implements OnInit {
     if (this.fechaHasta) {
       params = params.set('fecha_hasta', this.fechaHasta.toISOString());
     }
-
-    const url = 'http://localhost:8080/ventas/';
-    const urlPresupuesto ='http://localhost:8080/presupuesto'
+    const urlPresupuesto ='http://localhost:8080/presupuesto/'
 
     // Agrega los parámetros a la URL de manera adecuada
     const urlWithParams = `${urlPresupuesto}?${params.toString()}`;
-
+    console.log(urlWithParams);
     this.http.get(urlWithParams).subscribe({
       next: (response) => {
         console.log('Solicitud GET exitosa. Respuesta:', response);
@@ -86,42 +96,53 @@ export class ConsultarPresupuestoComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al realizar la solicitud GET:', error);
-        console.log(params.toString());
+        
+        var mensajeAlerta="";
+        if(error.status == 404){
+          mensajeAlerta = 'No se han encontrado presupuestos con los filtros especificados'; 
+        }
+        else mensajeAlerta = "Ha ocurrido un problema al buscar los presupuestos. Por favor, contacte con el administrador.";
         Swal.fire({
           icon: 'error',
-          title: 'Error al filtrar las ventas',
+          title: mensajeAlerta,
           showCancelButton: false,
           showConfirmButton: true,
           confirmButtonText: 'Aceptar',
         });
       },
     });
+    this.moverPantalla(this.presupuestosDOM.nativeElement);
   }
-
+  moverPantalla(elemento: HTMLElement){
+    if(elemento){
+      setTimeout(() => {
+        elemento.scrollIntoView({
+          behavior: 'smooth',
+        });
+      },100)
+    }
+    
+  }
   modificarPresupuesto(presupuesto : Presupuesto){
     this.service.guardarPresupuesto(presupuesto);
     this.router.navigate(['sales/modificar-presupuesto']);
-    console.log(presupuesto);
   }
-  // modificarVenta(presupuesto:Presupuesto){
-  //   this.service.guardarId(presupuesto);
-  //   this.router.navigate(['modificar-venta']);
-  //   console.log(presupuesto);
-  // }
 
   verDetalle(presupuesto: Presupuesto){
     this.presupuesto = presupuesto;
     this.mostrarDetalle = true;
+    this.moverPantalla(this.detallePresupuestosDOM.nativeElement);
   }
   eliminarPresupuesto(id: number){
     Swal.fire({
-      title: '¿Está seguro que desea eliminar el presupuesto?',
+      title: '¿Está seguro que desea eliminar el presupuesto con ID '+id+'?',
       text: 'Esta acción no se puede deshacer',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#05B001',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, eliminar'
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.service.deletePresupuesto(id).subscribe((response) => {
