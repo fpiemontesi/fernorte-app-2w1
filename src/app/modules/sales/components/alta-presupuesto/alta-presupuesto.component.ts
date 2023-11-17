@@ -9,6 +9,8 @@ import { Detalle } from '../../models/Detalles';
 import { Categoria } from '../../models/Categoria';
 import { FormBuilder,Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Ventas } from '../../models/Ventas';
+import { Descuento } from '../../models/Descuento';
 
 @Component({
   selector: 'fn-alta-presupuesto',
@@ -41,6 +43,7 @@ export class AltaPresupuestoComponent {
   categoria: Categoria = new Categoria("NORMAL", 0)
   total: number = 0;
   subtotal: number = 0;
+  boton_agregar = false;
 
   constructor(private http: HttpClient , private presupuestoService: PresupuestoService , private ventasService: VentasService, private fb:FormBuilder) {
    }  
@@ -49,6 +52,7 @@ export class AltaPresupuestoComponent {
   action!: string; 
 
   onSubmit() {
+    
   }
 
   ngOnInit() {
@@ -87,6 +91,8 @@ export class AltaPresupuestoComponent {
       }
     }
     
+    
+
     this.tipo_activado = false;
     var detalle = new Detalle();
     detalle.cantidad = this.cantidad;
@@ -96,7 +102,7 @@ export class AltaPresupuestoComponent {
     } else if(this.presupuesto.tipo_venta == 2){
       detalle.precio_unitario = this.productoSeleccionado.precio_mayorista;
     }
-    detalle.descripcion = this.productoSeleccionado.descripcion;
+    detalle.descripcion = this.productoSeleccionado.nombre;
     this.presupuesto.detalles.push(detalle);
     this.calcularTotales();
   }
@@ -137,6 +143,14 @@ export class AltaPresupuestoComponent {
     return true;
   }
 
+  validarCantidad(){
+    if(this.cantidad <= 0){
+      this.boton_agregar = false;
+    } else{
+      this.boton_agregar = true;
+    }
+  }
+
   guardarPresupuesto() {
       this.presupuestoService.realizarSolicitudPostPresupuesto(this.presupuesto).subscribe((response) => {
         console.log(response);
@@ -160,7 +174,30 @@ export class AltaPresupuestoComponent {
   }
 
   guardarVenta() {
-    
+    var venta = new Ventas();
+    venta.detalles = this.presupuesto.detalles;
+    venta.doc_cliente = this.cliente.nro_doc;
+    venta.estado = 1;
+    venta.id_vendedor = 1;
+    venta.fecha = new Date();
+    venta.fecha_entrega = new Date();
+    venta.descuentos = [new Descuento()];
+    venta.descuentos[0].monto = this.calcularDescuentos();
+    venta.descuentos[0].descripcion = "Descuento por cliente " + this.categoria.nombre;
+    venta.forma_entrega = 1;
+    venta.tipo_venta = this.presupuesto.tipo_venta;
+
+    console.log(venta);
+
+    this.ventasService.realizarSolicitudPostVenta(venta).subscribe((response) => {
+      console.log(response);
+      Swal.fire({
+        title: "Exito!",
+        text: "Se ha guardado la venta",
+        icon: "success",
+        timer:2000
+      });
+    })
   }
 
   actualizarPrecio(){

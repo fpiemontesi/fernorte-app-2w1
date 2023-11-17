@@ -18,7 +18,7 @@ export class ConsultarVentaComponent {
   fechaDesde!: Date;
   fechaHasta!: Date;
   nuevoEstado!: number;
-  ventas: any = [];
+  ventas: Ventas[] = [];
   venta: Ventas;
   mostrarModificar: boolean = false;
   clientes: any[] = [];
@@ -38,7 +38,6 @@ export class ConsultarVentaComponent {
   actualizarEstado(venta:any){
     this.service.actualizarEstado(venta.id, venta.estado).subscribe(response => {
       console.log("Solicitud de modificación de Estado exitosa. Respuesta:" + venta.estado);
-    
     });
   }
   
@@ -91,7 +90,7 @@ export class ConsultarVentaComponent {
     // Agrega los parámetros a la URL de manera adecuada
     const urlWithParams = `${url}?${params.toString()}`;
 
-    this.http.get(urlWithParams).subscribe({
+    this.http.get<Ventas[]>(urlWithParams).subscribe({
       next: (response) => {
         console.log('Solicitud GET exitosa. Respuesta:', response);
         this.ventas = response;

@@ -12,7 +12,7 @@ export class VentasService {
   idVenta!: number;
   constructor(private http : HttpClient) {
  }
-  private urlId = 'http://localhost:8080/ventas'
+  private urlId = 'http://localhost:8080/ventas/'
 
 
   getClientes(): Observable<any> {
@@ -40,24 +40,15 @@ export class VentasService {
   }
 
   actualizarEstado(ventaId: number, nuevoEstado: number) {
-    const url = `${this.urlId}/estado/${ventaId}`;
-    const body = { estado: nuevoEstado };
+    const url = `${this.urlId}${ventaId}?estado=${nuevoEstado}`;
 
-    return this.http.put(url, body);
+    return this.http.put(url, null);
   }
 
-  realizarSolicitudPostVenta(formData: any, productosVenta: any): Observable<any> {
+  realizarSolicitudPostVenta(venta: Ventas): Observable<any> {
 
-    const url = 'http://localhost:8080/ventas/save';
-    const body = {
-      fecha: new Date().toISOString(),
-      id_cliente: formData.cliente,
-      tipo_venta: formData.tipo,
-      forma_entrega: formData.formaEntrega,
-      fecha_entrega: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      id_vendedor: formData.vendedor,
-      detalles: productosVenta
-    };
+    const url = 'http://localhost:8080/ventas/';
+    const body = venta;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -70,7 +61,7 @@ export class VentasService {
 
 
   realizarModificacionVenta(ventaId: number, formData: any, productosVenta: any): Observable<any> {
-    const url = 'http://localhost:8080/ventas/';
+    const url = 'http://localhost:8080/venta/';
     const body = {
       doc_cliente: formData.doc_cliente,
       fecha: new Date().toISOString(),

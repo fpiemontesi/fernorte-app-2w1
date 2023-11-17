@@ -3,7 +3,7 @@
 
   <form (ngSubmit)="onSubmit()">
       <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
               <label for="mes">Mes</label>
               <select class="form-control" id="mes" name="mes" [ngModel]="formData.mes">
                   <option disabled selected value="">Seleccione un mes </option>
@@ -21,13 +21,11 @@
                   <option value="12">Diciembre</option>
               </select>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
               <label for="año">Año</label>
               <input type="number" class="form-control" id="año" name="anio" [ngModel]="formData.anio">
           </div>
-      </div>
-      <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
               <label for="tipo_venta">Tipo de venta</label>
               <select class="form-control" id="tipo_venta" name="tipo_venta" [ngModel]="formData.tipo_venta">
                   <option disabled selected value="">Selecciona el tipo de venta</option>
@@ -35,14 +33,17 @@
                   <option value="2">Minorista</option>
               </select>
           </div>
+      </div>
+      <div class="row">
+          
           <div class="col-md-6">
-              <button type="submit" class="btn btn-outline-dark">Buscar</button>
+              <button type="submit" class="btn btn-outline-dark mt-2">Buscar</button>
           </div>
       </div>
   </form>
 
-  <div class="row">
-      <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-3">
           <canvas id="estado-venta" width="400" height="200"></canvas>
       </div>
       <div class="col-md-6">

@@ -124,10 +124,10 @@ export class FiltroFechaComponent {
 
    generateRandomColor(count: number): string[] {
     const colors: string[] = [];
-    for (let i = 0; i < count; i++) {
-      const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
-      colors.push(color);
-    }
+
+    const color = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)},${count})`;
+    colors.push(color);
+
     return colors;
   }
 
