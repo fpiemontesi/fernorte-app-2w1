@@ -13,10 +13,9 @@ import { ToastsComponent } from './components/toast/toasts.component';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-
-  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
+  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
                  RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent
-                , ReceiptListComponent],
+                ,ReceiptListComponent, ReceiptDetailsModalComponent],
   providers: [],
   imports: [
     CommonModule,
