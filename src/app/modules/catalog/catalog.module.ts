@@ -22,6 +22,7 @@ import { ListOffersComponent } from './components/crud-offer/list-offers/list-of
 import { RegisterOfferComponent } from './components/crud-offer/register-offer/register-offer.component';
 import { UpdateOfferComponent } from './components/crud-offer/update-offer/update-offer.component';
 import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog.component';
+import { ListCatalogComponent } from './components/crud-catalog/list-catalog/list-catalog.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 
 
@@ -44,26 +45,31 @@ const routes:Routes = [
       {path:"", component:ListBrandsComponent},
     ]},
     {
-      path:'listDiscounts',
-      children: [
-        {path:'updateDiscount', component: UpdateDiscountComponent},
-        {path:'registerDiscount', component:RegisterDiscountComponent},
-        {path:"", component:ListDiscountsComponent},
-      ]},
-      {
-        path:'listOffers',
-        children:[
-          {path:'updateOffer',component: UpdateOfferComponent},
-          {path:'registerOffer',component: RegisterOfferComponent},
-          {path: '',component: ListOffersComponent}
-        ]},
-        {path:"registerCatalog", component:RegisterCatalogComponent},
-        {path:"", component:InicioComponent}
-    
+    path:'listDiscounts',
+    children: [
+      {path:'updateDiscount', component: UpdateDiscountComponent},
+      {path:'registerDiscount', component:RegisterDiscountComponent},
+      {path:"", component:ListDiscountsComponent},
+    ]},
+    {
+    path:'listOffers',
+    children:[
+      {path:'updateOffer',component: UpdateOfferComponent},
+      {path:'registerOffer',component: RegisterOfferComponent},
+      {path: '',component: ListOffersComponent}
+    ]},
+  {path:"listCatalogs",
+    children:[
+      {path:"updateCategory", component:HomeComponent},
+      {path:"registerCatalog", component:RegisterCatalogComponent},
+      {path:"", component:ListCatalogComponent},
+    ]
+  },
+  {path:"", component:InicioComponent}
 ];
 
 @NgModule({
-  declarations: [HomeComponent, RegisterProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent,RegisterCatalogComponent, InicioComponent],
+  declarations: [HomeComponent, RegisterProductComponent, DeleteProductComponent, AltaCategoriaComponent, EditarCategoriaComponent, ListCategoriasComponent, RegisterBrandComponent, UpdateBrandComponent, ListBrandsComponent, AlertComponent, ModalComponent, ListDiscountsComponent, RegisterDiscountComponent, UpdateDiscountComponent, ListOffersComponent, RegisterOfferComponent, UpdateOfferComponent,RegisterCatalogComponent, ListCatalogComponent, InicioComponent],
   providers: [],
   imports: [CommonModule, FormsModule, NgbModule, ReactiveFormsModule, RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],

@@ -5,6 +5,8 @@ import {Producto} from "../../../models/producto";
 import {productService} from "../../../services/productService/product.service";
 import {CatalogService} from "../../../services/catalogService/catalog.service";
 import {Catalog} from "../../../models/catalog";
+import {ActivatedRoute} from "@angular/router";
+import {CatalogDTO} from "../../dtos/catalog-dto";
 
 @Component({
   selector: 'fn-register-catalog',
@@ -20,9 +22,13 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
   hayProductos: boolean = false;
   allProducts:Producto[]=[];
   productosSeleccionados:Producto[]=[];
-  catalog:Catalog = {} as Catalog;
+  catalog:Catalog = {codigo:"",nombre:"",descripcion:"",productos_asociados:[]} as Catalog;
+  catalogDTO:CatalogDTO = {} as CatalogDTO;
+  codigo:string="";
   alert: boolean = false;
-  constructor(private formBuilder:FormBuilder, private productService:productService, private catalogService:CatalogService) {
+  title:string="";
+
+  constructor(private formBuilder:FormBuilder, private productService:productService, private catalogService:CatalogService, private activatedRoute:ActivatedRoute) {
   }
 
   ngOnDestroy(): void {
@@ -32,10 +38,47 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
 
     this.formCatalog = this.formBuilder.group({
+      codigo:["",[Validators.required]],
       name:["",[Validators.required]],
       description:["",[Validators.required]]
     })
 
+
+    this.subscription.add(
+        this.activatedRoute.queryParams.subscribe(params => {
+          this.title = params["title"];
+          if(params["codigo"] != null){
+            this.codigo = params["codigo"];
+          }
+        })
+    );
+
+    if(this.codigo != ""){
+      this.subscription.add(
+          this.catalogService.getCatalogByCode(this.codigo).subscribe({
+            next:(response:CatalogDTO)=>{
+
+
+              this.catalog.nombre=response.nombre;
+              this.catalog.codigo=response.codigo;
+              this.catalog.descripcion=response.descripcion;
+              response.productos_asociados.forEach((p: Producto) => {
+                this.productosSeleccionados.push(p);
+              });
+              this.formCatalog.setValue({
+                codigo: this.catalog.codigo,
+                name: this.catalog.nombre,
+                description: this.catalog.descripcion
+              });
+
+            },
+            error: () => {
+              alert("Error al intentar cargar el catalogo.")
+            }
+          }
+          )
+      )
+    }
 
     this.getAllProducts();
   }
@@ -99,7 +142,9 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
         next: async () => {
           await this.toggleAlert()
           this.catalog = {} as Catalog
+          this.productosSeleccionados = [];
           this.formCatalog.reset();
+          alert("Catalogo guardado exitosamente!")
           //this.router.navigate(["listCategories"])
 
         },

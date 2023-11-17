@@ -2,10 +2,21 @@
   <ng-container *ngIf="alert">
     <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
   </ng-container>
-  <h2>Registrar Catalogo</h2>
+  <h2>{{title}}</h2>
   <hr />
   <form [formGroup]="formCatalog" (ngSubmit)="saveCatalog()">
     <div class="form-group row">
+      <div class="col-sm-10">
+        <label for="txtCodigo" class="col-sm-2 col-form-label">Codigo</label>
+        <input
+                type="text"
+                class="form-control"
+                id="txtCodigo"
+                formControlName="codigo"
+                placeholder="Codigo"
+                readonly
+        />
+      </div>
       <div class="col-sm-10">
         <label for="txtName" class="col-sm-2 col-form-label">Nombre</label>
         <input

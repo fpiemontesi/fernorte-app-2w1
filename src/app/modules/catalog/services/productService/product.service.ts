@@ -14,7 +14,6 @@ export class productService {
   getAllProducts():Observable<Producto[]>{
       return this.client.get<Producto[]>("http://localhost:8080/api/products");
   }
-
   getProductByCode(code:string):Observable<Producto>{
     return this.client.get<Producto>("http://localhost:8080/api/products/"+code);
   }
@@ -25,7 +24,6 @@ export class productService {
   updateProduct(code:string, product:ProductoPreCarga):Observable<Producto>{
     return this.client.put<Producto>("http://localhost:8080/api/products/"+code, product);
   }
-
   deleteProduct(code:string):Observable<Producto>{
     return this.client.delete<Producto>("http://localhost:8080/api/products/"+code);
   }
