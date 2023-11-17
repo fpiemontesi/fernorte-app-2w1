@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Ventas } from '../models/Ventas';
 import { Observable, tap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -11,7 +10,7 @@ export class ReportesService {
 
   private apiUrl = 'http://localhost:8080/reportes'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {  }
 
   getReportes(anio: number, mes?: number, tipo_venta?: number): Observable<any> {
     let params = new HttpParams().set('anio', anio);
@@ -26,7 +25,7 @@ export class ReportesService {
 
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       tap((reportes) => {
-        console.log('Reportes obtenidos:', reportes); // Agrega este console.log para imprimir la respuesta
+        console.log('Reportes obtenidos:', reportes); 
       })
     );
   }
