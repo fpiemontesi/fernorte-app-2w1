@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
 import { RestService } from '../../services/rest.service';
 import { UserService } from '../../services/user.service';
@@ -11,8 +11,22 @@ import { CargoService } from '../../services/cargo.service';
   templateUrl: './crear-user.component.html',
   styleUrls: ['./crear-user.component.css'],
 })
-export class CrearUserComponent {
+export class CrearUserComponent implements OnInit{
+  crearUsuarioForm: FormGroup = this.fb.group({});
+  
   ngOnInit() {
+    this.crearUsuarioForm = this.fb.group({
+      nombre: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
+      tipoDocumento: ['', [Validators.required]],
+      tipoCargo: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      telefono: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      numeroDocumento: ['', [Validators.required]],
+    });
+
     this.cargoService.cargos$.subscribe((cargos) => {
       this.listaCargos = cargos;
       this.getListCargos();
@@ -20,14 +34,13 @@ export class CrearUserComponent {
   }
 
   constructor(
+    private fb:FormBuilder,
     private restService: RestService,
     private userService: UserService,
     private cargoService: CargoService
   ) {}
 
   listaCargos: any[] = [];
-
-  @ViewChild('crearUsuarioForm', { static: false }) crearUsuarioForm!: NgForm;
 
   usuario = new Usuario();
 
@@ -38,9 +51,7 @@ export class CrearUserComponent {
   }
 
   crearUsuario() {
-    Object.keys(this.crearUsuarioForm.controls).forEach((controlName) => {
-      this.crearUsuarioForm.controls[controlName].markAsTouched();
-    });
+    this.crearUsuarioForm.markAllAsTouched();
 
     if (this.crearUsuarioForm.valid) {
       this.restService.postUsuario(this.usuario).subscribe(

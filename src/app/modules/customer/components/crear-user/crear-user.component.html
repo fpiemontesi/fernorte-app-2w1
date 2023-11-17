@@ -1,6 +1,6 @@
 <div class="container big-cart">
   <h3>Crear Usuario</h3>
-  <form #crearUsuarioForm="ngForm">
+  <form [formGroup]="crearUsuarioForm">
     <div class="row">
       <!-- Primera columna -->
       <div class="col-md-6">
@@ -11,9 +11,8 @@
             class="form-control"
             id="nombre"
             placeholder="Nombre del Usuario"
-            name="nombre"
+            formControlName="nombre"
             [(ngModel)]="usuario.nombre"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -38,10 +37,8 @@
             class="form-control"
             id="email"
             placeholder="Email del Usuario"
-            name="email"
+            formControlName="email"
             [(ngModel)]="usuario.email"
-            required
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -59,7 +56,7 @@
           </div>
 
           <div
-            *ngIf="crearUsuarioForm.controls['email'].errors?.['pattern']"
+            *ngIf="crearUsuarioForm.controls['email'].errors?.['email']"
             class="invalid-feedback"
           >
             El formato del email es incorrecto.
@@ -73,9 +70,8 @@
             class="form-control"
             id="username"
             placeholder="Username"
-            name="username"
+            formControlName="username"
             [(ngModel)]="usuario.username"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -97,9 +93,8 @@
           <select
             class="form-control"
             id="tipoDocumento"
-            name="tipoDocumento"
+            formControlName="tipoDocumento"
             [(ngModel)]="usuario.id_tipo_documento.id_tipo_documento"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -128,9 +123,8 @@
           <select
             class="form-control"
             id="tipoCargo"
-            name="tipoCargo"
+            formControlName="tipoCargo"
             [(ngModel)]="usuario.id_cargo.id_cargo"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -165,9 +159,8 @@
             class="form-control"
             id="apellido"
             placeholder="Apellido del Usuario"
-            name="apellido"
+            formControlName="apellido"
             [(ngModel)]="usuario.apellido"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -192,9 +185,8 @@
             class="form-control"
             id="telefono"
             placeholder="Teléfono del Usuario"
-            name="telefono"
+            formControlName="telefono"
             [(ngModel)]="usuario.telefono"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -219,10 +211,8 @@
             class="form-control"
             id="password"
             placeholder="Contraseña del Usuario"
-            name="password"
+            formControlName="password"
             [(ngModel)]="usuario.password"
-            required
-            minlength="6"
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
@@ -254,9 +244,8 @@
             class="form-control"
             id="numeroDocumento"
             placeholder="Número de Documento"
-            name="numeroDocumento"
+            formControlName="numeroDocumento"
             [(ngModel)]="usuario.numero_documento"
-            required
             [ngClass]="{
               'is-invalid':
                 crearUsuarioForm &&
