@@ -25,4 +25,6 @@ export class BatchService {
   modificate(body: Batch, id: number): Observable<Batch>{
     return this.http.put<Batch>('http://localhost:3000/batchs/'+id, body)
 
+  }
+  
 }

@@ -26,8 +26,8 @@ export class ModificarLoteComponent {
   batch:Batch = new Batch();
   batches: Batch[] = [];
   sections: Section[]= [];
-  //existence$: Observable<Existence> = new Observable();
   existence: Existence = new Existence();
+
 
   private subscriptions = new Subscription();
 
@@ -138,7 +138,10 @@ export class ModificarLoteComponent {
       const inputDate = new Date(this.inputDate);
 
       if (inputDate > this.actualDate) return false
-      else if (inputDate < this.actualDate) return true;
+      else if (inputDate < this.actualDate) {
+        return true
+        
+       };
     }
 
     return true;
