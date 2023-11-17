@@ -15,13 +15,15 @@ import { UpdateBrandComponent } from './components/crud-brand/update-brand/updat
 import { ListBrandsComponent } from './components/crud-brand/list-brands/list-brands.component';
 import { AlertComponent } from './components/interactions/alert/alert.component';
 import { ModalComponent } from './components/interactions/modal/modal.component';
+
 import { ListDiscountsComponent } from './components/crud-discount/list-discounts/list-discounts.component';
 import { RegisterDiscountComponent } from './components/crud-discount/register-discount/register-discount.component';
 import { UpdateDiscountComponent } from './components/crud-discount/update-discount/update-discount.component';
 import { ListOffersComponent } from './components/crud-offer/list-offers/list-offers.component';
 import { RegisterOfferComponent } from './components/crud-offer/register-offer/register-offer.component';
 import { UpdateOfferComponent } from './components/crud-offer/update-offer/update-offer.component';
-import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog/register-catalog.component';
+import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog.component';
+
 
 
 

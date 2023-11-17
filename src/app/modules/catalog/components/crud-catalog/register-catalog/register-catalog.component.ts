@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
-import {Producto} from "../../../../models/producto";
-import {productService} from "../../../../services/productService/product.service";
-import {CatalogService} from "../../../../services/catalogService/catalog.service";
-import {Catalog} from "../../../../models/catalog";
+import {Producto} from "../../../models/producto";
+import {productService} from "../../../services/productService/product.service";
+import {CatalogService} from "../../../services/catalogService/catalog.service";
+import {Catalog} from "../../../models/catalog";
 
 @Component({
   selector: 'fn-register-catalog',
@@ -99,6 +99,7 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
         next: async () => {
           await this.toggleAlert()
           this.catalog = {} as Catalog
+          this.formCatalog.reset();
           //this.router.navigate(["listCategories"])
 
         },
