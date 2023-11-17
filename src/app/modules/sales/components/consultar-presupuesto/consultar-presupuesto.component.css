@@ -52,3 +52,14 @@
 {
   text-align: center;
 }
+.animated-table {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.invisible {
+  opacity: 0;
+}
