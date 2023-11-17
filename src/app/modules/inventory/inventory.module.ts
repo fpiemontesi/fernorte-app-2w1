@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
+import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
 import { ListBatchesByExistenceComponent } from './components/list-batches-by-existence/list-batches-by-existence.component';
 import { ListBatchesBySectionComponent } from './components/list-batches-by-section/list-batches-by-section.component';
 import { RegistrarRemitoComponent } from './components/remito/registrar-remito/registrar-remito.component';
@@ -10,7 +11,8 @@ import { ToastsComponent } from './components/toast/toasts.component';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent],
+  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
+                 RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent],
   providers: [],
   imports: [
     CommonModule,

@@ -6,4 +6,3 @@ export class Batch {
   dueDate: Date = new Date();
   shelf: number = 0;
 }
-
