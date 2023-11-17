@@ -67,7 +67,7 @@ export class ModificarRemitoComponent implements OnInit, OnDestroy {
       this.receipt.supplierName = this.receiptForm.get('supplierName')?.value;
       this.receipt.details = this.receiptDetails;
 
-      this.remitoService.modify(this.receipt).subscribe((updatedReceipt: Receipt) => {
+      this.receiptSubscription = this.remitoService.modify(this.receipt).subscribe((updatedReceipt: Receipt) => {
         this.toastService.show("Formulario valido","Remito modificado con exito.");      });
     } else {
       this.toastService.show("Formulario invalido","Datos del formulario invalidos");
