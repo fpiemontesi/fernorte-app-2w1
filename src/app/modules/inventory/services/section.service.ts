@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Section} from "../models/section";
+import { Section } from '../models/section';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +12,8 @@ export class SectionService {
 
   getAllByZone(zoneId: number): Observable<Section[]>{
     return this.http.get<Section[]>(`http://localhost:3000/sections?zoneId=${zoneId}`);
+    
+  getAll(): Observable<Section[]>{
+    return this.http.get<Section[]>(`http://localhost:3000/sections`);
   }
 }
