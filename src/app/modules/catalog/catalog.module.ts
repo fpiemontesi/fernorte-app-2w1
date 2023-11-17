@@ -15,7 +15,7 @@ import { UpdateBrandComponent } from './components/crud-brand/update-brand/updat
 import { ListBrandsComponent } from './components/crud-brand/list-brands/list-brands.component';
 import { AlertComponent } from './components/interactions/alert/alert.component';
 import { ModalComponent } from './components/interactions/modal/modal.component';
-import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog/register-catalog.component';
+import { RegisterCatalogComponent } from './components/crud-catalog/register-catalog/register-catalog.component';
 
 
 
