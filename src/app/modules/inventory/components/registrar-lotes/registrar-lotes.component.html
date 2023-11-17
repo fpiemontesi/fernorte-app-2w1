@@ -50,14 +50,14 @@
         [(ngModel)]="sectionSelect.id"
         [class.is-valid]="selectSetcion.valid && selectSetcion.dirty"
         [class.is-invalid]="
-        sectionSelect.id == '' &&
+        sectionSelect.id == 0 &&
           (selectSetcion.dirty || selectSetcion.touched)
         "
         required
       >
         <option
           [ngValue]="0"
-          [selected]="sectionSelect.id == ''"
+          [selected]="sectionSelect.id == 0"
           disabled
         ></option>
         <ng-container *ngFor="let section of sections">

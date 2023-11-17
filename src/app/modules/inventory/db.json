@@ -90,32 +90,32 @@
   ],
   "sections": [
       {
-        "id": "1",
+        "id": 1,
         "name": "A",
         "zoneId": 1
       },
       {
-        "id": "2",
+        "id": 2,
         "name": "B",
         "zoneId": 2
       },
       {
-        "id": "3",
+        "id": 3,
         "name": "C",
         "zoneId": 2
       },
       {
-        "id": "4",
+        "id": 4,
         "name": "D",
         "zoneId": 1
       },
       {
-        "id": "5",
+        "id": 5,
         "name": "E",
         "zoneId": 2
       },
       {
-        "id": "6",
+        "id": 6,
         "name": "R",
         "zoneId": 1
       }
@@ -134,7 +134,7 @@
     {
       "id": 1,
       "existenceCode": "1",
-      "sectionId": "4",
+      "sectionId": 4,
       "quantity": "5",
       "dueDate": "2024-10-27",
       "shelf": "6"
@@ -142,7 +142,7 @@
     {
       "id": 2,
       "existenceCode": "2",
-      "sectionId": "3",
+      "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "6"
@@ -150,7 +150,7 @@
     {
       "id": 3,
       "existenceCode": "1",
-      "sectionId": "3",
+      "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "6"
@@ -158,7 +158,7 @@
     {
       "id": 4,
       "existenceCode": "1",
-      "sectionId": "3",
+      "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "6"
@@ -166,7 +166,7 @@
     {
       "id": 5,
       "existenceCode": "1",
-      "sectionId": "3",
+      "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "3"
@@ -174,7 +174,7 @@
     {
       "id": 6,
       "existenceCode": "1",
-      "sectionId": "1",
+      "sectionId": 1,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "3"
@@ -182,14 +182,14 @@
     {
       "id": 7,
       "existenceCode": "1",
-      "sectionId": "3",
+      "sectionId": 3,
       "quantity": "4",
       "dueDate": "2023-10-26",
       "shelf": "4"
     },
     {
       "id": 8,
-      "existenceCode": "1",
+      "existenceCode": 1,
       "sectionId": "3",
       "quantity": "3",
       "dueDate": "2023-10-30",

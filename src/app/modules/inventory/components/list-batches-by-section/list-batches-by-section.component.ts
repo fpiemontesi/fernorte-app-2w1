@@ -12,7 +12,7 @@ import { AppToastService } from '../../services/app-toast.service';
 export class ListBatchesBySectionComponent implements OnInit, OnDestroy{
   batches: Batch[] = [];
   batchesFiltered: Batch[] = [];
-  sectionId!: string;
+  sectionId!: number;
   private subscriptions = new Subscription();
 
   constructor(private batchService: BatchService, private toastService: AppToastService) { }
