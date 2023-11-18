@@ -5,7 +5,7 @@
         <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
     </ng-container>
 
-    <button routerLink="registerCatalog" [queryParams]="{ title: 'Registrar Catalogo' }" class="btn btn-success float-end mt-2">Registrar Catalogo</button>
+    <button routerLink="registerCatalog" [queryParams]="{ tipo: 1,title: 'Registrar Catalogo' }" class="btn btn-success float-end mt-2">Registrar Catalogo</button>
     <h2 class="my-2 py-2">Listado de Catalogos</h2>
     <div class="table-responsive">
         <table class="table table-hover">
@@ -23,11 +23,11 @@
                 <td>{{c.codigo}}</td>
                 <td>{{c.nombre}}</td>
                 <td>
-                    <button routerLink="registerCatalog" [queryParams]="{title: 'Codigo de Catalogo: '+c.codigo}"
+                    <button routerLink="registerCatalog" [queryParams]="{tipo: 3,title: 'Codigo de Catalogo: '+c.codigo, codigo: [c.codigo]}"
                             class="btn btn-success">Ver</button>
                 </td>
                 <td>
-                    <button routerLink="registerCatalog" [queryParams]="{ codigo: [c.codigo], title: 'Modificar Catalogo' }"
+                    <button routerLink="registerCatalog" [queryParams]="{tipo: 2, codigo: [c.codigo], title: 'Modificar Catalogo' }"
                             class="btn btn-primary">Modificar</button>
                 </td>
 

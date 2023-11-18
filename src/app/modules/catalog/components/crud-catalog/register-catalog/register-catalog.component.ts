@@ -5,7 +5,7 @@ import {Producto} from "../../../models/producto";
 import {productService} from "../../../services/productService/product.service";
 import {CatalogService} from "../../../services/catalogService/catalog.service";
 import {Catalog} from "../../../models/catalog";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CatalogDTO} from "../../dtos/catalog-dto";
 
 @Component({
@@ -23,12 +23,12 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
   allProducts:Producto[]=[];
   productosSeleccionados:Producto[]=[];
   catalog:Catalog = {codigo:"",nombre:"",descripcion:"",productos_asociados:[]} as Catalog;
-  catalogDTO:CatalogDTO = {} as CatalogDTO;
   codigo:string="";
   alert: boolean = false;
   title:string="";
+  tipo:number = 1; // TIPO 1: REGISTRAR - TIPO 2: MODIFICAR - TIPO 3: CONSULTA
 
-  constructor(private formBuilder:FormBuilder, private productService:productService, private catalogService:CatalogService, private activatedRoute:ActivatedRoute) {
+  constructor(private formBuilder:FormBuilder, private productService:productService, private catalogService:CatalogService, private activatedRoute:ActivatedRoute, private router:Router) {
   }
 
   ngOnDestroy(): void {
@@ -36,52 +36,68 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
   }
 
   ngOnInit(): void {
-
     this.formCatalog = this.formBuilder.group({
-      codigo:["",[Validators.required]],
-      name:["",[Validators.required]],
-      description:["",[Validators.required]]
-    })
-
+      codigo: [""],
+      name: ["", [Validators.required]],
+      description: ["", [Validators.required]]
+    });
 
     this.subscription.add(
-        this.activatedRoute.queryParams.subscribe(params => {
-          this.title = params["title"];
-          if(params["codigo"] != null){
-            this.codigo = params["codigo"];
-          }
-        })
+      this.activatedRoute.queryParams.subscribe((params) => {
+        this.title = params["title"];
+        this.tipo = params["tipo"];
+        if (params["codigo"] != null) {
+          this.codigo = params["codigo"];
+        }
+      })
     );
 
-    if(this.codigo != ""){
+    if (this.codigo != "") {
       this.subscription.add(
-          this.catalogService.getCatalogByCode(this.codigo).subscribe({
-            next:(response:CatalogDTO)=>{
-
-
-              this.catalog.nombre=response.nombre;
-              this.catalog.codigo=response.codigo;
-              this.catalog.descripcion=response.descripcion;
-              response.productos_asociados.forEach((p: Producto) => {
-                this.productosSeleccionados.push(p);
-              });
-              this.formCatalog.setValue({
-                codigo: this.catalog.codigo,
-                name: this.catalog.nombre,
-                description: this.catalog.descripcion
-              });
-
-            },
-            error: () => {
-              alert("Error al intentar cargar el catalogo.")
-            }
+        this.catalogService.getCatalogByCode(this.codigo).subscribe({
+          next: (response: CatalogDTO) => {
+            this.catalog.nombre = response.nombre;
+            this.catalog.codigo = response.codigo;
+            this.catalog.descripcion = response.descripcion;
+            response.productos_asociados.forEach((p: Producto) => {
+              this.productosSeleccionados.push(p);
+            });
+            this.formCatalog.setValue({
+              codigo: this.catalog.codigo,
+              name: this.catalog.nombre,
+              description: this.catalog.descripcion
+            });
+          },
+          error: () => {
+            alert("Error al intentar cargar el catálogo.");
           }
-          )
-      )
+        })
+      );
     }
 
     this.getAllProducts();
+
+    if (this.tipo != 1) {
+      if (this.tipo == 2) {
+        this.formCatalog.get("codigo")?.disable();
+      } else {
+        this.formCatalog.get("codigo")?.disable();
+        this.formCatalog.get("name")?.disable();
+        this.formCatalog.get("description")?.disable();
+        this.formCatalog.get("product")?.disable();
+      }
+
+      this.subscription.add(
+        this.productService.getAllProducts().subscribe((response: Producto[]) => {
+          this.allProducts = response.filter(
+            (producto) =>
+              !this.productosSeleccionados.some((selected) => selected.codigo === producto.codigo)
+          );
+        })
+      );
+    }
   }
+
 
   getAllProducts(){
     this.subscription.add(
@@ -137,22 +153,42 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
       productos_asociados:codigos
     } as Catalog
 
-    this.subscription.add(
-      this.catalogService.postCatalog(this.catalog).subscribe({
-        next: async () => {
-          await this.toggleAlert()
-          this.catalog = {} as Catalog
-          this.productosSeleccionados = [];
-          this.formCatalog.reset();
-          alert("Catalogo guardado exitosamente!")
-          //this.router.navigate(["listCategories"])
+    if(this.tipo == 1){
+      this.subscription.add(
+        this.catalogService.postCatalog(this.catalog).subscribe({
+          next: async () => {
+            await this.toggleAlert()
+            this.catalog = {} as Catalog
+            this.productosSeleccionados = [];
+            this.formCatalog.reset();
+            alert("Catalogo guardado exitosamente!")
+            this.router.navigate(["listCatalogs"])
 
-        },
-        error: () => {
-          alert("Error al intentar crear el catalogo.")
-        }
-      })
-    )
+          },
+          error: () => {
+            alert("Error al intentar crear el catalogo.")
+          }
+        })
+      )
+    }
+    if(this.tipo == 2){
+      this.subscription.add(
+        this.catalogService.updateCatalog(this.codigo,this.catalog).subscribe({
+          next: async () => {
+            await this.toggleAlert()
+            this.catalog = {} as Catalog
+            this.productosSeleccionados = [];
+            this.formCatalog.reset();
+            alert("Catalogo actualizado exitosamente!")
+            this.router.navigate(["listCatalogs"])
+
+          },
+          error: () => {
+            alert("Error al intentar actualizar el catalogo.")
+          }
+        })
+      )
+    }
   }
 
 }

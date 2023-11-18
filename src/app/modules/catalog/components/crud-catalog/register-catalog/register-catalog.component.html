@@ -6,7 +6,7 @@
   <hr />
   <form [formGroup]="formCatalog" (ngSubmit)="saveCatalog()">
     <div class="form-group row">
-      <div class="col-sm-10">
+      <div class="col-sm-10" *ngIf="tipo!=1">
         <label for="txtCodigo" class="col-sm-2 col-form-label">Codigo</label>
         <input
                 type="text"
@@ -64,7 +64,7 @@
               </select>
             </div>
             <div class="col-lg">
-              <button type="button" class="btn btn-success w-75" (click)="addProduct()" [disabled]="product.invalid">Añadir<i class="bi-plus"></i></button>
+              <button type="button" class="btn btn-success w-75" (click)="addProduct()" [disabled]="product.invalid || tipo==3">Añadir<i class="bi-plus"></i></button>
             </div>
           </div>
           <div class="text-danger mt-2" *ngIf="product.invalid && product.touched">
@@ -96,8 +96,11 @@
       </tbody>
     </table>
     <div class="d-flex justify-content-center mt-4">
-      <button type="submit" class="btn btn-primary" [disabled]="formCatalog.invalid || formCatalog.untouched || productosSeleccionados.length == 0">Guardar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="formCatalog.invalid || formCatalog.untouched || productosSeleccionados.length == 0" *ngIf="tipo!=3">Guardar</button>
+      <div class="mx-2"></div>
+      <button type="button" class="btn btn-warning" routerLink="/listCatalogs">Volver</button>
     </div>
+
 
   </form>
 </div>

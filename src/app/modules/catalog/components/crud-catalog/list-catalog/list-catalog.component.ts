@@ -13,7 +13,6 @@ export class ListCatalogComponent {
   private subscription = new Subscription();
   alert: boolean = false;
   codeCatalog = "";
-  protected readonly encodeURIComponent = encodeURIComponent;
 
     constructor(private catalogService: CatalogService) {
   }
