@@ -65,8 +65,8 @@
           <td>{{ cliente.id_tipo_doc.tipo_documento }}</td>
           <td>{{ cliente.nroDoc }}</td>
           <td>{{ cliente.id_categoria_fiscal.descripcion }}</td>
-          <td *ngIf="cliente.id_clasificacion">
-            {{ cliente.id_clasificacion.descripcion }}
+          <td>
+            {{ cliente.id_clasificacion ? cliente.id_clasificacion.descripcion : '-' }}
           </td>
           <td>{{ cliente.cant_puntos }}</td>
         </tr>
