@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { StadisticsService } from '../../services/stadistics.service';
-import { Subscription } from 'rxjs';
-import { Stadistic } from '../../models/stadistic';
 import { StadisticByExistance } from '../../models/stadistic-by-existance';
+import { StadisticsService } from '../../services/stadistics.service';
+import { Stadistic } from '../../models/stadistic';
+import { Subscription } from 'rxjs';
+
 
 @Component({
-  selector: 'app-stadistics-expired-existances',
-  templateUrl: './stadistics-expired-existances.component.html',
-  styleUrls: ['./stadistics-expired-existances.component.css']
+  selector: 'app-stadistics-damaged-existances',
+  templateUrl: './stadistics-damaged-existances.component.html',
+  styleUrls: ['./stadistics-damaged-existances.component.css']
 })
-export class StadisticsExpiredExistancesComponent implements OnInit {
+export class StadisticsDamagedExistancesComponent implements OnInit {
+
 
   seasonStart:Date = new Date;
   seasonEnd:Date = new Date;
@@ -20,7 +22,7 @@ export class StadisticsExpiredExistancesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.subscriptions.add(this.service.getExpired().subscribe({
+    this.subscriptions.add(this.service.getDamaged().subscribe({
       next: (response: Stadistic) => {
         this.seasonStart=new Date(response.seasonStart);
         this.seasonEnd=new Date(response.seasonEnd);
@@ -32,5 +34,4 @@ export class StadisticsExpiredExistancesComponent implements OnInit {
     })
   );
   }
-
 }

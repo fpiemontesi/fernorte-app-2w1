@@ -321,5 +321,31 @@
         "percent": 10
       }
     ]
+  },
+  "stadistic_damaged": {
+    "seasonStart":"6/1/2023",
+    "seasonEnd":"12/30/2023",
+    "items":[
+      
+      {
+        
+        "name":"Tuercas",
+        "controls":10,
+        "units":50,
+        "percent": 50
+        },
+      {
+        "name": "Tornillos",
+        "controls": 8,
+        "units": 30,
+        "percent": 30
+      },
+      {
+        "name": "Martillos",
+        "controls": 5,
+        "units": 20,
+        "percent": 20
+      }
+    ]
   }
 }

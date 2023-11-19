@@ -11,7 +11,12 @@ export class StadisticsService {
 
 constructor(private http: HttpClient) { }
 
-get(): Observable<Stadistic>{
+getExpired(): Observable<Stadistic>{
   return this.http.get<Stadistic>(`http://localhost:3000/stadistic_expired`);
+}
+
+
+getDamaged(): Observable<Stadistic>{
+  return this.http.get<Stadistic>(`http://localhost:3000/stadistic_damaged`);
 }
 }

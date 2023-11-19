@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { StadisticsExpiredExistancesService } from './stadistics-expired-existances.service';
+import { StadisticsExpiredExistancesService } from './stadistics.service';
 
 describe('Service: StadisticsExpiredExistances', () => {
   beforeEach(() => {

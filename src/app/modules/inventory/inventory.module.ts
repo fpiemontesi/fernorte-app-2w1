@@ -11,11 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { ToastsComponent } from './components/toast/toasts.component';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { StadisticsExpiredExistancesComponent } from './components/stadistics-expired-existances/stadistics-expired-existances.component';
+import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
                  RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent, ListStockExistenciasComponent,
-                StadisticsExpiredExistancesComponent],
+                StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent],
   providers: [],
   imports: [
     CommonModule,
