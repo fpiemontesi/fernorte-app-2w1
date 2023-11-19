@@ -11,13 +11,14 @@ import { FormBuilder,Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Ventas } from '../../models/Ventas';
 import { Descuento } from '../../models/Descuento';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fn-alta-presupuesto',
   templateUrl: './alta-presupuesto.component.html',
   styleUrls: ['./alta-presupuesto.component.css']
 })
-export class AltaPresupuestoComponent {
+export class AltaPresupuestoComponent implements OnInit {
   tipo_venta = [
     {valor: 1, descripcion: 'Minorista'}, 
     {valor: 2, descripcion: 'Mayorista'}
@@ -45,7 +46,15 @@ export class AltaPresupuestoComponent {
   subtotal: number = 0;
   boton_agregar = false;
 
-  constructor(private http: HttpClient , private presupuestoService: PresupuestoService , private ventasService: VentasService, private fb:FormBuilder) {
+
+  //variable que identifica si el presupuesto a crear viene del boton generar venta de Consultar Presupuesto:
+  ventaFromPresupuesto:boolean = false;
+  
+  constructor(private http: HttpClient , private presupuestoService: PresupuestoService , 
+    private ventasService: VentasService, private fb:FormBuilder,private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        if(params['venta_from_presupuesto'] == "true") this.ventaFromPresupuesto=true;
+      });
    }  
 
 
@@ -58,8 +67,20 @@ export class AltaPresupuestoComponent {
   ngOnInit() {
     this.Listar();
     console.log('listado');
-    this.presupuesto.tipo_venta = 1;
-    this.cliente.nombre = 'CONSUMIDOR FINAL';
+    // Si el presupuesto viene de generar venta:
+    if(this.ventaFromPresupuesto){
+      this.presupuesto = this.presupuestoService.MostrarPresupuesto();
+      console.log("Se detecto que viene de generar venta, presupuesto a usar:",this.presupuesto);
+      this.cliente.nro_doc = this.presupuesto.doc_cliente;
+      this.onBlur(true);
+      //TODO: Realizar los descuentos a los productos que ya venian cargados.
+
+    }
+    // Sino:
+    else{
+      this.presupuesto.tipo_venta = 1;
+      this.cliente.nombre = 'CONSUMIDOR FINAL';
+    }
   }
 
   Listar() {

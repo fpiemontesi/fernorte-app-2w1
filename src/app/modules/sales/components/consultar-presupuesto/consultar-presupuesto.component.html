@@ -5,39 +5,39 @@
       <div class="row">
         <div class="col-md-2 col-sm-12" style="padding: 1%;">
           <label for="id" class="mb-1">ID</label>
-          <input id="id" type="number" name="id" class="form-control" placeholder="Ej: 10" [(ngModel)]="presupuesto.id">
+          <input id="id" type="number" name="id" class="form-control" placeholder="Ej: 10" [(ngModel)]="this.presupuestoFilter.id">
         </div>
         <div class="col-md-3 col-sm-12" style="padding: 1%;">
           <label class="mb-1">DNI Cliente</label>
-          <input type="number" class="form-control" id="cliente" name="cliente" [(ngModel)]="presupuesto.doc_cliente">
+          <input type="number" class="form-control" id="cliente" name="cliente" [(ngModel)]="this.presupuestoFilter.doc_cliente">
         </div>
         <div class="col-md-3 col-sm-12" style="padding: 1%;">
-          <label class="mb-1">Tipo de Pedido</label>
-          <select class="form-control form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="presupuesto.tipo_venta">
-            <option disabled selected>Seleccionar tipo de pedido</option>
-            <option value="1">Mayorista</option>
-            <option value="2">Minorista</option>
+          <label class="mb-1">Tipo de Presupuesto</label>
+          <select class="form-control form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="this.presupuestoFilter.tipo_presupuesto">
+            <option disabled selected>Seleccionar tipo de presupuesto</option>
+            <option value="1">Minorista</option>
+            <option value="2">Mayorista</option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Monto Desde:</label>
-          <input type="number" class="form-control" id="montoDesde" placeholder="$" name="montoDesde" [(ngModel)]="montoDesde">
+          <input type="number" class="form-control" id="montoDesde" placeholder="$" name="montoDesde" [(ngModel)]="this.presupuestoFilter.monto_desde">
         </div>
         <div class="col-md-4 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Monto Hasta:</label>
-          <input type="number" class="form-control" id="montoHasta" placeholder="$" name="montoH"  [(ngModel)]="montoHasta">
+          <input type="number" class="form-control" id="montoHasta" placeholder="$" name="montoH"  [(ngModel)]="this.presupuestoFilter.monto_hasta">
         </div>
       </div>  
       <div class="row">
         <div class="col-md-4 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Fecha Desde:</label>
-          <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="fechaDesde">
+          <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="this.presupuestoFilter.fecha_desde">
         </div>
         <div class="col-md-4 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Fecha Hasta:</label>
-          <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="fechaHasta">
+          <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="this.presupuestoFilter.fecha_hasta">
         </div>
         <div class="col-md-3 col-sm-12" style="padding-top: 3%;margin-top: 6px;">
           <div class="row mb-2">
@@ -65,7 +65,8 @@
             <th class="centered">Monto</th>
             <th style="text-align: center; margin-top: 3%; width: 50px; ">Ver Detalle</th>
             <th class="centered" style="width: 50px;">Modificar Presupuesto</th>
-            <th class="centered" style="width: 50px;">Eliminar Presupuesto
+            <th class="centered" style="width: 50px;">Eliminar Presupuesto</th>
+            <th class="centered" style="width: 50px;">Generar Venta</th>
             <!-- <th style="text-align: center; margin-top: 3%;">Modificar<br> Venta</th> -->
           </tr>
         </thead>
@@ -78,17 +79,22 @@
             <td class="centered">{{ presupuesto.precio_total | currency:'USD':'symbol':'1.2-2' }}</td>
             <td class="centered">
               <button class="btn btn-outline-dark btn-sm custom-btn" (click)="verDetalle(presupuesto);">
-                <i>ver</i>
+                <i>Ver</i>
               </button>
             </td>
             <td class="centered">
               <button class="btn btn-outline-dark btn-sm custom-btn" (click)="modificarPresupuesto(presupuesto)" >
-                <i>editar</i>
+                <i>Editar</i>
               </button>
             </td>
             <td class="centered">
-              <button class="btn" (click)="eliminarPresupuesto(presupuesto.id)">
-                <i class="fa fa-times">borrar</i>
+              <button class="btn btn-danger" (click)="eliminarPresupuesto(presupuesto.id)">
+                <i>Borrar</i>
+              </button>
+            </td>
+            <td class="centered">
+              <button class="btn btn-success" (click)="generarVenta(presupuesto)">
+                <i>Generar</i>
               </button>
             </td>
           </tr>

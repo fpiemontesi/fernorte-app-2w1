@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Presupuesto } from '../models/Presupuesto';
@@ -11,12 +11,12 @@ import { Producto } from '../models/Producto';
   providedIn: 'root'
 })
 export class PresupuestoService {
-  private baseUrl = 'http://localhost:8080/ventas/get';
   presupuesto: Presupuesto= {} as Presupuesto;
+  
   constructor(private http: HttpClient) {}
 
   getPresupuestoById(id: number): Observable<Presupuesto> {
-    return this.http.get<Presupuesto>(`${this.baseUrl}/ById/${id}`);
+    return this.http.get<Presupuesto>(`http://localhost:8080/ventas/getById/${id}`);
   }
   guardarPresupuesto(presupuesto: Presupuesto) {
     this.presupuesto = presupuesto;
@@ -89,6 +89,12 @@ export class PresupuestoService {
   deletePresupuesto(id : number): Observable<any> {
     const url = `http://localhost:8080/presupuesto/`+id;
     return this.http.delete<any>(url);
+  }
+  
+  getPresupuestosFilter(params:HttpParams){
+    const urlPresupuesto ='http://localhost:8080/presupuesto/'
+    const urlWithParams = `${urlPresupuesto}?${params.toString()}`;
+    return this.http.get(urlWithParams);
   }
 
 }

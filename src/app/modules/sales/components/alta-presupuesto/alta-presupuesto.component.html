@@ -151,7 +151,7 @@
         <div class="col-md-6 mt-4">
           <div class="justify-content-between">
             <button class="btn btn-dark">Cancelar</button>
-            <button type="submit" (click)="guardarPresupuesto()" class="btn btn-dark  m-2">Guardar Presupuesto</button>
+            <button type="submit" (click)="guardarPresupuesto()" class="btn btn-dark  m-2" [disabled]="ventaFromPresupuesto">Guardar Presupuesto</button>
             <button type="submit" (click)="guardarVenta()" class="btn btn-dark ">Generar Venta</button>
           </div>
         </div>

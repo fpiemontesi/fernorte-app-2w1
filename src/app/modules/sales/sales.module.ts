@@ -32,7 +32,17 @@ const routes: Routes = [
       },
       {
         path: 'alta-presupuesto',
-        component: AltaPresupuestoComponent
+        component: AltaPresupuestoComponent,
+        children: [
+          {
+            path: '',
+            component: AltaPresupuestoComponent
+          },
+          {
+            path: ':venta_from_presupuesto',
+            component: AltaPresupuestoComponent
+          }
+        ]
       },
       {
         path: 'modificar-presupuesto',
