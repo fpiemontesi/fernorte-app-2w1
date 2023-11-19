@@ -38,6 +38,7 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
 
   limpiarCampos(){
     this.presupuestoFilter = {} as PresupuestoFiltro;
+    this.presupuestos = [];
   }
 
   // Método para mostrar/ocultar la tabla
@@ -126,7 +127,17 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
       if (result.isConfirmed) {
         this.subscriptions?.add(
           this.service.deletePresupuesto(id).subscribe((response) => {
-            this.filtrarPresupuestos();  
+            if(response){
+              Swal.fire({
+                icon: 'success',
+                title: 'Presupuesto eliminado exitosamente',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+              });
+              this.presupuestos = this.presupuestos.filter((p : Presupuesto) => p.id !== id);
+              this.mostrarDetalle = false;
+            }
           })
         )
       }
