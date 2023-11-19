@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ListarExistenciasComponent } from './components/listar-existencias/listar-existencias.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ExistenciasService } from './services/existance.service';
+import { ListStockExistenciasComponent } from './components/list-stock-existencias/list-stock-existencias.component';
 import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
 import { ListBatchesByExistenceComponent } from './components/list-batches-by-existence/list-batches-by-existence.component';
 import { ListBatchesBySectionComponent } from './components/list-batches-by-section/list-batches-by-section.component';
@@ -36,7 +37,7 @@ const routes: Routes = [
     HomeComponent,
     ModificarExistenciaComponent,
     ListarExistenciasComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
-    RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent
+    RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent, ListStockExistenciasComponent
   ],
   providers: [ExistenciasService],
   imports: [
