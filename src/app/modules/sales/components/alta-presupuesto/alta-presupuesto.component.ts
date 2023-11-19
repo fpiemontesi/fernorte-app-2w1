@@ -252,6 +252,7 @@ export class AltaPresupuestoComponent implements OnInit {
       var doc = this.cliente.nro_doc;
       try {
         this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
+          console.log(response)
           if(response.length != 0){
             this.cliente.nombre = response[0].nombre;
             this.cliente.apellido = response[0].apellido;
@@ -263,8 +264,7 @@ export class AltaPresupuestoComponent implements OnInit {
             console.log("Cliente consultado");
           }
           else{
-            this.cliente = new Cliente();
-            this.cliente.nro_doc=doc;
+            this.presupuesto.doc_cliente = this.cliente.nro_doc
             this.nombre_cliente = "CONSUMIDOR FINAL";
             this.categoria = this.cliente.calcularCategoria();
             console.log(this.categoria.nombre)
@@ -273,9 +273,11 @@ export class AltaPresupuestoComponent implements OnInit {
         });
       } catch (error) {
         
-      } finally{
-        
       }
     }
+  }
+  actualizarNroDoc(){
+    console.log("Documento en presupuesto actualizado")
+    this.presupuesto.doc_cliente = this.cliente.nro_doc
   }
 }

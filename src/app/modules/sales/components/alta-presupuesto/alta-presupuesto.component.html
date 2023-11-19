@@ -5,7 +5,7 @@
       <div class="col-md-2">
         <label for="nro_doc" class="form-label">Documento</label>
         <input type="text" name="nro_doc" id="nro_doc" class="form-control" (blur)="onBlur(controlDocCliente.valid)"
-          [(ngModel)]="cliente.nro_doc" #controlDocCliente="ngModel" minlength="8" maxlength="8" required="number" pattern="[0-9]+">
+          [(ngModel)]="cliente.nro_doc" #controlDocCliente="ngModel" minlength="8" maxlength="8" required="number" pattern="[0-9]+" (ngModelChange)="actualizarNroDoc()">
           <div class="error" *ngIf="controlDocCliente.invalid && (controlDocCliente.dirty|| controlDocCliente.touched)" >
             <div *ngIf="controlDocCliente.getError('required');else numberError" class="error"> El documento del cliente es obligatorio.</div>
             <ng-template #numberError>
