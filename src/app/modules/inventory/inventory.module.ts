@@ -7,6 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { ListarExistenciasComponent } from './components/listar-existencias/listar-existencias.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ExistenciasService } from './services/existance.service';
+import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
+import { ListBatchesByExistenceComponent } from './components/list-batches-by-existence/list-batches-by-existence.component';
+import { ListBatchesBySectionComponent } from './components/list-batches-by-section/list-batches-by-section.component';
+import { RegistrarRemitoComponent } from './components/remito/registrar-remito/registrar-remito.component';
+import { RegistrarLotesComponent } from './components/registrar-lotes/registrar-lotes.component';
+import { ToastsComponent } from './components/toast/toasts.component';
 
 const routes: Routes = [
   {
@@ -29,7 +35,8 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ModificarExistenciaComponent,
-    ListarExistenciasComponent,
+    ListarExistenciasComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
+    RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent
   ],
   providers: [ExistenciasService],
   imports: [
@@ -40,5 +47,6 @@ const routes: Routes = [
     NgbToast,
   ],
   exports: [HomeComponent, RouterModule],
+
 })
 export class InventaryModule {}
