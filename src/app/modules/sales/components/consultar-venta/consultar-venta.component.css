@@ -27,3 +27,7 @@
     background-color: #343a40; /* Cambia el color de fondo del encabezado */
     color: white; /* Cambia el color del texto del encabezado */
   }
+  .centered
+{
+  text-align: center;
+}
