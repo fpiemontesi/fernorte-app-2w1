@@ -9,10 +9,12 @@ import { RegistrarLotesComponent } from './components/registrar-lotes/registrar-
 import { FormsModule } from '@angular/forms';
 import { ToastsComponent } from './components/toast/toasts.component';
 import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { ListBatchesExpiredComponent } from './components/list-batches-expired/list-batches-expired.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
-                 RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent],
+                 RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent,
+                ListBatchesExpiredComponent],
   providers: [],
   imports: [
     CommonModule,
