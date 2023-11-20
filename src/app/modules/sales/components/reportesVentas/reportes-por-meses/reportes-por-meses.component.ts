@@ -15,6 +15,7 @@ export class ReportesPorMesesComponent {
 
   chart: any;
   chartInstance!: Chart;
+  montoTotal: number = 0;
 
   formData = {
     mes: this.mes,
@@ -38,7 +39,6 @@ export class ReportesPorMesesComponent {
   }
 
   ngOnDestroy() {
-    // Destruir la instancia del gráfico al salir del componente
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }

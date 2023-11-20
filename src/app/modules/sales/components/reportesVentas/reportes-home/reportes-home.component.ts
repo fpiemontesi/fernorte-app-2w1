@@ -22,14 +22,26 @@ export class ReportesHomeComponent {
   tipo_venta!: number;
 
   mostrarGrafico :boolean = true;
+  montoTotal: number = 0;
 
   formData = {
     mes: this.mes,
     anio: this.anio,
     tipo_venta: this.tipo_venta
   }
-  constructor(private reportesService: ReportesService) {
-    
+
+  constructor(private reportesService: ReportesService) {}
+  
+  getReportesAndGenerateCharts(formData: any) {
+    this.formData = formData;
+    this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
+      (reportes) => {
+        this.montoTotal = reportes.monto;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   onSubmit() {
@@ -37,12 +49,16 @@ export class ReportesHomeComponent {
       console.error('El año es obligatorio para generar el gráfico.');
       return;
     }
+    this.getReportesAndGenerateCharts(this.formData); 
     this.tipoVentasComponent.getReportesAndGenerateCharts(this.formData);
     this.reportesPorMesesComponent.getReportesAndGenerateCharts(this.formData);
     this.TopProductosComponent.getReportesAndGenerateCharts(this.formData);
     this.estadoVentasComponent.getReportesAndGenerateCharts(this.formData);
+  
 
   }
+  
+  
 
   limpiarCampos(formData: any) {
     this.formData = formData;

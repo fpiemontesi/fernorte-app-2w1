@@ -15,6 +15,7 @@ export class EstadoVentasComponent {
 
   chart: any;
   chartInstance!: Chart;
+  montoTotal!:number;
 
   formData = {
     mes: this.mes,
@@ -29,7 +30,6 @@ export class EstadoVentasComponent {
     this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
       (reportes) => {
         this.generarReporteEstadoVenta(reportes);
-       
       },
       (error) => {
         console.error(error);

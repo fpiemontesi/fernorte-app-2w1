@@ -16,6 +16,7 @@ export class TipoVentasComponent {
   chart: any;
   chartInstance!: Chart;
 
+  montoTotal: number = 0;
   formData = {
     mes: this.mes,
     anio: this.anio,
@@ -29,7 +30,7 @@ export class TipoVentasComponent {
     this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
       (reportes) => {
         this.generarReporteTipoVentas(reportes);
-       
+       this.montoTotal = reportes.monto;
       },
       (error) => {
         console.error(error);

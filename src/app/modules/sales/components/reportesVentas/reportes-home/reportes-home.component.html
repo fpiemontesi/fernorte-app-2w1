@@ -37,6 +37,12 @@
       <div class="col-md-4">
         <div class="row">
           <div class="col-md-6">
+            <a style="width: 90%;">Monto Total = {{ montoTotal }} </a> </div>
+          
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-6">
             <button type="submit" class="btn btn-outline-dark btn-block mt-2" style="width: 90%;">Buscar</button>
           </div>
           <div class="col-md-6">
@@ -44,9 +50,11 @@
           </div>
         </div>
       </div>
+      </div>
   </form>
 
   <div class="row">
+
 
     <div class="col-6 mt-4" *ngIf="mostrarGrafico">
           <fn-reportes-por-meses ></fn-reportes-por-meses>
