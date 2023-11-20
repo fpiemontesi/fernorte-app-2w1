@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StadisticsService } from '../../services/stadistics.service';
+import { StadisticsService } from '../../../services/stadistics.service';
 import { Subscription } from 'rxjs';
-import { Stadistic } from '../../models/stadistic';
-import { StadisticByExistance } from '../../models/stadistic-by-existance';
+import { Stadistic } from '../../../models/stadistic';
+import { StadisticByExistance } from '../../../models/stadistic-by-existance';
 
 @Component({
   selector: 'app-stadistics-expired-existances',

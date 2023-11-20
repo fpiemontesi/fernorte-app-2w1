@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
-
+import { flip } from '@popperjs/core';
 @Component({
   selector: 'fn-home-inventory',
   templateUrl: './home.component.html',
@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit{
   active = "";
 
   constructor(private router: Router) {
+    console.log( router.parseUrl(router.url).root.children["primary"].segments[1].path)
+    this.active = router.parseUrl(router.url).root.children["primary"].segments[1].path
   }
 
   ngOnInit(): void {

@@ -1,11 +1,11 @@
-<nav ngbNav #nav="ngbNav" class="nav-tabs">
-    <ng-container ngbNavItem>
+<nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="activeId">
+    <ng-container [ngbNavItem]="0">
         <button ngbNavLink routerLink="listar">Listar</button>
     </ng-container>
-    <ng-container ngbNavItem>
+    <ng-container [ngbNavItem]="1">
         <button ngbNavLink routerLink="crear">Crear</button>
     </ng-container>
-    <ng-container ngbNavItem>
+    <ng-container [ngbNavItem]="2">
         <button ngbNavLink routerLink="modificar">Modificar</button>
     </ng-container>
 </nav>

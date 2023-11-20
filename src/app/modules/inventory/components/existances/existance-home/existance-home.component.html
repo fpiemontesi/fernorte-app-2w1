@@ -1,0 +1,9 @@
+<nav ngbNav #nav="ngbNav" class="nav-tabs" [activeId]="activeId">
+  <ng-container [ngbNavItem]="0">
+      <button ngbNavLink routerLink="registrar">Registrar</button>
+  </ng-container>
+  <ng-container [ngbNavItem]="1">
+      <button ngbNavLink routerLink="listar">Listar</button>
+  </ng-container>
+</nav>
+<router-outlet></router-outlet>
