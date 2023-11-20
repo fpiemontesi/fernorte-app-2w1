@@ -58,7 +58,7 @@
       <div class="col-md-3">
         <label for="fecha" class="form-label">Fecha</label>
         <input type="text" name="fecha" id="fecha" class="form-control"
-          [ngModel]="presupuesto.fecha_creacion.toISOString() | date:'dd/MM/yyyy HH:mm:ss'" disabled="">
+          [ngModel]="presupuesto.fecha_creacion | date:'dd/MM/yyyy HH:mm:ss'" disabled="">
       </div>
     </div>
         <div class="row" style="margin-top: 20px;">
@@ -163,7 +163,7 @@
       
       <div class="row mt-2">
           <div class="col mb-1">
-            <button class="btn btn-danger p-3 ps-5 pe-5"><strong>Cancelar</strong></button>
+            <button class="btn btn-danger p-3 ps-5 pe-5" type="button" (click)="cancelar()"><strong>Cancelar</strong></button>
           </div>
           <div class="col mb-1">
             <button type="submit" [disabled]="(presupuesto.detalles.length == 0 || form.invalid) || ventaFromPresupuesto"

@@ -19,20 +19,30 @@ export class ConsultarVentaComponent {
   mostrarActualizarEstado: boolean =false;
   montoDesde!: number;
   montoHasta!: number;
-  fechaDesde!: Date;
-  fechaHasta!: Date;
+  fechaDesde: Date | null = null;
+  fechaHasta: Date | null = null;
   nuevoEstado!: number;
   ventas: Ventas[] = [];
+  ventaFilter:Ventas;
   venta: Ventas;
+  //Ventas:
+  mostrarCanceladas:boolean = false
+  // Boton:
   mostrarModificar: boolean = false;
   clientes: any[] = [];
 
-  constructor(private http : HttpClient, private router: Router, private service : VentasService) {
+  constructor(private service : VentasService) {
     this.venta= {} as Ventas;
+    this.ventaFilter = {} as Ventas;
   }
 
   limpiarCampos(){
     this.venta = {} as Ventas;
+    this.ventaFilter = {} as Ventas;
+    this.mostrarTabla = false;
+    this.mostrarDetalle = false;
+    this.fechaDesde = null
+    this.fechaHasta = null
   }
   ngOnInit() {
     this.subscriptions = new Subscription();
@@ -68,20 +78,47 @@ export class ConsultarVentaComponent {
   }
  
   filtrarVentas() {
-    this.subscriptions?.add(
-    this.service
+    let fecDesde:string = ""
+    let fecHasta:string = ""
+    if(this.fechaDesde && this.fechaHasta){
+      fecDesde = new Date(this.fechaDesde).toISOString()
+      fecHasta = new Date(this.fechaHasta).toISOString()
+    }
+    
+    console.log();
+    this.ventas = [];
+    this.subscriptions?.add( 
+      this.service
       .filtrarVentas(
-        this.venta,
+        this.ventaFilter,
         this.montoDesde,
         this.montoHasta,
-        this.fechaDesde,
-        this.fechaHasta
+        fecDesde,
+        fecHasta
+        
       )
       .subscribe({
-        next: (response) => {
-          console.log('Solicitud GET exitosa. Respuesta:', response);
-          this.ventas = response;
+        next: (response) => { 
+          if(response.length == 0){
+            this.mostrarTabla = false; 
+            Swal.fire({
+              icon: 'error',
+              title: 'No se encuentran Ventas con los filtros especificados',
+              showCancelButton: false,
+              showConfirmButton: true,
+              confirmButtonText: 'Aceptar',
+            });
+          }
+          
+          
+          response.forEach(element => {
+            if(element.estado != 3){
+              this.ventas.push(element);
+            }
+          }); 
           this.mostrarTabla = true; 
+          
+          console.log("CANTIDAD DE VENTAS:"+this.ventas.length);
         },
         error: (error) => {
           console.error('Error al realizar la solicitud GET:', error);
@@ -104,5 +141,37 @@ export class ConsultarVentaComponent {
   }
   toggleTabla(val:boolean) {
     this.mostrarTabla = val;
+  }
+
+  bajaVenta(venta:Ventas){
+    this.subscriptions?.add(
+      this.service.bajaVenta(venta.id).subscribe({
+        next: (response) => {
+          console.log("Solicitud de baja de venta exitosa. Respuesta:" + response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Se ha dado de baja a la venta con ID '+venta.id,
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'Aceptar',
+          })
+        },
+        error: (error) => {
+          console.error('Error al realizar la solicitud GET:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'No se puede dar de baja la venta',
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'Aceptar',
+          });
+        },
+      })
+    )
+    setTimeout(() => {
+      this.filtrarVentas();
+    },300)
+    
+    
   }
 }

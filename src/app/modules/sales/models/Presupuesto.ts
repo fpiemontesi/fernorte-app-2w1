@@ -6,6 +6,7 @@ export class Presupuesto {
   fecha_creacion: Date;
   tipo_venta: number;
   detalles: Detalle[];
+  precio_total?: number;
 
   constructor() {
     this.id = 0;

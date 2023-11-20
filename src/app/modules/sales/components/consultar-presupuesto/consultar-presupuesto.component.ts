@@ -23,6 +23,8 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
   presupuesto: Presupuesto; // Objeto a mandar al modificar o generar venta
   mostrarTabla = false;            // De presupuestos
   mostrarDetalle: boolean = false; 
+
+  presupuesto_monto:number=0;
   
   constructor(private router: Router, private service : PresupuestoService) {
     this.presupuesto = {} as Presupuesto;
@@ -39,6 +41,8 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
   limpiarCampos(){
     this.presupuestoFilter = {} as PresupuestoFiltro;
     this.presupuestos = [];
+    this.mostrarTabla = false;
+    this.mostrarDetalle = false;
   }
 
   // Método para mostrar/ocultar la tabla
@@ -47,6 +51,14 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
   }
   // FILTRAR VENTAS POR GET
   filtrarPresupuestos() {
+    let fec_desde:string = ""
+    let fec_hasta:string = ""
+    if(this.presupuestoFilter.fecha_desde && this.presupuestoFilter.fecha_hasta){
+      fec_desde = new Date(this.presupuestoFilter.fecha_desde).toISOString()
+      fec_hasta = new Date(this.presupuestoFilter.fecha_hasta).toISOString()
+      console.log(fec_desde,fec_hasta)
+    }
+    
     let params = new HttpParams()
     if(this.presupuestoFilter?.id){
       params = params.set('id', this.presupuestoFilter.id);
@@ -64,10 +76,10 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
       params = params.set('monto_hasta', this.presupuestoFilter?.monto_hasta.toString());
     }
     if (this.presupuestoFilter?.fecha_desde) {
-      params = params.set('fecha_desde', this.presupuestoFilter?.fecha_desde.toISOString());
+      params = params.set('fecha_desde', fec_desde);
     }
     if (this.presupuestoFilter?.fecha_hasta) {
-      params = params.set('fecha_hasta', this.presupuestoFilter?.fecha_hasta.toISOString());
+      params = params.set('fecha_hasta', fec_hasta);
     }
 
     this.subscriptions!.add(
@@ -110,6 +122,9 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
   }
   verDetalle(presupuesto: Presupuesto){
     this.presupuesto = presupuesto;
+    if(presupuesto.precio_total){
+      this.presupuesto_monto = presupuesto.precio_total;
+    }
     this.mostrarDetalle = true;
     this.moverPantalla(this.detallePresupuestosDOM.nativeElement);
   }

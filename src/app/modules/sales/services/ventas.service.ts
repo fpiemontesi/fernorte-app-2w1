@@ -91,8 +91,8 @@ export class VentasService {
     venta: any,
     montoDesde: number | null,
     montoHasta: number | null,
-    fechaDesde: Date | null,
-    fechaHasta: Date | null
+    fechaDesde: string | null,
+    fechaHasta: string | null
   ): Observable<Ventas[]> {
     let params = new HttpParams();
 
@@ -101,7 +101,7 @@ export class VentasService {
     }
 
     if (venta.doc_cliente) {
-      params = params.set('doc_cliente', venta.doc_cliente);
+      params = params.set('id_cliente', venta.doc_cliente);
     }
 
     if (venta.id_vendedor) {
@@ -125,11 +125,11 @@ export class VentasService {
     }
 
     if (fechaDesde) {
-      params = params.set('fecha_desde', fechaDesde.toISOString());
+      params = params.set('fecha_min', fechaDesde);
     }
 
     if (fechaHasta) {
-      params = params.set('fecha_hasta', fechaHasta.toISOString());
+      params = params.set('fecha_max', fechaHasta);
     }
     if(venta.estado){
       params = params.set('estado', venta.estado);
@@ -140,6 +140,9 @@ export class VentasService {
     const urlWithParams = `${url}?${params.toString()}`;
 
     return this.http.get<Ventas[]>(urlWithParams);
+  }
+  bajaVenta(ventaId:number) {
+    return this.http.delete('http://localhost:8080/ventas/' + ventaId);
   }
 
   
