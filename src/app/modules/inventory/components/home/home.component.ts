@@ -11,14 +11,13 @@ export class HomeComponent implements OnInit{
   active = "";
 
   constructor(private router: Router) {
-    console.log( router.parseUrl(router.url).root.children["primary"].segments[1].path)
-    this.active = router.parseUrl(router.url).root.children["primary"].segments[1].path
+    console.log( this.active)
   }
 
   ngOnInit(): void {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
+      .subscribe((e) => {
         if(this.router.url === "/inventory") {
           this.active = "";
           console.log(this.active);
