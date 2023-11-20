@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ClientReportDTO } from '../models/client-report-dto';
 import { BilledMonthDto } from '../models/BilledMonthDto';
+import { ReportPaymentMethodDTO } from '../models/report-payment-method-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +67,21 @@ export class ReportesService {
     const url = `http://localhost:8081/api/v1/invoice/billed-months?dateFrom=${formattedDateFrom}&dateTo=${formattedDateTo}`;
 
     return this.http.get<BilledMonthDto[]>(url);
+  }
+
+  getAmountByPaymentsMethods(dateFrom: string, dateTo: string) : Observable<ReportPaymentMethodDTO[]> {
+    
+    let formattedDateFrom = '';
+    let formattedDateTo = '';
+    if(dateFrom){
+       formattedDateFrom = this.formatDate(dateFrom);
+    }
+    if(dateTo){
+       formattedDateTo = this.formatDate(dateTo);
+    }
+    const url = `http://localhost:8081/reportByPayement?dateFrom=${formattedDateFrom}&dateTo=${formattedDateTo}`;
+    
+    return this.http.get<ReportPaymentMethodDTO[]>(url);
+
   }
 }
