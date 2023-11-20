@@ -4,32 +4,34 @@
     <div class="row" style="margin-bottom: 20px;">
       <div class="col-md-2">
         <label for="nro_doc" class="form-label">Documento</label>
-        <input type="text" name="nro_doc" id="nro_doc" class="form-control" (blur)="onBlur(controlDocCliente.valid)"
-          [(ngModel)]="cliente.nro_doc" #controlDocCliente="ngModel" minlength="8" maxlength="8" required="number" pattern="[0-9]+" (ngModelChange)="actualizarNroDoc()">
-          <div class="error" *ngIf="controlDocCliente.invalid && (controlDocCliente.dirty|| controlDocCliente.touched)" >
-            <div *ngIf="controlDocCliente.getError('required');else numberError" class="error"> El documento del cliente es obligatorio.</div>
-            <ng-template #numberError>
-              <div *ngIf="controlDocCliente.getError('pattern'); else minlengthMaxlengthError " class="error">
-                El documento debe contener solo números.
+        <input type="number" name="nro_doc" id="nro_doc" class="form-control" (blur)="onBlur(controlDocCliente.valid)"
+          [(ngModel)]="cliente.nro_doc" #controlDocCliente="ngModel" min="10000000" max="99999999" required="number"
+          pattern="[0-9]+" (ngModelChange)="actualizarNroDoc()">
+
+        <div class="error" *ngIf="controlDocCliente.invalid ">
+          <div *ngIf="controlDocCliente.getError('required');else numberError" class="error"> El documento del cliente
+            es obligatorio.</div>
+          <ng-template #numberError>
+            <div *ngIf="controlDocCliente.getError('pattern'); else minlengthMaxlengthError " class="error">
+              El documento debe contener solo números.
+            </div>
+            <ng-template #minlengthMaxlengthError>
+              <div *ngIf="controlDocCliente.getError('min') || controlDocCliente.getError('max')" class="error">
+                El documento debe tener 8 caracteres.
               </div>
-                <ng-template #minlengthMaxlengthError>
-                  <div *ngIf="controlDocCliente.getError('minlength') || controlDocCliente.getError('maxlength')" class="error">
-                    El documento debe tener 8 caracteres.
-                  </div>
-                </ng-template>
             </ng-template>
-          </div>
+          </ng-template>
+        </div>
       </div>
       <div class="col-md-4">
         <label for="cliente" class="form-label">Cliente</label>
-        <input type="text" name="cliente" id="cliente" class="form-control" [ngModel]="nombre_cliente"  name="cliente"
-          disabled="true">
+        <input type="text" name="cliente" id="cliente" class="form-control" [ngModel]="nombre_cliente" disabled="true">
       </div>
       <div class="col-md-2">
         <label for="categoria" class="form-label">Categoría</label>
         <input disabled="true" type="text" class="form-control" name="categoria" id="categoria"
-          [ngModel]="categoria.nombre" >
-        
+          [ngModel]="categoria.nombre">
+
       </div>
       <div class="col-md-1">
         <label for="descuento" class="form-label">Descuento</label>
@@ -40,89 +42,94 @@
     <div class="row">
       <div class="col-md-3">
         <label for="tipo" class="form-label">Tipo Venta</label>
-        <select name="tipo" id="tipo" class="form-select" [(ngModel)]="presupuesto.tipo_venta" [disabled]="!tipo_activado" (ngModelChange)="actualizarPrecio()">
+        <select name="tipo" id="tipo" class="form-select" [(ngModel)]="presupuesto.tipo_venta"
+          [disabled]="!tipo_activado" (ngModelChange)="actualizarPrecio()">
           <option *ngFor="let opcion of tipo_venta" [ngValue]="opcion.valor">{{opcion.descripcion}}</option>
         </select>
       </div>
       <div class="col-md-3">
         <label for="formaEntrega" class="form-label">Forma de Entrega</label>
-        <select name="formaEntrega" id="formaEntrega" class="form-select">
-          <option *ngFor="let opcion of formas_entrega" [value]="opcion.valor">{{opcion.descripcion}}</option>
+        <select name="formaEntrega" id="formaEntrega" class="form-control" disabled="true">
+          <!--<option *ngFor="let opcion of formas_entrega" [value]="presupuesto.tipo_venta">{{opcion.descripcion}}</option>-->
+          <option [selected]="presupuesto.tipo_venta == 1" value="1">En caja</option>
+          <option [selected]="presupuesto.tipo_venta == 2" value="2">En deposito</option>
         </select>
       </div>
       <div class="col-md-3">
         <label for="fecha" class="form-label">Fecha</label>
-        <input type="date" name="fecha" id="fecha" class="form-control" [(ngModel)]="presupuesto.fecha_creacion" disabled="">
+        <input type="text" name="fecha" id="fecha" class="form-control"
+          [ngModel]="presupuesto.fecha_creacion.toISOString() | date:'dd/MM/yyyy HH:mm:ss'" disabled="">
       </div>
     </div>
-    <div class="row" style="margin-top: 20px;">
-      <div class="col-md-3">
-        <label for="producto" class="form-label">Producto</label>
-        <select name="producto" id="producto" class="form-select " [(ngModel)]="productoSeleccionado"
-          (ngModelChange)="consultarExistencia()"  #controlProducto="ngModel" required  >
-          <option *ngFor="let producto of productos" [ngValue]="producto">{{ producto.nombre }}</option>
-        </select>
-        <div class="error" *ngIf="(controlProducto.dirty|| controlProducto.touched)" >
-          <div *ngIf="controlProducto.getError('required')" class="error"> Debe seleccionar un producto obligatorio
+        <div class="row" style="margin-top: 20px;">
+        <div class="col-md-3">
+          <label for="producto" class="form-label">Producto</label>
+          <select name="producto" id="producto" class="form-select " [(ngModel)]="productoSeleccionado"
+            (ngModelChange)="consultarExistencia()" #controlProducto="ngModel" required>
+            <option *ngFor="let producto of productos" [ngValue]="producto">{{ producto.nombre }}</option>
+          </select>
+          <div class="error" *ngIf="(controlProducto.dirty|| controlProducto.touched)">
+            <div *ngIf="controlProducto.getError('required')" class="error"> Debe seleccionar un producto obligatorio
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-1">
-        <label for="precioUnitario" class="form-label">Precio</label>
-        <input name="precioUnitario" id="precioUnitario" type="input" class="form-control" disabled="true"
-          [(ngModel)]="precio_producto">
-      </div>
-      <div class="col-md-1">
-        <label for="existencias" class="form-label">Existencias</label>
-        <input name="existencias" id="existencias" type="input" class="form-control" disabled="true"
-          [(ngModel)]="existencias">
-      </div>
-      <div class="col-md-1">
-        <label for="dimension" class="form-label">Dimension</label>
-        <input name="dimension" id="dimension" type="input" class="form-control" disabled="true"
-          [(ngModel)]="productoSeleccionado.dimensiones">
-      </div>
-      <div class="col-md-1">
-        <label for="peso" class="form-label">Peso</label>
-        <input name="peso" id="peso" type="input" class="form-control" disabled="true"
-          [(ngModel)]="productoSeleccionado.peso">
-      </div>
-      <div class="col-md-2">
-        <label for="cantidad" class="form-label">Cantidad</label>
-        <input type="number" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad"
-          [(ngModel)]="cantidad" min="1" #controlCantidad="ngModel" (ngModelChange)="validarCantidad()" >
-        <div *ngIf="controlCantidad.getError('min')">
-          <span class="text-danger">El numero debe ser positivo</span>
+        <div class="col-md-1">
+          <label for="precioUnitario" class="form-label">Precio</label>
+          <input name="precioUnitario" id="precioUnitario" type="input" class="form-control" disabled="true"
+            [(ngModel)]="precio_producto">
         </div>
-      </div>
-      <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
-        <button (disabled)="!boton_agregar" (click)="agregarFila()" class="btn btn-dark btn-block m-sm-2" [disabled]="existencias == 0||existencias<cantidad">Agregar</button>
-      </div>
-    </div>
-    <div style="max-height: 250px; overflow-y: auto;">
-      <table id="tabla" class="table table-bordered table-hover table-striped"
-        style="text-align: center;align-content: center;vertical-align: middle;">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col" style="width: 400px;">Productos</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Precio Unitario</th>
-            <th scope="col">Precio Total</th>
-            <th scope="col" style="width: 50px;"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let detalle of presupuesto.detalles; let i = index">
-            <td>{{ detalle.descripcion }}</td>
-            <td>{{ detalle.cantidad }}</td>
-            <td>{{ detalle.precio_unitario }}</td>
-            <td>{{ detalle.precio_unitario * detalle.cantidad }}</td>
-            <td>
-              <button class="btn" (click)="eliminarFila(i)">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
-            <!-- <tr>
+        <div class="col-md-1">
+          <label for="existencias" class="form-label">Existencias</label>
+          <input name="existencias" id="existencias" type="input" class="form-control" disabled="true"
+            [(ngModel)]="existencias">
+        </div>
+        <div class="col-md-1">
+          <label for="dimension" class="form-label">Dimension</label>
+          <input name="dimension" id="dimension" type="input" class="form-control" disabled="true"
+            [(ngModel)]="productoSeleccionado.dimensiones">
+        </div>
+        <div class="col-md-1">
+          <label for="peso" class="form-label">Peso</label>
+          <input name="peso" id="peso" type="input" class="form-control" disabled="true"
+            [(ngModel)]="productoSeleccionado.peso">
+        </div>
+        <div class="col-md-2">
+          <label for="cantidad" class="form-label">Cantidad</label>
+          <input type="number" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad"
+            [(ngModel)]="cantidad" min="1" #controlCantidad="ngModel" (ngModelChange)="validarCantidad()">
+          <div *ngIf="controlCantidad.getError('min')">
+            <span class="text-danger">El numero debe ser positivo</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
+          <button (disabled)="!boton_agregar" (click)="agregarFila()" class="btn btn-outline-dark btn-block m-sm-2 pe-5 ps-5"
+            [disabled]="existencias == 0||existencias<cantidad">Agregar</button>
+        </div>
+        </div>
+        <div style="max-height: 250px; overflow-y: auto;">
+        <table id="tabla" class="table table-bordered table-hover table-striped table-responsive"
+          style="text-align: center;align-content: center;vertical-align: middle;">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col-2" style="width: 400px;">Productos</th>
+              <th scope="col-2">Cantidad</th>
+              <th scope="col">Precio Unitario</th>
+              <th scope="col">Precio Total</th>
+              <th scope="col" style="width: 50px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of presupuesto.detalles; let i = index">
+              <td>{{ detalle.descripcion }}</td>
+              <td>{{ detalle.cantidad }}</td>
+              <td>${{ detalle.precio_unitario }}</td>
+              <td>${{ (detalle.precio_unitario * detalle.cantidad).toFixed(2) }}</td>
+              <td>
+                <button class="btn" (click)="eliminarFila(i)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+              <!-- <tr>
               <td colspan="3">SUBTOTAL</td>
               <td>{{subtotal}}</td>
               <td></td>
@@ -132,40 +139,44 @@
               <td>{{total}}</td>
               <td></td>
             </tr> -->
-        </tbody>
-      </table>
-      <div *ngIf="(form.submitted && presupuesto.detalles.length === 0 )">
-        <span class="text-danger">Debe seleccionar al menos un producto</span>
-      </div>
-    </div>
-    <div>
-      <div class="row">
-        <div class="col-md-1">
-          <label for="subtotal" class="form-label">SUBTOTAL</label>
-          <input class="form-control" type="text" disabled="true" name="subtotal" id="subtotal" [(ngModel)]="subtotal">
+          </tbody>
+        </table>
+        <div *ngIf="(form.submitted && presupuesto.detalles.length === 0 )">
+          <span class="text-danger">Debe seleccionar al menos un producto</span>
         </div>
-        <div class="col-md-1">
-          <label for="total" class="form-label">TOTAL</label>
-          <input class="form-control" type="text" disabled="true" name="total" id="total" [(ngModel)]="total">
         </div>
-        <div class="col-md-6 mt-4">
-          <div class="justify-content-between">
-            <button class="btn btn-dark">Cancelar</button>
-            <button type="submit" (click)="guardarPresupuesto()" class="btn btn-dark  m-2" [disabled]="ventaFromPresupuesto">Guardar Presupuesto</button>
-            <button type="submit" (click)="guardarVenta()" class="btn btn-dark ">Generar Venta</button>
+        <div>
+        <div>
+          <table id="tablaResumen" class="table table-bordered table-hover table-striped"
+            style="text-align: end;align-content: end; vertical-align: middle;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">SUBTOTAL: ${{subtotal.toFixed(2)}}</th>
+              </tr>
+              <tr>
+                <th scope="col ">TOTAL: ${{total.toFixed(2)}}</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        </div>
+      
+      <div class="row mt-2">
+          <div class="col mb-1">
+            <button class="btn btn-danger p-3 ps-5 pe-5"><strong>Cancelar</strong></button>
           </div>
-        </div>
+          <div class="col mb-1">
+            <button type="submit" [disabled]="(presupuesto.detalles.length == 0 || form.invalid) || ventaFromPresupuesto"
+              (click)="guardarPresupuesto(form)" class="btn btn-success p-3 ps-5 pe-5"><strong>Guardar Presupuesto</strong></button>
+          </div>
+          <!--<div class="justify-content-between">-->
+            <div class="col mb-1">
+              <button type="submit" [disabled]="presupuesto.detalles.length == 0 || form.invalid "
+              (click)="guardarVenta(form)" class="btn btn-success p-3 ps-5 pe-5"><strong>Generar Venta</strong></button>
+            </div>
+          
       </div>
-    </div>
-    <div class="row" style="margin-bottom: 20px;">
-      <div class="col-md-6">
-      </div>
-      <div class="col-md-6">
-        
 
-      </div>
-
-    </div>
   </form>
 
 </div>
