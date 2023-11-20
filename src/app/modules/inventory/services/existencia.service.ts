@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { existencia } from '../models/existencia';
-import { articulo } from '../models/articulo';
+import { Existence } from '../models/existence';
+import { Article } from '../models/article';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,16 @@ export class ExistenciaService {
 
   constructor(private http: HttpClient) { }
 
-  get(): Observable<articulo[]>{
-    const result = this.http.get<articulo[]>(
-      'https://my-json-server.typicode.com/1w1111979DiFranciscoMateo/demo/articulos'
+  get(): Observable<Article[]>{
+    const result = this.http.get<Article[]>(
+      'http://localhost:3000/articles'
     );
     return result;
   }
 
-  create(existencia : existencia) : Observable<existencia>{
-    return this.http.post<existencia>(
-      'https://my-json-server.typicode.com/1w1111979DiFranciscoMateo/demo/existencias',
+  create(existencia : Existence) : Observable<Existence>{
+    return this.http.post<Existence>(
+      'http://localhost:3000/existences',
       existencia
     );
   }

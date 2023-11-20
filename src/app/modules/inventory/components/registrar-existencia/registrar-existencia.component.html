@@ -13,14 +13,17 @@
                 <tr>
                     <th scope="col" style="position: sticky; top: 0;">ID</th>
                     <th scope="col" style="position: sticky; top: 0;">Nombre de Producto</th>
+                    <th scope="col" style="position: sticky; top: 0;">Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let articulo of listaArticulos">
-                    <th scope="row">{{ articulo.id }}</th>
-                    <td>{{ articulo.nombre }}</td>
-                    <td>
-                        <button class="btn btn-primary m-2" (click)="onSeleccionar(articulo)">Seleccionar</button>
+                <tr *ngFor="let articulo of listaArticulos" >
+                    <th [ngClass]="{'bg-primary' : articuloSeleccionado == articulo}" scope="row" >{{ articulo.id }}</th>
+                    <td [ngClass]="{'bg-primary' : articuloSeleccionado == articulo}">{{ articulo.name }}</td>
+                    <td [ngClass]="{'bg-primary' : articuloSeleccionado == articulo}" class="p-2">
+                        <button class="btn btn-primary" (click)="onSeleccionar(articulo)"
+                        [disabled]="articuloSeleccionado == articulo"
+                        >Seleccionar</button>
                     </td>
                 </tr>
             </tbody>
@@ -41,7 +44,7 @@
         </div>
         <div class="col">
             <h3>Nombre del Producto:</h3>
-            <p class="fw-bold"># {{ articuloSeleccionado.nombre }}</p>
+            <p class="fw-bold"># {{ articuloSeleccionado.name }}</p>
         </div>
     </div>
     <br>
@@ -49,7 +52,7 @@
     <h3>Stock mínimo:</h3>
     <div class="row row-cols-auto text-center">
         <div class="col">
-            <input type="number" name="stockMinimo" id="stockMinimo" [(ngModel)]="existenciaCreada.stock_minimo">
+            <input type="number" name="stockMinimo" id="stockMinimo" [(ngModel)]="existenciaCreada.minimunStock">
         </div>
         <div class="col">
             <p class="fw-bold">Unidades</p>
@@ -65,3 +68,4 @@
         </div>
     </div>
 </div>
+<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>

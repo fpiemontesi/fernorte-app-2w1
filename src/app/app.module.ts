@@ -6,15 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-import { CatalogModule } from './modules/catalog/catalog.module';
 import { CustomerModule } from './modules/customer/customer.module';
 import { PurchaseModule } from './modules/purchase/purchase.module';
-import { InventaryModule } from './modules/inventory/inventory.module';
 import { SalesModule } from './modules/sales/sales.module';
 import { InvoiceModule } from './modules/invoice/invoice.module';
+import { CatalogModule } from './modules/catalog/catalog.module';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { InventaryModule } from './modules/inventory/inventory.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +27,7 @@ import { InvoiceModule } from './modules/invoice/invoice.module';
     ReactiveFormsModule,
     HttpClientModule,
 
+    AppRoutingModule,
     CatalogModule,
     CustomerModule,
     PurchaseModule,
@@ -37,4 +38,4 @@ import { InvoiceModule } from './modules/invoice/invoice.module';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
