@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
+
 import { ToastService } from '../../services/toast.service';
+import { PaymentMethodDTO } from '../../models/payment-method-dto';
 
 
 @Component({

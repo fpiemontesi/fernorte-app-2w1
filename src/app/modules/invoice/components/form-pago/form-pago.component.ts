@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
-import { PayDetailDTO } from '../../models/PayDetailDTO';
 import { ToastService } from '../../services/toast.service';
 import { Subscription } from 'rxjs';
+import { PaymentMethodDTO } from '../../models/payment-method-dto';
+import { PayDetailDTO } from '../../models/pay-detail-dto';
 
 @Component({
   selector: 'fn-form-pago',

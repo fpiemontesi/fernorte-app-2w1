@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { PayDetailDTO } from '../models/PayDetailDTO';
-import { PaymentMethodDTO } from '../models/PaymentMethodDTO';
+import { PayDetailDTO } from '../models/pay-detail-dto';
+import { PaymentMethodDTO } from '../models/payment-method-dto';
+
 
 @Injectable({
   providedIn: 'root'

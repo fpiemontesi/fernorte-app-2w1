@@ -1,7 +1,7 @@
 import { Detail } from "./Detail";
 import { DiscountDTO } from "./DiscountDTO";
-import { PayDetailDTO } from "./PayDetailDTO";
-import { PaymentMethodDTO } from "./PaymentMethodDTO";
+import { PayDetailDTO } from "./pay-detail-dto";
+
 
 export class RequestInvoiceDto{
     orderId?: number;

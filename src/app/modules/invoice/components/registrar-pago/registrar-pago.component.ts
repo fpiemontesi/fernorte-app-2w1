@@ -1,15 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { InvoiceService } from '../../services/invoice.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
-import { PayDetailDTO } from '../../models/PayDetailDTO';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { PaymentMethodDTO } from '../../models/PaymentMethodDTO';
 import { Invoice } from '../../models/Invoice';
 import { SharedDataInvoiceService } from '../../services/shared-data-invoice.service';
 import { Customvalidator } from '../validators/customvalidator';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast.service';
+import { PayDetailDTO } from '../../models/pay-detail-dto';
+import { PaymentMethodDTO } from '../../models/payment-method-dto';
+
 
 @Component({
   selector: 'fn-registrar-pago',
