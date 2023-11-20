@@ -17,7 +17,7 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
 
   private subscription:Subscription = new Subscription();
   formCatalog:FormGroup = new FormGroup({});
-  product: FormControl = new FormControl('', [Validators.required]);
+  product: FormControl = new FormControl(0, [Validators.required]);
   indexProductos: number | null = null;
   hayProductos: boolean = false;
   allProducts:Producto[]=[];
@@ -84,7 +84,7 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
         this.formCatalog.get("codigo")?.disable();
         this.formCatalog.get("name")?.disable();
         this.formCatalog.get("description")?.disable();
-        this.formCatalog.get("product")?.disable();
+        this.product.disable();
       }
 
       this.subscription.add(

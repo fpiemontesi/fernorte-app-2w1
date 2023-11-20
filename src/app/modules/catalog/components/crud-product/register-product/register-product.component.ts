@@ -32,18 +32,18 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
     constructor(
-      private storageService: StorageService, 
-      private httpClientService:productService, 
+      private storageService: StorageService,
+      private httpClientService:productService,
       private httpClientCategoria: CategoriaService,
       private htppBrand: ServiceMarcaService,
       private router: Router,
       private activedRoute: ActivatedRoute
       ) { }
 
-      
+
 
     ngOnInit(): void {
-     
+
 
       //TODO: get params from url
       this.subscription.add(
@@ -65,9 +65,9 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
                   this.productsInactives.push(this.model);
                   if(this.productsInactives[0].codigo == null || undefined){
                     console.log("No existe el producto");
-                    this.router.navigate(["/listProducts"]);                 
+                    this.router.navigate(["/listProducts"]);
                   }
-                
+
                   console.log(this.productsInactives);
                 },
                 error: (error:any)=>{
@@ -86,7 +86,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
       )
 
 
-      
+
 
       this.subscription.add(
         this.httpClientService.getAllProducts().subscribe(
@@ -147,7 +147,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
 
     addElement(){
       if(this.formArticle.value.categorias_id != ("" || null || undefined)){
-        
+
         for(let i = 0; i < this.categoriesCodigo.length; i++){
           if(this.categoriesCodigo[i] == this.formArticle.value.categorias_id){
             alert("Ya se ha agregado esta categoría");
@@ -159,20 +159,20 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
       }
     }
 
-   
+
     removeCategory(index: number){
       this.categoriesNombre.splice(index, 1);
       this.categoriesCodigo.splice(index, 1);
     }
 
 
-    onSubmit() {  
+    onSubmit() {
       if(this.formArticle.valid){
         this.prodPreCarga = {
           activo: true,
           codigo_categorias: this.categoriesCodigo as string[],
           codigo_marca: this.formArticle.value.codigo_marca || "",
-          paisOrigen: this.formArticle.value.pais || "", 
+          paisOrigen: this.formArticle.value.pais || "",
           color: this.formArticle.value.color || "",
           material: this.formArticle.value.material || "",
           peso: this.formArticle.value.peso || "",
@@ -181,9 +181,9 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
           precio_compra: 0,
           descripcion: this.formArticle.value.descripcion || "",
         }
-  
+
         let flag = false;
-  
+
         //TODO: add alert of success
         this.subscription.add(
           this.httpClientService.updateProduct(this.productsInactives[0].codigo, this.prodPreCarga ).subscribe(
@@ -195,11 +195,11 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
               this.categoriesCodigo = [];
               this.categoriesNombre = [];
               this.cargarDatos();
-              
+
             }
           )
         )
-       
+
       }else{
         alert("Rellene todos los campos");
       }
@@ -218,7 +218,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
             complete:()=>{
               console.log("Petición realizada");
             }
-        }     
+        }
         )
       )
     }
@@ -226,6 +226,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
 
     resetFields(){
       alert("SUCCESS");
+      this.router.navigate(["/deleteProduct"])
     }
 
     readPhoto(event:any){

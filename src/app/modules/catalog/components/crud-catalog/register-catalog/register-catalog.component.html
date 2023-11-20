@@ -57,7 +57,7 @@
             <div class="col-md-9 d-flex">
               <select class="form-select flex-grow-1 me-2" id="selectProducto" aria-label="Seleccionar Producto" name="productCodeSelected" [formControl]="product"
                       [ngStyle]="{'border': product.invalid && product.touched ? '1px solid red' : '' }">
-                <option selected disabled>Seleccionar Producto</option>
+                <option selected disabled [value]="0">Seleccionar Producto</option>
                 <ng-container *ngFor="let product of allProducts; let i = index">
                   <option [value]="product.codigo">{{product.nombre}}</option>
                 </ng-container>

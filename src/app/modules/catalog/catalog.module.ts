@@ -29,8 +29,12 @@ import { InicioComponent } from './components/inicio/inicio.component';
 
 
 const routes:Routes = [
-  {path:"registerProduct", component:RegisterProductComponent},
-  {path:"deleteProduct", component:DeleteProductComponent},
+  {path:"deleteProduct",
+    children:[
+      {path:"registerProduct", component:RegisterProductComponent},
+      {path:"", component:DeleteProductComponent},
+    ]
+  },
   {path:"listCategories",
     children:[
       {path:"updateCategory", component:EditarCategoriaComponent},
