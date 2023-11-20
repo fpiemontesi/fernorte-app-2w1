@@ -1,4 +1,4 @@
-import { Component , OnInit, ViewChild } from '@angular/core';
+import { Component , ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient  , HttpHeaders} from '@angular/common/http';
 import Swal from 'sweetalert2'
 import { NgForm } from '@angular/forms';
@@ -9,6 +9,7 @@ import { Producto } from '../../models/Producto';
 import { Cliente } from '../../models/Cliente';
 import { Presupuesto } from '../../models/Presupuesto';
 import { Detalle } from '../../models/Detalles';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fn-modificar-presupuesto',
@@ -24,7 +25,7 @@ export class ModificarPresupuestoComponent {
   
   clienteName: any = '';
   filas: Detalle[] = [];
-  
+  subscriptions: Subscription | undefined;
   existencias: number = 0;
   nro_doc: number = 0;
   nombre_cliente: string = '';
@@ -46,7 +47,7 @@ export class ModificarPresupuestoComponent {
     producto :'',
     cantidad: 1
   };
- 
+  @ViewChild('nro_doc_input', { static: false }) nro_doc_input!: ElementRef;
   myList: Producto[] = [];
   @ViewChild('form', { static: false })
   form!: NgForm;
@@ -62,15 +63,22 @@ export class ModificarPresupuestoComponent {
   }
 
   ngOnInit() {
+    this.subscriptions = new Subscription();
     this.Listar();
     this.CargarDatos();
     this.onBlur();  
   }
+  ngOnDestroy(){
+    if(this.subscriptions){
+      this.subscriptions.unsubscribe();
+    }
+  }
 
   Listar() {
+    this.subscriptions!.add(
     this.presupuestoService.getProductos().subscribe((data: any) => {
       this.myList = data;
-    })
+    }))
   }
  
   eliminarFila(index: number): void {
@@ -129,10 +137,17 @@ export class ModificarPresupuestoComponent {
   CargarDatos(){
     this.presupuesto = this.presupuestoService.MostrarPresupuesto();
     if(this.presupuesto){
+
       this.nro_doc = this.presupuesto.doc_cliente;
+      
       this.filas = this.presupuesto.detalles;
+      this.formData.tipo = this.presupuesto.tipo_venta;
     }
-    
+    this.onBlur();
+  }
+
+  Cancelar(){
+    this.router.navigate(['sales/consultar-presupuesto']);
   }
 
   calcularTotal() : number {
@@ -153,13 +168,14 @@ export class ModificarPresupuestoComponent {
     const producto = document.getElementById("producto") as HTMLSelectElement;
     this.dimension = this.myList.at(producto.selectedIndex)?.dimensiones;
     this.peso = this.myList.at(producto.selectedIndex)?.peso;
+    this.subscriptions!.add(
     this.presupuestoService.getExistenciaByCodProducto(producto.value).subscribe((response) => {
       if(response.length != 0){
         this.existencias = response[0].total;
       } else{
         this.existencias = 0
       }
-    });
+    }));
   }
 
   Clean() {
@@ -170,6 +186,7 @@ export class ModificarPresupuestoComponent {
   
   onBlur(){
     try {
+      this.subscriptions!.add(
       this.presupuestoService.getClienteByDni(this.nro_doc).subscribe((response) => {
         if(response.length != 0){
           this.formData.cliente = this.nro_doc;
@@ -185,7 +202,7 @@ export class ModificarPresupuestoComponent {
           this.formData.cliente = 0;
           this.nombre_cliente = "CONSUMIDOR FINAL";
         }
-      });
+      }));
     } catch (error) {
       
     }
@@ -193,8 +210,10 @@ export class ModificarPresupuestoComponent {
 
   UpdatePresupuesto(){
     if(this.onSubmit()){
-      this.presupuesto.doc_cliente = this.nro_doc;
+    this.presupuesto.tipo_venta = this.formData.tipo;
+    this.presupuesto.doc_cliente = this.nro_doc;
     this.presupuesto.detalles = this.filas;
+    this.subscriptions!.add(
     this.presupuestoService.realizarSolicitudPutPresupuesto(this.presupuesto).subscribe((response) => {
       console.log(response,"se actualizo el presupuesto");
       Swal.fire({
@@ -206,7 +225,7 @@ export class ModificarPresupuestoComponent {
       }).then(() => {
         this.router.navigate(['sales/consultar-presupuesto']);
       });
-    });
+    }));
     }
     else return;
     
