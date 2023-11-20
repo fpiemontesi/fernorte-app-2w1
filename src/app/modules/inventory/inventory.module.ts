@@ -9,6 +9,7 @@ import { ListBatchesByExistenceComponent } from './components/batches/list-batch
 import { ListStockExistenciasComponent } from './components/list-stock-existencias/list-stock-existencias.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastsComponent } from './components/toast/toasts.component';
+
 import {NgbDropdownModule, NgbNavModule, NgbToast, NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
 import { CreateSectionComponent } from './components/sections/create-section/create-section.component';
 import { ListBatchesBySectionComponent } from './components/batches/list-batches-by-section/list-batches-by-section.component';
@@ -32,6 +33,8 @@ import {RegistrarRemitoComponent} from "./components/remitos/registrar-remito/re
 import {RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
 import {LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
 import { ListBatchesExpiredComponent } from './components/list-batches-expired/list-batches-expired.component';
+import { StadisticsExpiredExistancesComponent } from './components/stadistics-expired-existances/stadistics-expired-existances.component';
+import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
@@ -39,7 +42,8 @@ import { ListBatchesExpiredComponent } from './components/list-batches-expired/l
     ReservationListComponent, ListStockExistenciasComponent,
     RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
     ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
-                ListBatchesExpiredComponent],
+                ListBatchesExpiredComponent,
+                StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent],
   providers: [],
   imports: [
     CommonModule,

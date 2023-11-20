@@ -253,11 +253,13 @@
     {
       "code": "2",
       "name": "planks",
+
       "minimumStock": 20
     },
     {
       "code": "3",
       "name": "nuts",
+
       "minimumStock": 150
     }
   ],
@@ -342,13 +344,64 @@
           "quantity": 1
         }
       ]
-
     }
   ],
+  "stadistic_expired": {
+    "seasonStart":"6/1/2023",
+    "seasonEnd":"12/30/2023",
+    "items":[
+      
+      {
+        
+        "name":"Martillos",
+        "controls":10,
+        "units":70,
+        "percent": 70
+        },
+      {
+        "name": "Tuercas",
+        "controls": 8,
+        "units": 20,
+        "percent": 20
+      },
+      {
+        "name": "Tornillos",
+        "controls": 5,
+        "units": 10,
+        "percent": 10
+      }
+    ]
+  },
+  "stadistic_damaged": {
+    "seasonStart":"6/1/2023",
+    "seasonEnd":"12/30/2023",
+    "items":[
+      
+      {
+        
+        "name":"Tuercas",
+        "controls":10,
+        "units":50,
+        "percent": 50
+        },
+      {
+        "name": "Tornillos",
+        "controls": 8,
+        "units": 30,
+        "percent": 30
+      },
+      {
+        "name": "Martillos",
+        "controls": 5,
+        "units": 20,
+        "percent": 20
+      }
+    ]
+  },
   "existencesStock": [
     {
       "id": 4,
-      "": "500",
+      "stock": "500",
       "name": "Destornillador"
     },
     {
