@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { reservation } from '../../../models/reservation';
 import { reservationDetail } from '../../../models/reservation-detail';
 import { ReservationService } from '../../../services/reservation.service';
-import { Subscription } from 'rxjs';
 import { Existence } from '../../../models/existence';
 
 @Component({

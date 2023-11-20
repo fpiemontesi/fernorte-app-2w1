@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
 
 @Component({
   selector: 'fn-home-inventory',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   active = "";
 
   constructor(private router: Router) {

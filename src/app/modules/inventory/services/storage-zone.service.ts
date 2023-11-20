@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs";
-import {Zone} from "../models/storage-zone";
+import {StorageZone} from "../models/storage-zone";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageZoneService {
+  constructor(private http:HttpClient) { }
 
-  constructor(private http: HttpClient) { }
-
-  getAll(): Observable<Zone[]>{
-    return this.http.get<Zone[]>(`http://localhost:3000/zones`);
+  getAll(): Observable<StorageZone[]> {
+    return this.http.get<StorageZone[]>('http://localhost:3000/zones')
   }
 }

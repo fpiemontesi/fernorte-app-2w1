@@ -17,11 +17,11 @@ export class BatchService {
   getById(id: number): Observable<Batch>{
     return this.http.get<Batch>("http://localhost:3000/batchs/" + id);
   }
-  
+
   getAll(): Observable<Batch[]>{
     return this.http.get<Batch[]>('http://localhost:3000/batches');
   }
-  
+
   create(body: Batch): Observable<Batch>{
     return this.http.post<Batch>('http://localhost:3000/batches', body);
   }

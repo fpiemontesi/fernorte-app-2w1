@@ -13,6 +13,10 @@ import {
 import {
   ModifyStockControlComponent
 } from "./components/stock-control-reports/modify-stock-control/modify-stock-control.component";
+import {RemitosHomeComponent} from "./components/remitos/remitos-home/remitos-home.component";
+import {RegistrarRemitoComponent} from "./components/remitos/registrar-remito/registrar-remito.component";
+import {LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
+import {RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
 
 const routes: Routes = [
   {
@@ -34,6 +38,24 @@ const routes: Routes = [
           },
           {
             path: 'modificar', component: ModifyStockControlComponent
+          },
+        ]
+      },
+      {
+        path: 'remitos',
+        component: RemitosHomeComponent,
+        children: [
+          {
+            path: 'registrar', component: RegistrarRemitoComponent
+          }
+        ]
+      },
+      {
+        path: 'lotes',
+        component: LotesHomeComponent,
+        children: [
+          {
+            path: 'registrar', component: RegistrarLotesComponent
           }
         ]
       }

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Zone} from "../../../models/storage-zone";
 import {Section} from "../../../models/section";
 import {Batch} from "../../../models/batch";
 import {Subscription} from "rxjs";
@@ -9,6 +8,7 @@ import {SectionService} from "../../../services/section.service";
 import {BatchService} from "../../../services/batch.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastService} from "../../../services/toast.service";
+import {StorageZone} from "../../../models/storage-zone";
 
 @Component({
   selector: 'fn-batch-finder-modal',
@@ -19,7 +19,7 @@ import {ToastService} from "../../../services/toast.service";
 export class BatchFinderModalComponent implements OnInit, OnDestroy {
   finderForm: FormGroup = this.fb.group({});
   zoneIsSelected: boolean = false;
-  zones: Zone[] = [];
+  zones: StorageZone[] = [];
   sections: Section[] = [];
   batches: Batch[] = [];
   @Output() onBatchSelected = new EventEmitter<Batch>;
@@ -39,7 +39,7 @@ export class BatchFinderModalComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(
       this.storageZoneService.getAll().subscribe({
-        next: (response: Zone[]) => {
+        next: (response: StorageZone[]) => {
           this.zones = response;
         },
         error: err => {

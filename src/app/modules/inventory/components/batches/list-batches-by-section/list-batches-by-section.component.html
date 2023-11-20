@@ -5,7 +5,7 @@
           <div class="form-group row">
             <label for="sectionId" class="col-md-2 col-form-label"><b>ID de Sección:</b></label>
             <div class="col-md-6">
-              <input type="text" class="form-control" id="sectionId" name="sectionId" [(ngModel)]="sectionId">
+              <input type="number" class="form-control" id="sectionId" name="sectionId" [(ngModel)]="sectionId">
             </div>
             <div class="col-md-3">
               <button type="button" class="btn btn-primary" (click)="filterBatchesBySection()">Filtrar</button>
@@ -46,4 +46,4 @@
     </div>
   </div>
 
-<fn-toasts-container aria-live="polite" aria-atomic="true"></fn-toasts-container>
+<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>

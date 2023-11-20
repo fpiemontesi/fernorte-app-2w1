@@ -106,214 +106,274 @@
           "detail": "Details details details..."
         }
       ]
+    },
+    {
+      "id": 6,
+      "arrivalDate": "2023-11-11",
+      "purchaseOrderNumber": 7,
+      "receiptNumber": 4,
+      "supplierName": "Juan",
+      "details": [
+        {
+          "id": 0,
+          "quantity": 7,
+          "productName": "Lappiz",
+          "detail": "no"
+        }
+      ]
     }
   ],
-   "sections": [
-      {
-        "id": 1,
-        "name": "A",
-        "id_zone": 1
-      },
-      {
-        "id": 2,
-        "name": "B",
-        "id_zone": 2
-      },
-      {
-        "id": 3,
-        "name": "C",
-        "id_zone": 2
-      },
-      {
-        "id": 4,
-        "name": "D",
-        "id_zone": 1
-      },
-      {
-        "id": 5,
-        "name": "E",
-        "id_zone": 2
-      },
-      {
-        "id": 6,
-        "name": "R",
-        "id_zone": 1
-      }
-    ],
-    "zones": [
-      {
-        "id": 1,
-        "name": "Warehouse"
-      },
-      {
-        "id": 2,
-        "name": "Yard"
-      }
-    ],
-    "batches": [
-      {
-        "id": 1,
-        "id_existence": "1",
-        "id_section": "3",
-        "quantity": "3",
-        "due_date": "2023-10-27",
-        "shelf": "6"
-      },
-      {
-        "id": 2,
-        "id_existence": "2",
-        "id_section": "3",
-        "quantity": "3",
-        "due_date": "2023-10-27",
-        "shelf": "6"
-      },
-      {
-        "id": 3,
-        "id_existence": "2",
-        "id_section": "4",
-        "quantity": "3",
-        "due_date": "2023-10-27",
-        "shelf": "6"
-      },
-      {
-        "id": 4,
-        "id_existence": "1",
-        "id_section": "3",
-        "quantity": "3",
-        "due_date": "2023-10-27",
-        "shelf": "6"
-      },
-      {
-        "id": 5,
-        "id_existence": "3",
-        "id_section": "2",
-        "quantity": "3",
-        "due_date": "2023-10-27",
-        "shelf": "3"
-      },
-      {
-        "id": 6,
-        "id_existence": "4",
-        "id_section": "1",
-        "quantity": "3",
-        "due_date": "2023-10-27",
-        "shelf": "3"
-      },
-      {
-        "id": 7,
-        "id_existence": "1",
-        "id_section": "1",
-        "quantity": "4",
-        "due_date": "2023-10-26",
-        "shelf": "4"
-      },
-      {
-        "id": 8,
-        "id_existence": "1",
-        "id_section": "1",
-        "quantity": "3",
-        "due_date": "2023-10-30",
-        "shelf": "5"
-      }
-    ],
-    "existences": [
-      {
-        "code": "1",
-        "name": "screws",
-        "minimum_stock": 100
-      },
-      {
-        "code": "2",
-        "name": "planks",
-        "minimum_stock": 20
-      },
-      {
-        "code": "3",
-        "name": "nuts",
-        "minimum_stock": 150
-      }
-    ],
-    "reservations": [
-      {
-        "id": 1,
-         "details": [
-            {
-                "batch": {
-                    "id": 1,
-                    "existenceCode": "1",
-                    "sectionId": "C",
-                    "quantity": 3,
-                    "dueDate": "2023-10-27",
-                    "shelf": 6
-                 },
-                "quantity": 2
-            },
-            {
-                "batch": {
-                    "id": 6,
-                    "existenceCode": "1",
-                    "sectionId": "A",
-                    "quantity": 3,
-                    "dueDate": "2023-10-27",
-                    "shelf": 3
-                 },
-                "quantity": 1
-            }
-          ]
-      },
-      {
-        "id": 2,
-        "details": [
-            {
-              "batch": {
-                "id": 7,
-                "existenceCode": "1",
-                "sectionId": "C",
-                "quantity": 4,
-                "dueDate": "2023-10-26",
-                "shelf": 4
-                },
-              "quantity": 2
-            }
-          ]
-      },
-      {
-        "id": 3,
-        "details": [
-          {
-            "batch": {
-              "id": 8,
-              "existenceCode": "2",
-              "sectionId": "B",
-              "quantity": 5,
-              "dueDate": "2023-10-29",
-              "shelf": 2
-            },
-            "quantity": 3
+  "sections": [
+    {
+      "id": 1,
+      "name": "A",
+      "zoneId": 1
+    },
+    {
+      "id": 2,
+      "name": "B",
+      "zoneId": 2
+    },
+    {
+      "id": 3,
+      "name": "C",
+      "zoneId": 2
+    },
+    {
+      "id": 4,
+      "name": "D",
+      "zoneId": 1
+    },
+    {
+      "id": 5,
+      "name": "E",
+      "zoneId": 2
+    },
+    {
+      "id": 6,
+      "name": "R",
+      "zoneId": 1
+    },
+    {
+      "id": 7,
+      "name": "A",
+      "zoneId": 2
+    }
+  ],
+  "zones": [
+    {
+      "id": 1,
+      "name": "Warehouse"
+    },
+    {
+      "id": 2,
+      "name": "Yard"
+    }
+  ],
+  "batches": [
+    {
+      "id": 1,
+      "existenceCode": "1",
+      "sectionId": 3,
+      "quantity": "3",
+      "dueDate": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 2,
+      "existenceCode": "2",
+      "sectionId": 3,
+      "quantity": "3",
+      "dueDate": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 3,
+      "existenceCode": "2",
+      "sectionId": 4,
+      "quantity": "3",
+      "due_date": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 4,
+      "existenceCode": "1",
+      "sectionId": 3,
+      "quantity": "3",
+      "dueDate": "2023-10-27",
+      "shelf": "6"
+    },
+    {
+      "id": 5,
+      "existenceCode": "3",
+      "sectionId": 2,
+      "quantity": "3",
+      "dueDate": "2023-10-27",
+      "shelf": "3"
+    },
+    {
+      "id": 6,
+      "existenceCode": "4",
+      "sectionId": 1,
+      "quantity": "3",
+      "dueDate": "2023-10-27",
+      "shelf": "3"
+    },
+    {
+      "id": 7,
+      "existenceCode": "1",
+      "sectionId": 1,
+      "quantity": "4",
+      "dueDate": "2023-10-26",
+      "shelf": "4"
+    },
+    {
+      "id": 8,
+      "existenceCode": "1",
+      "sectionId": 1,
+      "quantity": "3",
+      "dueDate": "2023-10-30",
+      "shelf": "5"
+    },
+    {
+      "id": 9,
+      "sectionId": 4,
+      "existenceCode": "1",
+      "quantity": "3",
+      "dueDate": "2023-11-18",
+      "shelf": "4"
+    }
+  ],
+  "existences": [
+    {
+      "code": "1",
+      "name": "screws",
+      "minimumStock": 100
+    },
+    {
+      "code": "2",
+      "name": "planks",
+      "minimumStock": 20
+    },
+    {
+      "code": "3",
+      "name": "nuts",
+      "minimumStock": 150
+    }
+  ],
+  "reservations": [
+    {
+      "id": 1,
+      "details": [
+        {
+          "batch": {
+            "id": 1,
+            "existenceCode": "1",
+            "sectionId": "C",
+            "quantity": 3,
+            "dueDate": "2023-10-27",
+            "shelf": 6
           },
-          {
-            "batch": {
-              "id": 9,
-              "existenceCode": "3",
-              "sectionId": "C",
-              "quantity": 4,
-              "dueDate": "2023-10-30",
-              "shelf": 5
-            },
-            "quantity": 2
+          "quantity": 2
+        },
+        {
+          "batch": {
+            "id": 6,
+            "existenceCode": "1",
+            "sectionId": "A",
+            "quantity": 3,
+            "dueDate": "2023-10-27",
+            "shelf": 3
           },
-          {
-            "batch": {
-              "id": 10,
-              "existenceCode": "2",
-              "sectionId": "B",
-              "quantity": 6,
-              "dueDate": "2023-10-29",
-              "shelf": 3
-            },
-            "quantity": 1
-          }
-        ]
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "details": [
+        {
+          "batch": {
+            "id": 7,
+            "existenceCode": "1",
+            "sectionId": "C",
+            "quantity": 4,
+            "dueDate": "2023-10-26",
+            "shelf": 4
+          },
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "details": [
+        {
+          "batch": {
+            "id": 8,
+            "existenceCode": "2",
+            "sectionId": "B",
+            "quantity": 5,
+            "dueDate": "2023-10-29",
+            "shelf": 2
+          },
+          "quantity": 3
+        },
+        {
+          "batch": {
+            "id": 9,
+            "existenceCode": "3",
+            "sectionId": "C",
+            "quantity": 4,
+            "dueDate": "2023-10-30",
+            "shelf": 5
+          },
+          "quantity": 2
+        },
+        {
+          "batch": {
+            "id": 10,
+            "existenceCode": "2",
+            "sectionId": "B",
+            "quantity": 6,
+            "dueDate": "2023-10-29",
+            "shelf": 3
+          },
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "existencesStock": [
+    {
+      "id": 4,
+      "": "500",
+      "name": "Destornillador"
+    },
+    {
+      "id": 5,
+      "stock": "3000",
+      "name": "Cinta de medir"
+    },
+    {
+      "id": 6,
+      "stock": "1200",
+      "name": "Martillo"
+    },
+    {
+      "id": 7,
+      "stock": "2000",
+      "name": "Aerosol"
+    },
+    {
+      "id": 8,
+      "stock": "550",
+      "name": "Tornillo"
+    },
+    {
+      "id": 9,
+      "stock": "800",
+      "name": "Taladro"
     }
   ]
- }
+}
