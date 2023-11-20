@@ -31,13 +31,15 @@ import {
 import {RegistrarRemitoComponent} from "./components/remitos/registrar-remito/registrar-remito.component";
 import {RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
 import {LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
+import { ListBatchesExpiredComponent } from './components/list-batches-expired/list-batches-expired.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
                  RegistrarLotesComponent, RegistrarRemitoComponent,CreateSectionComponent, ToastsComponent,
     ReservationListComponent, ListStockExistenciasComponent,
     RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
-    ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent],
+    ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
+                ListBatchesExpiredComponent],
   providers: [],
   imports: [
     CommonModule,
