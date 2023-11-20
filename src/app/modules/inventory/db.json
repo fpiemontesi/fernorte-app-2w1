@@ -1,4 +1,24 @@
 {
+  "stockControlReports": [
+    {
+      "id": 1,
+      "batchId": 6,
+      "date": "2023-11-06",
+      "description": "Inspección rutinaria, se observo 3 productos dañados",
+      "inspectedQuantity": 20,
+      "damagedQuantity": 3,
+      "batchIsExpired": false
+    },
+    {
+      "id": 2,
+      "batchId": 3,
+      "date": "2023-11-06",
+      "description": "Inspección rutinaria, el lote se encuentra expirado.",
+      "inspectedQuantity": 20,
+      "damagedQuantity": 0,
+      "batchIsExpired": true
+    }
+  ],
   "receipts": [
     {
       "id": 1,
@@ -322,6 +342,38 @@
           "quantity": 1
         }
       ]
+    }
+  ],
+  "existencesStock": [
+    {
+      "id": 4,
+      "": "500",
+      "name": "Destornillador"
+    },
+    {
+      "id": 5,
+      "stock": "3000",
+      "name": "Cinta de medir"
+    },
+    {
+      "id": 6,
+      "stock": "1200",
+      "name": "Martillo"
+    },
+    {
+      "id": 7,
+      "stock": "2000",
+      "name": "Aerosol"
+    },
+    {
+      "id": 8,
+      "stock": "550",
+      "name": "Tornillo"
+    },
+    {
+      "id": 9,
+      "stock": "800",
+      "name": "Taladro"
     }
   ]
 }

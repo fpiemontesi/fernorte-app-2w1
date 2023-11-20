@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-3 form-group">
             <label for="detail">Details:</label>
-            <input type="text" class="form-control" id="detail" name="detail" #detailElement="ngModel" 
+            <input type="text" class="form-control" id="detail" name="detail" #detailElement="ngModel"
                    [(ngModel)]="detail.detail" minlength="1" maxlength="50">
             <div *ngIf="detailElement.dirty && detailElement.hasError('minlength')" class="text-danger">
                 Detalle es muy corto
@@ -90,4 +90,4 @@
   </div>
 </div>
 
-<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>
+<fn-toasts-container aria-live="polite" aria-atomic="true"></fn-toasts-container>

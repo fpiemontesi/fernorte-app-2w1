@@ -7,7 +7,6 @@ import {StorageZone} from "../models/storage-zone";
   providedIn: 'root'
 })
 export class StorageZoneService {
-
   constructor(private http:HttpClient) { }
 
   getAll(): Observable<StorageZone[]> {

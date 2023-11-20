@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {filter} from "rxjs";
 
-
 @Component({
   selector: 'fn-home-inventory',
   templateUrl: './home.component.html',

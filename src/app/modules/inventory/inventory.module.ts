@@ -1,29 +1,50 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { RemitosHomeComponent } from './components/remitos/remitos-home/remitos-home.component';
-import { LotesHomeComponent } from './components/lotes/lotes-home/lotes-home.component';
 import {InventoryAppRoutingModule} from "./inventory-app-routing.module";
 import { ReservationListComponent } from './components/reservations/reservation-list/reservation-list.component';
 import { ListBatchesByExistenceComponent } from './components/batches/list-batches-by-existence/list-batches-by-existence.component';
 import { ListStockExistenciasComponent } from './components/list-stock-existencias/list-stock-existencias.component';
-import { RegistrarRemitoComponent } from './components/remito/registrar-remito/registrar-remito.component';
-import { RegistrarLotesComponent } from './components/batches/registrar-lotes/registrar-lotes.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastsComponent } from './components/toast/toasts.component';
-import { NgbDropdownModule, NgbNavModule, NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbNavModule, NgbToast, NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
 import { CreateSectionComponent } from './components/sections/create-section/create-section.component';
 import { ListBatchesBySectionComponent } from './components/batches/list-batches-by-section/list-batches-by-section.component';
+import {
+  CreateControlReportComponent
+} from "./components/stock-control-reports/create-control-report/create-control-report.component";
+import {
+  BatchFinderModalComponent
+} from "./components/stock-control-reports/batch-finder-modal/batch-finder-modal.component";
+import {
+  ModifyStockControlComponent
+} from "./components/stock-control-reports/modify-stock-control/modify-stock-control.component";
+import {
+  ListControlStockComponent
+} from "./components/stock-control-reports/list-control-stock/list-control-stock.component";
+import {ToastsContainer} from "./components/toast/toasts-container.component";
+import {
+  StockControlsHomeComponent
+} from "./components/stock-control-reports/stock-controls-home/stock-controls-home.component";
+import {RegistrarRemitoComponent} from "./components/remitos/registrar-remito/registrar-remito.component";
+import {RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
+import {LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
 
 @NgModule({
-  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
-                 RegistrarLotesComponent, RegistrarRemitoComponent,CreateSectionComponent, ToastsComponent, ReservationListComponent, ListStockExistenciasComponent, , RemitosHomeComponent, LotesHomeComponent],
+  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
+                 RegistrarLotesComponent, RegistrarRemitoComponent,CreateSectionComponent, ToastsComponent,
+    ReservationListComponent, ListStockExistenciasComponent,
+    RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
+    ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent],
   providers: [],
   imports: [
     CommonModule,
     FormsModule,
     NgbToast,
+    ReactiveFormsModule,
+    NgbToastModule,
     NgbNavModule,
     InventoryAppRoutingModule,
     NgbDropdownModule,
@@ -33,4 +54,5 @@ import { ListBatchesBySectionComponent } from './components/batches/list-batches
     RouterModule
   ],
 })
-export class InventaryModule {}
+export class InventaryModule {
+}
