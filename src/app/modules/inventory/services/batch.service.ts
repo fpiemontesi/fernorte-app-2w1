@@ -9,8 +9,20 @@ import { Batch } from '../models/batch';
 export class BatchService {
 
   constructor(private http: HttpClient) { }
-  
+
+  getAllBySection(sectionId: number): Observable<Batch[]>{
+    return this.http.get<Batch[]>(`http://localhost:3000/batchs?sectionId=${sectionId}`);
+  }
+
+  getById(id: number): Observable<Batch>{
+    return this.http.get<Batch>("http://localhost:3000/batchs/" + id);
+  }
+
   getAll(): Observable<Batch[]>{
+    return this.http.get<Batch[]>('http://localhost:3000/batches');
+  }
+
+  getExpired(): Observable<Batch[]>{
     return this.http.get<Batch[]>('http://localhost:3000/batches');
   }
   
@@ -20,6 +32,10 @@ export class BatchService {
 
   getSoonToExpire() : Observable<Batch[]>{
     return this.http.get<Batch[]>('https://my-json-server.typicode.com/1w1111979DiFranciscoMateo/demo/lotesProntoAExpirar');
+  }
+  
+  delete(id:number): Observable<Batch>{
+    return this.http.delete<Batch>('http://localhost:3000/batches/'+id);
   }
 
 }

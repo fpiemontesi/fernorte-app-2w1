@@ -1,1 +1,13 @@
-<fn-list-batch-soon-too-exipre></fn-list-batch-soon-too-exipre>
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li ngbNavItem="remitos">
+    <button ngbNavLink routerLink="remitos">Remitos</button>
+  </li>
+  <li ngbNavItem="lotes">
+    <button ngbNavLink routerLink="lotes">Lotes</button>
+  </li>
+  <li ngbNavItem="remitos">
+    <button ngbNavLink routerLink="controles">Controles de stock</button>
+  </li>
+</ul>
+<router-outlet></router-outlet>
+<p>home inventory works!</p>
