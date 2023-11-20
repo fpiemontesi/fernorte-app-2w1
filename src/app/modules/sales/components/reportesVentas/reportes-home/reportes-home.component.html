@@ -34,29 +34,50 @@
               </select>
           </div>
       </div>
-      <div class="row">
-          
+      <div class="col-md-4">
+        <div class="row">
           <div class="col-md-6">
-              <button type="submit" class="btn btn-outline-dark mt-2">Buscar</button>
+            <button type="submit" class="btn btn-outline-dark btn-block mt-2" style="width: 90%;">Buscar</button>
           </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos(this.formData)" style="width: 90%;">Reiniciar</button>
+          </div>
+        </div>
       </div>
   </form>
 
-    <div class="row">
-      <div class="col-md-6">
-          <canvas id="estado-venta" width="400" height="200"></canvas>
+  <div class="row">
+
+    <div class="col-6 mt-4" *ngIf="mostrarGrafico">
+          <fn-reportes-por-meses ></fn-reportes-por-meses>
+          <div class="row justify-content-center mt-2" >
+
       </div>
-      <div class="col-md-6">
-        <canvas id="top-productos" width="400" height="200"></canvas>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <canvas id="ant-actual" width="400" height="200"></canvas>
+    <div class="col-6 mt-4" *ngIf="mostrarGrafico">
+      <div class="card-body">
+          <fn-tipo-ventas #tipoVentas></fn-tipo-ventas>
+          <div class="row justify-content-center mt-2">
         </div>
-        <div class="col-md-6">
-          <canvas id="may-min" width="400" height="200"></canvas>
       </div>
+    </div>
+
+    <div class="col-6 mt-4" *ngIf="mostrarGrafico"> 
+      <div class="card-body">
+          <fn-top-productos #topProductos></fn-top-productos>
+          <div class="row justify-content-center mt-2">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 mt-4" *ngIf="mostrarGrafico">
+      <div class="card-body">
+          <fn-estado-ventas #estadoVentas></fn-estado-ventas>
+          <div class="row justify-content-center mt-2">
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </div>

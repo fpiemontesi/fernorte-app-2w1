@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { ReportesService } from '../../../services/reportes.service';
+import { ReportesService } from '../../services/reportes.service';
 import {  ChartType } from 'chart.js';
 import  {Chart } from 'chart.js/auto';
-import { Detalle } from '../../../models/Detalles';
+import { Detalle } from '../../models/Detalles';
 
-@Component({
-  selector: 'fn-filtro-fecha',
-  templateUrl: './filtro-fecha.component.html',
-  styleUrls: ['./filtro-fecha.component.css']
-})
+// @Component({
+//   selector: 'fn-filtro-fecha',
+//   templateUrl: './filtro-fecha.component.html',
+//   styleUrls: ['./filtro-fecha.component.css']
+// })
 export class FiltroFechaComponent {
   mes!: number;
   anio: number = 2023;
@@ -214,5 +214,22 @@ export class FiltroFechaComponent {
       return colors;
     }
   
+  //   <div class="row">
+  //   <div class="col-md-6">
+  //     <canvas id="estado-venta" width="400" height="200"></canvas>
+  //   </div>
+  //   <div class="col-md-6">
+  //     <canvas id="top-productos" width="400" height="200"></canvas>
+  //   </div>
+  // </div>
+
+  // <div class="row">
+  //   <div class="col-md-6">
+  //     <canvas id="ant-actual" width="400" height="200"></canvas>
+  //   </div>
+  //   <div class="col-md-6">
+  //     <canvas id="may-min" width="400" height="200"></canvas>
+  //   </div>
+  // </div>
   
   }

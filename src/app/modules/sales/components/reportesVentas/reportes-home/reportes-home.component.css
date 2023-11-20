@@ -1,0 +1,10 @@
+.btn-outline-violet {
+    color: rgb(110, 80, 141);
+    border-color: #591d94; 
+  }
+  
+  .btn-outline-violet:hover {
+    color: #ffffff; 
+    background-color:#432660;
+    border-color: #432660;
+  }

@@ -12,7 +12,11 @@ import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-pre
 import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ModificarPresupuestoComponent } from './components/modificar-presupuesto/modificar-presupuesto.component';
-import { FiltroFechaComponent } from './components/reportes/filtro-fecha/filtro-fecha.component';
+import { ReportesHomeComponent } from './components/reportesVentas/reportes-home/reportes-home.component';
+import { TipoVentasComponent } from './components/reportesVentas/tipo-ventas/tipo-ventas.component';
+import { ReportesPorMesesComponent } from './components/reportesVentas/reportes-por-meses/reportes-por-meses.component';
+import { TopProductosComponent } from './components/reportesVentas/reportes-topProductos/top-productos/top-productos.component';
+import { EstadoVentasComponent } from './components/reportesVentas/estado-ventas/estado-ventas.component';
 //import { ChartsModule } from 'ng2-charts';
 
 
@@ -49,8 +53,8 @@ const routes: Routes = [
         component: ModificarPresupuestoComponent
       },
       {
-        path: 'reporte-filtro',
-        component: FiltroFechaComponent
+        path: 'reportes-home',
+        component: ReportesHomeComponent
       }
     ]
   }
@@ -66,7 +70,11 @@ const routes: Routes = [
     AltaPresupuestoComponent,
     ModificarVentaComponent,
     ModificarPresupuestoComponent,
-    FiltroFechaComponent,
+    ReportesHomeComponent,
+    TipoVentasComponent,
+    ReportesPorMesesComponent,
+    TopProductosComponent,
+    EstadoVentasComponent,
   ],
   providers: [],
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],
