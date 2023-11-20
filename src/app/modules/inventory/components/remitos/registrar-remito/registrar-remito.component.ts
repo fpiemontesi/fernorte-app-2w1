@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { AppToastService } from '../../../services/app-toast.service';
 
 @Component({
-  selector: 'fn-registrar-remito',
+  selector: 'fn-registrar-remitos',
   templateUrl: './registrar-remito.component.html',
   styleUrls: ['./registrar-remito.component.css']
 })
@@ -38,7 +38,7 @@ export class RegistrarRemitoComponent implements OnDestroy{
       }
     });
   }
-  
+
   addReceiptDetail(form: NgForm) {
     if (form.valid) {
       const newDetail: ReceiptDetail = new ReceiptDetail();
@@ -47,7 +47,7 @@ export class RegistrarRemitoComponent implements OnDestroy{
       newDetail.detail = this.detail.detail;
 
       this.receipt.details.push(newDetail);
-      this.detail = new ReceiptDetail(); 
+      this.detail = new ReceiptDetail();
     } else {
       this.toastService.show("Formulario invalido","Datos del detalle invalido.");
     }
