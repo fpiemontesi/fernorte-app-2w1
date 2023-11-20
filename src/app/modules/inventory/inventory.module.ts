@@ -25,6 +25,7 @@ import { ListBatchesExpiredComponent } from './components/list-batches-expired/l
 import { StadisticsExpiredExistancesComponent } from './components/stadistics-expired-existances/stadistics-expired-existances.component';
 import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
 import { ListBatchSoonTooExipreComponent } from './components/list-batch-soon-too-exipre/list-batch-soon-too-exipre.component';
+import { RegistrarExistenciaComponent } from './components/registrar-existencia/registrar-existencia.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
@@ -32,7 +33,8 @@ import { ListBatchSoonTooExipreComponent } from './components/list-batch-soon-to
     ReservationListComponent, ListStockExistenciasComponent, ListBatchesExpiredComponent,
     RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
     ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
-    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent,ListBatchSoonTooExipreComponent],
+    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent,ListBatchSoonTooExipreComponent,
+    RegistrarExistenciaComponent],
   providers: [],
   imports: [
     CommonModule,
