@@ -5,11 +5,11 @@
       <div class="row">
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label for="id">Id</label>
-        <input id="id" type="text" name="id" class="form-control" placeholder="Id de la venta" [(ngModel)]="venta.id">
+        <input id="id" type="text" name="id" class="form-control" placeholder="Id de la venta" [(ngModel)]="ventaFilter.id">
       </div>
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label>Cliente</label>
-        <select class="form-select" id="cliente" name="cliente" [(ngModel)]="venta.doc_cliente">
+        <select class="form-select" id="cliente" name="cliente" [(ngModel)]="ventaFilter.doc_cliente">
           <option disabled selected value="">Selecciona el cliente de la venta</option>
           <!-- Use *ngFor to iterate over clients and populate the options -->
           <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nombre }} {{ cliente.apellido }}</option>
@@ -17,7 +17,7 @@
       </div>
     <div class="col-md-3 col-sm-12" style="padding: 1%;">
       <label>Vendedor</label>
-      <select class="form-select" id="vendedor" name="vendedor" [(ngModel)]="venta.id_vendedor">
+      <select class="form-select" id="vendedor" name="vendedor" [(ngModel)]="ventaFilter.id_vendedor">
         <option disabled selected value="">Selecciona el vendedor de la venta</option>
         <option value="1">Cande</option>
         <option value="2">Tomi</option>
@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label>Forma de Entrega</label>
-        <select class="form-select" id="formaEntrega" name="formaEntrega" [(ngModel)]="venta.forma_entrega">
+        <select class="form-select" id="formaEntrega" name="formaEntrega" [(ngModel)]="ventaFilter.forma_entrega">
           <option disabled selected value="">Selecciona la forma de entrega de la venta</option>
           <option value="1">En Caja</option>
           <option value="2">En Deposito</option>
@@ -35,7 +35,7 @@
       </div>
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label>Tipo de Venta</label>
-        <select class="form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="venta.tipo_venta">
+        <select class="form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="ventaFilter.tipo_venta">
           <option disabled selected>Selecciona el tipo de venta</option>
           <option value="2">Mayorista</option>
           <option value="1">Minorista</option>
@@ -61,7 +61,7 @@
       </div>
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label>Estado</label>
-        <select class="form-select" id="estado" name="estado" [(ngModel)]="venta.estado">
+        <select class="form-select" id="estado" name="estado" [(ngModel)]="ventaFilter.estado">
           <option disabled selected value="">Selecciona el estado de la venta</option>
           <option value="1">Pendiente</option>
           <option value="2">Entregado</option>

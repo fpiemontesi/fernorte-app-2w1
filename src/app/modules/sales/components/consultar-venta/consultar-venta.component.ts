@@ -23,6 +23,7 @@ export class ConsultarVentaComponent {
   fechaHasta: Date | null = null;
   nuevoEstado!: number;
   ventas: Ventas[] = [];
+  ventaFilter:Ventas;
   venta: Ventas;
   //Ventas:
   mostrarCanceladas:boolean = false
@@ -32,10 +33,12 @@ export class ConsultarVentaComponent {
 
   constructor(private service : VentasService) {
     this.venta= {} as Ventas;
+    this.ventaFilter = {} as Ventas;
   }
 
   limpiarCampos(){
     this.venta = {} as Ventas;
+    this.ventaFilter = {} as Ventas;
     this.mostrarTabla = false;
     this.mostrarDetalle = false;
     this.fechaDesde = null
@@ -87,7 +90,7 @@ export class ConsultarVentaComponent {
     this.subscriptions?.add( 
       this.service
       .filtrarVentas(
-        this.venta,
+        this.ventaFilter,
         this.montoDesde,
         this.montoHasta,
         fecDesde,
