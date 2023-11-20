@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { existencia } from '../../../models/existencia';
 import { Subscription } from 'rxjs';
+import { Article } from '../../../models/article';
+import { Existence } from '../../../models/existence';
 import { ExistenciaService } from '../../../services/existencia.service';
-import { articulo } from '../../../models/articulo';
+import { AppToastService } from '../../../services/app-toast.service';
 
 @Component({
   selector: 'fn-registrar-existencia',
@@ -10,31 +11,31 @@ import { articulo } from '../../../models/articulo';
   styleUrls: ['./registrar-existencia.component.css']
 })
 export class RegistrarExistenciaComponent {
-  listaArticulos: articulo[] = [];
-  articuloSeleccionado: articulo = {} as articulo; //inicializado "vacio"
-  existenciaCreada: existencia = {} as existencia;
+  listaArticulos: Article[] = [];
+  articuloSeleccionado: Article = {} as Article; //inicializado "vacio"
+  existenciaCreada: Existence = {} as Existence;
   paso1: boolean = true;
   paso2: boolean = false;
   botonHabil : boolean = false;
   private subscription = new Subscription();
 
-  constructor(private existenciaService: ExistenciaService) { }
+  constructor(private existenciaService: ExistenciaService, private toastService: AppToastService) { }
 
   ngOnInit(): void {
     this.cargarArticulos();
   }
 
-  onSeleccionar(articulo : articulo){
+  onSeleccionar(articulo : Article){
     this.articuloSeleccionado = articulo;
     this.botonHabil = true;
   }
 
   onFinalizar(){
-    if(this.existenciaCreada.stock_minimo == null){
-      alert("Error, cargar stock minimo antes de finalizar")
+    if(this.existenciaCreada.minimunStock == null){
+      this.toastService.show("Error","Cargar stock minimo antes de finalizar")
     } else {
-      this.existenciaCreada.id = this.articuloSeleccionado.id;
-      this.existenciaCreada.nombre = this.articuloSeleccionado.nombre;
+      this.existenciaCreada.code = this.articuloSeleccionado.id;
+      this.existenciaCreada.name = this.articuloSeleccionado.name;
       this.agregarExistencia();
     }
   }
@@ -52,11 +53,11 @@ export class RegistrarExistenciaComponent {
   private cargarArticulos() {
     this.subscription.add(
       this.existenciaService.get().subscribe({
-        next: (articulos: articulo[]) => {
-          this.listaArticulos = articulos;
+        next: (articles: Article[]) => {
+          this.listaArticulos = articles;
         },
         error: () => {
-          alert("Error en la API");
+          this.toastService.show("Error","Error en la API")
         }
       })
     )
@@ -64,12 +65,13 @@ export class RegistrarExistenciaComponent {
 
   private agregarExistencia(){
     this.existenciaService.create(this.existenciaCreada).subscribe({
-      next: (existencia : existencia) => {
-        alert("Existencia creada exitosamente");
-        this.existenciaCreada = {} as existencia; //lo reseteo
+      next: (existencia : Existence) => {
+        this.toastService.show("Exito","Existencia creada exitosamente")
+        this.existenciaCreada = {} as Existence; //lo reseteo
+        this.onPaso1();
       },
       error:() => {
-        alert("Error en la API");
+        this.toastService.show("Error","Error en la API")
       }
     })
   }

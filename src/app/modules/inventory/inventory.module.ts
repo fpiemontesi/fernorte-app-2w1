@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { RemitosHomeComponent } from './components/remitos/remitos-home/remitos-home.component';
 import { InventoryAppRoutingModule} from "./inventory-app-routing.module";
 import { ReservationListComponent } from './components/reservations/reservation-list/reservation-list.component';
@@ -56,7 +56,6 @@ import { ExistencesHomeComponent } from './components/existences/existences-home
     HomeComponent,
     RouterModule
   ],
-
 })
 export class InventaryModule {
 }
