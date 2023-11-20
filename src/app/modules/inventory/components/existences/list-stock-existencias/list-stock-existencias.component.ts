@@ -14,7 +14,6 @@ export class ListStockExistenciasComponent implements OnInit {
   constructor(private listarstockExistencias:ListExistenciasService){}
 
   list : ExistenceStock[]=[];
-
   ngOnInit(): void {
     this.llenarList();
   }
