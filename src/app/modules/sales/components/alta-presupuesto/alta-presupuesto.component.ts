@@ -1,4 +1,4 @@
-import { Component , OnInit, ViewChild } from '@angular/core';
+import { Component , OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { HttpClient  , HttpHeaders} from '@angular/common/http';
 import { PresupuestoService } from '../../services/presupuesto.service';
 import { VentasService } from '../../services/ventas.service';
@@ -7,18 +7,19 @@ import { Cliente } from '../../models/Cliente';
 import { Presupuesto } from '../../models/Presupuesto';
 import { Detalle } from '../../models/Detalles';
 import { Categoria } from '../../models/Categoria';
-import { FormBuilder,Validators } from '@angular/forms';
+import { FormBuilder,NgForm,Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Ventas } from '../../models/Ventas';
 import { Descuento } from '../../models/Descuento';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fn-alta-presupuesto',
   templateUrl: './alta-presupuesto.component.html',
   styleUrls: ['./alta-presupuesto.component.css']
 })
-export class AltaPresupuestoComponent implements OnInit {
+export class AltaPresupuestoComponent implements OnInit,OnDestroy {
   tipo_venta = [
     {valor: 1, descripcion: 'Minorista'}, 
     {valor: 2, descripcion: 'Mayorista'}
@@ -27,6 +28,8 @@ export class AltaPresupuestoComponent implements OnInit {
     {valor: 1, descripcion: 'En caja'}, 
     {valor: 2, descripcion: 'En depósito'}
   ];
+
+  subscriptions: Subscription | undefined;
   //lista de productos
   productos: Producto[] = [];
   //clase presupuesto
@@ -56,8 +59,6 @@ export class AltaPresupuestoComponent implements OnInit {
         if(params['venta_from_presupuesto'] == "true") this.ventaFromPresupuesto=true;
       });
    }  
-
-
   action!: string; 
 
   onSubmit() {
@@ -65,8 +66,9 @@ export class AltaPresupuestoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subscriptions = new Subscription();
+    
     this.Listar();
-    console.log('listado');
     // Si el presupuesto viene de generar venta:
     if(this.ventaFromPresupuesto){
       this.presupuesto = this.presupuestoService.MostrarPresupuesto();
@@ -80,18 +82,30 @@ export class AltaPresupuestoComponent implements OnInit {
     else{
       this.presupuesto.tipo_venta = 1;
       this.cliente.nombre = 'CONSUMIDOR FINAL';
+      this.cliente.nro_doc = 0;
+      this.presupuesto.fecha_creacion= new Date(Date.now());
+      console.log(this.presupuesto.fecha_creacion)
+
+    }
+    
+  }
+  ngOnDestroy(): void {
+    if(this.subscriptions){
+      this.subscriptions.unsubscribe();
     }
   }
 
   Listar() {
-    this.presupuestoService.getProductos().subscribe((data: any) => {
-      if(data.length !=0){
-        this.productos = data;
-        this.productoSeleccionado = this.productos[0];
-        this.consultarExistencia();
-      }
-      
-    })
+    this.subscriptions?.add(
+      this.presupuestoService.getProductos().subscribe((data: any) => {
+        if(data.length !=0){
+          this.productos = data;
+          this.productoSeleccionado = this.productos[0];
+          this.consultarExistencia();
+        }  
+      })
+
+    )
   }
  
   eliminarFila(index: number): void {
@@ -153,15 +167,30 @@ export class AltaPresupuestoComponent implements OnInit {
         }
       }
     }
-    console.log("Ganancia total: " + gananciaTotal);
-    console.log("Porcentaje sobre ganancia:" + this.categoria.descuento);
+    //console.log("Ganancia total: " + gananciaTotal);
+    //console.log("Porcentaje sobre ganancia:" + this.categoria.descuento);
     descuento = this.categoria.descuento * gananciaTotal / 100;
-    console.log("Descuento: " + descuento);
+    //console.log("Descuento: " + descuento);
     return descuento;
   }
   
+  // Gestiona agregar producto a detalle:
   valido(): boolean{
-    return true;
+    var res:boolean = true;
+    this.presupuesto.detalles.forEach(element => {
+      if(element.cod_producto == this.productoSeleccionado.codigo){
+        res = false;
+        Swal.fire({
+          icon: 'warning',
+          title: 'El producto '+element.descripcion+ ' ya ha sido agregado',
+          showCancelButton: false,
+          showConfirmButton: true,
+          confirmButtonText: 'Aceptar'
+        })
+      }
+    });
+    
+    return res;
   }
 
   validarCantidad(){
@@ -172,29 +201,44 @@ export class AltaPresupuestoComponent implements OnInit {
     }
   }
 
-  guardarPresupuesto() {
+  guardarPresupuesto(form:NgForm) {
+    if(form.invalid || this.presupuesto.detalles.length == 0){
+      console.log("Formulario invalido");
+      return;
+    }
+    this.subscriptions?.add(
+
       this.presupuestoService.realizarSolicitudPostPresupuesto(this.presupuesto).subscribe((response) => {
         console.log(response);
         Swal.fire({
-          title: "Exito!",
-          text: "Se ha guardado el presupuesto",
+          text: "Se ha guardado el presupuesto existosamente",
           icon: "success",
           timer:2000
         });
-      },
-     (error) =>{
+      }, (error) =>{
         console.error(error)
         Swal.fire({
-          title: "Ha habido un problema!",
-          text: "No se ha guardado el presupuesto",
+          title: "Ha ocurrido un problema!",
+          text: "Ha ocurrido un error al guardar el presupuesto",
           icon: "error",
           timer:2000
-        });
-      }
-    )
+          });
+        }
+      )
+
+    ) 
   }
 
-  guardarVenta() {
+  guardarVenta(form:NgForm) {
+    if(form.invalid || this.presupuesto.detalles.length == 0){
+      console.log("Formulario invalido");
+      return;
+    }
+    console.log(form)
+    if(form.invalid && this.presupuesto.detalles.length == 0){
+      console.log("Formulario invalido");
+      return;
+    }
     var venta = new Ventas();
     venta.detalles = this.presupuesto.detalles;
     venta.doc_cliente = this.cliente.nro_doc;
@@ -210,15 +254,28 @@ export class AltaPresupuestoComponent implements OnInit {
 
     console.log(venta);
 
-    this.ventasService.realizarSolicitudPostVenta(venta).subscribe((response) => {
-      console.log(response);
-      Swal.fire({
-        title: "Exito!",
-        text: "Se ha guardado la venta",
-        icon: "success",
-        timer:2000
-      });
-    })
+    this.subscriptions?.add(
+
+      this.ventasService.realizarSolicitudPostVenta(venta).subscribe((response) => {
+        console.log(response);
+        Swal.fire({
+          text: "Se ha guardado la venta exitosamente",
+          icon: "success",
+          timer:2000
+        });
+        
+      },(error) =>{
+        console.error(error)
+        Swal.fire({
+          title: "Ha ocurrido un problema",
+          text: "Ha ocurrido un error al guardar la venta", 
+          icon: "error",
+          timer:2000
+          });
+        })
+
+    )
+    
   }
 
   actualizarPrecio(){
@@ -230,18 +287,24 @@ export class AltaPresupuestoComponent implements OnInit {
   }
 
   consultarExistencia(){
-    console.log("Se llama a la funcion")
+    //console.log("Se llama a la funcion")
     const producto = this.productoSeleccionado;
-    console.log(this.productoSeleccionado);
-    this.presupuestoService.getExistenciaByCodProducto(producto.codigo).subscribe((response) => {
-      if(response.length != 0){
-        this.existencias = response[0].total; 
-        console.log("Existencias consultadas")
-        this.actualizarPrecio();
-      } else{
-        this.existencias = 0
-      }
-    });
+    //console.log(this.productoSeleccionado);
+
+    this.subscriptions?.add(
+
+      this.presupuestoService.getExistenciaByCodProducto(producto.codigo).subscribe((response) => {
+        if(response.length != 0){
+          this.existencias = response[0].total; 
+          //console.log("Existencias consultadas")
+          this.actualizarPrecio();
+        } else{
+          this.existencias = 0
+        }
+      })
+
+    )
+    
   }
 
   Clean() {
@@ -251,26 +314,31 @@ export class AltaPresupuestoComponent implements OnInit {
     if(valid!){
       var doc = this.cliente.nro_doc;
       try {
-        this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
-          console.log(response)
-          if(response.length != 0){
-            this.cliente.nombre = response[0].nombre;
-            this.cliente.apellido = response[0].apellido;
-            this.cliente.cant_puntos = response[0].cant_puntos;
-            this.cliente.nro_doc = response[0].nro_doc;
-            this.categoria = this.cliente.calcularCategoria();
-            this.nombre_cliente = this.cliente.apellido + ", " + this.cliente.nombre;
-            this.calcularTotales();
-            console.log("Cliente consultado");
-          }
-          else{
-            this.presupuesto.doc_cliente = this.cliente.nro_doc
-            this.nombre_cliente = "CONSUMIDOR FINAL";
-            this.categoria = this.cliente.calcularCategoria();
-            console.log(this.categoria.nombre)
-            this.calcularTotales();
-          }
-        });
+        this.subscriptions?.add(
+
+          this.presupuestoService.getClienteByDni(doc).subscribe((response) => {
+            console.log(response)
+            if(response.length != 0){
+              this.cliente.nombre = response[0].nombre;
+              this.cliente.apellido = response[0].apellido;
+              this.cliente.cant_puntos = response[0].cant_puntos;
+              this.cliente.nro_doc = response[0].nro_doc;
+              this.categoria = this.cliente.calcularCategoria();
+              this.nombre_cliente = this.cliente.apellido + ", " + this.cliente.nombre;
+              this.calcularTotales();
+              console.log("Cliente consultado");
+            }
+            else{
+              this.presupuesto.doc_cliente = this.cliente.nro_doc
+              this.nombre_cliente = "CONSUMIDOR FINAL";
+              this.categoria = this.cliente.calcularCategoria();
+              console.log(this.categoria.nombre)
+              this.calcularTotales();
+            }
+          })
+
+        );
+        
       } catch (error) {
         
       }

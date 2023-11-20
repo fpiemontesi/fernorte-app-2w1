@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ventas } from '../models/Ventas';
@@ -85,6 +85,61 @@ export class VentasService {
   modificarVenta(ventaId: number, ventaData: any): Observable<any> {
     const url = `${this.apiUrl}/ventas/${ventaId}`;
     return this.http.put(url, ventaData);
+  }
+
+  filtrarVentas(
+    venta: any,
+    montoDesde: number | null,
+    montoHasta: number | null,
+    fechaDesde: Date | null,
+    fechaHasta: Date | null
+  ): Observable<Ventas[]> {
+    let params = new HttpParams();
+
+    if (venta.id) {
+      params = params.set('id', venta.id);
+    }
+
+    if (venta.doc_cliente) {
+      params = params.set('doc_cliente', venta.doc_cliente);
+    }
+
+    if (venta.id_vendedor) {
+      params = params.set('id_vendedor', venta.id_vendedor);
+    }
+
+    if (venta.tipo_venta) {
+      params = params.set('tipo_venta', venta.tipo_venta);
+    }
+
+    if (venta.forma_entrega) {
+      params = params.set('forma_entrega', venta.forma_entrega);
+    }
+
+    if (montoDesde) {
+      params = params.set('monto_desde', montoDesde.toString());
+    }
+
+    if (montoHasta) {
+      params = params.set('monto_hasta', montoHasta.toString());
+    }
+
+    if (fechaDesde) {
+      params = params.set('fecha_desde', fechaDesde.toISOString());
+    }
+
+    if (fechaHasta) {
+      params = params.set('fecha_hasta', fechaHasta.toISOString());
+    }
+    if(venta.estado){
+      params = params.set('estado', venta.estado);
+    }
+
+    const url = 'http://localhost:8080/ventas/';
+
+    const urlWithParams = `${url}?${params.toString()}`;
+
+    return this.http.get<Ventas[]>(urlWithParams);
   }
 
   
