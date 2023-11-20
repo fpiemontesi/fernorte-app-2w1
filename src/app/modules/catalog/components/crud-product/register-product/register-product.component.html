@@ -1,18 +1,24 @@
-<div class="container mt-5" id="formulario">
+<div class="container mt-5 p-4"  id="formulario">
     <h1 class="text-start fs-3">{{this.title}}</h1>
     <div class="">
         <form [formGroup]="formArticle">
             <div class="info row">
                <div class="col-md-12">
                     <h5>Informacion Precargada:</h5>
-                    <p *ngIf="productsInactives && productsInactives.length > 0"> 
-                        <span style="font-weight: 600;">Codigo:</span> {{this.productsInactives[0]!.codigo}}, 
-                        <span style="font-weight: 600;"> Nombre:</span>{{this.productsInactives[0]!.nombre}},
-                        <span style="font-weight: 600;"> Precio Minorista:</span>{{this.productsInactives[0]!.precio_minorista || 'No tiene'}},
-                        <span style="font-weight: 600;"> Precio Mayorista:</span>{{this.productsInactives[0]!.precio_mayorista || 'No tiene'}},
-                        <span style="font-weight: 600;"> Precio Compra:</span>{{this.productsInactives[0]!.precio_compra}},
-                    </p>
-                   
+                    <div *ngIf="productsInactives && productsInactives.length > 0; else noProducts">
+                        <p>
+                            <span style="font-weight: 600;">Codigo:</span> {{this.productsInactives[0]!.codigo}}, 
+                            <span style="font-weight: 600;"> Nombre:</span>{{this.productsInactives[0]!.nombre}},
+                            <span style="font-weight: 600;"> Precio Minorista:</span>{{this.productsInactives[0]!.precio_minorista || 'No tiene'}},
+                            <span style="font-weight: 600;"> Precio Mayorista:</span>{{this.productsInactives[0]!.precio_mayorista || 'No tiene'}},
+                            <span style="font-weight: 600;"> Precio Compra:</span>{{this.productsInactives[0]!.precio_compra}},
+                        </p>
+                    </div>
+                    <ng-template #noProducts>
+                        <p>¡No hay productos para cargar pendientes!</p>
+                    </ng-template>
+                    
+                                 
                </div>
         
             </div>
@@ -88,9 +94,21 @@
 
                     <div class="form-floating">
                     <select id="pais" formControlName="pais" class="form-select" aria-label="Pais de Origen">
-                        <option value="1">Arg</option>
-                        <option value="2">awdawd</option>
-                        <option value="3">awd</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Canadá">Canadá</option>
+                            <option value="China">China</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Alemania">Alemania</option>
+                            <option value="India">India</option>
+                            <option value="Italia">Italia</option>
+                            <option value="Japón">Japón</option>
+                            <option value="México">México</option>
+                            <option value="Rusia">Rusia</option>
+                            <option value="Corea del Sur">Corea del Sur</option>
+                            <option value="Reino Unido">Reino Unido</option>
+                            <option value="Estados Unidos">Estados Unidos</option>                                        
                     </select>
                     <label for="pais">Pais de Origen</label>
                     </div>
