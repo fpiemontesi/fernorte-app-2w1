@@ -11,9 +11,9 @@ export class BatchService {
   constructor(private http: HttpClient) { }
 
   create(body: Batch): Observable<Batch>{
-    return this.http.post<Batch>('http://localhost:3000/batchs', body);
+    return this.http.post<Batch>('http://localhost:3000/batches', body);
   }
   getAll(): Observable<Batch[]>{
-    return this.http.get<Batch[]>(`http://localhost:3000/batchs`);
+    return this.http.get<Batch[]>(`http://localhost:3000/batches`);
   }
 }

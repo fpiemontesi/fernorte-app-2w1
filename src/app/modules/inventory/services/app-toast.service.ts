@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AppToastService {
+export interface ToastInfo {
+  header: string;
+  body: string;
+  delay?: number;
+}
 
+@Injectable({ providedIn: 'root' })
+export class AppToastService {
   toasts: ToastInfo[] = [];
 
   show(header: string, body: string) {
@@ -15,10 +18,3 @@ export class AppToastService {
     this.toasts = this.toasts.filter(t => t != toast);
   }
 }
-
-export interface ToastInfo {
-  header: string;
-  body: string;
-  delay?: number;
-}
-

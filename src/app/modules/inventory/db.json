@@ -86,6 +86,21 @@
           "detail": "Details details details..."
         }
       ]
+    },
+    {
+      "id": 6,
+      "arrivalDate": "2023-11-11",
+      "purchaseOrderNumber": 7,
+      "receiptNumber": 4,
+      "supplierName": "Juan",
+      "details": [
+        {
+          "id": 0,
+          "quantity": 7,
+          "productName": "Lappiz",
+          "detail": "no"
+        }
+      ]
     }
   ],
   "sections": [
@@ -93,6 +108,11 @@
       "id": 1,
       "name": "A",
       "zoneId": 1
+    },
+    {
+      "id": 2,
+      "name": "B",
+      "zoneId": 2
     },
     {
       "id": 3,
@@ -105,35 +125,35 @@
       "zoneId": 1
     },
     {
+      "id": 5,
+      "name": "E",
+      "zoneId": 2
+    },
+    {
+      "id": 6,
+      "name": "R",
+      "zoneId": 1
+    },
+    {
       "id": 7,
-      "name": "ZZ",
-      "zoneId": 1
-    },
-    {
-      "id": 8,
-      "name": "Zh",
-      "zoneId": 1
-    },
-    {
-      "id": 9,
-      "name": "Z1",
-      "zoneId": 1
+      "name": "A",
+      "zoneId": 2
     }
   ],
   "zones": [
     {
       "id": 1,
-      "name": "Galpon"
+      "name": "Warehouse"
     },
     {
       "id": 2,
-      "name": "Corralon"
+      "name": "Yard"
     }
   ],
-  "batchs": [
+  "batches": [
     {
       "id": 1,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -141,7 +161,7 @@
     },
     {
       "id": 2,
-      "existenceId": 1,
+      "existenceCode": "2",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -149,15 +169,15 @@
     },
     {
       "id": 3,
-      "existenceId": 1,
-      "sectionId": 3,
+      "existenceCode": "2",
+      "sectionId": 4,
       "quantity": "3",
-      "dueDate": "2023-10-27",
+      "due_date": "2023-10-27",
       "shelf": "6"
     },
     {
       "id": 4,
-      "existenceId": 1,
+      "existenceCode": "1",
       "sectionId": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -165,15 +185,15 @@
     },
     {
       "id": 5,
-      "existenceId": 1,
-      "sectionId": 3,
+      "existenceCode": "3",
+      "sectionId": 2,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "3"
     },
     {
       "id": 6,
-      "existenceId": 1,
+      "existenceCode": "4",
       "sectionId": 1,
       "quantity": "3",
       "dueDate": "2023-10-27",
@@ -181,36 +201,127 @@
     },
     {
       "id": 7,
-      "existenceId": 1,
-      "sectionId": 3,
+      "existenceCode": "1",
+      "sectionId": 1,
       "quantity": "4",
       "dueDate": "2023-10-26",
       "shelf": "4"
     },
     {
       "id": 8,
-      "existenceId": 1,
-      "sectionId": 3,
+      "existenceCode": "1",
+      "sectionId": 1,
       "quantity": "3",
       "dueDate": "2023-10-30",
       "shelf": "5"
+    },
+    {
+      "id": 9,
+      "sectionId": 4,
+      "existenceCode": "1",
+      "quantity": "3",
+      "dueDate": "2023-11-18",
+      "shelf": "4"
     }
   ],
   "existences": [
     {
+      "code": "1",
+      "name": "screws",
+      "minimumStock": 100
+    },
+    {
+      "code": "2",
+      "name": "planks",
+      "minimumStock": 20
+    },
+    {
+      "code": "3",
+      "name": "nuts",
+      "minimumStock": 150
+    }
+  ],
+  "reservations": [
+    {
       "id": 1,
-      "name": "tornillos",
-      "minimunStock": 100
+      "details": [
+        {
+          "batch": {
+            "id": 1,
+            "existenceCode": "1",
+            "sectionId": "C",
+            "quantity": 3,
+            "dueDate": "2023-10-27",
+            "shelf": 6
+          },
+          "quantity": 2
+        },
+        {
+          "batch": {
+            "id": 6,
+            "existenceCode": "1",
+            "sectionId": "A",
+            "quantity": 3,
+            "dueDate": "2023-10-27",
+            "shelf": 3
+          },
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": 2,
-      "name": "tablones",
-      "minimunStock": 20
+      "details": [
+        {
+          "batch": {
+            "id": 7,
+            "existenceCode": "1",
+            "sectionId": "C",
+            "quantity": 4,
+            "dueDate": "2023-10-26",
+            "shelf": 4
+          },
+          "quantity": 2
+        }
+      ]
     },
     {
       "id": 3,
-      "name": "tuercas",
-      "minimunStock": 150
+      "details": [
+        {
+          "batch": {
+            "id": 8,
+            "existenceCode": "2",
+            "sectionId": "B",
+            "quantity": 5,
+            "dueDate": "2023-10-29",
+            "shelf": 2
+          },
+          "quantity": 3
+        },
+        {
+          "batch": {
+            "id": 9,
+            "existenceCode": "3",
+            "sectionId": "C",
+            "quantity": 4,
+            "dueDate": "2023-10-30",
+            "shelf": 5
+          },
+          "quantity": 2
+        },
+        {
+          "batch": {
+            "id": 10,
+            "existenceCode": "2",
+            "sectionId": "B",
+            "quantity": 6,
+            "dueDate": "2023-10-29",
+            "shelf": 3
+          },
+          "quantity": 1
+        }
+      ]
     }
   ]
 }
