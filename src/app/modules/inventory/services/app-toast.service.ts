@@ -18,5 +18,3 @@ export class AppToastService {
     this.toasts = this.toasts.filter(t => t != toast);
   }
 }
-
-

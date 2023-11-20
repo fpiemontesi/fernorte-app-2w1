@@ -9,13 +9,30 @@ import { Batch } from '../models/batch';
 export class BatchService {
 
   constructor(private http: HttpClient) { }
-  
+
+  getAllBySection(sectionId: number): Observable<Batch[]>{
+    return this.http.get<Batch[]>(`http://localhost:3000/batchs?sectionId=${sectionId}`);
+  }
+
+  getById(id: number): Observable<Batch>{
+    return this.http.get<Batch>("http://localhost:3000/batchs/" + id);
+  }
+
   getAll(): Observable<Batch[]>{
+    return this.http.get<Batch[]>('http://localhost:3000/batches');
+  }
+
+  getExpired(): Observable<Batch[]>{
     return this.http.get<Batch[]>('http://localhost:3000/batches');
   }
   
   create(body: Batch): Observable<Batch>{
     return this.http.post<Batch>('http://localhost:3000/batches', body);
+  }
+
+  
+  delete(id:number): Observable<Batch>{
+    return this.http.delete<Batch>('http://localhost:3000/batches/'+id);
   }
 
 }
