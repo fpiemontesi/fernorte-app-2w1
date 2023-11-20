@@ -9,9 +9,20 @@
         </div>
         <div class="col-md-3 col-sm-12" style="padding: 1%;">
           <label class="mb-1">DNI Cliente</label>
-          <input type="number" class="form-control" id="cliente" name="cliente" [(ngModel)]="this.presupuestoFilter.doc_cliente">
+          <input type="number" class="form-control" id="cliente" name="cliente" placeholder="Ej: 44896259" [(ngModel)]="this.presupuestoFilter.doc_cliente">
         </div>
         <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Monto Desde:</label>
+          <input type="number" class="form-control" id="montoDesde" placeholder="Monto desde a filtrar" name="montoDesde" [(ngModel)]="this.presupuestoFilter.monto_desde">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Monto Hasta:</label>
+          <input type="number" class="form-control" id="montoHasta" placeholder="Monto hasta filtrar" name="montoH"  [(ngModel)]="this.presupuestoFilter.monto_hasta">
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Tipo de Presupuesto</label>
           <select class="form-control form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="this.presupuestoFilter.tipo_presupuesto">
             <option disabled selected>Seleccionar tipo de presupuesto</option>
@@ -19,23 +30,11 @@
             <option value="2">Mayorista</option>
           </select>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-12" style="padding: 1%;">
-          <label class="mb-1">Monto Desde:</label>
-          <input type="number" class="form-control" id="montoDesde" placeholder="$" name="montoDesde" [(ngModel)]="this.presupuestoFilter.monto_desde">
-        </div>
-        <div class="col-md-4 col-sm-12" style="padding: 1%;">
-          <label class="mb-1">Monto Hasta:</label>
-          <input type="number" class="form-control" id="montoHasta" placeholder="$" name="montoH"  [(ngModel)]="this.presupuestoFilter.monto_hasta">
-        </div>
-      </div>  
-      <div class="row">
-        <div class="col-md-4 col-sm-12" style="padding: 1%;">
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Fecha Desde:</label>
           <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="this.presupuestoFilter.fecha_desde">
         </div>
-        <div class="col-md-4 col-sm-12" style="padding: 1%;">
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
           <label class="mb-1">Fecha Hasta:</label>
           <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="this.presupuestoFilter.fecha_hasta">
         </div>
@@ -44,10 +43,10 @@
             <div class="col-md-6 mb-2">
               <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="filtrarPresupuestos();  toggleTabla(true)">Buscar</button>
             </div>
-          
-            <div class="col-md-6">
-              <button type="submit" class="btn btn-outline-secondary" style="width: 100%;" (click)="limpiarCampos(); toggleTabla(false)">Reiniciar</button>
+            <div class="col-md-6" >
+              <button type="submit" class="btn btn-outline-violet" style="width: 100%;" (click)="limpiarCampos(); toggleTabla(false)">Reiniciar</button>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -57,16 +56,16 @@
       <table class="table table-striped table-bordered table-hover" style="align-content: center;">
         <thead class="thead">
           <tr>
-            <th class="centered">ID</th>
-            <th class="centered">DNI Cliente</th>
-            <th class="centered">Fecha de Creación</th>
-            <th class="centered">Tipo de Pedido</th>
+            <th class="centered col">ID</th>
+            <th class="centered col">DNI Cliente</th>
+            <th class="centered col">Fecha de Creación</th>
+            <th class="centered col">Tipo de Pedido</th>
             
-            <th class="centered">Monto</th>
-            <th style="text-align: center; margin-top: 3%; width: 50px; ">Ver Detalle</th>
-            <th class="centered" style="width: 50px;">Modificar Presupuesto</th>
-            <th class="centered" style="width: 50px;">Eliminar Presupuesto</th>
-            <th class="centered" style="width: 50px;">Generar Venta</th>
+            <th class="centered col">Monto</th>
+            <th class="centered col" style="text-align: center; margin-top: 3%; width: 50px; ">Ver Detalle</th>
+            <th class="centered col" style="width: 50px;">Modificar Presupuesto</th>
+            <th class="centered col" style="width: 50px;">Eliminar Presupuesto</th>
+            <th class="centered col" style="width: 50px;">Generar Venta</th>
             <!-- <th style="text-align: center; margin-top: 3%;">Modificar<br> Venta</th> -->
           </tr>
         </thead>
@@ -124,5 +123,4 @@
       </table>
       
     </div>
-  </div>
   </div>
