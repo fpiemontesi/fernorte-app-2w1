@@ -1,11 +1,19 @@
 
 <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
-  <li ngbNavItem="remitos">
-    <button ngbNavLink routerLink="remitos">Remitos</button>
-  </li>
   <li ngbNavItem="lotes">
     <button ngbNavLink routerLink="lotes">Lotes</button>
   </li>
+  <li ngbNavItem="existencias">
+    <button ngbNavLink routerLink="existencias">Existencias</button>
+  </li>
+  <li ngbNavItem="remitos">
+    <button ngbNavLink routerLink="remitos">Remitos</button>
+  </li>
+  <li ngbNavItem="reservas">
+    <button ngbNavLink routerLink="reservas">Reservas</button>
+  </li>
+  <li ngbNavItem="secciones">
+    <button ngbNavLink routerLink="secciones">Secciones</button>
+  </li>
 </ul>
 <router-outlet></router-outlet>
-<p>home inventory works!</p>
