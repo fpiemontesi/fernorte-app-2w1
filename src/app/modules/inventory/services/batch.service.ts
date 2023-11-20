@@ -30,6 +30,9 @@ export class BatchService {
     return this.http.post<Batch>('http://localhost:3000/batches', body);
   }
 
+  getSoonToExpire() : Observable<Batch[]>{
+    return this.http.get<Batch[]>('https://my-json-server.typicode.com/1w1111979DiFranciscoMateo/demo/lotesProntoAExpirar');
+  }
   
   delete(id:number): Observable<Batch>{
     return this.http.delete<Batch>('http://localhost:3000/batches/'+id);
