@@ -67,7 +67,7 @@
       </div>
       <div class="col-md-3 col-sm-6" style="padding-top: 3%;">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-2">
             <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="filtrarVentas()" (click)="toggleTabla(true)"  >Buscar</button>
           </div>
           <div class="col-md-6">
@@ -109,7 +109,7 @@
           
           <!-- <td>{{ venta.estado }}</td> -->
           <td class="centered">
-            <select class="form-control" id="estado" name="estado" [(ngModel)]="venta.estado" (change)="actualizarEstado(venta)">
+            <select class="form-select" id="estado" name="estado" [(ngModel)]="venta.estado" (change)="actualizarEstado(venta)">
               <option [value]="1">Pendiente</option>
               <option [value]="2">Entregado</option>
             </select>

@@ -43,7 +43,7 @@
             <div class="col-md-6 mb-2">
               <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="filtrarPresupuestos();  toggleTabla(true)">Buscar</button>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" >
               <button type="submit" class="btn btn-outline-violet" style="width: 100%;" (click)="limpiarCampos(); toggleTabla(false)">Reiniciar</button>
             </div>
           </div>
@@ -56,16 +56,16 @@
       <table class="table table-striped table-bordered table-hover" style="align-content: center;">
         <thead class="thead">
           <tr>
-            <th class="centered">ID</th>
-            <th class="centered">DNI Cliente</th>
-            <th class="centered">Fecha de Creación</th>
-            <th class="centered">Tipo de Pedido</th>
+            <th class="centered col">ID</th>
+            <th class="centered col">DNI Cliente</th>
+            <th class="centered col">Fecha de Creación</th>
+            <th class="centered col">Tipo de Pedido</th>
             
-            <th class="centered">Monto</th>
-            <th style="text-align: center; margin-top: 3%; width: 50px; ">Ver Detalle</th>
-            <th class="centered" style="width: 50px;">Modificar Presupuesto</th>
-            <th class="centered" style="width: 50px;">Eliminar Presupuesto</th>
-            <th class="centered" style="width: 50px;">Generar Venta</th>
+            <th class="centered col">Monto</th>
+            <th class="centered col" style="text-align: center; margin-top: 3%; width: 50px; ">Ver Detalle</th>
+            <th class="centered col" style="width: 50px;">Modificar Presupuesto</th>
+            <th class="centered col" style="width: 50px;">Eliminar Presupuesto</th>
+            <th class="centered col" style="width: 50px;">Generar Venta</th>
             <!-- <th style="text-align: center; margin-top: 3%;">Modificar<br> Venta</th> -->
           </tr>
         </thead>
