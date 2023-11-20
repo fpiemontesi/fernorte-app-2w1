@@ -35,7 +35,7 @@ export class ClientsConsumePieChartComponent implements OnInit {
   }
 
   createChart() {
-    const labels = this.clients.map(client => client.name);
+    const labels = this.clients.map(client => client.name + ' ' + client.lastName);
     const dataValues = this.clients.map(client => client.totalAmount);
 
     this.chartInstance = new Chart("MyChart", {
