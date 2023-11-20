@@ -1,5 +1,6 @@
 <div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;" >
-    <h1>Modificar</h1>
+    <h1>Modificar Presupuesto</h1>
+    <h6>ID Presupuesto: {{presupuesto.id}}</h6>
     <form #form="ngForm" style="margin: 20px;" (ngSubmit)="onSubmit()">
         <div class="row" style="margin-bottom: 20px;">
           <div class="col-md-2">
@@ -117,7 +118,7 @@
                     <button class="btn btn-danger p-3 ps-5 pe-5" (click)="Cancelar()"><strong>Cancelar</strong></button>
                   </div>
                   <div class="col mb-1">
-                    <button type="submit"
+                    <button type="submit" [disabled]="form.invalid || filas.length == 0"
                       (click)="UpdatePresupuesto()" class="btn btn-success p-3 ps-5 pe-5"><strong>Guardar Presupuesto</strong></button>
                   </div>
 

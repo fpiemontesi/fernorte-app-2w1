@@ -7,11 +7,11 @@ import { Cliente } from '../../models/Cliente';
 import { Presupuesto } from '../../models/Presupuesto';
 import { Detalle } from '../../models/Detalles';
 import { Categoria } from '../../models/Categoria';
-import { FormBuilder,NgForm,Validators } from '@angular/forms';
+import { FormBuilder,NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Ventas } from '../../models/Ventas';
 import { Descuento } from '../../models/Descuento';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -53,11 +53,13 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
   //variable que identifica si el presupuesto a crear viene del boton generar venta de Consultar Presupuesto:
   ventaFromPresupuesto:boolean = false;
   
-  constructor(private http: HttpClient , private presupuestoService: PresupuestoService , 
-    private ventasService: VentasService, private fb:FormBuilder,private route: ActivatedRoute) {
+  constructor(private presupuestoService: PresupuestoService , 
+    private ventasService: VentasService,private route: ActivatedRoute,private router:Router) {
       this.route.queryParams.subscribe(params => {
         if(params['venta_from_presupuesto'] == "true") this.ventaFromPresupuesto=true;
+        else this.ventaFromPresupuesto=false;
       });
+      
    }  
   action!: string; 
 
@@ -71,7 +73,14 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
     this.Listar();
     // Si el presupuesto viene de generar venta:
     if(this.ventaFromPresupuesto){
-      this.presupuesto = this.presupuestoService.MostrarPresupuesto();
+      var presupuestoAUsar= this.presupuestoService.MostrarPresupuesto();
+      this.presupuesto.id = presupuestoAUsar.id
+      this.presupuesto.doc_cliente = presupuestoAUsar.doc_cliente;
+      this.presupuesto.detalles = presupuestoAUsar.detalles;
+      this.presupuesto.tipo_venta = presupuestoAUsar.tipo_venta;
+      this.presupuesto.fecha_creacion = presupuestoAUsar.fecha_creacion;
+      this.cliente.nro_doc = this.presupuesto.doc_cliente;
+
       console.log("Se detecto que viene de generar venta, presupuesto a usar:",this.presupuesto);
       this.cliente.nro_doc = this.presupuesto.doc_cliente;
       this.onBlur(true);
@@ -173,7 +182,9 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
     //console.log("Descuento: " + descuento);
     return descuento;
   }
-  
+  cancelar(){
+    this.router.navigate(['sales/consultar-presupuesto']);
+  }
   // Gestiona agregar producto a detalle:
   valido(): boolean{
     var res:boolean = true;
@@ -211,10 +222,14 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
       this.presupuestoService.realizarSolicitudPostPresupuesto(this.presupuesto).subscribe((response) => {
         console.log(response);
         Swal.fire({
-          text: "Se ha guardado el presupuesto existosamente",
+          title: "Se ha guardado el presupuesto exitosamente",
+          text:  "Se redigirá a la ventana consultar presupuestos",
           icon: "success",
           timer:2000
         });
+        setTimeout(() => {
+          this.router.navigate(['sales/consultar-presupuesto']);
+        }, 2000);
       }, (error) =>{
         console.error(error)
         Swal.fire({
@@ -227,6 +242,8 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
       )
 
     ) 
+    
+    
   }
 
   guardarVenta(form:NgForm) {
@@ -259,10 +276,14 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
       this.ventasService.realizarSolicitudPostVenta(venta).subscribe((response) => {
         console.log(response);
         Swal.fire({
-          text: "Se ha guardado la venta exitosamente",
+          title: "Se ha guardado la venta exitosamente",
+          text: "Se redigirá a la ventana consultar ventas",
           icon: "success",
           timer:2000
         });
+        setTimeout(() => {
+          this.router.navigate(['sales/consultar-venta']);
+        }, 2000);
         
       },(error) =>{
         console.error(error)
@@ -275,6 +296,7 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
         })
 
     )
+    
     
   }
 
