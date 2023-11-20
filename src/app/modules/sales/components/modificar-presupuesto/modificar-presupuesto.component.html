@@ -4,8 +4,9 @@
         <div class="row" style="margin-bottom: 20px;">
           <div class="col-md-2">
             <label for="nro_doc" class="form-label">Documento</label>
-            <input type="text"  name="nro_doc" id="nro_doc" class="form-control" [(ngModel)]="nro_doc" (blur)="onBlur()">
+            <input type="number" disabled="true" name="nro_doc" id="nro_doc" required="true" class="form-control" [(ngModel)]="nro_doc" (blur)="onBlur()" #nro_doc_input>
           </div>
+          
           <div class="col-md-4">
             <label for="cliente" class="form-label">Cliente</label>
             <input 
@@ -48,7 +49,7 @@
         <div class="row" style="margin-top: 20px;">
           <div class="col-md-3">
             <label for="producto" class="form-label">Producto</label>
-            <select name="producto" id="producto" class="form-select "  (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto" required #producto="ngModel">
+            <select name="producto" id="producto" class="form-select "  (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto"  #producto="ngModel">
               <option *ngFor="let producto of myList" [value]="producto.codigo">{{ producto.nombre }}</option>
             </select>
           </div>
@@ -112,7 +113,7 @@
             <div class="col-md-6">
               <div class="row">
                 <div class="d-flex justify-content-between">
-                  <button class="btn btn-dark">Cancelar</button>
+                  <button class="btn btn-dark" (click)="Cancelar()">Cancelar</button>
                   <button type="submit"  class="btn btn-dark "  (click)="UpdatePresupuesto()">Guardar Presupuesto</button>
                   <button type="submit"  class="btn btn-dark ">Generar Venta</button>
                 </div>
