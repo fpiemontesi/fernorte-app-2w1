@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Batch } from '../../models/batch';
-import { BatchService } from '../../services/batch.service';
+import { Batch } from '../../../models/batch';
+import { BatchService } from '../../../services/batch.service';
 import { Subscription } from 'rxjs';
-import { AppToastService } from '../../services/app-toast.service';
+import { AppToastService } from '../../../services/app-toast.service';
 
 @Component({
   selector: 'fn-list-batches-by-section',
@@ -12,7 +12,7 @@ import { AppToastService } from '../../services/app-toast.service';
 export class ListBatchesBySectionComponent implements OnInit, OnDestroy{
   batches: Batch[] = [];
   batchesFiltered: Batch[] = [];
-  sectionId!: string;
+  sectionId!: number;
   private subscriptions = new Subscription();
 
   constructor(private batchService: BatchService, private toastService: AppToastService) { }
@@ -29,7 +29,7 @@ export class ListBatchesBySectionComponent implements OnInit, OnDestroy{
       })
     );
   }
- 
+
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

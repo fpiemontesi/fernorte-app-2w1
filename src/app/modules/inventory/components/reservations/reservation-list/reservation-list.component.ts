@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { reservation } from '../../models/reservation';
-import { reservationDetail } from '../../models/reservation-detail';
-import { ReservationService } from '../../services/reservation.service';
 import { Subscription } from 'rxjs';
-import { Existence } from '../../models/existence';
+import { reservation } from '../../../models/reservation';
+import { reservationDetail } from '../../../models/reservation-detail';
+import { ReservationService } from '../../../services/reservation.service';
+import { Existence } from '../../../models/existence';
 
 @Component({
   selector: 'fn-reservation-list',
@@ -43,7 +43,7 @@ export class ReservationListComponent {
         this.reservationDetails.forEach((detail) => {
             this.getStock(detail.batch.existenceCode);
         });
-      } 
+      }
     else {
       this.reservationDetails = [];
     }
@@ -67,7 +67,7 @@ export class ReservationListComponent {
       })
     );
   }
-  
+
   assignProductNameToDetails(codeExistence: string, name: string) {
     this.reservationDetails.forEach((detail) => {
       if (detail.batch.existenceCode === codeExistence) {
