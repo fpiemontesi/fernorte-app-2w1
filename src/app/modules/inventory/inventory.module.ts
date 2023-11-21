@@ -26,14 +26,17 @@ import { StadisticsExpiredExistancesComponent } from './components/stadistics-ex
 import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
 import { ListBatchSoonTooExipreComponent } from './components/list-batch-soon-too-exipre/list-batch-soon-too-exipre.component';
 import { ModificarLoteComponent } from './components/modificar-lote/modificar-lote.component';
+import { ReceiptListComponent } from './components/receipts/lista-remitos/lista-remitos.component';
+import { ReceiptDetailsModalComponent } from './components/receipts/receipt-details-modal/receipt-details-modal.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
     RegistrarLotesComponent, RegistrarRemitoComponent,CreateSectionComponent, ToastsComponent,
     ReservationListComponent, ListStockExistenciasComponent, ListBatchesExpiredComponent,
     RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
-    ModifyStockControlComponent,ModificarLoteComponent , ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
-    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent,ListBatchSoonTooExipreComponent],
+    ModifyStockControlComponent, ModificarLoteComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
+    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent,ListBatchSoonTooExipreComponent, ReceiptListComponent,
+    ReceiptDetailsModalComponent],
   providers: [],
   imports: [
     CommonModule,

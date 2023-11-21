@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { ReceiptService } from './remito.service';
 
-import { RemitoService } from './remito.service';
-
-describe('RemitoService', () => {
-  let service: RemitoService;
+describe('RemitoServService', () => {
+  let service: ReceiptService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RemitoService);
+    service = TestBed.inject(ReceiptService);
   });
 
   it('should be created', () => {
