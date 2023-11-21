@@ -117,7 +117,7 @@
           <td class="centered">
             <select class="form-select" id="estado" name="estado" [(ngModel)]="venta.estado" (change)="actualizarEstado(venta)">
               <option [value]="1">Pendiente</option>
-              <option [value]="2">Entregado</option>
+              <option [value]="4">Entregado</option>
             </select>
           </td>
           <td class="centered">{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
