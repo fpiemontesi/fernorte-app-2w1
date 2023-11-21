@@ -90,7 +90,7 @@
         <td>{{p.codigo}}</td>
         <td>{{p.nombre}}</td>
         <td>
-          <button type="button" class="btn btn-danger" (click)="deleteProduct(i)">Borrar Producto</button>
+          <button type="button" class="btn btn-danger" (click)="deleteProduct(i)" [disabled]="tipo==3">Borrar Producto</button>
         </td>
       </tr>
       </tbody>
