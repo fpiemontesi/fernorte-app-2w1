@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <h3>Estadistica de existencias dañadas del ultimo semestre</h3>
+    <div class="col fw-bold">
+      Semestre: {{ seasonStart | date : "dd/MM/yyyy" }} a
+      {{ seasonEnd | date : "dd/MM/yyyy" }}
+    </div>
+  </div>
+
+
+  <div class="row mt-3">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Existencia</th>
+            <th>Controles realizados</th>
+            <th class="text-break">Unidades Dañadas Totales</th>
+            <th>Comparación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let stat of stadistics">
+            <tr>
+              <td>{{ stat.name }}</td>
+              <td>{{ stat.controls }}</td>
+              <td class="text-aling-end">{{ stat.units }}</td>
+              <td class="w-50">
+                <div class="progress  mb-2" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar text-start p-2" [ngStyle]="{'width': stat.percent+'%'}"></div>
+                </div></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<fn-toasts aria-live="polite" aria-atomic="true"></fn-toasts>

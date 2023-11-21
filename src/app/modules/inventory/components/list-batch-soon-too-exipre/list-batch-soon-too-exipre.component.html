@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <h1>Lista lotes pronto a expirar</h1>
+    </div>
+</nav>
+<div class="container mx-auto mb-3" style="width: 70%;">
+    <div style="overflow: auto; max-height: 700px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" style="position: sticky; top: 0;">ID</th>
+                    <th scope="col" style="position: sticky; top: 0;">ID de Existencia</th>
+                    <th scope="col" style="position: sticky; top: 0;">ID de Seccion</th>
+                    <th scope="col" style="position: sticky; top: 0;">Estante</th>
+                    <th scope="col" style="position: sticky; top: 0;">Fecha Vencimiento</th>
+                    <th scope="col" style="position: sticky; top: 0;">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let lote of listaLotesProntoExpirar">
+                    <th scope="row">{{ lote.id }}</th>
+                    <td scope="row">{{ lote.existenceCode }}</td>
+                    <td scope="row">{{ lote.sectionId }}</td>
+                    <td scope="row">{{ lote.shelf }}</td>
+                    <td scope="row">{{ lote.dueDate }}</td>
+                    <td scope="row">{{ lote.quantity }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
