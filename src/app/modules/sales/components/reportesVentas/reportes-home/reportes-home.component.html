@@ -1,11 +1,11 @@
-<div class="container" style="padding-top: 3%;">
+<div class="container" style="padding-top: 3%;" print="#REPORTE">
     <h1>Reportes de ventas</h1>
 <div class="container">
   <form (ngSubmit)="onSubmit()">
       <div class="row">
           <div class="col-md-4">
               <label for="mes">Mes</label>
-              <select class="form-control" id="mes" name="mes" [(ngModel)]="formData.mes">
+              <select class="form-control" id="mes" name="mes" [(ngModel)]="this.mes" #mesObtenido (ngModelChange)="obtenerNombreMes(mesObtenido.options[mesObtenido.selectedIndex].text)">
                   <option disabled selected value="">Seleccione un mes </option>
                   <option value="01">Enero</option>
                   <option value="02">Febrero</option>
@@ -23,68 +23,80 @@
           </div>
           <div class="col-md-4">
               <label for="año">Año</label>
-              <input type="number" class="form-control" id="año" name="anio" [(ngModel)]="formData.anio">
+              <input type="number" class="form-control" id="año" name="anio" [(ngModel)]="anio">
           </div>
           <div class="col-md-4">
               <label for="tipo_venta">Tipo de venta</label>
-              <select class="form-control" id="tipo_venta" name="tipo_venta" [(ngModel)]="formData.tipo_venta">
+              <select class="form-control" id="tipo_venta" name="tipo_venta" [(ngModel)]="tipo_venta">
                   <option disabled selected value="">Selecciona el tipo de venta</option>
                   <option value="1">Mayorista</option>
                   <option value="2">Minorista</option>
               </select>
           </div>
       </div>
-      <div class="col-md-4">
-        <div class="row">
-          <div class="col-md-6">
-            <a style="width: 90%;">Monto Total = {{ montoTotal }} </a> </div>
-      </div>
-      </div>
+      
       <div class="col-md-4">
         <div class="row">
           <div class="col-md-6">
             <button type="submit" class="btn btn-outline-dark btn-block mt-2" style="width: 90%;">Buscar</button>
           </div>
           <div class="col-md-6">
-            <button type="button" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos(this.formData)" style="width: 90%;">Reiniciar</button>
+            <button type="button" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos()" style="width: 90%;">Reiniciar</button>
           </div>
         </div>
       </div>
   </form>
+  <div #REPORTE>
+  <div class="row" *ngIf="mostrarGrafico">
+    <div class="row mt-3 text-center">
+      <div *ngIf="mes && mostrarGrafico">
+        <h2 style="width: 90%;">Reporte general, {{ mesNombre }} de {{ anio }} </h2>
+      </div>
+      <div *ngIf="!mes && mostrarGrafico">
+        <h2 style="width: 90%;">Reporte general del año {{ anio }} </h2>
+      </div>
+      
+        
+        <h3 style="width: 90%;">Monto total facturado en el mes: ${{ montoTotal | number: '1.0-0'}} </h3>
+    </div>
 
-  <div class="row">
-
-
-    <div class="col-6 mt-4" *ngIf="mostrarGrafico">
-          <fn-reportes-por-meses ></fn-reportes-por-meses>
-          <div class="row justify-content-center mt-2" >
+    <div class="col-6 mt-4" >
+        <h5 class="text-center mb-4" *ngIf="mes">Monto y cantidades en comparacion al mes anterior</h5>
+        <h5 class="text-center mb-4" *ngIf="!mes">Monto y cantidades en comparacion al año anterior</h5>
+        <fn-reportes-por-meses ></fn-reportes-por-meses>
+        <div class="row justify-content-center mt-2" >
 
       </div>
     </div>
 
-    <div class="col-6 mt-4" *ngIf="mostrarGrafico">
+    <div class="col-6 mt-4">
       <div class="card-body">
+        <h5 class="text-center mb-4">Cantidad de ventas mayoristas y minoristas</h5>
           <fn-tipo-ventas #tipoVentas></fn-tipo-ventas>
           <div class="row justify-content-center mt-2">
         </div>
       </div>
     </div>
 
-    <div class="col-6 mt-4" *ngIf="mostrarGrafico"> 
+    <div class="col-6 mt-4"> 
       <div class="card-body">
+        <h5 class="text-center mb-4" *ngIf="!mes">Top 5 productos más vendidos del año</h5>
+        <h5 class="text-center mb-4" *ngIf="mes">Top 5 productos más vendidos del mes</h5>
           <fn-top-productos #topProductos></fn-top-productos>
           <div class="row justify-content-center mt-2">
         </div>
       </div>
     </div>
 
-    <div class="col-6 mt-4" *ngIf="mostrarGrafico">
+    <div class="col-6 mt-4">
       <div class="card-body">
+        <h5 class="text-center mb-4">Ventas pendientes y entregadas</h5>
           <fn-estado-ventas #estadoVentas></fn-estado-ventas>
           <div class="row justify-content-center mt-2">
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 </div>

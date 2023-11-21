@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ReportesService } from 'src/app/modules/sales/services/reportes.service';
-import {  ChartType } from 'chart.js';
+import {  ChartType, Colors } from 'chart.js';
 
 @Component({
   selector: 'fn-tipo-ventas',
@@ -22,21 +22,20 @@ export class TipoVentasComponent {
     anio: this.anio,
     tipo_venta: this.tipo_venta
   }
-  constructor(private reportesService: ReportesService, private elementRef: ElementRef) {
+  constructor(private reportesService: ReportesService) {
     
   }
   getReportesAndGenerateCharts(formData: any) {
 
-    this.formData = formData;
-    this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
-      (reportes) => {
+    this.reportesService.getReportes(formData.anio, formData.mes, formData.tipo_venta).subscribe({
+      next: (reportes) => {
         this.generarReporteTipoVentas(reportes);
-       this.montoTotal = reportes.monto;
+        this.montoTotal = reportes.monto;
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
       }
-    );
+    });
   }
   ngOnDestroy() {
     // Destruir la instancia del gráfico al salir del componente
@@ -47,12 +46,17 @@ export class TipoVentasComponent {
   
   generarReporteTipoVentas(reportes : any) {
     const chartData = {
-      labels: ['Venta Mayorista', 'Venta Minorista'], 
+      labels: ['Ventas Mayoristas y Minoristas'], 
       datasets: [
         {
-          label: 'Cantidad de ventas Minoristas y Mayoristas',
-          data: [reportes.mayorista, reportes.minorista], 
-          backgroundColor: this.generateRandomColor(2)
+          label: 'Ventas Mayoristas',
+          data: [reportes.mayorista], 
+          backgroundColor: ['violet']
+        },
+        {
+          label: 'Ventas Minoristas',
+          data: [reportes.minorista], 
+          backgroundColor: ['orange']
         }
       ]
     };
