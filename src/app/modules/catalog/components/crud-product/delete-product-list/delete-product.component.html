@@ -1,5 +1,5 @@
 <div class="container">
-  <button (click)="getProductsActive()" class="btn btn-success float-end mt-2">Cargar Productos</button>
+  <button routerLink="registerProduct" class="btn btn-success float-end mt-2">Cargar Productos</button>
   <h2 class="my-2 py-2">Listado de Productos</h2>
   <div class="table-responsive">
     <table class="table table-hover">
@@ -15,7 +15,7 @@
         <td>{{c.codigo}}</td>
         <td>{{c.nombre}}</td>
         <td><button (click)="deleteProduct(c.codigo)" class="btn btn-danger">Eliminar</button></td>
-        <td><button routerLink="/registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]} class="btn btn-dark">Editar</button></td>
+        <td><button routerLink="registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]} class="btn btn-dark">Editar</button></td>
       </tr>
       </tbody>
     </table>

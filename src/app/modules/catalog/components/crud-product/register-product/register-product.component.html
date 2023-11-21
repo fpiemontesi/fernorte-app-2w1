@@ -7,7 +7,7 @@
                     <h5>Informacion Precargada:</h5>
                     <div *ngIf="productsInactives && productsInactives.length > 0; else noProducts">
                         <p>
-                            <span style="font-weight: 600;">Codigo:</span> {{this.productsInactives[0]!.codigo}}, 
+                            <span style="font-weight: 600;">Codigo:</span> {{this.productsInactives[0]!.codigo}},
                             <span style="font-weight: 600;"> Nombre:</span>{{this.productsInactives[0]!.nombre}},
                             <span style="font-weight: 600;"> Precio Minorista:</span>{{this.productsInactives[0]!.precio_minorista || 'No tiene'}},
                             <span style="font-weight: 600;"> Precio Mayorista:</span>{{this.productsInactives[0]!.precio_mayorista || 'No tiene'}},
@@ -17,24 +17,24 @@
                     <ng-template #noProducts>
                         <p>¡No hay productos para cargar pendientes!</p>
                     </ng-template>
-                    
-                                 
+
+
                </div>
-        
+
             </div>
             <div class="row">
                 <div class="col-md-6">
-                   
-               
+
+
                     <div class="form-floating">
-                      <textarea 
+                      <textarea
                       [ngClass]="{'is-invalid': formArticle.get('descripcion')?.invalid && formArticle.get('descripcion')?.touched}"
-                      formControlName="descripcion" 
+                      formControlName="descripcion"
                       class="form-control"
-                       style="height: 100px" 
-                       placeholder="Descripcion relevante" 
-                       name="" id="descripcion"  
-                       cols="30" rows="10"></textarea>    
+                       style="height: 100px"
+                       placeholder="Descripcion relevante"
+                       name="" id="descripcion"
+                       cols="30" rows="10"></textarea>
                       <label for="descripcion">Descripcion del Producto</label>
                     </div>
 
@@ -44,7 +44,7 @@
                         </select>
                         <label for="codigo_marca">Seleccionar Marca</label>
                     </div>
-                 
+
 
                     <div class="form-floating">
                         <select formControlName="categorias_id" (change)="addElement()" class="form-select" id="categorias" aria-label="Seleccionar Categorias">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
 
-               
+
 
                 </div>
                 <div class="col-md-6">
@@ -76,13 +76,13 @@
                     </div>
 
                     <div class="form-floating">
-                        
-                        <input [ngClass]="{'is-invalid': formArticle.get('peso')?.invalid && formArticle.get('peso')?.touched}" formControlName="peso" type="number" class="form-control" id="dimensiones" placeholder="Dimensiones del producto">
+
+                        <input [ngClass]="{'is-invalid': formArticle.get('peso')?.invalid && formArticle.get('peso')?.touched}" formControlName="peso" type="number" class="form-control" id="peso" placeholder="Dimensiones del producto">
                         <label for="peso">Peso del producto en KG</label>
                     </div>
 
                     <div class="form-floating">
-                        <input [ngClass]="{'is-invalid': formArticle.get('color')?.invalid && formArticle.get('color')?.touched}" formControlName="color" type="text" class="form-control" id="dimensiones" placeholder="Color del producto">
+                        <input [ngClass]="{'is-invalid': formArticle.get('color')?.invalid && formArticle.get('color')?.touched}" formControlName="color" type="text" class="form-control" id="color" placeholder="Color del producto">
                         <label for="color">Color del producto</label>
                     </div>
 
@@ -108,17 +108,17 @@
                             <option value="Rusia">Rusia</option>
                             <option value="Corea del Sur">Corea del Sur</option>
                             <option value="Reino Unido">Reino Unido</option>
-                            <option value="Estados Unidos">Estados Unidos</option>                                        
+                            <option value="Estados Unidos">Estados Unidos</option>
                     </select>
                     <label for="pais">Pais de Origen</label>
                     </div>
-                  
+
 
                     <div class="input-group">
-                        <input [ngClass]="{'is-invalid': formArticle.get('imagen')?.invalid && formArticle.get('imagen')?.touched}" placeholder="Imagen del Producto" title="Seleccione la imagen" type="file" formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">   
+                        <input [ngClass]="{'is-invalid': formArticle.get('imagen')?.invalid && formArticle.get('imagen')?.touched}" placeholder="Imagen del Producto" title="Seleccione la imagen" type="file" formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
                     </div>
 
-                    
+
                 </div>
             </div>
             <div class="mt-3">
