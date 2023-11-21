@@ -5,6 +5,7 @@ import { TipoVentasComponent } from '../tipo-ventas/tipo-ventas.component';
 import { ReportesPorMesesComponent } from '../reportes-por-meses/reportes-por-meses.component';
 import { TopProductosComponent } from '../reportes-topProductos/top-productos/top-productos.component';
 import { EstadoVentasComponent } from '../estado-ventas/estado-ventas.component';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'fn-reportes-home',
@@ -17,9 +18,9 @@ export class ReportesHomeComponent {
   @ViewChild(ReportesPorMesesComponent) reportesPorMesesComponent!: ReportesPorMesesComponent;
   @ViewChild(TopProductosComponent) TopProductosComponent!: TopProductosComponent;
   @ViewChild(EstadoVentasComponent) estadoVentasComponent!: EstadoVentasComponent;
-  mes!: number;
+  mes: number | undefined = undefined; 
   anio: number = 2023;
-  tipo_venta!: number;
+  tipo_venta: number | undefined =  undefined;
 
   mostrarGrafico :boolean = true;
   montoTotal: number = 0;
@@ -45,8 +46,13 @@ export class ReportesHomeComponent {
   }
 
   onSubmit() {
+    console.log(this.formData)
     if (!this.formData.anio) {
       console.error('El año es obligatorio para generar el gráfico.');
+      return;
+    }
+    if(!this.formData)
+    {
       return;
     }
     this.getReportesAndGenerateCharts(this.formData); 
@@ -54,16 +60,15 @@ export class ReportesHomeComponent {
     this.reportesPorMesesComponent.getReportesAndGenerateCharts(this.formData);
     this.TopProductosComponent.getReportesAndGenerateCharts(this.formData);
     this.estadoVentasComponent.getReportesAndGenerateCharts(this.formData);
-  
+    this.mostrarGrafico=true;
 
   }
   
   
 
   limpiarCampos(formData: any) {
-    this.formData = formData;
-    this.formData.mes = 0;
-    this.formData.tipo_venta = 0;
+    this.formData.mes = undefined;
+    this.formData.tipo_venta = undefined;
     this.mostrarGrafico = false;
   }
 

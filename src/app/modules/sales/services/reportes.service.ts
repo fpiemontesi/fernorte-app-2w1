@@ -7,19 +7,20 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class ReportesService {
 
-
+ 
   private apiUrl = 'http://localhost:8080/reportes'; 
 
   constructor(private http: HttpClient) {  }
 
   getReportes(anio: number, mes?: number, tipo_venta?: number): Observable<any> {
     let params = new HttpParams().set('anio', anio);
-
-    if (mes !== undefined) {
+    console.log('anio', anio , 'mes', mes, 'tipoVenta', tipo_venta);
+    
+    if (mes !== undefined && mes != 0) {
       params = params.set('mes', mes);
     }
 
-    if (tipo_venta !== undefined) {
+    if (tipo_venta !== undefined && tipo_venta != 0) { 
       params = params.set('tipoVenta', tipo_venta);
     }
 

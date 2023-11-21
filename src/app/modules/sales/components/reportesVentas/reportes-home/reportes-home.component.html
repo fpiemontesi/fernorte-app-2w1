@@ -5,7 +5,7 @@
       <div class="row">
           <div class="col-md-4">
               <label for="mes">Mes</label>
-              <select class="form-control" id="mes" name="mes" [ngModel]="formData.mes">
+              <select class="form-control" id="mes" name="mes" [(ngModel)]="formData.mes">
                   <option disabled selected value="">Seleccione un mes </option>
                   <option value="01">Enero</option>
                   <option value="02">Febrero</option>
@@ -23,11 +23,11 @@
           </div>
           <div class="col-md-4">
               <label for="año">Año</label>
-              <input type="number" class="form-control" id="año" name="anio" [ngModel]="formData.anio">
+              <input type="number" class="form-control" id="año" name="anio" [(ngModel)]="formData.anio">
           </div>
           <div class="col-md-4">
               <label for="tipo_venta">Tipo de venta</label>
-              <select class="form-control" id="tipo_venta" name="tipo_venta" [ngModel]="formData.tipo_venta">
+              <select class="form-control" id="tipo_venta" name="tipo_venta" [(ngModel)]="formData.tipo_venta">
                   <option disabled selected value="">Selecciona el tipo de venta</option>
                   <option value="1">Mayorista</option>
                   <option value="2">Minorista</option>
@@ -46,7 +46,7 @@
             <button type="submit" class="btn btn-outline-dark btn-block mt-2" style="width: 90%;">Buscar</button>
           </div>
           <div class="col-md-6">
-            <button type="submit" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos(this.formData)" style="width: 90%;">Reiniciar</button>
+            <button type="button" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos(this.formData)" style="width: 90%;">Reiniciar</button>
           </div>
         </div>
       </div>

@@ -26,6 +26,7 @@ export class TipoVentasComponent {
     
   }
   getReportesAndGenerateCharts(formData: any) {
+
     this.formData = formData;
     this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
       (reportes) => {

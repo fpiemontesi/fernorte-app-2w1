@@ -44,12 +44,13 @@ export class ReportesPorMesesComponent {
     }
   }
   generarReporteVentasPorMeses(reportes: any) {
+    console.log(reportes);
     const chartData = {
-      labels: ['Mes Anterior', 'Mes Actual'],
+      labels: ['Mes Actual', 'Mes Anterior'],
       datasets: [
         {
           label: 'Mes Anterior (Monto)',
-          data: [reportes.monto_mes_anterior],
+          data: [reportes],
           backgroundColor: this.generateRandomColor(1)
         },
         {
