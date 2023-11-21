@@ -11,11 +11,11 @@ export class BatchService {
   constructor(private http: HttpClient) { }
 
   getAllBySection(sectionId: number): Observable<Batch[]>{
-    return this.http.get<Batch[]>(`http://localhost:3000/batchs?sectionId=${sectionId}`);
+    return this.http.get<Batch[]>(`http://localhost:3000/batches?sectionId=${sectionId}`);
   }
 
   getById(id: number): Observable<Batch>{
-    return this.http.get<Batch>("http://localhost:3000/batchs/" + id);
+    return this.http.get<Batch>("http://localhost:3000/batches/" + id);
   }
 
   getAll(): Observable<Batch[]>{
@@ -28,6 +28,11 @@ export class BatchService {
   
   create(body: Batch): Observable<Batch>{
     return this.http.post<Batch>('http://localhost:3000/batches', body);
+  }
+
+  modificate(body: Batch, id: number): Observable<Batch>{
+    return this.http.put<Batch>('http://localhost:3000/batches/'+id, body)
+
   }
 
   getSoonToExpire() : Observable<Batch[]>{

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { RemitosHomeComponent } from './components/remitos/remitos-home/remitos-home.component';
 import { InventoryAppRoutingModule} from "./inventory-app-routing.module";
 import { ReservationListComponent } from './components/reservations/reservation-list/reservation-list.component';
@@ -25,13 +25,14 @@ import { ListBatchesExpiredComponent } from './components/list-batches-expired/l
 import { StadisticsExpiredExistancesComponent } from './components/stadistics-expired-existances/stadistics-expired-existances.component';
 import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
 import { ListBatchSoonTooExipreComponent } from './components/list-batch-soon-too-exipre/list-batch-soon-too-exipre.component';
+import { ModificarLoteComponent } from './components/modificar-lote/modificar-lote.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
     RegistrarLotesComponent, RegistrarRemitoComponent,CreateSectionComponent, ToastsComponent,
     ReservationListComponent, ListStockExistenciasComponent, ListBatchesExpiredComponent,
     RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
-    ModifyStockControlComponent, ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
+    ModifyStockControlComponent,ModificarLoteComponent , ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
     StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent,ListBatchSoonTooExipreComponent],
   providers: [],
   imports: [

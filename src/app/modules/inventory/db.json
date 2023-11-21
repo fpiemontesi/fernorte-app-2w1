@@ -17,6 +17,15 @@
       "inspectedQuantity": 20,
       "damagedQuantity": 0,
       "batchIsExpired": true
+    },
+    {
+      "id": 3,
+      "batchId": 1,
+      "date": "2023-11-20",
+      "description": "kjbkjbkjbjln.knknñkbñkvlknñ",
+      "inspectedQuantity": 2,
+      "damagedQuantity": 1,
+      "batchIsExpired": false
     }
   ],
   "receipts": [
@@ -121,6 +130,21 @@
           "detail": "no"
         }
       ]
+    },
+    {
+      "id": 7,
+      "arrivalDate": "2023-11-21T18:28:39.129Z",
+      "purchaseOrderNumber": 2,
+      "receiptNumber": 8,
+      "supplierName": "kjbbhkjb",
+      "details": [
+        {
+          "id": 0,
+          "quantity": 2,
+          "productName": "jkgiug",
+          "detail": "ufjfvivi"
+        }
+      ]
     }
   ],
   "sections": [
@@ -153,11 +177,6 @@
       "id": 6,
       "name": "R",
       "zoneId": 1
-    },
-    {
-      "id": 7,
-      "name": "A",
-      "zoneId": 2
     }
   ],
   "zones": [
@@ -174,15 +193,16 @@
     {
       "id": 1,
       "existenceCode": "1",
-      "sectionId": 3,
+      "idSection": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
-      "shelf": "6"
+      "shelf": "6",
+      "sectionId": 2
     },
     {
       "id": 2,
       "existenceCode": "2",
-      "sectionId": 3,
+      "idSection": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "6"
@@ -190,7 +210,7 @@
     {
       "id": 3,
       "existenceCode": "2",
-      "sectionId": 4,
+      "idSection": 4,
       "quantity": "3",
       "due_date": "2023-10-27",
       "shelf": "6"
@@ -198,7 +218,7 @@
     {
       "id": 4,
       "existenceCode": "1",
-      "sectionId": 3,
+      "idSection": 3,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "6"
@@ -206,7 +226,7 @@
     {
       "id": 5,
       "existenceCode": "3",
-      "sectionId": 2,
+      "idSection": 2,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "3"
@@ -214,7 +234,7 @@
     {
       "id": 6,
       "existenceCode": "4",
-      "sectionId": 1,
+      "idSection": 1,
       "quantity": "3",
       "dueDate": "2023-10-27",
       "shelf": "3"
@@ -222,7 +242,7 @@
     {
       "id": 7,
       "existenceCode": "1",
-      "sectionId": 1,
+      "idSection": 1,
       "quantity": "4",
       "dueDate": "2023-10-26",
       "shelf": "4"
@@ -230,18 +250,18 @@
     {
       "id": 8,
       "existenceCode": "1",
-      "sectionId": 1,
+      "idSection": 1,
       "quantity": "3",
       "dueDate": "2023-10-30",
       "shelf": "5"
     },
     {
       "id": 9,
-      "sectionId": 4,
+      "sectionId": 3,
       "existenceCode": "1",
-      "quantity": "3",
-      "dueDate": "2023-11-18",
-      "shelf": "4"
+      "quantity": "20",
+      "dueDate": "2023-11-29",
+      "shelf": "8"
     }
   ],
   "existences": [
@@ -253,13 +273,11 @@
     {
       "code": "2",
       "name": "planks",
-
       "minimumStock": 20
     },
     {
       "code": "3",
       "name": "nuts",
-
       "minimumStock": 150
     }
   ],
@@ -347,17 +365,15 @@
     }
   ],
   "stadistic_expired": {
-    "seasonStart":"6/1/2023",
-    "seasonEnd":"12/30/2023",
-    "items":[
-      
+    "seasonStart": "6/1/2023",
+    "seasonEnd": "12/30/2023",
+    "items": [
       {
-        
-        "name":"Martillos",
-        "controls":10,
-        "units":70,
+        "name": "Martillos",
+        "controls": 10,
+        "units": 70,
         "percent": 70
-        },
+      },
       {
         "name": "Tuercas",
         "controls": 8,
@@ -373,17 +389,15 @@
     ]
   },
   "stadistic_damaged": {
-    "seasonStart":"6/1/2023",
-    "seasonEnd":"12/30/2023",
-    "items":[
-      
+    "seasonStart": "6/1/2023",
+    "seasonEnd": "12/30/2023",
+    "items": [
       {
-        
-        "name":"Tuercas",
-        "controls":10,
-        "units":50,
+        "name": "Tuercas",
+        "controls": 10,
+        "units": 50,
         "percent": 50
-        },
+      },
       {
         "name": "Tornillos",
         "controls": 8,
