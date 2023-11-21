@@ -10,6 +10,10 @@ export class SectionService {
 
   constructor(private http: HttpClient) { }
 
+  getByZone(zoneId: number): Observable<Section[]> {
+    return this.http.get<Section[]>(`http://localhost:3000/sections?zoneId=${zoneId}`);
+  }
+
   create(body: Section): Observable<Section>{
     return this.http.post<Section>('http://localhost:3000/sections', body);
   }
@@ -20,10 +24,6 @@ export class SectionService {
 
   getById(id: number): Observable<Section>{
     return this.http.get<Section>(`http://localhost:3000/sections/${id}`);
-  }
-
-  getByZone(nombreZona: number): Observable<Section[]>{
-    return this.http.get<Section[]>(`http://localhost:3000/sections/?zoneId=${nombreZona.toString()}`);
   }
 
   getAll(): Observable<Section[]>{

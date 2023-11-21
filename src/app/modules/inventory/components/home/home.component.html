@@ -1,5 +1,13 @@
-<<<<<<< HEAD
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li ngbNavItem="remitos">
+    <button ngbNavLink routerLink="remitos">Remitos</button>
+  </li>
+  <li ngbNavItem="lotes">
+    <button ngbNavLink routerLink="lotes">Lotes</button>
+  </li>
+  <li ngbNavItem="remitos">
+    <button ngbNavLink routerLink="controles">Controles de stock</button>
+  </li>
+</ul>
+<router-outlet></router-outlet>
 <fn-modificar-lote></fn-modificar-lote>
-=======
-<p>home inventory works!</p>
->>>>>>> a1a717f67d219c416745a5788c452c6ffaff36c0
