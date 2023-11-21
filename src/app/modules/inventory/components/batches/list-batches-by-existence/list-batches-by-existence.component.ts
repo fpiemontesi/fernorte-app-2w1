@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Batch } from '../../models/batch';
+import { Batch } from '../../../models/batch';
 import { Subscription } from 'rxjs';
-import { BatchService } from '../../services/batch.service';
-import { AppToastService } from '../../services/app-toast.service';
+import { BatchService } from '../../../services/batch.service';
+import { AppToastService } from '../../../services/app-toast.service';
 
 @Component({
   selector: 'fn-list-batches-by-existence',
@@ -12,7 +12,7 @@ import { AppToastService } from '../../services/app-toast.service';
 export class ListBatchesByExistenceComponent implements OnInit, OnDestroy{
  batches: Batch[] = [];
  batchesFiltered: Batch[] = [];
- existenceId!: string; 
+ existenceId!: string;
  private subscriptions = new Subscription();
 
  constructor(private batchService: BatchService, private toastService: AppToastService) { }

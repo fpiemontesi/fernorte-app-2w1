@@ -13,6 +13,7 @@ export class BatchService {
   create(body: Batch): Observable<Batch>{
     return this.http.post<Batch>('http://localhost:3000/batchs', body);
   }
+<<<<<<< HEAD
 
   getAll(): Observable<Batch[]>{
     return this.http.get<Batch[]>('http://localhost:3000/batchs');
@@ -27,4 +28,9 @@ export class BatchService {
 
   }
   
+=======
+  getAll(): Observable<Batch[]>{
+    return this.http.get<Batch[]>(`http://localhost:3000/batches`);
+  }
+>>>>>>> a1a717f67d219c416745a5788c452c6ffaff36c0
 }

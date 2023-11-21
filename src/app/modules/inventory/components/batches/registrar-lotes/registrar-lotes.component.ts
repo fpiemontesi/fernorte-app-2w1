@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Batch } from '../../models/batch';
-import { Existence } from '../../models/existence';
-import { Section } from '../../models/section';
+import { Batch } from '../../../models/batch';
+import { Existence } from '../../../models/existence';
+import { Section } from '../../../models/section';
 import { Subscription } from 'rxjs';
-import { SectionService } from '../../services/section.service';
-import { ExistenceService } from '../../services/existence.service';
-import { BatchService } from '../../services/batch.service';
-import { AppToastService } from '../../services/app-toast.service';
+import { SectionService } from '../../../services/section.service';
+import { ExistenceService } from '../../../services/existence.service';
+import { BatchService } from '../../../services/batch.service';
+import { AppToastService } from '../../../services/app-toast.service';
 
 @Component({
   selector: 'fn-registrar-lotes',
