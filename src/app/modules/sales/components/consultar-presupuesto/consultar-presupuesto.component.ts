@@ -94,7 +94,7 @@ export class ConsultarPresupuestoComponent implements OnInit,OnDestroy {
           if(error.status == 404){
             mensajeAlerta = 'No se han encontrado presupuestos con los filtros especificados'; 
           }
-          else mensajeAlerta = "Ha ocurrido un problema al buscar los presupuestos. Por favor, contacte con el administrador.";
+          else mensajeAlerta = "Ha ocurrido un problema al buscar los presupuestos";
           Swal.fire({
             icon: 'error',
             title: mensajeAlerta,

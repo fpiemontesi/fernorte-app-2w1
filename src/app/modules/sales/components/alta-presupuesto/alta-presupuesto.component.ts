@@ -28,7 +28,6 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
     {valor: 1, descripcion: 'En caja'}, 
     {valor: 2, descripcion: 'En depósito'}
   ];
-
   subscriptions: Subscription | undefined;
   //lista de productos
   productos: Producto[] = [];
@@ -49,10 +48,10 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
   subtotal: number = 0;
   boton_agregar = false;
 
-
   //variable que identifica si el presupuesto a crear viene del boton generar venta de Consultar Presupuesto:
   ventaFromPresupuesto:boolean = false;
   
+
   constructor(private presupuestoService: PresupuestoService , 
     private ventasService: VentasService,private route: ActivatedRoute,private router:Router) {
       this.route.queryParams.subscribe(params => {
@@ -62,10 +61,6 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
       
    }  
   action!: string; 
-
-  onSubmit() {
-    
-  }
 
   ngOnInit() {
     this.subscriptions = new Subscription();
@@ -84,8 +79,6 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
       console.log("Se detecto que viene de generar venta, presupuesto a usar:",this.presupuesto);
       this.cliente.nro_doc = this.presupuesto.doc_cliente;
       this.onBlur(true);
-      //TODO: Realizar los descuentos a los productos que ya venian cargados.
-
     }
     // Sino:
     else{
@@ -94,9 +87,7 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
       this.cliente.nro_doc = 0;
       this.presupuesto.fecha_creacion= new Date(Date.now());
       console.log(this.presupuesto.fecha_creacion)
-
     }
-    
   }
   ngOnDestroy(): void {
     if(this.subscriptions){
@@ -134,9 +125,6 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
         return
       }
     }
-    
-    
-
     this.tipo_activado = false;
     var detalle = new Detalle();
     detalle.cantidad = this.cantidad;
@@ -185,6 +173,7 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
   cancelar(){
     this.router.navigate(['sales/consultar-presupuesto']);
   }
+  
   // Gestiona agregar producto a detalle:
   valido(): boolean{
     var res:boolean = true;
@@ -239,11 +228,7 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
           timer:2000
           });
         }
-      )
-
-    ) 
-    
-    
+      ))  
   }
 
   guardarVenta(form:NgForm) {
@@ -327,9 +312,6 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
 
     )
     
-  }
-
-  Clean() {
   }
   
   onBlur(valid:any){

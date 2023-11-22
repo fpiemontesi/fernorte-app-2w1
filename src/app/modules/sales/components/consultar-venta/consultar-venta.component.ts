@@ -120,8 +120,6 @@ export class ConsultarVentaComponent {
             }
           }); 
           this.mostrarTabla = true; 
-          
-          console.log("CANTIDAD DE VENTAS:"+this.ventas.length);
         },
         error: (error) => {
           console.error('Error al realizar la solicitud GET:', error);
@@ -140,7 +138,10 @@ export class ConsultarVentaComponent {
   verDetalle(venta: Ventas){
     this.venta = venta;
     this.mostrarDetalle = true;
-    this.moverPantalla(this.detallePresupuestosDOM.nativeElement)
+    setTimeout(() => {
+      this.moverPantalla(this.detallePresupuestosDOM.nativeElement)
+    },100)
+    
   }
   toggleTabla(val:boolean) {
     this.mostrarTabla = val;

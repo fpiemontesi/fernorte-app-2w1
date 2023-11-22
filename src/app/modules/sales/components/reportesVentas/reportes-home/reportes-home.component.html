@@ -54,7 +54,7 @@
     </div>
     <div class="row mt-1 text-center">
       <div *ngIf="mes && mostrarGrafico">
-        <h2 >Reporte general, {{ mesNombre }} de {{ anio }} </h2>
+        <h2 #reportes>Reporte general, {{ mesNombre }} de {{ anio }} </h2>
       </div>
       <div *ngIf="!mes && mostrarGrafico" >
         <h2  #reportes>Reporte general del año {{ anio }} </h2>
