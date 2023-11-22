@@ -12,6 +12,7 @@ import { Producto } from '../models/Producto';
 })
 export class PresupuestoService {
   presupuesto: Presupuesto= {} as Presupuesto;
+  url: string = "http://localhost:8081/presupuesto";
   
   constructor(private http: HttpClient) {}
 
@@ -44,16 +45,13 @@ export class PresupuestoService {
   }
 
   realizarSolicitudPostPresupuesto(presupuesto: Presupuesto): Observable<any> {
-    
-    const url = 'http://localhost:8080/presupuesto';
-    const body = presupuesto;
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post(url, body, httpOptions);
+    return this.http.post(this.url, presupuesto, httpOptions);
   }
   validarProducto(formData: any): boolean {
     if (formData.producto !== 0 && formData.cantidad !== 0 && formData.cantidad !== null) {
@@ -87,13 +85,12 @@ export class PresupuestoService {
   }
 
   deletePresupuesto(id : number): Observable<any> {
-    const url = `http://localhost:8080/presupuesto/`+id;
+    const url = `${this.url}/`+id;
     return this.http.delete<any>(url);
   }
   
   getPresupuestosFilter(params:HttpParams){
-    const urlPresupuesto ='http://localhost:8080/presupuesto/'
-    const urlWithParams = `${urlPresupuesto}?${params.toString()}`;
+    const urlWithParams = `${this.url}?${params.toString()}`;
     return this.http.get(urlWithParams);
   }
 
