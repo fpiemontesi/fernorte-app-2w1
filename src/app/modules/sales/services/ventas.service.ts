@@ -10,19 +10,17 @@ import { Ventas } from '../models/Ventas';
 export class VentasService {
   venta: Ventas= {} as Ventas;
   idVenta!: number;
-  constructor(private http : HttpClient) {
- }
-  private urlId = 'http://localhost:8080/ventas/'
-
+  url: string = "http://localhost:8080/ventas";
+  constructor(private http : HttpClient) {}
 
   getClientes(): Observable<any> {
-    const url = 'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes';
-    return this.http.get(url);
+    const urlClientes = 'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-clients-bd/clientes';
+    return this.http.get(urlClientes);
   }
 
   getArticulos(): Observable<any> {
-    const url = 'http://localhost:3000/articulos';
-    return this.http.get(url);
+    const urlArticulos = 'http://localhost:3000/articulos';
+    return this.http.get(urlArticulos);
   }
   guardarId(ventas: Ventas) {
     this.venta = ventas;
@@ -36,18 +34,18 @@ export class VentasService {
   }
 
   getVentaById(ventaId: number) {
-    return this.http.get(`${this.urlId}/${ventaId}`);
+    return this.http.get(`${this.url}/${ventaId}`);
   }
 
   actualizarEstado(ventaId: number, nuevoEstado: number) {
-    const url = `${this.urlId}${ventaId}?estado=${nuevoEstado}`;
+    const url = `${this.url}/${ventaId}?estado=${nuevoEstado}`;
 
     return this.http.put(url, null);
   }
 
   realizarSolicitudPostVenta(venta: Ventas): Observable<any> {
 
-    const url = 'http://localhost:8080/ventas/';
+    const url = `${this.url}/`;
     const body = venta;
 
     const httpOptions = {
@@ -61,7 +59,7 @@ export class VentasService {
 
 
   realizarModificacionVenta(ventaId: number, formData: any, productosVenta: any): Observable<any> {
-    const url = 'http://localhost:8080/venta/';
+    const url = `${this.url}/${ventaId}`;
     const body = {
       doc_cliente: formData.doc_cliente,
       fecha: new Date().toISOString(),
@@ -78,12 +76,10 @@ export class VentasService {
       })
     };
   
-    return this.http.put(url + ventaId, body, httpOptions);
+    return this.http.put(url, body, httpOptions);
   }
-
-  apiUrl = 'http://localhost:8080';
   modificarVenta(ventaId: number, ventaData: any): Observable<any> {
-    const url = `${this.apiUrl}/ventas/${ventaId}`;
+    const url = `${this.url}/${ventaId}`;
     return this.http.put(url, ventaData);
   }
 
@@ -135,14 +131,12 @@ export class VentasService {
       params = params.set('estado', venta.estado);
     }
 
-    const url = 'http://localhost:8080/ventas/';
-
-    const urlWithParams = `${url}?${params.toString()}`;
+    const urlWithParams = `${this.url}/?${params.toString()}`;
 
     return this.http.get<Ventas[]>(urlWithParams);
   }
   bajaVenta(ventaId:number) {
-    return this.http.delete('http://localhost:8080/ventas/' + ventaId);
+    return this.http.delete(`${this.url}/${ventaId}`);
   }
 
   

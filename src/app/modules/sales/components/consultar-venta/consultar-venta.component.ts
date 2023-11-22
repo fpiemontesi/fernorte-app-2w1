@@ -112,7 +112,10 @@ export class ConsultarVentaComponent {
           
           
           response.forEach(element => {
-            if(element.estado != 3){
+            if(this.ventaFilter.estado == 3){
+              this.ventas.push(element);
+            }
+            else if(element.estado != 3){
               this.ventas.push(element);
             }
           }); 
@@ -144,34 +147,33 @@ export class ConsultarVentaComponent {
   }
 
   bajaVenta(venta:Ventas){
-    this.subscriptions?.add(
-      this.service.bajaVenta(venta.id).subscribe({
-        next: (response) => {
-          console.log("Solicitud de baja de venta exitosa. Respuesta:" + response);
-          Swal.fire({
-            icon: 'success',
-            title: 'Se ha dado de baja a la venta con ID '+venta.id,
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonText: 'Aceptar',
+    Swal.fire({
+      title: '¿Está seguro que desea cancelar la venta con ID '+venta.id+'?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#05B001',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.subscriptions?.add(
+          this.service.bajaVenta(venta.id).subscribe((response) => {
+            if(response){
+              Swal.fire({
+                icon: 'success',
+                title: 'Venta cancelada exitosamente',
+                showCancelButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+              });
+              this.filtrarVentas();
+              this.mostrarDetalle = false;
+            }
           })
-        },
-        error: (error) => {
-          console.error('Error al realizar la solicitud GET:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'No se puede dar de baja la venta',
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonText: 'Aceptar',
-          });
-        },
-      })
-    )
-    setTimeout(() => {
-      this.filtrarVentas();
-    },300)
-    
+        )
+      }
+    });
     
   }
 }

@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HomeComponent } from './components/home/home.component';
-
 import { ConsultarPresupuestoComponent } from './components/consultar-presupuesto/consultar-presupuesto.component';
 import { ConsultarVentaComponent } from './components/consultar-venta/consultar-venta.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
@@ -16,9 +13,6 @@ import { TipoVentasComponent } from './components/reportesVentas/tipo-ventas/tip
 import { ReportesPorMesesComponent } from './components/reportesVentas/reportes-por-meses/reportes-por-meses.component';
 import { TopProductosComponent } from './components/reportesVentas/reportes-topProductos/top-productos/top-productos.component';
 import { EstadoVentasComponent } from './components/reportesVentas/estado-ventas/estado-ventas.component';
-//import { ChartsModule } from 'ng2-charts';
-
-
 
 const routes: Routes = [
   {

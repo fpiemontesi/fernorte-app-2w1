@@ -5,23 +5,24 @@
       <div class="row">
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
         <label for="id">Id</label>
-        <input id="id" type="text" name="id" class="form-control" placeholder="Id de la venta" [(ngModel)]="ventaFilter.id">
+        <input id="id" type="number" name="id" class="form-control" [(ngModel)]="ventaFilter.id">
       </div>
       <div class="col-md-3 col-sm-12" style="padding: 1%;">
-        <label>Cliente</label>
-        <select class="form-select" id="cliente" name="cliente" [(ngModel)]="ventaFilter.doc_cliente">
+        <label>Documento Cliente</label>
+        <input type="number" class="form-control" id="cliente" name="cliente" [(ngModel)]="ventaFilter.doc_cliente">
+        <!-- <select class="form-select" id="cliente" name="cliente" [(ngModel)]="ventaFilter.doc_cliente">
           <option disabled selected value="">Selecciona el cliente de la venta</option>
-          <!-- Use *ngFor to iterate over clients and populate the options -->
           <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nombre }} {{ cliente.apellido }}</option>
-        </select>
+        </select> -->
       </div>
     <div class="col-md-3 col-sm-12" style="padding: 1%;">
-      <label>Vendedor</label>
-      <select class="form-select" id="vendedor" name="vendedor" [(ngModel)]="ventaFilter.id_vendedor">
+      <label>ID Vendedor</label>
+      <input type="number" class="form-control" id="vendedor" name="vendedor" [(ngModel)]="ventaFilter.id_vendedor">
+      <!-- <select class="form-select" id="vendedor" name="vendedor" [(ngModel)]="ventaFilter.id_vendedor">
         <option disabled selected value="">Selecciona el vendedor de la venta</option>
         <option value="1">Cande</option>
         <option value="2">Tomi</option>
-      </select>
+      </select> -->
     </div>
   </div>
     <div class="row">
@@ -63,8 +64,10 @@
         <label>Estado</label>
         <select class="form-select" id="estado" name="estado" [(ngModel)]="ventaFilter.estado">
           <option disabled selected value="">Selecciona el estado de la venta</option>
-          <option value="1">Pendiente</option>
-          <option value="2">Entregado</option>
+          <option value="1">Pendiente facturacion</option>
+          <option value="2">Facturado </option>
+          <option value="4">Entregado</option>
+          <option value="3">Cancelado</option>
         </select>
       </div>
       <div class="col-md-3 col-sm-6" style="padding-top: 3%;">
@@ -114,11 +117,15 @@
           </td>
           
           <!-- <td>{{ venta.estado }}</td> -->
-          <td class="centered">
+          <td class="centered " *ngIf="this.ventaFilter.estado != 3">
             <select class="form-select" id="estado" name="estado" [(ngModel)]="venta.estado" (change)="actualizarEstado(venta)">
-              <option [value]="1">Pendiente</option>
+              <option [value]="1">Pendiente Facturacion</option>
+              <option [value]="2">Facturado</option>
               <option [value]="4">Entregado</option>
             </select>
+          </td>
+          <td class="centered " *ngIf="this.ventaFilter.estado == 3">
+            Cancelado
           </td>
           <td class="centered">{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
           <td class="centered">
