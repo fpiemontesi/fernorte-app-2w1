@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./stock-controls-home.component.css']
 })
 export class StockControlsHomeComponent {
-
+activeId = -1
 }

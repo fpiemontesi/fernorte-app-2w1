@@ -1,6 +1,19 @@
-<ul ngbNav #nav="ngbNav" [activeId]="active" class="nav-tabs">
-  <li [ngbNavItem]="0">
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li ngbNavItem="registrar">
     <button ngbNavLink routerLink="registrar">Registrar</button>
   </li>
+  <li ngbNavItem="listar-pronto-expirar">
+    <button ngbNavLink routerLink="listar-pronto-expirar">Listar Pronto a expirar</button>
+  </li>
+  <li ngbNavItem="listar-expirado">
+    <button ngbNavLink routerLink="listar-expirado">Listar Expirados</button>
+  </li>
+  <li ngbNavItem="listar-por-existencia">
+    <button ngbNavLink routerLink="listar-por-existencia">Listar por Existencia</button>
+  </li>
+  <li ngbNavItem="listar-por-seccion">
+    <button ngbNavLink routerLink="listar-por-seccion">Listar por Seccion</button>
+  </li>
 </ul>
+
 <router-outlet></router-outlet>

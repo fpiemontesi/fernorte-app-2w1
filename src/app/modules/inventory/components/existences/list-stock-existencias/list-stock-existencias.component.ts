@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExistenceStock } from '../../models/ExistenceStock';
-import { ListExistenciasService } from '../../services/list-existencias.service';
+import { ExistenceStock } from '../../../models/ExistenceStock';
+import { ListExistenciasService } from '../../../services/list-existencias.service';
 
 
 @Component({
@@ -14,7 +14,6 @@ export class ListStockExistenciasComponent implements OnInit {
   constructor(private listarstockExistencias:ListExistenciasService){}
 
   list : ExistenceStock[]=[];
-
   ngOnInit(): void {
     this.llenarList();
   }

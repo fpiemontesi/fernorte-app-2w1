@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StadisticByExistance } from '../../models/stadistic-by-existance';
-import { StadisticsService } from '../../services/stadistics.service';
-import { Stadistic } from '../../models/stadistic';
+import { StadisticByExistance } from '../../../models/stadistic-by-existance';
+import { StadisticsService } from '../../../services/stadistics.service';
+import { Stadistic } from '../../../models/stadistic';
 import { Subscription } from 'rxjs';
 
 

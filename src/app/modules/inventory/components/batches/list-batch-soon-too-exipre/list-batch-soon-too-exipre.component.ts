@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Batch } from '../../models/batch';
-import { BatchService } from '../../services/batch.service';
+import { Batch } from '../../../models/batch';
+import { BatchService } from '../../../services/batch.service';
 import { Subscription } from 'rxjs';
 
 @Component({

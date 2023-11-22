@@ -266,19 +266,34 @@
   ],
   "existences": [
     {
+      "id": 1,
       "code": "1",
       "name": "screws",
       "minimumStock": 100
     },
     {
+      "id": 2,
       "code": "2",
       "name": "planks",
       "minimumStock": 20
     },
     {
+      "id": 3,
       "code": "3",
       "name": "nuts",
       "minimumStock": 150
+    },
+    {
+      "minimunStock": 4,
+      "code": 1,
+      "name": "Tornillos Philip",
+      "id": 4
+    },
+    {
+      "minimunStock": 1,
+      "code": 1,
+      "name": "Tornillos Philip",
+      "id": 5
     }
   ],
   "reservations": [
@@ -442,6 +457,26 @@
       "id": 9,
       "stock": "800",
       "name": "Taladro"
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "name": "Tornillos Philip",
+      "expirationDate": "20-1-2024",
+      "description": "Tornillos Philip"
+    },
+    {
+      "id": 2,
+      "name": "Tuercas",
+      "expirationDate": "20-2-2024",
+      "description": "Tuercas Philip"
+    },
+    {
+      "id": 3,
+      "name": "Cinta de medir",
+      "expirationDate": "21-9-2024",
+      "description": "Cinta de medir"
     }
   ]
 }
