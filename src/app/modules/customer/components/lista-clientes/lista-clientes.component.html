@@ -1,0 +1,69 @@
+<div class="container big-cart">
+  <h3>Listado de clientes</h3>
+
+  <!-- Filtros de Búsqueda -->
+  <div class="row mb-3 d-flex align-items-end filter-container">
+    <div class="col-md-6 d-flex flex-column">
+      <label for="filtroNumeroDocumento"
+        >Filtrar por número de documento:</label
+      >
+      <div class="d-flex flex-row gap-2">
+        <input
+          type="number"
+          class="form-control mt-1"
+          id="filtroNumeroDocumento"
+          placeholder="Número de Documento"
+          [(ngModel)]="numeroDoc"
+        />
+
+        <button
+          class="btn btn-primary mt-1"
+          id="buscarClientesBtn"
+          (click)="filtrarPersonas()"
+        >
+          Buscar
+        </button>
+
+        <button
+          *ngIf="listaFiltrada"
+          class="btn btn-secondary w-75 mt-1"
+          (click)="borrarFiltro()"
+        >
+          Borrar filtro
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Clientes -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Domicilio</th>
+        <th>Tipo de Documento</th>
+        <th>Número de Documento</th>
+        <th>Categoría Fiscal</th>
+        <th>Categoría Monotributista</th>
+      </tr>
+    </thead>
+    <tbody id="listaClientes">
+      <tr *ngFor="let cliente of clienteFiltro">
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.apellido }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.telefono }}</td>
+        <td>{{ cliente.domicilio }}</td>
+        <td>{{ cliente.id_tipo_doc.tipo_documento }}</td>
+        <td>{{ cliente.nroDoc }}</td>
+        <td>{{ cliente.id_categoria_fiscal.descripcion }}</td>
+        <td *ngIf="cliente.id_clasificacion">
+          {{ cliente.id_clasificacion.descripcion }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,72 @@
+<div class="container big-cart">
+  <h3>Listado de Usarios por cargo</h3>
+
+  <!-- Filtros de Búsqueda -->
+  <div class="row mb-3 d-flex align-items-end filter-container">
+    <div class="col-md-6 d-flex flex-column">
+      <label for="filtroCargo" class="text-nowrap">Filtrar por cargo:</label>
+
+      <div class="d-flex flex-row gap-2">
+        <select
+          class="form-control mt-1"
+          id="cargo"
+          name="cargo"
+          [(ngModel)]="cargoElegido"
+          required
+        >
+          <option value="" selected disabled>Seleccione un cargo</option>
+          <option *ngFor="let cargo of listaCargos" [value]="cargo.descripcion">
+            {{ cargo.descripcion }}
+          </option>
+        </select>
+
+        <button
+          class="btn btn-primary form-control mt-1"
+          id="buscarUsuariosBtn"
+          (click)="filtrarUsuarios()"
+        >
+          Buscar
+        </button>
+
+        <button
+          *ngIf="listaFiltrada"
+          class="btn btn-secondary form-control mt-1"
+          (click)="borrarFiltro()"
+        >
+          Borrar filtro
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Usuarios -->
+  <table class="table" *ngIf="listaFiltrada">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Username</th>
+        <th>Tipo de Documento</th>
+        <th>Número de Documento</th>
+        <th>Cargo</th>
+        <th>Activo</th>
+      </tr>
+    </thead>
+
+    <tbody id="listaUsuarios">
+      <tr *ngFor="let usuario of usuarioArray">
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.apellido }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.telefono }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.id_tipo_documento.descripcion }}</td>
+        <td>{{ usuario.numero_documento }}</td>
+        <td>{{ usuario.id_cargo.descripcion }}</td>
+        <td>{{ usuario.activo ? "Si" : "No" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

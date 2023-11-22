@@ -1,0 +1,75 @@
+<div class="container big-cart">
+    <h3>Listado de clientes por puntos</h3>
+  
+    <!-- Filtro de Búsqueda -->
+    <div class="row mb-3 d-flex align-items-end filter-container">
+      <div class="col-md-3">
+        <label for="filtroDesde" class="text-nowrap">Desde:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="filtroDesde"
+          placeholder="Puntos mínimos"
+          [(ngModel)]="puntosDesde"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="filtroHasta" class="text-nowrap">Hasta:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="filtroHasta"
+          placeholder="Puntos máximos"
+          [(ngModel)]="puntosHasta"
+        />
+      </div>
+      <div class="col-md-3">
+        <label>&nbsp;</label>
+        <button
+          class="btn btn-primary form-control"
+          id="buscarClientesBtn"
+          (click)="filtrarPersonas()"
+        >
+          Buscar
+        </button>
+      </div>
+      <div class="col-md-3" *ngIf="listaFiltrada">
+        <label>&nbsp;</label>
+        <button class="btn btn-secondary form-control" (click)="borrarFiltro()">
+          Borrar filtro
+        </button>
+      </div>
+    </div>
+  
+    <!-- Lista de Clientes -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Tipo de Documento</th>
+          <th>Número de Documento</th>
+          <th>Categoría Fiscal</th>
+          <th>Categoría Monotributista</th>
+          <th>Puntos</th>
+        </tr>
+      </thead>
+      <tbody id="listaClientes">
+        <tr *ngFor="let cliente of clienteFiltro">
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.apellido }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td>{{ cliente.id_tipo_doc.tipo_documento }}</td>
+          <td>{{ cliente.nroDoc }}</td>
+          <td>{{ cliente.id_categoria_fiscal.descripcion }}</td>
+          <td>
+            {{ cliente.id_clasificacion ? cliente.id_clasificacion.descripcion : '-' }}
+          </td>
+          <td>{{ cliente.cant_puntos }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

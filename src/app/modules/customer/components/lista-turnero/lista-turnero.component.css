@@ -1,0 +1,14 @@
+.big-cart {
+    border: 1px solid grey;
+    border-radius: 30px;
+    padding: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .turno {
+    background-color: rgb(117, 255, 117);
+    padding: 5px;
+    border-radius: 5px;
+  }
+  

@@ -1,1 +1,28 @@
-<p>home clients works!</p>
+<div class="containerBtn">
+    <button (click)="toggleComponent('mostrarComponentesClientes')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesClientes')}"  class="buttonComponent"><img class="icon" src="../../../../../assets/icons/customers.svg" alt="Icono de clientes"><p class="m-0">Clientes</p></button>
+    <button (click)="toggleComponent('mostrarComponentesUsuarios')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesUsuarios')}" class="buttonComponent"><img class="icon" src="../../../../../assets/icons/user.svg" alt="Icono de usuarios"><p class="m-0">Usuarios</p></button>
+    <button (click)="toggleComponent('mostrarComponentesTurnero')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesTurnero')}" class="buttonComponent"><img class="icon" src="../../../../../assets/icons/turn.svg" alt="Icono de turnero"><p class="m-0">Turnero</p></button>
+    <button (click)="toggleComponent('mostrarComponentesBeneficios')" *ngIf="isLogged" [ngClass]="{'active': isComponentVisible('mostrarComponentesBeneficios')}" class="buttonComponent"><img class="icon" src="../../../../../assets/icons/benefits.svg" alt="Icono de beneficios"><p class="m-0">Beneficios</p></button>
+    <fn-logout *ngIf="isLogged"></fn-logout>
+  </div>
+
+
+
+<fn-crear-cliente *ngIf="isComponentVisible('mostrarComponentesClientes') && isLogged"></fn-crear-cliente>
+<fn-modificar-clientes *ngIf="isComponentVisible('mostrarComponentesClientes') && isLogged"></fn-modificar-clientes>
+<fn-lista-clientes *ngIf="isComponentVisible('mostrarComponentesClientes') && isLogged"></fn-lista-clientes>
+
+<fn-crear-user *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-crear-user>
+<fn-delete-user *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-delete-user>
+<fn-get-user *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-get-user>
+<fn-crear-position *ngIf="isComponentVisible('mostrarComponentesUsuarios') && isLogged"></fn-crear-position>
+
+<fn-turnero *ngIf="isComponentVisible('mostrarComponentesTurnero') && isLogged"></fn-turnero>
+<fn-lista-turnero *ngIf="isComponentVisible('mostrarComponentesTurnero') && isLogged"></fn-lista-turnero>
+
+<fn-get-benefits *ngIf="isComponentVisible('mostrarComponentesBeneficios') && isLogged"></fn-get-benefits>
+<fn-get-customers-points *ngIf="isComponentVisible('mostrarComponentesBeneficios') && isLogged"></fn-get-customers-points>
+
+
+
+<fn-login (loginSuccess)="onLoginSuccess()" *ngIf="showLoginForm && !isLogged"></fn-login>

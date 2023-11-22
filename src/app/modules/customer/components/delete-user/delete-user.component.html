@@ -1,0 +1,47 @@
+<div class="container big-cart">
+  <h3>Baja de Usuario</h3>
+
+  <form #borrarUsuarioForm="ngForm">
+    <div class="row mb-3 d-flex align-items-end">
+      <div class="col-md-6">
+        <label for="numeroDocumento" class="text-nowrap"
+          >Dar de baja usuario por número de documento:</label
+        >
+
+        <div class="d-flex flex-row gap-2">
+          <div class="d-flex flex-column">
+            <input
+              type="number"
+              class="form-control mt-1"
+              id="numeroDocumento"
+              name="numeroDocumento"
+              [(ngModel)]="numeroDoc"
+              placeholder="Número de Documento"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  borrarUsuarioForm &&
+                  borrarUsuarioForm.controls['numeroDocumento'] &&
+                  borrarUsuarioForm.controls['numeroDocumento'].invalid &&
+                  borrarUsuarioForm.controls['numeroDocumento'].touched
+              }"
+            />
+
+            <div
+              *ngIf="borrarUsuarioForm.controls['numeroDocumento'].errors?.['required']"
+              class="invalid-feedback"
+            >
+              El número de documento es requerido.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <button class="btn btn-danger mt-1" (click)="borrarUsuario()">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
