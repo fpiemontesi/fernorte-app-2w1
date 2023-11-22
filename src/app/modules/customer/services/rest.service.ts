@@ -6,13 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RestService {
-  private baseUrlCliente = 'http://localhost:8080/clientes';
-  private baseUrlUsuario = 'http://localhost:8081/auth';
-  private baseUrlTurnero = 'http://localhost:8080/turnero';
+  private baseUrlCliente = 'http://localhost:8085/clientes';
+  private baseUrlUsuario = 'http://localhost:8087/auth';
+  private baseUrlTurnero = 'http://localhost:8085/turnero';
   private urlGetBenefits =
     'https://my-json-server.typicode.com/113974-Olivera-Gustavo/api-catalogo-bd/productos';
   private urlPostBenefits =
-    'http://localhost:8080/fidelizacion/sendProductCatalogToAllClientsFilter';
+    'http://localhost:8085/fidelizacion/sendProductCatalogToAllClientsFilter';
 
   constructor(private httpClient: HttpClient) {}
 
