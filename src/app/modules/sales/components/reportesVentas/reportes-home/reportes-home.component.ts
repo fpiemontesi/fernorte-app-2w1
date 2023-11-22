@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
 import { TipoVentasComponent } from '../tipo-ventas/tipo-ventas.component';
 import { ReportesPorMesesComponent } from '../reportes-por-meses/reportes-por-meses.component';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reportes-home.component.css']
 })
 export class ReportesHomeComponent {
-
+  @ViewChild('reportes') reportesDOM!: ElementRef;
   @ViewChild(TipoVentasComponent) tipoVentasComponent: TipoVentasComponent | undefined
   @ViewChild(ReportesPorMesesComponent) reportesPorMesesComponent: ReportesPorMesesComponent | undefined
   @ViewChild(TopProductosComponent) TopProductosComponent: TopProductosComponent | undefined
@@ -25,6 +25,8 @@ export class ReportesHomeComponent {
   mostrarGrafico :boolean = false;
   montoTotal: number = 0;
 
+  montoMesAnterior: number = 0;
+
   
 
   constructor(private reportesService: ReportesService) {}
@@ -35,7 +37,7 @@ export class ReportesHomeComponent {
     this.reportesService.getReportes(formData.anio, formData.mes, formData.tipo_venta).subscribe({
       next: (reportes) => {
         this.montoTotal = reportes.monto;
-        
+        this.montoMesAnterior = reportes.monto_mes_anterior;
       },
       error: (error) => {
         if(error.status == 404)
@@ -75,9 +77,21 @@ export class ReportesHomeComponent {
     
 
     this.mostrarGrafico = true;
-
+    setTimeout(() => {
+      this.moverPantalla(this.reportesDOM.nativeElement);
+    },150)
+    
   }
   
+  moverPantalla(elemento: HTMLElement){
+    if(elemento){
+      setTimeout(() => {
+        elemento.scrollIntoView({
+          behavior: 'smooth',
+        });
+      },100)}
+      window.print();
+  }
   
 
   limpiarCampos() {

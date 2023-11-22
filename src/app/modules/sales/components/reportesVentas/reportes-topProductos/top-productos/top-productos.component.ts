@@ -69,9 +69,14 @@ export class TopProductosComponent {
       }
       
       this.chartInstance = new Chart(ctx, {
-        type: 'pie' as ChartType,
+        type: 'doughnut' as ChartType,
         data: chartData,
-        options: {}
+        options: {
+          responsive: true,
+          plugins: {
+            
+          }
+        }
       });
     } else {
       console.error('Error al generar los reportes de estado de venta.');
