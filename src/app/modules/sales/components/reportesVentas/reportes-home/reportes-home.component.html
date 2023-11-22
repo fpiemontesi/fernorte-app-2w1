@@ -1,7 +1,7 @@
 <div class="container" style="padding-top: 3%;" print="#REPORTE">
-    <h1>Reportes de ventas</h1>
+<h1 class="no-print">Reportes de ventas</h1>
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" class="no-print">
       <div class="row">
           <div class="col-md-4">
               <label for="mes">Mes</label>
@@ -43,10 +43,13 @@
           <div class="col-md-6">
             <button type="button" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos()" style="width: 90%;">Reiniciar</button>
           </div>
+          <div class="row">
+            <button type="button" class="btn btn-primary btn-block mt-2 "  (click)="imprimir()">Imprimir Reporte</button>
+          </div>
         </div>
       </div>
   </form>
-  <div>
+  
   <div class="row" *ngIf="mostrarGrafico">
     <div class="row mt-5 text-center">
       <div *ngIf="mes && mostrarGrafico">
@@ -64,43 +67,43 @@
         </h5>
     </div>
 
-    <div class="col-12 mt-4"   >
-        <h5 class="text-center mb-4" *ngIf="mes">Monto y cantidades en comparacion al mes anterior</h5>
-        <h5 class="text-center mb-4" *ngIf="!mes">Monto y cantidades en comparacion al año anterior</h5>
-        <fn-reportes-por-meses ></fn-reportes-por-meses>
-        <div class="row justify-content-center mt-2" >
-
+    <div class="col-md-12 col-sm-12 mt-4 mb-3">
+        <h5 class="text-center  mb-4" *ngIf="mes">Monto y cantidades en comparacion al mes anterior</h5>
+        <h5 class="text-center  mb-4" *ngIf="!mes">Monto y cantidades en comparacion al año anterior</h5>
+        
+        <div class="row justify-content-center mt-2 col-sm-12" >
+          <fn-reportes-por-meses ></fn-reportes-por-meses>
       </div>
     </div>
 
-    <div class="col-4 mt-4">
+    <div class="col-md-4 col-sm-12 mt-4 ">
       <div class="card-body">
         <h5 class="text-center mb-4">Cantidad de ventas mayoristas y minoristas</h5>
+        <div class="row justify-content-center mt-2"> 
           <fn-tipo-ventas #tipoVentas></fn-tipo-ventas>
-          <div class="row justify-content-center mt-2">
         </div>
       </div>
     </div>
 
-    <div class="col-4 mt-4"> 
+    <div class="col-md-4  mt-4 mb-2 col-sm-12 "> 
       <div class="card-body">
-        <h5 class="text-center mb-4" *ngIf="!mes">Top 5 productos más vendidos del año</h5>
-        <h5 class="text-center mb-4" *ngIf="mes">Top 5 productos más vendidos del mes</h5>
-          <fn-top-productos #topProductos></fn-top-productos>
-          <div class="row justify-content-center mt-2">
+        <h5 class="text-center mb-4 col-sm-12" *ngIf="!mes">Top 5 productos más vendidos del año</h5>
+        <h5 class="text-center mb-4 col-sm-12" *ngIf="mes">Top 5 productos más vendidos del mes</h5>
+        <div class="row justify-content-center mt-2"> 
+          <fn-top-productos #topProductos class="col-sm-12 "></fn-top-productos>
         </div>
       </div>
     </div>
 
-    <div class="col-4 mt-4">
+    <div class="col-md-4 mt-4 col-sm-12 ">
       <div class="card-body">
-        <h5 class="text-center mb-4">Ventas pendientes y entregadas</h5>
-          <fn-estado-ventas #estadoVentas></fn-estado-ventas>
-          <div class="row justify-content-center mt-2">
+        <h5 class="text-center mb-4 col-sm-12" >Ventas pendientes y entregadas</h5>
+        <div class="row justify-content-center mt-2"> 
+          <fn-estado-ventas #estadoVentas class="col-sm-12 "></fn-estado-ventas>
         </div>
       </div>
     </div>
   </div>
   </div>
-</div>
+
 </div>

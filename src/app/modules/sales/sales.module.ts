@@ -76,7 +76,10 @@ const routes: Routes = [
     TopProductosComponent,
     EstadoVentasComponent,
   ],
-  providers: [],
+  providers: [{
+    provide: Window,
+    useValue: window
+  }],
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule, FormsModule,RouterModule.forRoot(routes)],
   exports: [HomeComponent, RouterModule],
 })

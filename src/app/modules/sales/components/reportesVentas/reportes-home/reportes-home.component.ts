@@ -29,7 +29,7 @@ export class ReportesHomeComponent {
 
   
 
-  constructor(private reportesService: ReportesService) {}
+  constructor(private reportesService: ReportesService,private window:Window) {}
   obtenerNombreMes(mes: string) {
     this.mesNombre = mes;
   }
@@ -90,10 +90,12 @@ export class ReportesHomeComponent {
           behavior: 'smooth',
         });
       },100)}
-      window.print();
+      
   }
   
-
+  imprimir() {
+    this.window.print();
+  }
   limpiarCampos() {
     this.mes = undefined;
     this.tipo_venta = undefined;
