@@ -43,15 +43,16 @@
           <div class="col-md-6">
             <button type="button" class="btn btn-outline-violet btn-block mt-2" (click)="limpiarCampos()" style="width: 90%;">Reiniciar</button>
           </div>
-          <div class="row">
-            <button type="button" class="btn btn-primary btn-block mt-2 "  (click)="imprimir()">Imprimir Reporte</button>
-          </div>
+          
         </div>
       </div>
   </form>
   
   <div class="row" *ngIf="mostrarGrafico">
-    <div class="row mt-5 text-center">
+    <div class="row no-print">
+      <button type="button" class="btn btn-primary btn-block mt-3 mb-5 "  (click)="imprimir()">Imprimir Reporte</button>
+    </div>
+    <div class="row mt-1 text-center">
       <div *ngIf="mes && mostrarGrafico">
         <h2 >Reporte general, {{ mesNombre }} de {{ anio }} </h2>
       </div>
@@ -78,7 +79,7 @@
 
     <div class="col-md-4 col-sm-12 mt-4 ">
       <div class="card-body">
-        <h5 class="text-center mb-4">Cantidad de ventas mayoristas y minoristas</h5>
+        <h5 class="text-center mb-4 no-print">Cantidad de ventas mayoristas y minoristas</h5>
         <div class="row justify-content-center mt-2"> 
           <fn-tipo-ventas #tipoVentas></fn-tipo-ventas>
         </div>
@@ -103,6 +104,7 @@
         </div>
       </div>
     </div>
+    
   </div>
   </div>
 

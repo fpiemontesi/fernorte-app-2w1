@@ -1,5 +1,7 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import Chart, { ChartType } from 'chart.js/auto';
+import { Subscription } from 'rxjs';
+import { ReporteResponse } from 'src/app/modules/sales/models/ReporteResponse';
 import { ReportesService } from 'src/app/modules/sales/services/reportes.service';
 
 @Component({
@@ -7,34 +9,15 @@ import { ReportesService } from 'src/app/modules/sales/services/reportes.service
   templateUrl: './top-productos.component.html',
   styleUrls: ['./top-productos.component.css']
 })
-export class TopProductosComponent {
-
-  mes!: number;
-  anio: number = 2023;
-  tipo_venta!: number;
-
+export class TopProductosComponent implements OnDestroy,OnInit {
   chart: any;
   chartInstance!: Chart;
-
-  formData = {
-    mes: this.mes,
-    anio: this.anio,
-    tipo_venta: this.tipo_venta
-  }
-  constructor(private reportesService: ReportesService, private elementRef: ElementRef) {
-    
-  }
-  getReportesAndGenerateCharts(formData: any) {
-    this.formData = formData;
-    this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
-      (reportes) => {
-        this.generarReporteTopProductos(reportes);
-       
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  constructor() { }
+  ngOnInit(): void {}
+  getReportesAndGenerateCharts(reporteResponse: ReporteResponse | undefined) {
+    if(reporteResponse){
+      this.generarReporteTopProductos(reporteResponse);
+    }
   }
 
   ngOnDestroy() {

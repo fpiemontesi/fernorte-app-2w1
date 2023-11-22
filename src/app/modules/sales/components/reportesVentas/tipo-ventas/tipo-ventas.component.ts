@@ -1,41 +1,25 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { ReportesService } from 'src/app/modules/sales/services/reportes.service';
 import {  ChartType, Colors } from 'chart.js';
+import { Subscription } from 'rxjs';
+import { ReporteResponse } from '../../../models/ReporteResponse';
 
 @Component({
   selector: 'fn-tipo-ventas',
   templateUrl: './tipo-ventas.component.html',
   styleUrls: ['./tipo-ventas.component.css']
 })
-export class TipoVentasComponent {
-  mes!: number;
-  anio: number = 2023;
-  tipo_venta!: number;
-
+export class TipoVentasComponent implements OnDestroy,OnInit {
   chart: any;
   chartInstance!: Chart;
-
-  montoTotal: number = 0;
-  formData = {
-    mes: this.mes,
-    anio: this.anio,
-    tipo_venta: this.tipo_venta
+  constructor() {  
   }
-  constructor(private reportesService: ReportesService) {
-    
-  }
-  getReportesAndGenerateCharts(formData: any) {
-
-    this.reportesService.getReportes(formData.anio, formData.mes, formData.tipo_venta).subscribe({
-      next: (reportes) => {
-        this.generarReporteTipoVentas(reportes);
-        this.montoTotal = reportes.monto;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
+  ngOnInit(): void {}
+  getReportesAndGenerateCharts(reporteResponse: ReporteResponse | undefined) {
+    if(reporteResponse){
+      this.generarReporteTipoVentas(reporteResponse);
+    }
   }
   ngOnDestroy() {
     // Destruir la instancia del gráfico al salir del componente
@@ -82,7 +66,6 @@ export class TipoVentasComponent {
     } else {
       console.error('Error al generar los reportes de ventas del mes anterior y del mes actual.');  }
   }
-
   generateRandomColor(count: number): string[] {
     const colors: string[] = [];
 

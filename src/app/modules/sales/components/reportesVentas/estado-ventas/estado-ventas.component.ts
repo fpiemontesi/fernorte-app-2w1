@@ -1,6 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import Chart, { ChartType } from 'chart.js/auto';
 import { ReportesService } from '../../../services/reportes.service';
+import { ReporteResponse } from '../../../models/ReporteResponse';
 
 @Component({
   selector: 'fn-estado-ventas',
@@ -8,37 +9,19 @@ import { ReportesService } from '../../../services/reportes.service';
   styleUrls: ['./estado-ventas.component.css']
 })
 export class EstadoVentasComponent {
-
-  mes!: number;
-  anio: number = 2023;
-  tipo_venta!: number;
-
   chart: any;
   chartInstance!: Chart;
-  montoTotal!:number;
 
-  formData = {
-    mes: this.mes,
-    anio: this.anio,
-    tipo_venta: this.tipo_venta
-  }
-  constructor(private reportesService: ReportesService, private elementRef: ElementRef) {
+  constructor() {
     
   }
-  getReportesAndGenerateCharts(formData: any) {
-    this.formData = formData;
-    this.reportesService.getReportes(this.formData.anio, this.formData.mes, this.formData.tipo_venta).subscribe(
-      (reportes) => {
-        this.generarReporteEstadoVenta(reportes);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  getReportesAndGenerateCharts(reporteResponse: ReporteResponse | undefined) {
+    if(reporteResponse){
+      this.generarReporteEstadoVenta(reporteResponse);
+    }
   }
 
   ngOnDestroy() {
-    // Destruir la instancia del gráfico al salir del componente
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }

@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { ReportesService } from '../../../services/reportes.service';
 import Chart from 'chart.js/auto';
 import { Subscription } from 'rxjs';
+import { ReporteResponse } from '../../../models/ReporteResponse';
 
 @Component({
   selector: 'fn-reportes-por-meses',
@@ -9,49 +10,26 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./reportes-por-meses.component.css']
 })
 export class ReportesPorMesesComponent implements OnDestroy,OnInit {
-  subscriptions: Subscription | undefined;
-  mes!: number;
-  anio: number = 2023;
-  tipo_venta!: number;
-
   chart: any;
   chart2: any;
   chartInstance!: Chart;
   chartInstance2!: Chart;
-  montoTotal: number = 0;
 
-  constructor(private reportesService: ReportesService) {
-    
-  }
-  ngOnInit(): void {
-    this.subscriptions = new Subscription();
-  }
-  getReportesAndGenerateCharts(formData: any) {
-    this.subscriptions?.add(
-      this.reportesService.getReportes(formData.anio, formData.mes, formData.tipo_venta).subscribe(
-        (reportes) => {
-          this.generarReporteCantidades(reportes);
-          this.generarReporteVentasPorMeses(reportes);
-         
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-    )
-    
+  constructor() {}
+  ngOnInit(): void {}
+  getReportesAndGenerateCharts(reporteResponse: ReporteResponse | undefined) {
+    if(reporteResponse){
+      this.generarReporteCantidades(reporteResponse);
+      this.generarReporteVentasPorMeses(reporteResponse);
+    }
   }
 
   ngOnDestroy() {
     if (this.chartInstance) {
       this.chartInstance.destroy();
     }
-    if(this.subscriptions){
-      this.subscriptions.unsubscribe();
-    }
   }
   generarReporteVentasPorMeses(reportes: any) {
-    console.log(reportes);
     const chartData = {
       labels: ['Comparacion cantidad de ventas realizadas'],
       datasets: [

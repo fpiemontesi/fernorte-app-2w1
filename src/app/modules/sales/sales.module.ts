@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './components/home/home.component';
-import { AltaVentaComponent } from './components/alta-venta/alta-venta.component';
+
 import { ConsultarPresupuestoComponent } from './components/consultar-presupuesto/consultar-presupuesto.component';
 import { ConsultarVentaComponent } from './components/consultar-venta/consultar-venta.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AltaPresupuestoComponent } from './components/alta-presupuesto/alta-presupuesto.component';
-import { ModificarVentaComponent } from './components/modificar-venta/modificar-venta.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ModificarPresupuestoComponent } from './components/modificar-presupuesto/modificar-presupuesto.component';
 import { ReportesHomeComponent } from './components/reportesVentas/reportes-home/reportes-home.component';
@@ -64,11 +63,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomeComponent,
-    AltaVentaComponent,
     ConsultarPresupuestoComponent,
     ConsultarVentaComponent,
     AltaPresupuestoComponent,
-    ModificarVentaComponent,
     ModificarPresupuestoComponent,
     ReportesHomeComponent,
     TipoVentasComponent,
