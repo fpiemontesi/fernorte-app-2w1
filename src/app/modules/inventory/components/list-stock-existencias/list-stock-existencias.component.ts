@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExistenciaStock } from '../../models/existenciaStock';
+import { ExistenceStock } from '../../models/ExistenceStock';
 import { ListExistenciasService } from '../../services/list-existencias.service';
 
 
@@ -12,20 +12,20 @@ import { ListExistenciasService } from '../../services/list-existencias.service'
 export class ListStockExistenciasComponent implements OnInit {
 
   constructor(private listarstockExistencias:ListExistenciasService){}
-  
-  list : ExistenciaStock[]=[];
+
+  list : ExistenceStock[]=[];
 
   ngOnInit(): void {
     this.llenarList();
   }
 
-  
+
    llenarList(){
     this.listarstockExistencias.getExistenciasStockTotal().subscribe(list=>{
       this.list=list;
     })
   }
-  
+
 
 
 }

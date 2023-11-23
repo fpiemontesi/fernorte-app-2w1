@@ -1,53 +1,58 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './components/home/home.component';
-import { ModificarExistenciaComponent } from './components/modificar-existencia/modificar-existencia.component';
-import { NgbNavModule, NgbToast } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { ListarExistenciasComponent } from './components/listar-existencias/listar-existencias.component';
-import { RouterModule, Routes } from '@angular/router';
-import { ExistenciasService } from './services/existance.service';
+import { RouterModule } from '@angular/router';
+import { RemitosHomeComponent } from './components/remitos/remitos-home/remitos-home.component';
+import { InventoryAppRoutingModule} from "./inventory-app-routing.module";
+import { ReservationListComponent } from './components/reservations/reservation-list/reservation-list.component';
+import { ListBatchesByExistenceComponent } from './components/batches/list-batches-by-existence/list-batches-by-existence.component';
 import { ListStockExistenciasComponent } from './components/list-stock-existencias/list-stock-existencias.component';
-import { ReservationListComponent } from './components/reservation-list/reservation-list.component';
-import { ListBatchesByExistenceComponent } from './components/list-batches-by-existence/list-batches-by-existence.component';
-import { ListBatchesBySectionComponent } from './components/list-batches-by-section/list-batches-by-section.component';
-import { RegistrarRemitoComponent } from './components/remito/registrar-remito/registrar-remito.component';
-import { RegistrarLotesComponent } from './components/registrar-lotes/registrar-lotes.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastsComponent } from './components/toast/toasts.component';
-
-const routes: Routes = [
-  {
-    path: 'inventory',
-    component: HomeComponent,
-    children: [
-      {
-        path: 'listar-existencias',
-        component: ListarExistenciasComponent,
-      },
-      {
-        path: 'modificar-existencia/:id',
-        component: ModificarExistenciaComponent,
-      },
-    ],
-  },
-];
+import { NgbDropdownModule, NgbNavModule, NgbToast, NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
+import { CreateSectionComponent } from './components/sections/create-section/create-section.component';
+import { ListBatchesBySectionComponent } from './components/batches/list-batches-by-section/list-batches-by-section.component';
+import { CreateControlReportComponent} from "./components/stock-control-reports/create-control-report/create-control-report.component";
+import { BatchFinderModalComponent} from "./components/stock-control-reports/batch-finder-modal/batch-finder-modal.component";
+import { ModifyStockControlComponent} from "./components/stock-control-reports/modify-stock-control/modify-stock-control.component";
+import { ListControlStockComponent} from "./components/stock-control-reports/list-control-stock/list-control-stock.component";
+import { ToastsContainer} from "./components/toast/toasts-container.component";
+import { StockControlsHomeComponent} from "./components/stock-control-reports/stock-controls-home/stock-controls-home.component";
+import { RegistrarRemitoComponent} from "./components/remitos/registrar-remito/registrar-remito.component";
+import { RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
+import { LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
+import { StadisticsExpiredExistancesComponent } from './components/stadistics-expired-existances/stadistics-expired-existances.component';
+import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
+import { ListBatchSoonTooExipreComponent } from './components/list-batch-soon-too-exipre/list-batch-soon-too-exipre.component';
+import { ModificarLoteComponent } from './components/modificar-lote/modificar-lote.component';
+import { ModificarExistenciaComponent } from './components/existences/modificar-existencia/modificar-existencia.component';
+import { ListarExistenciasComponent } from './components/existences/listar-existencias/listar-existencias.component';
+import { ListBatchesExpiredComponent } from './components/list-batches-expired/list-batches-expired.component';
+import { ExistenceHomeComponent } from './components/existences/existence-home/existence-home.component';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    ModificarExistenciaComponent,
-    ListarExistenciasComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent, 
-    RegistrarLotesComponent, RegistrarRemitoComponent, ToastsComponent, ReservationListComponent, ListStockExistenciasComponent
-  ],
-  providers: [ExistenciasService],
+  declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
+    RegistrarLotesComponent, RegistrarRemitoComponent,CreateSectionComponent, ToastsComponent,
+    ReservationListComponent, ListStockExistenciasComponent, ListBatchesExpiredComponent,
+    RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
+    ModifyStockControlComponent,ModificarLoteComponent , ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
+    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent, ListBatchSoonTooExipreComponent,
+    ModificarExistenciaComponent, ListarExistenciasComponent, ExistenceHomeComponent],
+  providers: [],
   imports: [
     CommonModule,
     FormsModule,
-    NgbNavModule,
-    RouterModule.forChild(routes),
     NgbToast,
+    ReactiveFormsModule,
+    NgbToastModule,
+    NgbNavModule,
+    InventoryAppRoutingModule,
+    NgbDropdownModule,
   ],
-  exports: [HomeComponent, RouterModule],
-
+  exports: [
+    HomeComponent,
+    RouterModule
+  ],
 })
-export class InventaryModule {}
+export class InventaryModule {
+}
