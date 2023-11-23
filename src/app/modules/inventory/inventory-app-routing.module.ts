@@ -20,6 +20,7 @@ import {RegistrarLotesComponent} from "./components/batches/registrar-lotes/regi
 import { ListarExistenciasComponent } from './components/existences/listar-existencias/listar-existencias.component';
 import { ListStockExistenciasComponent } from './components/list-stock-existencias/list-stock-existencias.component';
 import { ExistenceHomeComponent } from './components/existences/existence-home/existence-home.component';
+import { ModificarExistenciaComponent } from './components/existences/modificar-existencia/modificar-existencia.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,9 @@ const routes: Routes = [
           },
           {
             path: 'stock-total', component: ListStockExistenciasComponent
+          },
+          {
+            path: 'modificar/:id', component: ModificarExistenciaComponent
           }
         ]
       },

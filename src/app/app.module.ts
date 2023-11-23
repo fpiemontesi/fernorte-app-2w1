@@ -15,6 +15,7 @@ import { CatalogModule } from './modules/catalog/catalog.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InventaryModule } from './modules/inventory/inventory.module';
+import { ExistenciasService } from './modules/inventory/services/existance.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +36,7 @@ import { InventaryModule } from './modules/inventory/inventory.module';
     SalesModule,
     InvoiceModule
   ],
-  providers: [],
+  providers: [ExistenciasService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

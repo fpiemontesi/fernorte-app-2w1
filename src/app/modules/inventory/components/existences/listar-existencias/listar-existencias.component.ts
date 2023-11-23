@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Existencia } from '../../../models/existencia';
+import { Existence } from '../../../models/existence';
 import { ExistenciasService } from '../../../services/existance.service';
 import { Router } from '@angular/router';
 import { ToastInfo } from '../../../models/notification';
@@ -13,7 +13,7 @@ import { ModalComponent } from '../../modal/modal.component';
   styleUrls: ['./listar-existencias.component.css'],
 })
 export class ListarExistenciasComponent implements OnInit, OnDestroy {
-  list: Existencia[] = [];
+  list: Existence[] = [];
   toasts: ToastInfo[] = [];
   suscripciones: Subscription = new Subscription();
 
@@ -38,7 +38,7 @@ export class ListarExistenciasComponent implements OnInit, OnDestroy {
     );
   }
 
-  eliminarExistencia(id: number) {
+  eliminarExistencia(id: string) {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.description = 'Seguro desea eliminar un producto?';
     modalRef.result.then(
@@ -63,8 +63,8 @@ export class ListarExistenciasComponent implements OnInit, OnDestroy {
     );
   }
 
-  modificarExistencia(id: number) {
-    this.router.navigate(['/inventory/modificar-existencia/' + id]);
+  modificarExistencia(id: string) {
+    this.router.navigate(['/inventory/existencias/modificar/' + id]);
   }
 
   notificar(header: string, body: string) {

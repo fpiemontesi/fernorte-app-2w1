@@ -4,11 +4,11 @@
     <div class="row justify-content-between">
       <div class="col">
         <div class="fw-bold">Id del Producto</div>
-        <div>#{{ existenciaAModificar.id }}</div>
+        <div>#{{ existenciaAModificar.code }}</div>
       </div>
       <div class="col">
         <div class="fw-bold">Nombre del Producto</div>
-        <div>#{{ existenciaAModificar.nombre }}</div>
+        <div>#{{ existenciaAModificar.name }}</div>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@
           id="stockMin"
           required
           min="1"
-          [(ngModel)]="existenciaAModificar.stock_minimo"
+          [(ngModel)]="existenciaAModificar.minimunStock"
           name="stockMin"
           #stockMin="ngModel"
         />

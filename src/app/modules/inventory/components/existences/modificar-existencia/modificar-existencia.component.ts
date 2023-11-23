@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Existencia } from '../../../models/existencia';
+import { Existence } from '../../../models/existence';
 import { ExistenciasService } from '../../../services/existance.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastInfo } from '../../../models/notification';
@@ -12,11 +12,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./modificar-existencia.component.css']
 })
 export class ModificarExistenciaComponent implements OnInit,OnDestroy {
-  existenciaAModificar:Existencia= {
-    id:1,
-    stock_minimo:5,
-    nombre:"Tornillos",
-    id_catalogo:5
+  existenciaAModificar:Existence= {
+    code:"1",
+    minimunStock:5,
+    name:"Tornillos"
   }
   toasts: ToastInfo[] = [];
   invalido=false
@@ -52,7 +51,7 @@ export class ModificarExistenciaComponent implements OnInit,OnDestroy {
           next:() =>{
             // this.notificar("Exito",'Producto modificado correctamente!');
             // alert('Producto modificado correctamente!');
-            this.router.navigate(['/inventory/listar-existencias']);
+            this.router.navigate(['/inventory/existencias/listar']);
           },
           error:() =>{
             this.notificar("Error",'Ocurrio un error al modificar el producto!');
