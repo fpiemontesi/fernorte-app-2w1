@@ -14,14 +14,14 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./update-offer.component.css']
 })
 export class UpdateOfferComponent {
-  offer:Offer = {} as Offer;
-  lstProductos:Producto[] = []
-  codeOfferSelected:string = "";
-  alert:boolean = false
+
+  offer: Offer = {} as Offer;
+  lstProductos: Producto[] = []
+  codeOfferSelected: string = "";
+  alert: boolean = false
   private subscription = new Subscription();
 
-
-  constructor(private offerService:OfferService, private activatedRoute: ActivatedRoute, private route:Router,private pService:productService){
+  constructor(private offerService: OfferService, private activatedRoute: ActivatedRoute, private route: Router, private pService: productService) {
   }
 
   ngOnInit(): void {
@@ -32,32 +32,31 @@ export class UpdateOfferComponent {
     )
     this.subscription.add(
       this.offerService.getByCode(this.codeOfferSelected).subscribe(
-        (response:OfferDtoProducto)=>{
-          this.offer={
+        (response: OfferDtoProducto) => {
+          this.offer = {
             nombre: response.nombre,
             codigo: response.codigo,
             descripcion: response.descripcion,
             puntos: response.puntos,
             activo: response.activo,
             codigo_producto: response.producto.codigo,
-            precio_oferta : response.precio_oferta
+            precio_oferta: response.precio_oferta
           };
         }),
     )
     this.subscription.add(
       this.pService.getAllProducts().subscribe({
-        next: (data:Producto[])=>{
-          data.forEach(e =>{
-            if(e.activo==true){
+        next: (data: Producto[]) => {
+          data.forEach(e => {
+            if (e.activo == true) {
               this.lstProductos.push(e)
             }
           })
         },
-        error:() => {
+        error: () => {
           alert("error")
         }
       }),
-      
     )
   }
 
@@ -65,30 +64,29 @@ export class UpdateOfferComponent {
     this.subscription.unsubscribe();
   }
 
-  enviarForm(formulario: NgForm){
-    if(formulario.valid){
+  enviarForm(formulario: NgForm) {
+    if (formulario.valid) {
       this.editarOffer()
     }
   }
-  editarOffer(){
+
+  editarOffer() {
     this.subscription.add(
-        this.offerService.update(this.offer).subscribe({
-          next: async (offer:Offer)=>{
-            await this.toggleAlert()
-            this.offer = {} as Offer
-            this.route.navigate(["/listOffers"])
-          },
-          error:()=>{
-            alert("Ocurrio un error")
-          }
-        })
+      this.offerService.update(this.offer).subscribe({
+        next: async (offer: Offer) => {
+          await this.toggleAlert()
+          this.offer = {} as Offer
+          this.route.navigate(["/listOffers"])
+        },
+        error: () => {
+          alert("Ocurrio un error")
+        }
+      })
     )
   }
 
-
   toggleAlert(): Promise<void> {
     this.alert = !this.alert;
-
     if (this.alert) {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -100,5 +98,4 @@ export class UpdateOfferComponent {
       return Promise.resolve();
     }
   }
-
 }

@@ -14,30 +14,31 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./register-offer.component.css']
 })
 export class RegisterOfferComponent {
-  offer:OfferDto = {} as OfferDto;
-  lstProductos:Producto[] = []
-  alert:boolean = false;
+
+  offer: OfferDto = {} as OfferDto;
+  lstProductos: Producto[] = []
+  alert: boolean = false;
   private subscription = new Subscription();
-  constructor(private offerService:OfferService, private router:Router, private pService:productService){}
+
+  constructor(private offerService: OfferService, private router: Router, private pService: productService) { }
 
   ngOnInit(): void {
     this.pService.getAllProducts().subscribe({
-      next: (data : Producto[]) =>{
+      next: (data: Producto[]) => {
         this.lstProductos = []
         data.forEach(p => {
-          if(p.activo==true){
+          if (p.activo == true) {
             this.lstProductos.push(p)
           }
         })
-
       },
       error: () => {
         alert("error")
       }
     })
   }
-  
-  cleanForm(){
+
+  cleanForm() {
     this.offer = {} as Offer
     this.router.navigate(["/listOffers"])
   }
@@ -46,21 +47,22 @@ export class RegisterOfferComponent {
     this.subscription.unsubscribe()
 
   }
-  enviarForm(formulario: NgForm){
-    if(formulario.valid){
+
+  enviarForm(formulario: NgForm) {
+    if (formulario.valid) {
       this.agregarOffer()
     }
   }
 
-  agregarOffer(){
+  agregarOffer() {
     this.subscription.add(
       this.offerService.create(this.offer).subscribe({
-        next: async (offer:OfferDto)=>{
+        next: async (offer: OfferDto) => {
           await this.toggleAlert()
           this.offer = {} as OfferDto
           this.router.navigate(["listOffers"])
         },
-        error:()=>{
+        error: () => {
           alert("Ocurrio un error")
         }
       })
@@ -69,7 +71,6 @@ export class RegisterOfferComponent {
 
   toggleAlert(): Promise<void> {
     this.alert = !this.alert;
-
     if (this.alert) {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -81,5 +82,4 @@ export class RegisterOfferComponent {
       return Promise.resolve();
     }
   }
-
 }

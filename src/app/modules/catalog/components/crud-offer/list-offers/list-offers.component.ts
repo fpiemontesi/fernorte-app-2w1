@@ -12,20 +12,21 @@ import { Producto } from '../../../models/producto';
   styleUrls: ['./list-offers.component.css']
 })
 export class ListOffersComponent {
-  lista:OfferDtoProducto[]=[];
-  listaproduct:Offer[]=[]
-  check:boolean=false;
+  lista: OfferDtoProducto[] = [];
+  listaproduct: Offer[] = []
+  check: boolean = false;
   codigoOffer = "";
-  alert:boolean = false;
+  alert: boolean = false;
   private subscription = new Subscription();
-  constructor(private offerService:OfferService, private pService:productService) {
 
-
+  constructor(private offerService: OfferService, private pService: productService) {
   }
+
   ngOnInit(): void {
     this.loadOffers();
   }
-  obtenerNombreProducto(code:string): string{
+
+  obtenerNombreProducto(code: string): string {
     const producto = this.listaproduct.find(m => m.codigo === code);
     return producto ? producto.nombre : 'Desconocida';
   }
@@ -34,28 +35,26 @@ export class ListOffersComponent {
     this.subscription.unsubscribe();
   }
 
-  guardarCodigo(codigo:string){
+  guardarCodigo(codigo: string) {
     this.codigoOffer = codigo;
   }
-  
 
-  eliminarMarca(){
+  eliminarMarca() {
     this.subscription.add(
-        this.offerService.delete(this.codigoOffer).subscribe({
-          next: async (offer:Offer) => {
-            await this.toggleAlert();
-            this.loadOffers()
-          },
-          error: () => {
-            alert("error")
-          }
-        })
+      this.offerService.delete(this.codigoOffer).subscribe({
+        next: async (offer: Offer) => {
+          await this.toggleAlert();
+          this.loadOffers()
+        },
+        error: () => {
+          alert("error")
+        }
+      })
     )
   }
 
   toggleAlert(): Promise<void> {
     this.alert = !this.alert;
-
     if (this.alert) {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -68,43 +67,39 @@ export class ListOffersComponent {
     }
   }
 
-  loadOffers(){
-    if(this.check==false){
+  loadOffers() {
+    if (this.check == false) {
       this.subscription.add(
         this.offerService.get().subscribe({
-          next: (offer:OfferDtoProducto[])=> {
-            this.lista=[]
-            offer.forEach(o =>{
-              if(o.activo==true){
+          next: (offer: OfferDtoProducto[]) => {
+            this.lista = []
+            offer.forEach(o => {
+              if (o.activo == true) {
                 this.lista.push(o)
               }
             })
-  
           },
-          error: ()=>{
+          error: () => {
             console.log("Error al cargar las Descuento")
           }
         })
       )
-
-    }else{
+    } else {
       this.subscription.add(
         this.offerService.get().subscribe({
-          next: (offer:OfferDtoProducto[])=> {
-            this.lista=[]
-            offer.forEach(o =>{
-              if(o.activo==false){
+          next: (offer: OfferDtoProducto[]) => {
+            this.lista = []
+            offer.forEach(o => {
+              if (o.activo == false) {
                 this.lista.push(o)
               }
             })
-  
           },
-          error: ()=>{
+          error: () => {
             console.log("Error al cargar las Descuento")
           }
         })
       )
     }
   }
-
 }
