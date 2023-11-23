@@ -1,80 +1,77 @@
 .botonAbrirNav {
   position: fixed;
-  top: 0; /* Lo anclamos en la parte superior */
-  left: 0; /* Lo anclamos a la izquierda */
-  width: 60px; /* Establecemos el ancho al 100% del ancho de la pantalla */
-  height: 100%; /* Establecemos la altura al 100% de la altura de la pantalla */
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
   background-color: rgb(250, 250, 250);
   border: none;
-  box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
-  -webkit-box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
-  -moz-box-shadow: 10px 5px 5px -4px rgba(0,0,0,0.32);
+  box-shadow: 10px 5px 5px -4px rgba(0, 0, 0, 0.32);
+  -webkit-box-shadow: 10px 5px 5px -4px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: 10px 5px 5px -4px rgba(0, 0, 0, 0.32);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.botonAbrirNav:active{
- background-color: rgb(250, 250, 250);
+.botonAbrirNav:active {
+  background-color: rgb(250, 250, 250);
   border: none;
 }
 
-#svgInic{
-  width: 40px; /* Establece el tamaño del icono */
+#svgInic {
+  width: 40px;
   position: relative;
   color: rgb(49, 49, 49);
   animation-name: example;
-  animation-duration:2s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
   animation-play-state: running;
-
 }
-li{
+
+li {
   list-style: none;
   margin: 0;
   padding: 0;
   font-size: 1rem;
   font-weight: 500;
 }
-a{
+
+a {
   text-decoration: none;
   color: rgb(9, 9, 9);
 }
 
 #toggleProducts[aria-expanded="false"] svg {
-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 #toggleProducts[aria-expanded="true"] svg {
-transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 #togglePromociones[aria-expanded="false"] svg {
-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 #togglePromociones[aria-expanded="true"] svg {
-transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 #toggleCatalogo[aria-expanded="false"] svg {
-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 #toggleCatalogo[aria-expanded="true"] svg {
-transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
 #toggleOfertas[aria-expanded="false"] svg {
-transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 #toggleOfertas[aria-expanded="true"] svg {
-transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
-
-
-
-
