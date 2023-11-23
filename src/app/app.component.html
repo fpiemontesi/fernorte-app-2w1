@@ -6,21 +6,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="#" (click)="onShowCatalog()">Catálogo</a>
-        <a class="nav-link" href="#" (click)="onShowClients()">Clientes</a>
-        <a class="nav-link" href="#" (click)="onShowPurchase()">Compras</a>
-        <a class="nav-link" href="#" (click)="onShowInvoice()">Facturación</a>
-        <a class="nav-link" href="#" (click)="onShowInventory()">Inventario</a>
-        <a class="nav-link" href="#" routerLink="sales">Ventas</a>
+        <a class="nav-link" href="#" routerLink="/catalog" routerLinkActive="active">Catálogo</a>
+        <a class="nav-link" href="#" routerLink="/customer" routerLinkActive="active">Clientes</a>
+        <a class="nav-link" href="#" routerLink="/purchase" routerLinkActive="active">Compras</a>
+        <a class="nav-link" href="#" routerLink="/invoice" routerLinkActive="active">Facturación</a>
+        <a class="nav-link" href="#" routerLink="/inventory" routerLinkActive="active">Inventario</a>
+        <a class="nav-link" href="#" routerLink="/sales" routerLinkActive="active">Ventas</a>
       </div>
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
-<fn-home-catalog *ngIf="showCatalog"></fn-home-catalog>
-<fn-home-clients *ngIf="showClients"></fn-home-clients>
-<fn-home-inventory *ngIf="showInventory"></fn-home-inventory>
-<fn-home-purchase *ngIf="showPurchase"></fn-home-purchase>
-<fn-home-sales *ngIf="showSales"></fn-home-sales>
-<fn-home-invoice *ngIf="showInvoice"></fn-home-invoice>
 
+<router-outlet></router-outlet>
