@@ -302,7 +302,7 @@ export class AltaPresupuestoComponent implements OnInit,OnDestroy {
 
       this.presupuestoService.getExistenciaByCodProducto(producto.codigo).subscribe((response) => {
         if(response.length != 0){
-          this.existencias = response[0].total; 
+          this.existencias = response[0].stock; 
           //console.log("Existencias consultadas")
           this.actualizarPrecio();
         } else{

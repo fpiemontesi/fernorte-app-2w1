@@ -1,5 +1,5 @@
 export interface Existencia {
-    codigo: string;
-    nombre: string;
-    total: number;
+    code: string;
+    name: string;
+    stock: number;
 }

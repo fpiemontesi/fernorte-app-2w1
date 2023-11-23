@@ -171,7 +171,7 @@ export class ModificarPresupuestoComponent {
     this.subscriptions!.add(
     this.presupuestoService.getExistenciaByCodProducto(producto.value).subscribe((response) => {
       if(response.length != 0){
-        this.existencias = response[0].total;
+        this.existencias = response[0].stock;
       } else{
         this.existencias = 0
       }

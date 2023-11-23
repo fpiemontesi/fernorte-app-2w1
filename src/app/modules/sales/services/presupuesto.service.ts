@@ -75,7 +75,7 @@ export class PresupuestoService {
   }
 
   getExistenciaByCodProducto(cod: string): Observable<Existencia[]> {
-    const url = `https://my-json-server.typicode.com/113843-Decicco-Giovanni/ventas/existencias?codigo=${cod}`;
+    const url = `https://my-json-server.typicode.com/113843-Decicco-Giovanni/ventas/existencias?code=${cod}`;
     return this.http.get<Existencia[]>(url);
   }
 
