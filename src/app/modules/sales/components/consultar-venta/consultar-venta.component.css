@@ -1,0 +1,43 @@
+
+.custom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 32%;
+    background-color: rgb(13, 136, 202); /* Color de fondo al estado normal */
+    border: 1px solid rgb(13, 136, 202); /* Borde del botón */
+    color: white; /* Color del texto en el botón */
+  
+    /* Transición para el color de fondo cuando se presiona */
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: rgb(50, 100, 80); 
+  }
+  
+  .custom-btn:active {
+    background-color: rgb(30, 70, 50); 
+  }
+
+  .table tbody tr:nth-child(odd) {
+    background-color: #f8f9fa; 
+  }
+  .table thead {
+    background-color: #343a40; 
+    color: white; 
+  }
+  .centered
+{
+  text-align: center;
+}
+.btn-outline-violet {
+  color: rgb(110, 80, 141);
+  border-color: #591d94; 
+}
+
+.btn-outline-violet:hover {
+  color: #ffffff; 
+  background-color:#432660;
+  border-color: #432660;
+}

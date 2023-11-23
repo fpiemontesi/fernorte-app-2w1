@@ -1,0 +1,29 @@
+.btn-outline-violet {
+    color: rgb(110, 80, 141);
+    border-color: #591d94; 
+  }
+  
+  .btn-outline-violet:hover {
+    color: #ffffff; 
+    background-color:#432660;
+    border-color: #432660;
+  }
+
+  @media print{
+    .printable{
+      top: 0;
+      left: 0;
+      width: 100%;
+      visibility: visible;
+      display: flex;
+      image-resolution: 768dpi 1024dpi;
+    }
+    .print-graphic{
+      width: 30%;
+      display: block;
+    }
+    .no-print{
+      visibility: hidden;
+      display: none;
+    }
+  }

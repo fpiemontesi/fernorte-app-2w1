@@ -1,0 +1,130 @@
+<div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;">
+  <h1>Consultar Presupuestos</h1>
+      
+      <div class="row">
+        <div class="col-md-2 col-sm-12" style="padding: 1%;">
+          <label for="id" class="mb-1">ID</label>
+          <input id="id" type="number" name="id" class="form-control" placeholder="Ej: 10" [(ngModel)]="this.presupuestoFilter.id">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">DNI Cliente</label>
+          <input type="number" class="form-control" id="cliente" name="cliente" [(ngModel)]="this.presupuestoFilter.doc_cliente">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Tipo de Presupuesto</label>
+          <select class="form-control form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="this.presupuestoFilter.tipo_presupuesto">
+            <option disabled selected>Seleccionar tipo de presupuesto</option>
+            <option value="1">Minorista</option>
+            <option value="2">Mayorista</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Monto Desde:</label>
+          <input type="number" class="form-control" id="montoDesde" placeholder="$" name="montoDesde" [(ngModel)]="this.presupuestoFilter.monto_desde">
+        </div>
+        <div class="col-md-4 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Monto Hasta:</label>
+          <input type="number" class="form-control" id="montoHasta" placeholder="$" name="montoH"  [(ngModel)]="this.presupuestoFilter.monto_hasta">
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-md-4 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Fecha Desde:</label>
+          <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="this.presupuestoFilter.fecha_desde">
+        </div>
+        <div class="col-md-4 col-sm-12" style="padding: 1%;">
+          <label class="mb-1">Fecha Hasta:</label>
+          <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="this.presupuestoFilter.fecha_hasta">
+        </div>
+        <div class="col-md-3 col-sm-12" style="padding-top: 3%;margin-top: 6px;">
+          <div class="row mb-2">
+            <div class="col-md-6 mb-2">
+              <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="filtrarPresupuestos();  toggleTabla(true)">Buscar</button>
+            </div>
+          
+            <div class="col-md-6">
+              <button type="button" class="btn btn-outline-violet" style="width: 100%;" (click)="limpiarCampos(); toggleTabla(false)">Reiniciar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <br>
+    <div class="table-responsive" #presupuestosDOM [style]="{display: mostrarTabla ? 'block' : 'none'}" >
+      <table class="table table-striped table-bordered table-hover" style="align-content: center;">
+        <thead class="thead">
+          <tr>
+            <th class="centered">ID</th>
+            <th class="centered">DNI Cliente</th>
+            <th class="centered">Fecha de Creación</th>
+            <th class="centered">Tipo de Pedido</th>
+            
+            <th class="centered">Monto</th>
+            <th style="text-align: center; margin-top: 3%; width: 50px; ">Ver Detalle</th>
+            <th class="centered" style="width: 50px;">Modificar Presupuesto</th>
+            <th class="centered" style="width: 50px;">Eliminar Presupuesto</th>
+            <th class="centered" style="width: 50px;">Generar Venta</th>
+            <!-- <th style="text-align: center; margin-top: 3%;">Modificar<br> Venta</th> -->
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let presupuesto of presupuestos">
+            <td class="centered">{{ presupuesto.id }}</td>
+            <td class="centered">{{ presupuesto.doc_cliente }}</td>
+            <td class="centered">{{ presupuesto.fecha_creacion | date: 'dd/MM/yyyy' }}</td>
+            <td class="centered">{{ presupuesto.tipo_venta === 1 ? 'Minorista' : presupuesto.tipo_venta === 2 ? 'Mayorista' : '' }}</td>
+            <td class="centered">{{ presupuesto.precio_total | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td class="centered">
+              <button class="btn btn-outline-dark btn-sm custom-btn" (click)="verDetalle(presupuesto);">
+                <i>Ver</i>
+              </button>
+            </td>
+            <td class="centered">
+              <button class="btn btn-warning" (click)="modificarPresupuesto(presupuesto)" >
+                <i>Editar</i>
+              </button>
+            </td>
+            <td class="centered">
+              <button class="btn btn-danger" (click)="eliminarPresupuesto(presupuesto.id)">
+                <i>Borrar</i>
+              </button>
+            </td>
+            <td class="centered">
+              <button class="btn btn-success" (click)="generarVenta(presupuesto)">
+                <i>Generar</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div #detallePresupuestosDOM>
+    <div class="container modal-dialog modal-lg"  *ngIf="mostrarDetalle">
+      <h3 class="h4"  >Detalles</h3>
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="thead">
+          <tr>
+            <th class="centered">Producto</th>
+            <th class="centered">Descripción</th>
+            <th class="centered">Cantidad</th>
+            <th class="centered">Precio Unitario</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let detalle of presupuesto.detalles">
+            <td class="centered">{{ detalle.cod_producto }}</td>
+            <td class="centered">{{ detalle.descripcion }}</td>
+            <td class="centered">{{ detalle.cantidad }}</td>
+            <td class="centered">{{ detalle.precio_unitario | currency:'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+          <tr>
+            <td></td><td></td><td class="text-end"><strong>TOTAL:</strong></td><td><strong>{{ presupuesto_monto  | currency:'USD':'symbol':'1.2-2' }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+  </div>

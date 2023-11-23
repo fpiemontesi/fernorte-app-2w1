@@ -1,0 +1,179 @@
+<div class="container" style="padding-top: 3%;">
+  <h1>Consultar Ventas</h1>
+  <div class="container">
+    <div class="row">
+      <div class="row">
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label for="id">Id</label>
+        <input id="id" type="number" name="id" class="form-control" [(ngModel)]="ventaFilter.id">
+      </div>
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Documento Cliente</label>
+        <input type="number" class="form-control" id="cliente" name="cliente" [(ngModel)]="ventaFilter.doc_cliente">
+        <!-- <select class="form-select" id="cliente" name="cliente" [(ngModel)]="ventaFilter.doc_cliente">
+          <option disabled selected value="">Selecciona el cliente de la venta</option>
+          <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nombre }} {{ cliente.apellido }}</option>
+        </select> -->
+      </div>
+    <div class="col-md-3 col-sm-12" style="padding: 1%;">
+      <label>ID Vendedor</label>
+      <input type="number" class="form-control" id="vendedor" name="vendedor" [(ngModel)]="ventaFilter.id_vendedor">
+      <!-- <select class="form-select" id="vendedor" name="vendedor" [(ngModel)]="ventaFilter.id_vendedor">
+        <option disabled selected value="">Selecciona el vendedor de la venta</option>
+        <option value="1">Cande</option>
+        <option value="2">Tomi</option>
+      </select> -->
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Forma de Entrega</label>
+        <select class="form-select" id="formaEntrega" name="formaEntrega" [(ngModel)]="ventaFilter.forma_entrega">
+          <option disabled selected value="">Selecciona la forma de entrega de la venta</option>
+          <option value="1">En Caja</option>
+          <option value="2">En Deposito</option>
+        </select>
+      </div>
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Tipo de Venta</label>
+        <select class="form-select" id="tipo_venta" name="tipo_venta" [(ngModel)]="ventaFilter.tipo_venta">
+          <option disabled selected>Selecciona el tipo de venta</option>
+          <option value="2">Mayorista</option>
+          <option value="1">Minorista</option>
+        </select>
+      </div>
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Monto Desde:</label>
+        <input type="number" class="form-control" id="montoDesde" placeholder="Monto desde a filtrar" name="montoDesde" [(ngModel)]="montoDesde">
+      </div>
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Monto Hasta:</label>
+        <input type="number" class="form-control" id="montoHasta" placeholder="Monto hasta filtrar" name="montoH"  [(ngModel)]="montoHasta">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Fecha Desde:</label>
+        <input type="date" class="form-control" id="fechaDesde" name="fechaDesde" [(ngModel)]="fechaDesde">
+      </div>
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Fecha Hasta:</label>
+        <input type="date" class="form-control" id="fechaHasta" name="fechaHasta" [(ngModel)]="fechaHasta">
+      </div>
+      <div class="col-md-3 col-sm-12" style="padding: 1%;">
+        <label>Estado</label>
+        <select class="form-select" id="estado" name="estado" [(ngModel)]="ventaFilter.estado">
+          <option disabled selected value="">Selecciona el estado de la venta</option>
+          <option value="1">Pendiente facturacion</option>
+          <option value="2">Facturado </option>
+          <option value="4">Entregado</option>
+          <option value="3">Cancelado</option>
+        </select>
+      </div>
+      <div class="col-md-3 col-sm-6" style="padding-top: 3%;">
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <button type="submit" class="btn btn-outline-dark" style="width: 100%;" (click)="filtrarVentas()" (click)="toggleTabla(true)"  >Buscar</button>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-outline-violet" style="width: 100%;" (click)="limpiarCampos(); toggleTabla(false)">Reiniciar</button>
+          </div>
+        </div>
+    </div>
+    
+  </div>
+  
+  
+  <br>
+  
+  <div class="table-responsive" style="margin-top: 30px; max-height: 500px;overflow-y: auto;" [style]="{display: mostrarTabla ? 'block' : 'none'}">
+    <table class="table table-striped table-bordered table-hover table-responsive " style="align-content: center; ">
+      <thead class="thead">
+        <tr class="centered">
+          <th class="centered">ID</th>
+          <th class="centered">Cliente</th>
+          <th class="centered">Vendedor</th>
+          <th class="centered">Fecha</th>
+          <th class="centered">Forma de Entrega</th>
+          <th class="centered">Tipo de Pedido</th>
+          <th class="centered">Estado</th>
+          <th class="centered">Monto</th>
+          <th style="text-align: center; margin-top: 3%;">Ver<br> Detalle</th>
+          <th style="text-align: center; margin-top: 3%;">Dar de baja</th>
+        </tr>
+      </thead>
+      
+      <tbody class="table-group-divider">
+        <tr *ngFor="let venta of ventas">
+          <td class="centered">{{ venta.id }}</td>
+          <td class="centered">{{ venta.doc_cliente }}</td>
+          <td class="centered">{{ venta.id_vendedor }}</td>
+          <td class="centered">{{ venta.fecha | date: 'dd/MM/yyyy' }}</td>
+          <td class="centered">
+            {{ venta.forma_entrega === 1 ? 'En Caja' : 'En Deposito' }}
+          </td>
+          <td class="centered">
+            {{ venta.tipo_venta === 1 ? 'Minorista' : 'Mayorista' }}
+          </td>
+          
+          <!-- <td>{{ venta.estado }}</td> -->
+          <td class="centered " *ngIf="this.ventaFilter.estado != 3">
+            <select class="form-select" id="estado" name="estado" [(ngModel)]="venta.estado" (change)="actualizarEstado(venta)">
+              <option [value]="1">Pendiente Facturacion</option>
+              <option [value]="2">Facturado</option>
+              <option [value]="4">Entregado</option>
+            </select>
+          </td>
+          <td class="centered " *ngIf="this.ventaFilter.estado == 3">
+            Cancelado
+          </td>
+          <td class="centered">{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="centered">
+            <button class="btn btn-outline-dark btn-sm " (click)="verDetalle(venta)">
+              <i>Ver</i>
+            </button>
+          </td>
+          <td class="centered">
+            <button class="btn btn-danger btn-sm text-center" (click)="bajaVenta(venta)">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="mostrarDetalle" style="margin-top: 30px;">
+  <div #detallePresupuestosDOM>
+  <h3>Detalles</h3>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead">
+      <tr>
+        <th class="centered">Producto</th>
+        <th class="centered">Descripción</th>
+        <th class="centered">Cantidad</th>
+        <th class="centered">Precio Unitario</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let detalle of venta.detalles">
+        <td class="centered">{{ detalle.cod_producto }}</td>
+        <td class="centered">{{ detalle.descripcion }}</td>
+        <td class="centered">{{ detalle.cantidad }}</td>
+        <td class="centered">{{ detalle.precio_unitario | currency:'USD':'symbol':'1.2-2' }}</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td class="text-end">TOTAL (sin descuento):</td><td>{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td class="text-end">DESCUENTO:</td><td>{{ venta.descuentos.at(0)?.monto | currency:'USD':'symbol':'1.2-2' }}</td>
+      </tr>
+      <tr>
+        <td></td><td></td><td class="text-end"><strong>TOTAL:</strong></td><td><strong>{{ venta.total | currency:'USD':'symbol':'1.2-2' }}</strong></td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>

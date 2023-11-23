@@ -1,0 +1,138 @@
+<div class="container" style="background-color: rgb(197, 199, 200); ; margin-bottom: 40px; margin-top: 50px;" >
+    <h1>Modificar Presupuesto</h1>
+    <h6>ID Presupuesto: {{presupuesto.id}}</h6>
+    <form #form="ngForm" style="margin: 20px;" (ngSubmit)="onSubmit()">
+        <div class="row" style="margin-bottom: 20px;">
+          <div class="col-md-2">
+            <label for="nro_doc" class="form-label">Documento</label>
+            <input type="number" disabled="true" name="nro_doc" id="nro_doc" required="true" class="form-control" [(ngModel)]="nro_doc" (blur)="onBlur()" #nro_doc_input>
+          </div>
+          
+          <div class="col-md-4">
+            <label for="cliente" class="form-label">Cliente</label>
+            <input 
+            type="text" 
+            name="cliente" 
+            id="cliente" 
+            class="form-control" 
+            [(ngModel)]="nombre_cliente" 
+            name="cliente" 
+            disabled="true">
+            
+            </div>
+          <div class="col-md-2">
+            <label for="categoria" class="form-label">Categoría</label>
+            <input disabled="true" type="text" class="form-control" name="categoria" id="categoria" [(ngModel)]="categoria">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label for="tipo" class="form-label">Tipo Pedido</label>
+            <select [disabled]="!tipo_activado" disabled="true" name="tipo" id="tipo" class="form-select " [ngClass]="{'is-invalid': (form.submitted || tipo.touched) && tipo.invalid}" [(ngModel)]="formData.tipo" #tipo="ngModel" required>
+              <option value="1">Minorista</option>
+              <option value="2">Mayorista</option>
+            </select>
+            <div *ngIf="(form.submitted || tipo.touched) && tipo.invalid">
+              <span class="text-danger">Debe seleccionar un tipo de pedido</span>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <label for="formaEntrega" class="form-label">Forma Entrega</label>
+            <select name="formaEntrega" id="formaEntrega" class="form-select" [ngClass]="{'is-invalid': (form.submitted || formaEntrega.touched) && formaEntrega.invalid}"  [(ngModel)]="formData.formaEntrega" required #formaEntrega="ngModel">
+              <option value="1">Caja</option>
+              <option value="2">Deposito</option>
+            </select>
+            <div *ngIf="(form.submitted || formaEntrega.touched) && formaEntrega.invalid">
+              <span class="text-danger">Debe seleccionar una forma de entrega</span>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+          <div class="col-md-3">
+            <label for="producto" class="form-label">Producto</label>
+            <select name="producto" id="producto" class="form-select "  (ngModelChange)="consultarExistencia()" [(ngModel)]="formData.producto"  #producto="ngModel">
+              <option *ngFor="let producto of myList" [value]="producto.codigo">{{ producto.nombre }}</option>
+            </select>
+          </div>
+          <div class="col-md-1">
+            <label for="existencias" class="form-label">Existencias</label>
+            <input name="existencias" id="existencias" type="input" class="form-control" disabled="true" [(ngModel)]="existencias">
+          </div>
+          <div class="col-md-1">
+            <label for="dimension" class="form-label">Dimension</label>
+            <input name="dimension" id="dimension" type="input" class="form-control" disabled="true" [(ngModel)]="dimension">
+          </div>
+          <div class="col-md-1">
+            <label for="peso" class="form-label">Peso</label>
+            <input name="peso" id="peso" type="input" class="form-control" disabled="true" [(ngModel)]="peso">
+          </div>
+          <div class="col-md-2">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="number" min="1" id="cantidad" class="form-control" aria-describedby="nombreHelpBlock" name="cantidad" [ngClass]="{'is-invalid': (form.submitted || cantidad.touched) && cantidad.invalid}" required [(ngModel)]="formData.cantidad" #cantidad="ngModel">
+          </div>
+          <div class="col-md-3 col-sm-12" style="margin-top: 24px;">
+            <button (click)="agregarFila($event)" class="btn btn-dark btn-block m-sm-2">Agregar</button>
+          </div>
+        </div>
+        <div style="max-height: 250px; overflow-y: auto;">
+          <table id="tabla" class="table table-bordered table-hover table-striped" style="text-align: center;align-content: center;vertical-align: middle;">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" style="width: 400px;">Productos</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio Unitario</th>
+                    <th scope="col">Precio Total</th>
+                    <th scope="col" style="width: 50px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fila of filas; let i = index">
+                    <td>{{ fila.cod_producto }}</td>
+                    <td>{{ fila.cantidad }}</td>
+                    <td>{{fila.precio_unitario | currency:'USD':'symbol':'1.2-2'}}</td>
+                    <td >{{ CacularPrecioTotalporProducto(fila) | currency:'USD':'symbol':'1.2-2'}}</td>
+                    <td>
+                      <button class="btn" (click)="eliminarFila(i)">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    </td>
+                <tr>
+                    <td colspan="3">TOTAL</td>
+                    <td>{{calcularTotal() | currency:'USD':'symbol':'1.2-2'}} </td>
+                    <td></td>
+                </tr>
+            </tbody>
+            
+        </table>
+        <div *ngIf="(form.submitted && filas.length === 0 )">
+          <span class="text-danger">Debe seleccionar al menos un producto</span>
+        </div>
+        </div> 
+          <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-6" >               
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="row mt-2">
+                  <div class="col mb-1">
+                    <button class="btn btn-danger p-3 ps-5 pe-5" (click)="Cancelar()"><strong>Cancelar</strong></button>
+                  </div>
+                  <div class="col mb-1">
+                    <button type="submit" [disabled]="form.invalid || filas.length == 0"
+                      (click)="UpdatePresupuesto()" class="btn btn-success p-3 ps-5 pe-5"><strong>Guardar Presupuesto</strong></button>
+                  </div>
+
+              </div>
+              </div>
+              
+            </div>
+  
+        </div>
+      </form>
+  
+  </div>
+  
+  
+  
+  
+  

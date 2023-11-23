@@ -1,0 +1,19 @@
+.estilo {
+    border: 1px solid rgb(197,199,200); 
+    font-size: 1.2em; 
+    display: block; 
+    padding: 8px 15px; 
+    margin-bottom: 8px; 
+    border-radius: 10px; 
+    transition: border 0.3s, font-size 0.3s;
+    color: rgb(197,199,200);
+}
+
+.estilo:hover{
+    background-color: #2d6df9;
+    color: whitesmoke;
+}
+
+.fondo-formulario {
+    background-color: rgb(197,199,200);
+}
