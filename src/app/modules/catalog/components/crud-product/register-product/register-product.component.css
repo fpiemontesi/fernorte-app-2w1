@@ -1,4 +1,3 @@
-
 .imagen-borde {
   width: 200px;
   height: 200px;
@@ -6,8 +5,9 @@
   overflow: hidden;
   background-color: #f0f0f0;
   margin: 0 auto;
-  position: relative; /* Necesario para posicionar el span en el centro */
+  position: relative;
 }
+
 #product-image {
   width: 100%;
   height: 100%;
@@ -16,15 +16,15 @@
   border: 3px solid black;
 }
 
-.imagen-borde span{
+.imagen-borde span {
   position: absolute;
-  top: 15%; /* Ajusta este valor para mover el texto más abajo o arriba */
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: end;
 }
 
-input{
+input {
   border-radius: 0px;
   height: 3.5rem;
   font-size: 1.2rem;
@@ -32,7 +32,7 @@ input{
   margin-bottom: 5px;
 }
 
-select{
+select {
   border-radius: 0px;
   height: 3.5rem;
   font-size: 1.1rem;
@@ -40,14 +40,14 @@ select{
   margin-bottom: 5px;
 }
 
-#cardAddElement{
+#cardAddElement {
   height: 6rem;
   scroll-behavior: smooth;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-textarea{
+textarea {
   border-radius: 0px;
   font-size: 1.2rem;
   margin-top: 5px;
@@ -58,20 +58,18 @@ textarea{
   overflow-y: auto;
 }
 
-.border-radius-0{
+.border-radius-0 {
   border-radius: 0px;
 }
 
-
-.logo-green{
+.logo-green {
   color: #00a65a;
 }
 
-.logo-red{
+.logo-red {
   color: #dd4b39;
 }
 
 input[type="file"]::file-selector-button {
   height: 3.5rem;
 }
-
