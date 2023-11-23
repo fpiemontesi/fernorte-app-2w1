@@ -1,3 +1,3 @@
 export interface BrandDto {
-    nombre:string;
+    nombre: string;
 }
