@@ -1,0 +1,71 @@
+<h1 class="bg-secondary text-white p-5 text-center">Modificar Existencia</h1>
+<div class="container">
+  <div class="card bg-light p-1 fs-3">
+    <div class="row justify-content-between">
+      <div class="col">
+        <div class="fw-bold">Id del Producto</div>
+        <div>#{{ existenciaAModificar.code }}</div>
+      </div>
+      <div class="col">
+        <div class="fw-bold">Nombre del Producto</div>
+        <div>#{{ existenciaAModificar.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <form class="p-3" #formModExi="ngForm" (ngSubmit)="confirmar(formModExi)">
+    <div class="mb-3">
+      <label for="stockMin" class="form-label fw-bold">Stock Minimo</label>
+      <div>
+        <input
+          type="number"
+          class="form-control w-25"
+          id="stockMin"
+          required
+          min="1"
+          [(ngModel)]="existenciaAModificar.minimunStock"
+          name="stockMin"
+          #stockMin="ngModel"
+        />
+        <span>Unidades</span>
+      </div>
+
+      <div
+        *ngIf="stockMin.getError('required') && (stockMin.dirty || invalido)"
+        class="text-danger text-end fst-italic"
+      >
+        El nombre de alumno es requerido
+      </div>
+      <div
+        [hidden]="!stockMin.errors?.['min'] || stockMin.pristine"
+        class="text-danger text-end fst-italic"
+      >
+        El nombre debe tener menos de 200 caracteres
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+      <button
+        type="submit"
+        [disabled]="formModExi.invalid || formModExi.pristine"
+        class="btn btn-success"
+      >
+        Confirmar
+      </button>
+    </div>
+  </form>
+</div>
+
+<ngb-toast [header]="toast.header" *ngFor="let toast of toasts; index as index">
+  {{ toast.body }}
+</ngb-toast>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+	</div>
+</ng-template>

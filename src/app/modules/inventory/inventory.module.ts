@@ -21,11 +21,14 @@ import { StockControlsHomeComponent} from "./components/stock-control-reports/st
 import { RegistrarRemitoComponent} from "./components/remitos/registrar-remito/registrar-remito.component";
 import { RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
 import { LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
-import { ListBatchesExpiredComponent } from './components/list-batches-expired/list-batches-expired.component';
 import { StadisticsExpiredExistancesComponent } from './components/stadistics-expired-existances/stadistics-expired-existances.component';
 import { StadisticsDamagedExistancesComponent } from './components/stadistics-damaged-existances/stadistics-damaged-existances.component';
 import { ListBatchSoonTooExipreComponent } from './components/list-batch-soon-too-exipre/list-batch-soon-too-exipre.component';
 import { ModificarLoteComponent } from './components/modificar-lote/modificar-lote.component';
+import { ModificarExistenciaComponent } from './components/existences/modificar-existencia/modificar-existencia.component';
+import { ListarExistenciasComponent } from './components/existences/listar-existencias/listar-existencias.component';
+import { ListBatchesExpiredComponent } from './components/list-batches-expired/list-batches-expired.component';
+import { ExistenceHomeComponent } from './components/existences/existence-home/existence-home.component';
 
 @NgModule({
   declarations: [HomeComponent, ListBatchesByExistenceComponent, ListBatchesBySectionComponent,
@@ -33,7 +36,8 @@ import { ModificarLoteComponent } from './components/modificar-lote/modificar-lo
     ReservationListComponent, ListStockExistenciasComponent, ListBatchesExpiredComponent,
     RemitosHomeComponent, LotesHomeComponent, CreateControlReportComponent, BatchFinderModalComponent,
     ModifyStockControlComponent,ModificarLoteComponent , ListControlStockComponent, ToastsContainer, StockControlsHomeComponent,
-    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent,ListBatchSoonTooExipreComponent],
+    StadisticsExpiredExistancesComponent, StadisticsDamagedExistancesComponent, ListBatchSoonTooExipreComponent,
+    ModificarExistenciaComponent, ListarExistenciasComponent, ExistenceHomeComponent],
   providers: [],
   imports: [
     CommonModule,

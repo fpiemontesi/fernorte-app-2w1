@@ -1,0 +1,40 @@
+<div>
+  <h2 class="bg-secondary text-white p-5 text-center">LISTAR EXISTENCIAS</h2>
+</div>
+<div class="container my-5">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">PRODUCTO</th>
+        <th scope="col">STOCK MINIMO</th>
+        <th scope="col" class="text-end">ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exist of list">
+        <td>{{ exist.name }}</td>
+        <td>{{ exist.minimunStock }}</td>
+
+        <td class="text-end">
+          <button
+            class="btn btn-warning mx-2"
+            (click)="modificarExistencia(exist.code)"
+          >
+          <i class="bi bi-pencil-fill"></i>
+          </button>
+          <button
+            class="btn btn-danger mx-2"
+            (click)="eliminarExistencia(exist.code)"
+          >
+          <i class="bi bi-trash-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ngb-toast [header]="toast.header"
+  *ngFor="let toast of toasts; index as index" >
+  {{toast.body}} 
+</ngb-toast>

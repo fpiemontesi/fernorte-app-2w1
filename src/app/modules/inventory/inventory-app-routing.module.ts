@@ -17,6 +17,10 @@ import {RemitosHomeComponent} from "./components/remitos/remitos-home/remitos-ho
 import {RegistrarRemitoComponent} from "./components/remitos/registrar-remito/registrar-remito.component";
 import {LotesHomeComponent} from "./components/batches/lotes-home/lotes-home.component";
 import {RegistrarLotesComponent} from "./components/batches/registrar-lotes/registrar-lotes.component";
+import { ListarExistenciasComponent } from './components/existences/listar-existencias/listar-existencias.component';
+import { ListStockExistenciasComponent } from './components/list-stock-existencias/list-stock-existencias.component';
+import { ExistenceHomeComponent } from './components/existences/existence-home/existence-home.component';
+import { ModificarExistenciaComponent } from './components/existences/modificar-existencia/modificar-existencia.component';
 
 const routes: Routes = [
   {
@@ -47,6 +51,21 @@ const routes: Routes = [
         children: [
           {
             path: 'registrar', component: RegistrarRemitoComponent
+          }
+        ]
+      },
+      {
+        path: 'existencias',
+        component: ExistenceHomeComponent,
+        children: [
+          {
+            path: 'listar', component: ListarExistenciasComponent
+          },
+          {
+            path: 'stock-total', component: ListStockExistenciasComponent
+          },
+          {
+            path: 'modificar/:id', component: ModificarExistenciaComponent
           }
         ]
       },
