@@ -103,32 +103,15 @@
                     </div>
 
                     <div class="form-floating">
-                        <select id="pais" formControlName="pais" class="form-select" aria-label="Pais de Origen">
-                            <option value="Argentina">Argentina</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Brasil">Brasil</option>
-                            <option value="Canadá">Canadá</option>
-                            <option value="China">China</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Alemania">Alemania</option>
-                            <option value="India">India</option>
-                            <option value="Italia">Italia</option>
-                            <option value="Japón">Japón</option>
-                            <option value="México">México</option>
-                            <option value="Rusia">Rusia</option>
-                            <option value="Corea del Sur">Corea del Sur</option>
-                            <option value="Reino Unido">Reino Unido</option>
-                            <option value="Estados Unidos">Estados Unidos</option>
-                        </select>
-                        <label for="pais">Pais de Origen</label>
+                    <select id="pais" formControlName="pais" class="form-select" aria-label="Pais de Origen">
+                        <option *ngFor="let option of options" [value]="option.toUpperCase()" >{{option}}</option>
+                    </select>
+                    <label for="pais">Pais de Origen</label>
                     </div>
 
                     <div class="input-group">
-                        <input
-                            [ngClass]="{'is-invalid': formArticle.get('imagen')?.invalid && formArticle.get('imagen')?.touched}"
-                            placeholder="Imagen del Producto" title="Seleccione la imagen" type="file"
-                            formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg"
-                            (change)="readPhoto($event)">
+                        <input  placeholder="Imagen del Producto" title="Seleccione la imagen" type="file" formControlName="imageURL" class="form-control" id="imageURL" accept=".png, .jpg, .jpeg" (change)="readPhoto($event)">
+                        <img [src]="formArticle.value.imageURL">
                     </div>
 
                 </div>
