@@ -1,5 +1,4 @@
 <div class="container">
-  <button routerLink="registerProduct" class="btn btn-success float-end mt-2">Cargar Productos</button>
   <h2 class="my-2 py-2">Listado de Productos</h2>
   <div class="table-responsive">
     <table class="table table-hover">
@@ -7,6 +6,9 @@
         <tr>
           <th scope="col">Código</th>
           <th scope="col">Nombre</th>
+          <th scope="col">Precio Minorista</th>
+          <th scope="col">Precio Mayorista</th>
+          <th scope="col"></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -14,9 +16,13 @@
         <tr *ngFor="let c of products">
           <td>{{c.codigo}}</td>
           <td>{{c.nombre}}</td>
-          <td><button (click)="deleteProduct(c.codigo)" class="btn btn-danger">Eliminar</button></td>
+          <td>{{c.precio_minorista}}</td>
+          <td>{{c.precio_mayorista}}</td>
+          <td><button (click)="deleteProduct(c.codigo)" class="btn btn-danger" [disabled]="!c.activo" >Eliminar</button></td>
           <td><button routerLink="registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]}
-              class="btn btn-dark">Editar</button></td>
+              class="btn btn-success" [disabled]="c.activo">Dar de Alta</button></td>
+          <td><button routerLink="registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]}
+                      class="btn btn-dark" [disabled]="!c.activo">Editar</button></td>
         </tr>
       </tbody>
     </table>

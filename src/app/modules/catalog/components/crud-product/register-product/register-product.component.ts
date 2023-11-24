@@ -81,7 +81,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
                   this.productsInactives.push(this.model);
                   if(this.productsInactives[0].codigo == null || undefined){
                     window.alert("No existe el producto");
-                    this.router.navigate(["/listProducts"]);
+                    this.router.navigate(["/deleteProduct"])
                     return;
                   }
                   const product = this.productsInactives[0];
@@ -154,10 +154,10 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
 
     formArticle = new FormGroup({
       codigo_marca: new FormControl('', [Validators.required]),
-      categorias_id: new FormControl('', [Validators.required, Validators.nullValidator]),
+      categorias_id: new FormControl('', [Validators.nullValidator]),
       descripcion: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
-      dimensiones: new FormControl("", [Validators.required]), // Inicializado en 0 como número
-      peso: new FormControl("", [Validators.required]), // Inicializado en 0 como número
+      dimensiones: new FormControl("", []), // Inicializado en 0 como número
+      peso: new FormControl("", []), // Inicializado en 0 como número
       color: new FormControl('', [Validators.required]),
       material: new FormControl('', [Validators.required]),
       pais: new FormControl('', [Validators.required]),
@@ -208,6 +208,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
           imageURL: this.formArticle.value.imageURL || "",
           precio_compra: 0,
           descripcion: this.formArticle.value.descripcion || "",
+
         }
 
 
@@ -224,7 +225,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
               this.categoriesCodigo = [];
               this.categoriesNombre = [];
               this.cargarDatos();
-
+              this.router.navigate(["/deleteProduct"])
             }
           )
         )
@@ -252,7 +253,6 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
 
 
     resetFields(){
-      alert("SUCCESS");
       this.router.navigate(["/deleteProduct"])
     }
 
