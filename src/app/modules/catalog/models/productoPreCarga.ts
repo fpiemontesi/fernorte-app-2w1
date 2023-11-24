@@ -1,7 +1,6 @@
 // Objetivo: Modelo para pre carga de productos
 export interface ProductoPreCarga {
     descripcion:string;
-    precio_compra:number;
     imageURL:string;
     dimensiones:string;
     peso:string;
