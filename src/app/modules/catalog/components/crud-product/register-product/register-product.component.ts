@@ -206,6 +206,7 @@ export class RegisterProductComponent implements OnInit, OnDestroy {
           peso: this.formArticle.value.peso || "",
           dimensiones: this.formArticle.value.dimensiones || "",
           imageURL: this.formArticle.value.imageURL || "",
+          precio_compra: this.model.precio_compra,
           descripcion: this.formArticle.value.descripcion || "",
 
         }
