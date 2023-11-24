@@ -60,7 +60,7 @@ export class ListCatalogComponent {
         setTimeout(() => {
           this.alert = false;
           resolve();
-        }, 3000);
+        }, 1000);
       });
     } else {
       return Promise.resolve();

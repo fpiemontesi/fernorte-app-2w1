@@ -35,16 +35,16 @@ export class DeleteProductComponent implements OnInit, OnDestroy {
   }
 
   deleteProduct(id: string) {
-    const confirmed = confirm("¿Desea eliminar el producto?")
+    const confirmed = confirm("¿Desea inhabilitar el producto?")
     if (confirmed) {
       this.subscription.add(
         this.httpClientService.deleteProduct(id).subscribe({
           next: (producto: Producto) => {
-            alert("Producto eliminado exitosamente.")
+            alert("Producto inhabilitado exitosamente.")
             this.getProductsActive();
           },
           error: () => {
-            alert("Error al intentar eliminar el producto.")
+            alert("Error al intentar inhabilitar el producto.")
           }
         })
       )

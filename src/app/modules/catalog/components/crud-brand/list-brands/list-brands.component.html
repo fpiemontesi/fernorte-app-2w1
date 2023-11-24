@@ -1,7 +1,7 @@
 <div class="container">
   <fn-modal mensaje="Seguro que quieres eliminar?" option1="Eliminar" option2="Cancelar" (evento)="eliminarMarca()" title="Eliminar marca"></fn-modal>
   <ng-container *ngIf="alert">
-    <fn-alert mensaje="Se elimino correctamente. Espere 5 segundos." tipoAlert="alert alert-success"></fn-alert>
+    <fn-alert mensaje="Operación Exitosa." tipoAlert="alert alert-success"></fn-alert>
   </ng-container>
 
   <button routerLink="registerBrand" class="btn btn-success float-end mt-2">Registrar Marca</button>

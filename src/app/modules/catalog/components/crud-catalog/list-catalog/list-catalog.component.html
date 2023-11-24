@@ -2,7 +2,7 @@
     <fn-modal mensaje="¿Realmente desea eliminar el catalogo?" option1="Eliminar" option2="Cancelar"
               (evento)="eliminarCatalogo()" title="Eliminar Categoría"></fn-modal>
     <ng-container *ngIf="alert">
-        <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
+        <fn-alert mensaje="Operación Exitosa." tipoAlert="alert alert-success"></fn-alert>
     </ng-container>
 
     <button routerLink="registerCatalog" [queryParams]="{ tipo: 1,title: 'Registrar Catalogo' }" class="btn btn-success float-end mt-2">Registrar Catalogo</button>

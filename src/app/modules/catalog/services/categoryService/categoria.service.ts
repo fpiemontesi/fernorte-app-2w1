@@ -29,7 +29,7 @@ export class CategoriaService {
     return this.http.put<Categoria>('http://localhost:8080/api/categories/'+id, categoria)
   }*/
   update(categoria: Categoria): Observable<Categoria> {
-    return this.http.put<Categoria>('http://localhost:8080/api/categories/'+categoria.codigo, categoria)
+    return this.http.put<Categoria>('http://localhost:8080/api/categories/'+categoria.codigo, categoria.nombre)
   }
 
   delete(id: string): Observable<Categoria> {

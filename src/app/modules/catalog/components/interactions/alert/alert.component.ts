@@ -13,6 +13,6 @@ export class AlertComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.showAlert = false;
-    }, 5000);
+    }, 1000);
   }
 }

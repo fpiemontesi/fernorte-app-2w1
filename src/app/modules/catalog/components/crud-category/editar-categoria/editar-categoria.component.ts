@@ -76,7 +76,7 @@ export class EditarCategoriaComponent implements OnInit, OnDestroy{
         setTimeout(() => {
           this.alert = false;
           resolve();
-        }, 3000);
+        }, 1000);
       });
     } else {
       return Promise.resolve();

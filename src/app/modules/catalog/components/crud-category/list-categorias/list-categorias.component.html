@@ -2,7 +2,7 @@
     <fn-modal mensaje="¿Realmente desea eliminar la categoría?" option1="Eliminar" option2="Cancelar"
         (evento)="eliminarCategoria()" title="Eliminar Categoría"></fn-modal>
     <ng-container *ngIf="alert">
-        <fn-alert mensaje="Operación Exitosa. Esperar 3 segundos..." tipoAlert="alert alert-success"></fn-alert>
+        <fn-alert mensaje="Operación Exitosa." tipoAlert="alert alert-success"></fn-alert>
     </ng-container>
 
     <button routerLink="registerCategory" class="btn btn-success float-end mt-2">Registrar Categoría</button>

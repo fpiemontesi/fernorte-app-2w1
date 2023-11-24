@@ -117,7 +117,7 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
         setTimeout(() => {
           this.alert = false;
           resolve();
-        }, 3000);
+        }, 1000);
       });
     } else {
       return Promise.resolve();
@@ -161,7 +161,7 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
             this.catalog = {} as Catalog
             this.productosSeleccionados = [];
             this.formCatalog.reset();
-            alert("Catalogo guardado exitosamente!")
+            //alert("Catalogo guardado exitosamente!")
             this.router.navigate(["listCatalogs"])
 
           },
@@ -179,7 +179,7 @@ export class RegisterCatalogComponent implements OnInit,OnDestroy{
             this.catalog = {} as Catalog
             this.productosSeleccionados = [];
             this.formCatalog.reset();
-            alert("Catalogo actualizado exitosamente!")
+            //alert("Catalogo actualizado exitosamente!")
             this.router.navigate(["listCatalogs"])
 
           },

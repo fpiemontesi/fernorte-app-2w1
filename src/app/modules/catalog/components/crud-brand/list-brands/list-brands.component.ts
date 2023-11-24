@@ -51,7 +51,7 @@ export class ListBrandsComponent implements OnInit,OnDestroy{
         setTimeout(() => {
           this.alert = false;
           resolve();
-        }, 5000);
+        }, 1000);
       });
     } else {
       return Promise.resolve();

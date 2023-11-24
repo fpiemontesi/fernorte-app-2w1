@@ -18,7 +18,7 @@
           <td>{{c.nombre}}</td>
           <td>{{c.precio_minorista}}</td>
           <td>{{c.precio_mayorista}}</td>
-          <td><button (click)="deleteProduct(c.codigo)" class="btn btn-danger" [disabled]="!c.activo" >Eliminar</button></td>
+          <td><button (click)="deleteProduct(c.codigo)" class="btn btn-danger" [disabled]="!c.activo" >Inhabilitar</button></td>
           <td><button routerLink="registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]}
               class="btn btn-success" [disabled]="c.activo">Dar de Alta</button></td>
           <td><button routerLink="registerProduct" [queryParams]={codigo:[c.codigo],title:[this.title]}
